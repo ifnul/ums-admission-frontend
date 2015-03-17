@@ -1,0 +1,19 @@
+
+/*Content header*/
+.content-header {
+	min-height: 60px;
+}
+.content-header .fa-graduation-cap {
+	color: #7f3232;
+}
+
+.content-header .content-header-title {
+	font-size:25px;
+}
+
+.content-header .add-button {
+	font-size:15px;
+}
+.content-header-new-proposal {
+	font-size:25px;
+}

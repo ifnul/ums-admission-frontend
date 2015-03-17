@@ -1,0 +1,36 @@
+/* FILTER */
+
+.filter{
+  min-height: 530px;
+  padding-top: 10px;
+  /*border: 2px solid #6e68a1; */
+  background-color: #f7f7f7;
+  /*outline: 1px solid black;*/
+}
+
+/*.fa-caret-square-o-left {
+	float: right;
+}*/
+
+.slide-left {
+	float: right;
+}
+.filter-title  span{
+	font-size: 20px;
+}
+
+.filter-title {
+	margin-bottom: 30px;
+}
+
+.search-around {
+	margin-bottom: 30px;
+}
+
+.filter-subjects {
+	margin-bottom: 30px;
+}
+
+.filter-faculty {
+	margin-bottom: 30px;
+}
