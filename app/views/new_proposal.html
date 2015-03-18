@@ -1,0 +1,44 @@
+<div class=" content-header">
+  <div class="col-md-5">
+    <ol class="breadcrumb">
+      <li><a href="#">Пропозиції ВУЗу</a></li>
+      <li class="active">Нова пропозиція</li>
+    </ol>
+    <h2 class="content-header-title top-buffer bottom-buffer"><i class="fa fa-graduation-cap text-danger  "></i> Пропозиції ВУЗу</h2>
+  </div>
+</div>
+
+
+<!-- main content -->
+  <div class="col-sm-12 col-md-12 new-proposal-wrapper">
+   <!-- <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab" href="#sectionA">Загальні відомості</a></li>
+      <li ><a data-toggle="tab" href="new_proposal/#sectionB">Предмети</a></li>
+      <li><a data-toggle="tab" href="#sectionС">Квоти</a></li>
+    </ul>
+    <div class="tab-content">-->
+    <div ng-controller="TabsDemoCtrl">
+      <tabset>
+      <tab heading="Пропозицiї">
+
+<div class="top-buffer" ng-include="'views/tabs/tab_proposition.html'"></div>
+
+      <!--  -->
+    </tab>
+
+<tab heading="Предмети">
+
+  <div class="top-buffer" ng-include="'views/tabs/tab_subject.html'"></div>
+
+  </tab>
+
+        <tab heading="Пiльги">
+   <div class="top-buffer" ng-include="'views/tabs/tab_benefit.html'"></div>
+
+    </tab>
+  </tabset>
+
+
+
+<div class="footer">
+</div>

@@ -1,0 +1,36 @@
+
+<div class="modal-header">
+  <h3 class="modal-title">Додати предмет</h3>
+</div>
+<div class="modal-body">
+  <form class="form-horizontal">
+    <div class="row">
+    <div class="form-group">
+      <div class="col-md-2 col-md-offset-1">
+        <label for="inputType" class="control-label">Тип</label>
+        </div>
+        <div class="col-md-8">
+        <input type="text" class="form-control" id="inputType" placeholder="Тип пiльги">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group">
+        <div class="col-md-2 col-md-offset-1">
+          <label for="inputCount" class="control-label">Кількість мість</label>
+        </div>
+        <div class="col-md-8">
+          <input type="text" class="form-control" id="inputCount" placeholder="Кількість мість">
+        </div>
+      </div>
+    </div>
+
+
+  </form>
+
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" ng-click="ok()">OK</button>
+  <button class="btn btn-danger" ng-click="cancel()">Cancel</button>
+</div>
