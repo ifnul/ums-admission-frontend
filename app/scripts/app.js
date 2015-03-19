@@ -12,8 +12,10 @@ angular
   .module('admissionSystemApp', [
     'ngResource',
     'ngRoute',
-    'ngTable'
+    'ui.bootstrap'
   ])
+
+
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
@@ -28,3 +30,4 @@ angular
         redirectTo: '/'
       });
   });
+
