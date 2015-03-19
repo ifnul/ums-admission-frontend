@@ -1,0 +1,60 @@
+<div class="modal-header">
+  <h3 class="modal-title">Додати предмет</h3>
+</div>
+<div class="modal-body">
+
+  <form class="form-horizontal">
+    <div class="form-group">
+
+
+      <label for="inputSubject" class="control-label col-xs-2">Предмет</label>
+
+      <div class="col-md-10">
+        <select class="form-control" name="genre" id="inputSubject">
+          <option value="">Географія</option>
+          <option value="action">Математика</option>
+          <option value="comedy">Іноземна мова</option>
+          <option value="horror">Фізика</option>
+          <option value="romance">Хімія</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+
+      <div class="col-md-2"></div>
+      <div class="col-md-10">
+        <div class="checkbox-inline">
+          <label><input type="checkbox"> Профільний</label>
+        </div>
+        <div class="checkbox-inline">
+          <label><input type="checkbox"> Обов'язковий</label>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <label for="inputSmth" class="control-label col-xs-2">Додаткова назва</label>
+      <div class="col-xs-10">
+        <input type="text" class="form-control" id="inputSmth" placeholder="Додаткова назва">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputMinZno" class="control-label col-xs-2">Мінімальний бал ЗНО</label>
+      <div class="col-xs-10">
+        <input type="number" class="form-control" id="inputMinZno" placeholder="Мінімальний бал ЗНО">
+      </div>
+    </div>
+
+
+
+  </form>
+
+
+
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" ng-click="ok()">OK</button>
+  <button class="btn btn-danger" ng-click="cancel()">Cancel</button>
+</div>

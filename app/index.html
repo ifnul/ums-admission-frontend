@@ -23,33 +23,31 @@
 </head>
 <body ng-app="admissionSystemApp">
 
-    <div class="container-fluid no-padding main-wrapper">
-
-      <div ng-include src="'views/header.html'"></div>
-      <div ng-view></div>
-
-    </div>
+<div class="container-fluid">
+  <div ng-include="'views/header.html'"></div>
+  <div ng-view></div>
+</div>
 
 
+<!-- build:js(.) scripts/vendor.js -->
+<!-- bower:js -->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="bower_components/angular-resource/angular-resource.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<!-- endbower -->
+<!-- endbuild -->
 
-    
+<!-- build:js({.tmp,app}) scripts/scripts.js -->
+<script src="scripts/app.js"></script>
+<script src="scripts/controllers/list_proposal.js"></script>
+<script src="scripts/controllers/new_proposal.js"></script>
+<script src="scripts/controllers/tabs.js"></script>
+<script src="scripts/controllers/modalSubject.js"></script>
+<script src="scripts/controllers/modalBenefit.js"></script>
 
-      <!-- build:js(.) scripts/vendor.js -->
-      <!-- bower:js -->
-      <script src="bower_components/jquery/dist/jquery.js"></script>
-      <script src="bower_components/angular/angular.js"></script>
-      <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-      <script src="bower_components/angular-resource/angular-resource.js"></script>
-      <script src="bower_components/angular-route/angular-route.js"></script>
-      <!-- endbower -->
-      <!-- endbuild -->
-      <script src="bower_components/bootstrap/js/modal.js"></script>
-      <script src="bower_components/bootstrap/js/tab.js"></script>
-
-      <!-- build:js({.tmp,app}) scripts/scripts.js -->
-      <script src="scripts/app.js"></script>
-      <script src="scripts/controllers/list_proposal.js"></script>
-      <script src="scripts/controllers/new_proposal.js"></script>
-      <!-- endbuild -->
+<!-- endbuild -->
 </body>
 </html>
