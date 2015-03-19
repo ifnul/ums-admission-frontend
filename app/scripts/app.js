@@ -11,7 +11,8 @@
 angular
   .module('admissionSystemApp', [
     'ngResource',
-    'ngRoute'
+    'ngRoute',
+    'ngTable'
   ])
   .config(function ($routeProvider) {
     $routeProvider
