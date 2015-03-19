@@ -1,7 +1,9 @@
 {
   "name": "admissionsystem",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "bower-installer": "^1.2.0"
+  },
   "repository": {},
   "devDependencies": {
     "grunt": "^0.4.5",
