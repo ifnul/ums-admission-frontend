@@ -15,6 +15,12 @@ angular.module('admissionSystemApp')
     //gets all proposals
     this.getAllProposals = function(timePeriod){
 
+      //return if we already have proposals
+      if (proposals.length) {
+        console.log('cashed', proposals);
+        return proposals;
+      }
+
       //this gives configuration for http GET request
       function getConfig(offset, limit, timePeriod) {
 
@@ -30,7 +36,7 @@ angular.module('admissionSystemApp')
 
       var resolveData = function (data){
 
-        //console.log({count: count, dataLength: data.resources.length, loaded: proposals.length});
+        console.log({count: count, dataLength: data.resources.length, loaded: proposals.length});
 
         //checking if we get the end of the data on server
         if(data.resources.length == 0) return;
@@ -46,7 +52,7 @@ angular.module('admissionSystemApp')
         nextOffset += limit;
 
         //if all data loaded now, lets show them
-        if(count == proposals.length) //console.log(proposals);
+        if(count == proposals.length) console.log(proposals);
 
         // getting a next data recursively
         $http(getConfig(nextOffset, limit, timePeriod)).success(resolveData);
