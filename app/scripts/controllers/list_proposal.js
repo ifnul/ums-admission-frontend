@@ -8,10 +8,6 @@
  * Controller of the admissionSystemApp
  */
 angular.module('admissionSystemApp')
-  .controller('ListProposalCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+  .controller('ListProposalCtrl', ['$scope', 'ListProposalGettingService', function ($scope, ListProposalGettingService) {
+
+  }]);
