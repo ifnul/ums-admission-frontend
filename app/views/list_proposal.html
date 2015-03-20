@@ -66,50 +66,76 @@
         </a>
         <button type="button" class="pull-right btn btn-primary"><i class="fa fa-bars "></i></button>
       </div>
+
       <!-- Table -->
-      <table class="table table-bordered table-striped">
-      <tr>
-        <th><input type="checkbox" id="inlineCheckbox1" value="option1"></label></th>
-        <th>Спеціальність <i class="fa fa-caret-down"></i></th>
-        <th>Структурний підрозділ <i class="fa fa-caret-down"></i></th>
-        <th>Форма <i class="fa fa-caret-down"></i></th>
-        <th>ОРК <i class="fa fa-caret-down"></i></th>
-        <th>Серія ліцензії <i class="fa fa-caret-down"></i></th>
-        <th>№ ліцензії <i class="fa fa-caret-down"></i></th>
-        <th>Форма навчання <i class="fa fa-caret-down"></i></th>
-        <th>Кількість ліцензованих місць <i class="fa fa-caret-down"></i></th>
-        <th>Кількість місць держзамовлення <i class="fa fa-caret-down"></i></th>
-        <th>Дата початку</th>
-        <th>Дата закінчення</th>
-        <th>
 
-        </th>
-      </tr>
-      <tr>
-        <th><input type="checkbox" id="inlineCheckbox1" value="option1"></label></th>
-        <td>Філологія</td>
-        <td>Факультет фiлософії</td>
-        <td>?????</td>
-        <td>Бакалавр</td>
-        <td>РЛ</td>
-        <td>3749328</td>
-        <td>Денна</td>
-        <td>43</td>
-        <td>12</td>
-        <td>01.09.2015</td>
-        <td>24.06.2019</td>
-        <th>
-          <a class="edit ml10" href="javascript:void(0)" title="Edit">
-            <i class="glyphicon glyphicon-edit"></i>
-          </a>
-          <a class="remove ml10" href="javascript:void(0)" title="Remove">
-            <i class="glyphicon glyphicon-remove"></i>
-          </a>
-        </th>
-      </tr>
+      <!--<table class="table table-bordered table-striped">-->
+      <!--<tr>-->
+        <!--<th><input type="checkbox" id="inlineCheckbox1" value="option1"></label></th>-->
+        <!--<th>Спеціальність <i class="fa fa-caret-down"></i></th>-->
+        <!--<th>Структурний підрозділ <i class="fa fa-caret-down"></i></th>-->
+        <!--<th>Форма <i class="fa fa-caret-down"></i></th>-->
+        <!--<th>ОРК <i class="fa fa-caret-down"></i></th>-->
+        <!--<th>Серія ліцензії <i class="fa fa-caret-down"></i></th>-->
+        <!--<th>№ ліцензії <i class="fa fa-caret-down"></i></th>-->
+        <!--<th>Форма навчання <i class="fa fa-caret-down"></i></th>-->
+        <!--<th>Кількість ліцензованих місць <i class="fa fa-caret-down"></i></th>-->
+        <!--<th>Кількість місць держзамовлення <i class="fa fa-caret-down"></i></th>-->
+        <!--<th>Дата початку</th>-->
+        <!--<th>Дата закінчення</th>-->
+        <!--<th>-->
 
-      </table>
+        <!--</th>-->
+      <!--</tr>-->
+      <!--<tr>-->
+        <!--<th><input type="checkbox" id="inlineCheckbox1" value="option1"></label></th>-->
+        <!--<td>Філологія</td>-->
+        <!--<td>Факультет фiлософії</td>-->
+        <!--<td>?????</td>-->
+        <!--<td>Бакалавр</td>-->
+        <!--<td>РЛ</td>-->
+        <!--<td>3749328</td>-->
+        <!--<td>Денна</td>-->
+        <!--<td>43</td>-->
+        <!--<td>12</td>-->
+        <!--<td>01.09.2015</td>-->
+        <!--<td>24.06.2019</td>-->
+        <!--<th>-->
+          <!--<a class="edit ml10" href="javascript:void(0)" title="Edit">-->
+            <!--<i class="glyphicon glyphicon-edit"></i>-->
+          <!--</a>-->
+          <!--<a class="remove ml10" href="javascript:void(0)" title="Remove">-->
+            <!--<i class="glyphicon glyphicon-remove"></i>-->
+          <!--</a>-->
+        <!--</th>-->
+      <!--</tr>-->
 
+      <!--</table>-->
+      <div ng-controller="PaginationCtrl">
+
+        <table ng-table="tableParams" class="table">
+
+          <tr ng-repeat="prop in $data">
+
+            <td data-title="'specialityID'">{{prop.specialityID}}</td>
+            <td data-title="'departmentID'">{{prop.departmentID}}</td>
+            <td data-title="'timePeriodId'">{{prop.timePeriodId}}</td>
+            <td data-title="'specofferTypeId'">{{prop.specofferTypeId}}</td>
+            <td data-title="'docSeries'">{{prop.docSeries}}</td>
+            <td data-title="'docNum'">{{prop.docNum}}</td>
+            <td data-title="'eduFormTypeId'">{{prop.eduFormTypeId}}</td>
+            <td data-title="'licCount'">{{prop.licCount}}</td>
+            <td data-title="'stateCount'">{{prop.stateCount}}</td>
+            <td data-title="'begDate'">{{prop.begDate}}</td>
+            <td data-title="'endDate'">{{prop.endDate}}</td>
+            <td data-title="'parentId'">{{prop.parentId}}</td>
+
+          </tr>
+
+
+        </table>
+
+      </div>
 
     </div>
 

@@ -16,6 +16,8 @@ angular.module('admissionSystemApp')
     ];
   });
 
+// ------------ pagination -------------
+
 angular.module('admissionSystemApp')
   .controller('PaginationCtrl', ['$scope', 'ngTableParams', function($scope, ngTableParams) {
     var data = [
@@ -985,12 +987,21 @@ angular.module('admissionSystemApp')
         "endDate": "2/02/2014",
         "parentId": "ACCIDENCY"
       }];
+
+    //When instantiating ngTableParams, the function takes two arguments: parameters and settings
     $scope.tableParams = new ngTableParams({
       page: 1,            // show first page
       count: 10           // count per page
     }, {
       total: data.length, // length of data
       getData: function($defer, params) {
+
+        //getData: Defines a method for collating the data that should be displayed in ngTable.
+        // ngTable always calls getData with 2 arguments, $defer and params
+        //$defer is a Promise object.
+        // params is a reference to the configuration supplied in the parameters object
+        // (or ngTable's defaults, if not supplied in parameters).
+
         $defer.resolve(data.slice((params.page() - 1) * params.count(), params.page() * params.count()));
       }
     });
