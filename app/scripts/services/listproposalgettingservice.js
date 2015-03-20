@@ -29,7 +29,7 @@ angular.module('admissionSystemApp')
 
         return {
           method: 'GET',
-          url: 'http://176.36.11.25/api-lnu/specoffers?limit='+limit+'&offset='+offset+'&timePeriodId='+timePeriod,
+          url: 'http://104.236.29.16:8080/is-lnu-rest-api/api/specoffers?limit='+limit+'&offset='+offset+'&timePeriodId='+timePeriod,
           headers: { 'Authorization': 'Basic YWRtaW46bmltZGE=' }
         }
       } // END of getConfig
