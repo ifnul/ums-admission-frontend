@@ -2,7 +2,7 @@
 
 
 angular.module('admissionSystemApp')
-  .controller('manageSpecoffersCtrl', ['$scope', 'Restangular', 'SpecoffersService',
+  .controller('NewProposalCtrl', ['$scope', 'Restangular', 'SpecoffersService',
   	function ($scope, Restangular, SpecoffersService) {
 
 
@@ -19,8 +19,8 @@ angular.module('admissionSystemApp')
 	    });
 	    console.log('allSpecoffers', allSpecoffers);
 
-                
-  		// ----------------POST ONE  NEW SPECOFFER-----------------	
+
+  		// ----------------POST ONE  NEW SPECOFFER-----------------
   		var newSpecOffer = {
 		  'docSeries': '122211',
 		  'docNum': '234333111',
@@ -39,7 +39,7 @@ angular.module('admissionSystemApp')
 		// function addSpecOffer (newSpecOffer) {
 		// 	return SpecoffersService.manageSpecoffers.addSingleSpecoffer(newSpecOffer);
 		// }
-             
+
   		// -------------UPDATE ONE EXISTING SPECOFFER BY ID---------------------
 		var updatedSpecOffer = {
 			"timePeriodId": 10,
@@ -54,17 +54,17 @@ angular.module('admissionSystemApp')
 			"departmentId": 1,
 			"specialtyId": 1,
 			"note": "NEW_NOTE",
-		}
+		};
 		SpecoffersService.manageSpecoffers.updateSingleSpecoffer(updatedSpecOffer, 30);
-		
 
-                
+
+
   		// -------------GET ONE SPECOFFER BY ID-----------------------------
 		SpecoffersService.manageSpecoffers.getSingleSpecoffer(36).then(function(res){
 			console.log("res",res)
-		})
+		});
 
-              
+
   		// ------------DELETE ONE SPECOFFER BY ID-------------------------------
 		SpecoffersService.manageSpecoffers.deleteSingleSpecoffer(33)
 
@@ -84,7 +84,7 @@ angular.module('admissionSystemApp')
 		  "specOfferId": 35,
 		  "enrolmentSubjectId": 1,
 		  "note": "HERE"
-		}
+		};
 		SpecoffersService.manageSubjects.addSingleSubject(35, newSubject);
 
 
@@ -111,7 +111,7 @@ angular.module('admissionSystemApp')
 			"specOfferId": 36,
 			"enrolmentSubjectId": 1,
 			"note": "newNote"
-		}
+		};
 		SpecoffersService.manageSubjects.updateSingleSubject(36, 5, updatedSubject);
 
 
@@ -121,8 +121,8 @@ angular.module('admissionSystemApp')
 
    		// ------------- GET LIST OF BENEFITS USING  SPECOFFER'S ID----------------
    		SpecoffersService.manageBenefits.getListOfBenefits(37).then(function (res) {
-   			console.log('benefits', res);
-   		})
+   			// console.log('benefits', res);
+   		});
 
 
    		// ----------------- ADD SINGLE BENEFIT -----------------------------------
@@ -130,10 +130,10 @@ angular.module('admissionSystemApp')
 		  "benefitId": 1,
 		  "specOfferId": 37,
 		  "note": "new note note"
-		}
+		};
 
-		SpecoffersService.manageBenefits.addSingleBenefit(37, newBenefit)
-		
+		SpecoffersService.manageBenefits.addSingleBenefit(37, newBenefit);
+
 		// ----------------- GET SINGLE BENEFIT -----------------------------------
 		SpecoffersService.manageBenefits.addSingleBenefit(37, 8).then(function (res){
 			console.log('specoffer id-37, benefit id-8', res);
