@@ -12,7 +12,8 @@ angular
   .module('admissionSystemApp', [
     'ngResource',
     'ngRoute',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'restangular'
   ])
 
 
@@ -30,4 +31,3 @@ angular
         redirectTo: '/'
       });
   });
-
