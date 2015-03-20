@@ -5,6 +5,7 @@
   </div>
 </div>
 <!-- main content -->
+<!-- main content -->
 
 <div class="row">
   <!-- filter -->
@@ -55,7 +56,7 @@
   <!-- end filter -->
 
 
-  <div class="col-sm-10 col-md-10 content-data">
+  <div class="col-sm-10 col-md-10 content-data" ng-controller = "mainTable">
     <div class="panel panel-default">
       <!-- Default panel contents -->
       <div class="panel-heading">
@@ -64,40 +65,35 @@
         <a href="#/new-proposal" class="col-md-offset-1">
           <button type="button" class="btn btn-success "><i class="fa fa-plus"></i> Додати пропозицію</button>
         </a>
-        <button type="button" class="pull-right btn btn-primary"><i class="fa fa-bars "></i></button>
+
+        <button type="button" class="pull-right btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm"><i class="fa fa-bars "></i></button>
       </div>
-      <!-- Table -->
+        <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+              <ul>
+                <li ng-repeat = "header in headers" ng-click = "show[$index] = !show[$index]">
+                  <label>
+                    <input type= "checkbox" checked>
+                          <span>
+                            {{header}}</span>
+                  </label>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Table -->
       <table class="table table-bordered table-striped">
       <tr>
         <th><input type="checkbox" id="inlineCheckbox1" value="option1"></label></th>
-        <th>Спеціальність <i class="fa fa-caret-down"></i></th>
-        <th>Структурний підрозділ <i class="fa fa-caret-down"></i></th>
-        <th>Форма <i class="fa fa-caret-down"></i></th>
-        <th>ОРК <i class="fa fa-caret-down"></i></th>
-        <th>Серія ліцензії <i class="fa fa-caret-down"></i></th>
-        <th>№ ліцензії <i class="fa fa-caret-down"></i></th>
-        <th>Форма навчання <i class="fa fa-caret-down"></i></th>
-        <th>Кількість ліцензованих місць <i class="fa fa-caret-down"></i></th>
-        <th>Кількість місць держзамовлення <i class="fa fa-caret-down"></i></th>
-        <th>Дата початку</th>
-        <th>Дата закінчення</th>
-        <th>
-
-        </th>
+        <th ng-repeat="header in headers" ng-show = "show[$index]">{{header}}</th>
       </tr>
-      <tr>
+
+      <tr ng-repeat="row in rows">
         <th><input type="checkbox" id="inlineCheckbox1" value="option1"></label></th>
-        <td>Філологія</td>
-        <td>Факультет фiлософії</td>
-        <td>?????</td>
-        <td>Бакалавр</td>
-        <td>РЛ</td>
-        <td>3749328</td>
-        <td>Денна</td>
-        <td>43</td>
-        <td>12</td>
-        <td>01.09.2015</td>
-        <td>24.06.2019</td>
+        <td ng-show = "show[$index]" ng-repeat="value in row">{{value}}</td>
         <th>
           <a class="edit ml10" href="javascript:void(0)" title="Edit">
             <i class="glyphicon glyphicon-edit"></i>
