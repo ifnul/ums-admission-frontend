@@ -12,8 +12,8 @@ angular
   .module('admissionSystemApp', [
     'ngResource',
     'ngRoute',
-    'ngTable',
     'ui.bootstrap',
+    'ngTable',
     'restangular'
   ])
 
