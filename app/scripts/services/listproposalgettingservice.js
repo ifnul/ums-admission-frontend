@@ -8,66 +8,52 @@
  * Service in the admissionSystemApp.
  */
 angular.module('admissionSystemApp')
-  .service('ListProposalGettingService', ['$http', function ($http) {
+  .service('ListProposalGettingService', ['$http', '$q', function ($http, $q) {
 
-    var proposals = [];
+    function getConfig(offset, limit, timePeriod) {
 
-    //gets all proposals
-    this.getAllProposals = function(timePeriod){
+      limit = limit || 300;
+      offset = offset || 0;
 
-      //return if we already have proposals
-      if (proposals.length) {
-        console.log('cashed', proposals);
-        return proposals;
+      return {
+        method: 'GET',
+        url: 'http://104.236.29.16:8080/is-lnu-rest-api/api/specoffers',
+        params: {
+          limit: limit,
+          offset: offset,
+          timePeriodId: timePeriod
+        },
+        headers: {'Authorization': 'Basic YWRtaW46bmltZGE='}
       }
+    }
 
-      //this gives configuration for http GET request
-      function getConfig(offset, limit, timePeriod) {
+    this.getAllProposals = function (timePeriod) {
 
-        limit = limit || 300;
-        offset = offset || 0;
+      var proposals = [],
+        deferred = $q.defer(),
+        nextOffset = 0,
+        limit = 300;
 
-        return {
-          method: 'GET',
-          url: 'http://104.236.29.16:8080/is-lnu-rest-api/api/specoffers?limit='+limit+'&offset='+offset+'&timePeriodId='+timePeriod,
-          headers: { 'Authorization': 'Basic YWRtaW46bmltZGE=' }
+
+      var resolveData = function (data) {
+
+        if (data.resources.length < limit) {
+          deferred.resolve(proposals);
+          return;
         }
-      } // END of getConfig
 
-      var resolveData = function (data){
+        angular.extend(proposals, data.resources);
 
-        console.log({count: count, dataLength: data.resources.length, loaded: proposals.length});
-
-        //checking if we get the end of the data on server
-        if(data.resources.length == 0) return;
-
-        //using angular.forEach for filling data array
-        angular.forEach(data.resources, function(resource){
-          proposals.push(resource);
-        });
-
-        count = data.count || 0;
-
-        //increase offset for the next getting of data
         nextOffset += limit;
 
-        //if all data loaded now, lets show them
-        if(count == proposals.length) console.log(proposals);
-
-        // getting a next data recursively
         $http(getConfig(nextOffset, limit, timePeriod)).success(resolveData);
 
-      } // END of resolveData
-
-      //variables for configuring get data request
-      var nextOffset = 0,
-          limit = 300,
-          count = 0;
+      };
 
       $http(getConfig(nextOffset, limit, timePeriod)).success(resolveData);
 
-      return proposals;
+      return deferred.promise;
 
-    }; // END of getAllProposals
+    };
 
   }]);
