@@ -13,7 +13,8 @@ angular
     'ngResource',
     'ngRoute',
     'ngTable',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'restangular'
   ])
 
 
@@ -31,4 +32,3 @@ angular
         redirectTo: '/'
       });
   });
-
