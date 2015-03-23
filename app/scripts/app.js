@@ -13,6 +13,7 @@ angular
     'ngResource',
     'ngRoute',
     'ui.bootstrap',
+    'ngTable',
     'restangular'
   ])
 
