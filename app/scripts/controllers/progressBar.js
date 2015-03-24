@@ -1,16 +1,16 @@
 angular.module('admissionSystemApp')
-  .controller('ProgressBarCtrl',['$scope','progressBarService', function ($scope, progressBarService) {
+  .controller('ProgressBarCtrl', ['$scope', 'progressBarService', function ($scope, progressBarService) {
 
 
     $scope.status = "Заповнено на: ";
-   $scope.value = progressBarService;
+    $scope.value = progressBarService;
 
-    $scope.$watch('value.value', function(value) {
+    $scope.$watch('value.value', function (value) {
       console.log("Value: " + value);
 
       console.log("Number pro: " + progressBarService.number);
 
-      $scope.dynamic = Math.round((value*100)/progressBarService.number);
+      $scope.dynamic = Math.round((value * 100) / progressBarService.number);
 
       var type;
       if ($scope.dynamic < 25) {
@@ -24,13 +24,12 @@ angular.module('admissionSystemApp')
       }
       $scope.type = type;
 
-      if ($scope.dynamic === 100){
+      if ($scope.dynamic === 100) {
         $scope.propositionAll = "Будь ласка, додайте предмети та пiльги!";
       } else {
         $scope.propositionAll = " ";
 
       }
-
 
 
     });

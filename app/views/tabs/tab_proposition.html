@@ -5,27 +5,31 @@
       <div class="row">
         <div class="form-group col-md-2">
           <label for="inputCodeDirection">Код напряму</label>
-          <input type="text" class="form-control" id="inputCodeDirection" ng-model="proposition.directionCode" placeholder="Введiть код напряму"
+          <input type="text" class="form-control" id="inputCodeDirection" ng-model="proposition.directionCode"
+                 placeholder="Введiть код напряму"
                  name="directionCode" ng-pattern="/^\d{1,2}\.\d/" required val-bubble>
         </div>
 
         <div class="form-group col-md-3">
           <label for="inputDirection">Напрям</label>
-          <input type="text" class="form-control" id="inputDirection" ng-model="proposition.direction" placeholder="Введiть напрям"
+          <input type="text" class="form-control" id="inputDirection" ng-model="proposition.direction"
+                 placeholder="Введiть напрям"
                  name="direction" required val-bubble>
         </div>
 
 
         <div class="form-group col-md-4">
           <label for="inputCodeSpecialty">Код спеціальностi</label>
-          <input type="text" class="form-control" id="inputCodeSpecialty" ng-model="proposition.codeSpecialty" placeholder="Введiть код"
+          <input type="text" class="form-control" id="inputCodeSpecialty" ng-model="proposition.codeSpecialty"
+                 placeholder="Введiть код"
                  name="codeSpecialty" ng-pattern="/^\d{1,2}\.\d/" required val-bubble>
         </div>
 
 
         <div class="form-group col-md-3">
           <label for="inputSpecialty">Спеціальнiсть</label>
-          <input type="text" class="form-control" id="inputSpecialty" ng-model="proposition.specialty" placeholder="Введiть спеціальність"
+          <input type="text" class="form-control" id="inputSpecialty" ng-model="proposition.specialty"
+                 placeholder="Введiть спеціальність"
                  name="specialty" required val-bubble>
         </div>
       </div>
@@ -33,7 +37,8 @@
       <div class="row">
         <div class="form-group  col-md-5">
           <label for="inputStructure">Структурний підрозділ</label>
-          <input type="text" class="form-control" id="inputStructure" ng-model="proposition.structure" placeholder="Введiть факультет"
+          <input type="text" class="form-control" id="inputStructure" ng-model="proposition.structure"
+                 placeholder="Введiть факультет"
                  name="structure" required val-bubble>
         </div>
       </div>
@@ -57,13 +62,15 @@
         <div class="form-group col-md-4 ">
           <label for="inputLicenseNumber"> Номер ліцензії</label>
           <input type="number" class="form-control " id="inputLicenseNumber"
-                 placeholder="Введiть номер лiцензiї" name="inputLicenseNumber" ng-model="inputLicenseNumber" required val-bubble>
+                 placeholder="Введiть номер лiцензiї" name="inputLicenseNumber" ng-model="inputLicenseNumber" required
+                 val-bubble>
         </div>
       </div>
       <div class="row">
         <div class="form-group col-md-3 ">
           <label for="inputFormStuding">Оберiть форму навчання</label>
-          <select class="form-control " id="inputFormStuding" name="inputFormStuding" ng-model="inputFormStuding" required val-bubble>
+          <select class="form-control " id="inputFormStuding" name="inputFormStuding" ng-model="inputFormStuding"
+                  required val-bubble>
             <option>Денна</option>
             <option>Вечiрня</option>
             <option>Заочна</option>
@@ -74,23 +81,27 @@
         <div class="form-group col-md-3">
           <label for="inputNumberOfPlaces">Кiлькiсть лiцензованих мiсць</label>
           <input type="number" class="form-control " id="inputNumberOfPlaces"
-                 placeholder="Введiть кiлькiсть лiцензованих мiсць" name="inputNumberOfPlaces" ng-model="inputNumberOfPlaces" required val-bubble>
+                 placeholder="Введiть кiлькiсть лiцензованих мiсць" name="inputNumberOfPlaces"
+                 ng-model="inputNumberOfPlaces" required val-bubble>
         </div>
         <div class="form-group col-md-3">
           <label for="inputNumberOfStateOrder">Кiлькiсть мiсць держзамовлення</label>
           <input type="number" class="form-control " id="inputNumberOfStateOrder"
-                 placeholder="Введiть кiлькiсть мiсць держзамовлення" name="inputNumberOfStateOrder" ng-model="inputNumberOfStateOrder" required val-bubble>
+                 placeholder="Введiть кiлькiсть мiсць держзамовлення" name="inputNumberOfStateOrder"
+                 ng-model="inputNumberOfStateOrder" required val-bubble>
         </div>
       </div>
       <div class="row">
 
         <div class="col-md-3">
           <label for="inputStartData">Дата початку навчання</label>
-          <input type="date" class="form-control" name="StartData" id="inputStartData" ng-model="StartData" required val-bubble>
+          <input type="date" class="form-control" name="StartData" id="inputStartData" ng-model="StartData" required
+                 val-bubble>
         </div>
         <div class="col-md-3">
           <label for="inputEndData">Дата закінчення навчання</label>
-          <input type="date" class="form-control" id="inputEndData" name="EndData" ng-model="EndData" required val-bubble>
+          <input type="date" class="form-control" id="inputEndData" name="EndData" ng-model="EndData" required
+                 val-bubble>
         </div>
       </div>
     </div>
