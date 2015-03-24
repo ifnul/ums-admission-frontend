@@ -15,10 +15,12 @@ angular.module('admissionSystemApp')
 // Please note that $modalInstance represents a modal window (instance) dependency.
 // It is not the same as the $modal service used above.
 
-  .controller('ModalInstanceBenefitCtrl', function ($scope, $modalInstance) {
+  .controller('ModalInstanceBenefitCtrl', function ($scope, $modalInstance, progressBarService) {
+
+    console.log("Value modal: " + progressBarService.value);
 
     $scope.ok = function () {
-      $modalInstance.close($scope.selected.item);
+
     };
 
     $scope.cancel = function () {

@@ -15,4 +15,13 @@
   height: 52px;
 }
 
+input.ng-invalid.ng-dirty {
+  border-color: red;
+  background-color: #ffcccc;
+}
+
+.tabset {
+  border: 1px solid grey;
+  padding: 10px;
+}
 

@@ -2,14 +2,16 @@
   <h3 class="modal-title">Додати предмет</h3>
 </div>
 <div class="modal-body">
-  <form class="form-horizontal">
+  <form class="form-horizontal" name="form_benefit">
+
     <div class="row">
       <div class="form-group">
         <div class="col-md-2 col-md-offset-1">
           <label for="inputType" class="control-label">Тип</label>
         </div>
         <div class="col-md-8">
-          <input type="text" class="form-control" id="inputType" placeholder="Тип пiльги">
+          <input type="text" class="form-control" id="inputType" name="type" ng-model="type"
+                 placeholder="Тип пiльги" required val-bubble>
         </div>
       </div>
     </div>
@@ -20,11 +22,11 @@
           <label for="inputCount" class="control-label">Кількість мість</label>
         </div>
         <div class="col-md-8">
-          <input type="text" class="form-control" id="inputCount" placeholder="Кількість мість">
+          <input type="text" class="form-control" id="inputCount" name="count" ng-model="count"
+                 placeholder="Кількість мість" required val-bubble>
         </div>
       </div>
     </div>
-
 
   </form>
 
