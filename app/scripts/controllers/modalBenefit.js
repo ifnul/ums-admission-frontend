@@ -17,8 +17,6 @@ angular.module('admissionSystemApp')
 
   .controller('ModalInstanceBenefitCtrl', function ($scope, $modalInstance, progressBarService) {
 
-    console.log("Value modal: " + progressBarService.value);
-
     $scope.ok = function () {
 
     };

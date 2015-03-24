@@ -11,17 +11,17 @@
 angular.module('admissionSystemApp')
   .controller('TabsCtrl', ['$scope', 'progressBarService', function ($scope, progressBarService) {
 
-    $scope.$on('valBubble', function (evt, args) {
+    $scope.$on('valBubble', function (evt, args) {  // using directive, which is responsible for changes in each input
 
-      if (args.isValid) {
-        progressBarService.value++;
+      if (args.isValid) {                           // checking if input is valid
+        progressBarService.value++;                 // value increases if the field is valid
       }
 
-      else if (progressBarService.value > 0) {
+      else if (progressBarService.value > 0) {      // value decreases if input content's was deleted
         progressBarService.value--;
       }
       else {
-        progressBarService.number++;
+        progressBarService.inputQuantity++;         // counting the number of inputs
       }
 
     });

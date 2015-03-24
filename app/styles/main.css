@@ -6,14 +6,6 @@
   margin-bottom: 20px;
 }
 
-.b-container__header {
-  position: absolute;
-  left: 0;
-  z-index: 2000;
-  width: 100%;
-  height: 52px;
-}
-
 input.ng-invalid.ng-dirty {
   border-color: red;
   background-color: #ffcccc;

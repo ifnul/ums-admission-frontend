@@ -3,21 +3,19 @@ angular.module('admissionSystemApp')
 
 
     $scope.status = "Заповнено на: ";
+
     $scope.value = progressBarService;
 
     $scope.$watch('value.value', function (value) {
-      console.log("Value: " + value);
 
-      console.log("Number pro: " + progressBarService.number);
-
-      $scope.dynamic = Math.round((value * 100) / progressBarService.number);
+      $scope.progressBarPercent = Math.round((value * 100) / progressBarService.inputQuantity);
 
       var type;
-      if ($scope.dynamic < 25) {
+      if ($scope.progressBarPercent < 25) {
         type = 'danger';
-      } else if ($scope.dynamic < 50) {
+      } else if ($scope.progressBarPercent < 50) {
         type = 'warning';
-      } else if ($scope.dynamic < 99) {
+      } else if ($scope.progressBarPercent < 99) {
         type = 'info';
       } else {
         type = 'success';
