@@ -11,14 +11,6 @@
  * Controller of the admissionSystemApp
  */
 angular.module('admissionSystemApp')
-  .controller('ListSubjectsCtrl', ['$scope', 'getSubjects', function($scope, getSubjects) {
-
-    $scope.subjects = getSubjects.getChiefSubjects();
-    console.log("$scope.Subjects", $scope.subjects);
-
-    $scope.subjectsForParent = getSubjects.getSubjectsForParent(3);
-    console.log("$scope.SubjectsForParent", $scope.subjectsForParent);
-  }])
 
 //http://176.36.11.25/api-lnu/enrolments/subjects
 //http://104.236.29.16:8080/is-lnu-rest-api/api/enrolments/subjects
