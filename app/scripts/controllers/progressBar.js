@@ -22,10 +22,10 @@ angular.module('admissionSystemApp')
       }
       $scope.type = type;
 
-      if ($scope.dynamic === 100) {
-        $scope.propositionAll = "Будь ласка, додайте предмети та пiльги!";
+      if ($scope.progressBarPercent === 100) {
+        $scope.propositionMessage = "Будь ласка, додайте предмети та пiльги!";
       } else {
-        $scope.propositionAll = " ";
+        $scope.propositionMessage = " ";
 
       }
 
