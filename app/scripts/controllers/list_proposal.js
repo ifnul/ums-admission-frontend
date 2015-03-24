@@ -8,7 +8,7 @@
  * Controller of the admissionSystemApp
  */
 angular.module('admissionSystemApp')
-  .controller('ListProposalCtrl', ['$scope','ngTableParams', 'ListProposalGettingService', function ($scope, ngTableParams, ListProposalGettingService) {
+  .controller('ListProposalCtrl', ['$scope', 'ngTableParams', 'ListProposalGettingService', function ($scope, ngTableParams, ListProposalGettingService) {
 
     ListProposalGettingService.getAllProposals(8).then(function (data) {
       $scope.tableParams = new ngTableParams({
@@ -21,6 +21,7 @@ angular.module('admissionSystemApp')
         }
       });
     });
+
   }])
 
 
