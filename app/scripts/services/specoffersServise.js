@@ -25,12 +25,12 @@ angular.module('admissionSystemApp')
         });
     });
 
-    var _specoffersService = restAngular.all('specoffers');
+    // var _specoffersService = ;
 
     return { 
         manageSpecoffers: {
             getSpecoffersList: function() {
-                return _specoffersService.getList();
+                return restAngular.all('specoffers').getList();
             },
             addSingleSpecoffer: function(params) {
                 return _specoffersService.post(params);
@@ -50,7 +50,6 @@ angular.module('admissionSystemApp')
                 // })
                 // IF YOU WANT TO CHANGE RECEIVED OBJECT AND THEN PUT IT BACK USE DRAFT ABOVE
                 return restAngular.one("specoffers", specOfferID).customPUT(newOffer)
-
             },
             deleteSingleSpecoffer: function(specOfferID) {
                 return restAngular.one("specoffers", specOfferID).remove()
