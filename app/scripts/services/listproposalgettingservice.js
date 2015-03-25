@@ -21,28 +21,30 @@ angular.module('admissionSystemApp')
         params: {
           limit: limit,
           offset: offset,
-          timePeriodId: timePeriod
+          timePeriodId: timePeriod,
+          timePeriodCourseId: 1
         },
         headers: {'Authorization': 'Basic YWRtaW46bmltZGE='}
       }
     }
 
     this.getAllProposals = function (timePeriod) {
-
+      console.log('im inside function getallPropodal');
       var proposals = [],
         deferred = $q.defer(),
         nextOffset = 0,
         limit = 300;
 
-
       var resolveData = function (data) {
+
+        angular.forEach(data.resources, function (resourse) {
+          proposals.push(resourse);
+        });
 
         if (data.resources.length < limit) {
           deferred.resolve(proposals);
           return;
         }
-
-        angular.extend(proposals, data.resources);
 
         nextOffset += limit;
 
