@@ -1,36 +1,35 @@
 angular.module('admissionSystemApp')
   .controller('ProgressBarCtrl', ['$scope', 'progressBarService', function ($scope, progressBarService) {
 
+    $scope.$watch(
+      function () {
+        return progressBarService.value;
+      },
 
-    $scope.status = "Заповнено на: ";
+      function (value) {
 
-    $scope.value = progressBarService;
+        $scope.progressBarPercent = Math.round((value * 100) / progressBarService.inputQuantity);
 
-    $scope.$watch('value.value', function (value) {
+        var type;
+        if ($scope.progressBarPercent < 25) {
+          type = 'danger';
+        } else if ($scope.progressBarPercent < 50) {
+          type = 'warning';
+        } else if ($scope.progressBarPercent < 99) {
+          type = 'info';
+        } else {
+          type = 'success';
+        }
+        $scope.type = type;
 
-      $scope.progressBarPercent = Math.round((value * 100) / progressBarService.inputQuantity);
+        if ($scope.progressBarPercent === 100) {
+          $scope.propositionMessage = "Будь ласка, додайте предмети та пiльги!";
+        } else {
+          $scope.propositionMessage = " ";
 
-      var type;
-      if ($scope.progressBarPercent < 25) {
-        type = 'danger';
-      } else if ($scope.progressBarPercent < 50) {
-        type = 'warning';
-      } else if ($scope.progressBarPercent < 99) {
-        type = 'info';
-      } else {
-        type = 'success';
-      }
-      $scope.type = type;
+        }
 
-      if ($scope.progressBarPercent === 100) {
-        $scope.propositionMessage = "Будь ласка, додайте предмети та пiльги!";
-      } else {
-        $scope.propositionMessage = " ";
-
-      }
-
-
-    });
+      });
 
   }]);
 

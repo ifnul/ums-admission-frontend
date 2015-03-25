@@ -6,7 +6,13 @@ angular.module('admissionSystemApp')
 
       var modalInstance = $modal.open({
         templateUrl: '../views/modal/modalBenefit.html',
-        controller: 'ModalInstanceBenefitCtrl',
+        controller: function ($scope, $modalInstance) {
+          $scope.ok = function () {
+          };
+          $scope.cancel = function () {
+            $modalInstance.dismiss('cancel');
+          };
+        },
         size: size
       });
     };
@@ -15,15 +21,4 @@ angular.module('admissionSystemApp')
 // Please note that $modalInstance represents a modal window (instance) dependency.
 // It is not the same as the $modal service used above.
 
-  .controller('ModalInstanceBenefitCtrl', function ($scope, $modalInstance, progressBarService) {
 
-    $scope.ok = function () {
-
-    };
-
-    $scope.cancel = function () {
-      $modalInstance.dismiss('cancel');
-    };
-
-
-  });
