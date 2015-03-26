@@ -22,28 +22,33 @@ angular.module('admissionSystemApp')
         $scope.specOffer.eduFormTypeId = eduformtypes[0].id;
       });
 
+      SpecofferDictionaryService.getTimePeriodCourseIds().then(function (timePeriodCourseIds) {
+        $scope.timePeriodCourseId = timePeriodCourseIds;
+        $scope.specOffer.timePeriodCourseId = timePeriodCourseIds[0].id;
+      });
+
       // DEMO FOR GEtting ALL Departments
       // SpecofferDictionaryService.getAllDepartments().then(function (allDepartments) {
         // console.log(allDepartments);
       // })
 
       // timePeriodCourseIds for demo ('курс вступу')
-      var timePeriodCourseIds = [
-          {
-            id: 1,
-            name: '1'
-          },
-          {
-            id: 2,
-            name: '2'
-          },
-          {
-            id: 3,
-            name: '3'
-          }
-      ];
-      $scope.timePeriodCourseId = timePeriodCourseIds;
-      $scope.specOffer.timePeriodCourseId = timePeriodCourseIds[0].id;
+      // var timePeriodCourseIds = [
+      //     {
+      //       id: 1,
+      //       name: '1'
+      //     },
+      //     {
+      //       id: 2,
+      //       name: '2'
+      //     },
+      //     {
+      //       id: 3,
+      //       name: '3'
+      //     }
+      // ];
+      // $scope.timePeriodCourseId = timePeriodCourseIds;
+      // $scope.specOffer.timePeriodCourseId = timePeriodCourseIds[0].id;
    	  // --> end demo
 
       // watching specOffer object

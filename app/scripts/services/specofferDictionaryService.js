@@ -66,8 +66,7 @@ angular.module('admissionSystemApp')
         return getAnyItems('eduformtypes');
       },
       getTimePeriodCourseIds: function () {
-        // return 'getAllTimePeriodCourseIds()';
-        // this method doesn't exist yet
+        return getAnyItems('/courses/types');
       }
     };
   }]);
