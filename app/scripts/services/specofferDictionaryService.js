@@ -32,21 +32,24 @@ angular.module('admissionSystemApp')
       return deferred.promise;
     }
 
-    function getAllDepartments () {
-      var departments = [];
+    function getLargeDictionary (route) {
+      var arrayToFill = [];
       var deferred = $q.defer();
       var limit = 300;
       var offset = 0;
 
-      $http(requestConfig('departments', undefined, limit, offset)).success(function callBack (data) {
-        angular.extend(departments, data.resources);
-
+      $http(requestConfig(route, undefined, limit, offset)).success(function callBack (data) {
+        
+        for (var i=0; i<data.resources.length; i+=1) {
+          arrayToFill.push(data.resources[i]);
+        }
         if(data.resources.length < 300) {
-          deferred.resolve(departments);
+          deferred.resolve(arrayToFill);
           return;
         }
+
         offset += limit;
-        $http(requestConfig('departments', undefined, limit, offset)).success(callBack);
+        $http(requestConfig(route, undefined, limit, offset)).success(callBack);
       });
 
       return deferred.promise;
@@ -57,7 +60,10 @@ angular.module('admissionSystemApp')
         return getAnyItems('departments', 2);
       },
       getAllDepartments: function () {
-        return getAllDepartments();
+        return getLargeDictionary('departments');
+      },
+      getAllSpecialties: function () {
+        return getLargeDictionary('specialties');
       },
       getSpecoffersTypes: function () {
         return getAnyItems('specoffers/types');
