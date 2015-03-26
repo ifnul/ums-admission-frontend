@@ -32,25 +32,6 @@ angular.module('admissionSystemApp')
         // console.log(allDepartments);
       // })
 
-      // timePeriodCourseIds for demo ('курс вступу')
-      // var timePeriodCourseIds = [
-      //     {
-      //       id: 1,
-      //       name: '1'
-      //     },
-      //     {
-      //       id: 2,
-      //       name: '2'
-      //     },
-      //     {
-      //       id: 3,
-      //       name: '3'
-      //     }
-      // ];
-      // $scope.timePeriodCourseId = timePeriodCourseIds;
-      // $scope.specOffer.timePeriodCourseId = timePeriodCourseIds[0].id;
-   	  // --> end demo
-
       // watching specOffer object
       $scope.$watch('specOffer', function (newVal) {
         // console.log(newVal);
