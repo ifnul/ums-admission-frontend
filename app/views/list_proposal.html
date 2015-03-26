@@ -68,12 +68,10 @@
         </div>
 
         <!-- Table -->
-
-        <div>
-          <table ng-table="tableParams" class="table table-hover">
+          <table ng-table="tableParams" class="table">
             <tr ng-repeat="prop in $data">
-              <td data-title="'specialtyId'">{{prop.specialtyId}}</td>
-              <td data-title="'departmentId'">{{prop.departmentId}}</td>
+              <td data-title="'specialityID'">{{prop.specialtyId}}</td>
+              <td data-title="'departmentID'">{{prop.departmentId}}</td>
               <td data-title="'timePeriodId'">{{prop.timePeriodId}}</td>
               <td data-title="'timePeriodCourseId'">{{prop.timePeriodCourseId}}</td>
               <td data-title="'specofferTypeId'">{{prop.specofferTypeId}}</td>
@@ -84,9 +82,9 @@
               <td data-title="'stateCount'">{{prop.stateCount}}</td>
               <!--<td data-title="'begDate'">{{prop.begDate}}</td>-->
               <!--<td data-title="'endDate'">{{prop.endDate}}</td>-->
+              <!--<td data-title="'parentId'">{{prop.parentId}}</td>-->
             </tr>
           </table>
-        </div>
       </div>
     </div>
 

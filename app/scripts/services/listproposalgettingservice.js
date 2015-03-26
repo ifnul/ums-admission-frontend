@@ -21,15 +21,14 @@ angular.module('admissionSystemApp')
         params: {
           limit: limit,
           offset: offset,
-          timePeriodId: timePeriod,
-          timePeriodCourseId: 1
+          timePeriodId: timePeriod
         },
         headers: {'Authorization': 'Basic YWRtaW46bmltZGE='}
       }
     }
 
     this.getAllProposals = function (timePeriod) {
-      console.log('im inside function getallPropodal');
+
       var proposals = [],
         deferred = $q.defer(),
         nextOffset = 0,
@@ -37,11 +36,22 @@ angular.module('admissionSystemApp')
 
       var resolveData = function (data) {
 
-        angular.forEach(data.resources, function (resourse) {
-          proposals.push(resourse);
+        angular.forEach(data.resources, function(resource){
+          proposals.push(resource);
         });
 
-        if (data.resources.length < limit) {
+        if(data.resources.length < limit) {
+            var deptDictLenght = deptDictionary.length; //deptDictionary - link to dictionary of departments
+            angular.forEach(proposals, function() {
+                for (var i= 0; i<deptDictLenght; i++) {
+                  if (proposals.departmentId === deptDictionary[i].id) {
+                    proposals.departmentId = deptDictionary.name;
+                    break;
+                  }
+                }
+            }
+          )
+
           deferred.resolve(proposals);
           return;
         }
