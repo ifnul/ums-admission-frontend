@@ -64,29 +64,44 @@
           <a href="#/new-proposal" class="col-md-offset-1">
             <button type="button" class="btn btn-success "><i class="fa fa-plus"></i> Додати пропозицію</button>
           </a>
-          <button type="button" class="pull-right btn btn-primary"><i class="fa fa-bars "></i></button>
+          <button type="button" class="pull-right btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm"><i class="fa fa-bars "></i></button>
         </div>
+
+        <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+              <ul class="list-group">
+                <li class="list-group-item" ng-repeat = "header in headers" ng-click = "header.visible = !header.visible">
+                  <label>
+                    <input type= "checkbox" ng-checked="header.visible">
+                          <span>{{header.display}}</span>
+                  </label>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+
 
         <!-- Table -->
 
-        <div ng-controller="ListProposalCtrl">
+        <div>
 
-          <table ng-table="tableParams" class="table">
+          <table ng-table="tableParams" show-filter="true" class="table">
 
+            <thead>
+              <tr>
+                <td ng-repeat="column in headers" data-title="'column.display'" ng-show="column.visible" sortable="column.field">
+                  {{column.display}}
+                </td>
+              </tr>
+            </thead>
             <tr ng-repeat="prop in $data">
 
-              <td data-title="'specialityID'">{{prop.specialityID}}</td>
-              <td data-title="'departmentID'">{{prop.departmentID}}</td>
-              <td data-title="'timePeriodId'">{{prop.timePeriodId}}</td>
-              <td data-title="'specofferTypeId'">{{prop.specofferTypeId}}</td>
-              <td data-title="'docSeries'">{{prop.docSeries}}</td>
-              <td data-title="'docNum'">{{prop.docNum}}</td>
-              <td data-title="'eduFormTypeId'">{{prop.eduFormTypeId}}</td>
-              <td data-title="'licCount'">{{prop.licCount}}</td>
-              <td data-title="'stateCount'">{{prop.stateCount}}</td>
-              <td data-title="'begDate'">{{prop.begDate}}</td>
-              <td data-title="'endDate'">{{prop.endDate}}</td>
-              <td data-title="'parentId'">{{prop.parentId}}</td>
+              <td ng-repeat="column in headers" data-title="'column.display'" ng-show="column.visible" sortable="column.field">
+                {{prop[column.name]}}
+              </td>
 
             </tr>
 
