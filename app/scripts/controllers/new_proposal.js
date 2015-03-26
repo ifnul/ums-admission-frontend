@@ -2,87 +2,63 @@
 
 
 angular.module('admissionSystemApp')
-.controller('NewProposalCtrl', ['$scope', 'Restangular', 'SpecoffersService',
-	function ($scope, Restangular, SpecoffersService) {
+.controller('NewProposalCtrl', ['$scope', 'Restangular', 'SpecoffersService', 'SpecofferDictionaryService','$filter',
+	function ($scope, Restangular, SpecoffersService, SpecofferDictionaryService, $filter) {
+
+      $scope.specOffer = {};
+
+      SpecofferDictionaryService.getDepartmentsByType().then(function (departments) {
+        $scope.departmentId = departments;
+        $scope.specOffer.departmentId = departments[0].id;
+      });
+
+      SpecofferDictionaryService.getSpecoffersTypes().then(function (SpecoffersTypes) {
+        $scope.specofferTypesOptions = SpecoffersTypes;
+        $scope.specOffer.specofferTypeId = SpecoffersTypes[0].id;
+      });
+
+      SpecofferDictionaryService.getEduformTypes().then(function (eduformtypes) {
+        $scope.eduFormTypesOptions = eduformtypes;
+        $scope.specOffer.eduFormTypeId = eduformtypes[0].id;
+      });
+
+      // DEMO FOR GEtting ALL Departments
+      // SpecofferDictionaryService.getAllDepartments().then(function (allDepartments) {
+        // console.log(allDepartments);
+      // })
+
+      // timePeriodCourseIds for demo ('курс вступу')
+      var timePeriodCourseIds = [
+          {
+            id: 1,
+            name: '1'
+          },
+          {
+            id: 2,
+            name: '2'
+          },
+          {
+            id: 3,
+            name: '3'
+          }
+      ];
+      $scope.timePeriodCourseId = timePeriodCourseIds;
+      $scope.specOffer.timePeriodCourseId = timePeriodCourseIds[0].id;
+   	  // --> end demo
+
+      // watching specOffer object
+      $scope.$watch('specOffer', function (newVal) {
+        // console.log(newVal);
+      }, true);
 
 
+      $scope.$watchGroup(['specOffer.begDate', 'specOffer.endDate'], function(newValues){
+          $scope.specOffer.begDate = $filter('date')(newValues[0], 'yyyy-MM-dd');
+          $scope.specOffer.endDate = $filter('date')(newValues[1], 'yyyy-MM-dd');
+      });
 
 
-   		// **********************************************************************
-   		//                      MANAGIN SPECOFFERS DEMO
-   		// **********************************************************************
-
-  		// -------------- GET LIST OF SCPECOFFERS-----------------------
-
-	    // var allSpecoffers = SpecoffersService.manageSpecoffers.getSpecoffersList().then(function(offers) {
-	    // 	// console.log('offers',offers);
-	    // 	offers[0].note = 'my new note';
-	    // 	offers[0].put();
-	    // });
-	    // console.log('allSpecoffers', allSpecoffers);
-
-
-  		// ----------------POST ONE  NEW SPECOFFER-----------------
-
-  		// $scope.specofferTypesOptions = [
-  		var specofferTypesOptions = [
-  		{
-  			"id": 1,
-  			"name": "Молодший спеціаліст на основі базової загальної середньої освіти",
-  		},
-  		{
-  			"id": 2,
-  			"name": "Молодший спеціаліст на основі повної загальної середньої освіти",
-  		},
-  		{
-  			"id": 3,
-  			"name": "Молодший спеціаліст (зі скороченим терміном навчання)",
-  		},
-  		{
-  			"id": 4,
-  			"name": "Молодший спеціаліст (зі скороченим терміном навчання, на 2 курс)",
-  		}
-  		]
-  		$scope.specofferTypesOptions = specofferTypesOptions;
-
-  		var eduFormTypesOptions = [
-	  		{
-	  			"id": 1,
-	  			"name": "денна",
-	  		},
-	  		{
-	  			"id": 2,
-	  			"name": "заочна",
-	  		},
-	  		{
-	  			"id": 3,
-	  			"name": "екстернат",
-	  		},
-	  		{
-	  			"id": 4,
-	  			"name": "вечірня",
-	  		},
-	  		{
-	  			"id": 5,
-	  			"name": "дистанційна",
-	  		}
-  		]
-  		$scope.eduFormTypesOptions = eduFormTypesOptions;
-
-  		var specOffer = {};
-  		specOffer.specofferTypeId = specofferTypesOptions[0].id;
-  		specOffer.eduFormTypeId = eduFormTypesOptions[0].id;
-  		$scope.specOffer = specOffer;
-
-  		$scope.$watch('specOffer.specofferTypeId', function (newVal){
-  			console.log(newVal);
-  		})
-		// $scope.$watch('specOffer', function(newNames, oldNames) {
-		// 	console.log(newNames);
-		// });
-  		// $scope.masterSpecOffer = {};
-
-
+      // new SpecOffer example
   		var newSpecOffer = {
   			'docSeries': '122211',
   			'docNum': '234333111',
@@ -96,128 +72,33 @@ angular.module('admissionSystemApp')
   			'note': 'TEXT',
   			'begDate': '2015-10-01',
   			'endDate': '2020-07-05'
-  		}
-
-		// UNCOMMENT FOR DEMO
-		// function addSpecOffer (newSpecOffer) {
-		// 	return SpecoffersService.manageSpecoffers.addSingleSpecoffer(newSpecOffer);
-		// }
-
-
-  		// -------------UPDATE ONE EXISTING SPECOFFER BY ID---------------------
-
-  		var updatedSpecOffer = {
-  			"timePeriodId": 10,
-  			"eduFormTypeId": 2,
-  			"specofferTypeId": 2,
-  			"docSeries": "12345",
-  			"docNum": "12345",
-  			"begDate": "2015-02-08",
-  			"endDate": "2015-02-08",
-  			"licCount": 4,
-  			"stateCount": 4,
-  			"departmentId": 1,
-  			"specialtyId": 1,
-  			"note": "NEW_NOTE",
   		};
-		// UNCOMMENT FOR DEMO
-		// SpecoffersService.manageSpecoffers.updateSingleSpecoffer(updatedSpecOffer, 30);
 
-
-
-  		// -------------GET ONE SPECOFFER BY ID-----------------------------
-		// UNCOMMENT FOR DEMO
-		// SpecoffersService.manageSpecoffers.getSingleSpecoffer(36).then(function(res){
-		// 	console.log("res",res)
-		// });
-
-
-  		// ------------DELETE ONE SPECOFFER BY ID-------------------------------
-  		// UNCOMMENT FOR DEMO
-		// SpecoffersService.manageSpecoffers.deleteSingleSpecoffer(33)
-
-
-
-
-   		// **********************************************************************
-   		//                      MANAGING SUBJECTS DEMO
-   		// **********************************************************************
-
-  		// ------------ ADD SINGLE SUBJECT TO SPECIFIC SPECOFFER(ID) ---------------
+      // new Subject example
   		var newSubject = {
-  			"mark": 3,
-  			"isMajor": false,
-  			"alternative": false,
-  			"weightSubject": 0.9,
-  			"specOfferId": 35,
-  			"enrolmentSubjectId": 1,
-  			"note": "HERE"
+  			'mark': 3,
+  			'isMajor': false,
+  			'alternative': false,
+  			'weightSubject': 0.9,
+  			'specOfferId': 35,
+  			'enrolmentSubjectId': 1,
+  			'note': 'HERE'
   		};
-		// UNCOMMENT FOR DEMO
-		// SpecoffersService.manageSubjects.addSingleSubject(35, newSubject);
 
-
-
-
-  		// ------------ GET SINGLE SUBJECT(ID) OF SPECOFFER(ID) --------------------
-  		// UNCOMMENT FOR DEMO
-		// SpecoffersService.manageSubjects.getSingleSubject(34,2).then(function (res) {
-			// console.log('specoffers/34/subjects/2', res);
-		// });
-
-		// ------------- GET LIST OF SUJECTS USING  SPECOFFER'S ID-----------------------------
-		// UNCOMMENT FOR DEMO
-		// SpecoffersService.manageSubjects.getListOfSubjects(36).then(function(res){
-			// console.log("specoffers subjects ID 36",res)
-		// });
-
-		// ------------- REMOVE SINGLE SUBJECT(ID) OF SPECOFFER(ID)  ----------------------------
-		// UNCOMMENT FOR DEMO
-		// SpecoffersService.manageSubjects.removeSingleSubject(36, 6);
-
-		// ------------- UPDATE SINGLE SUBJECT(ID) OF SPECOFFER(ID)  ----------------------------
-		var updatedSubject = {
-			"mark": 5,
-			"isMajor": true,
-			"alternative": true,
-			"weightSubject": 0.5,
-			"specOfferId": 36,
-			"enrolmentSubjectId": 1,
-			"note": "newNote"
-		};
-		// UNCOMMENT FOR DEMO
-		// SpecoffersService.manageSubjects.updateSingleSubject(36, 5, updatedSubject);
-
-
-   		// **********************************************************************
-   		//                      MANAGING BENEFITS DEMO
-   		// **********************************************************************
-
-   		// ------------- GET LIST OF BENEFITS USING  SPECOFFER'S ID----------------
-   		// UNCOMMENT FOR DEMO
-   		// SpecoffersService.manageBenefits.getListOfBenefits(37).then(function (res) {
-   			// console.log('benefits', res);
-   		// });
-
-
-   		// ----------------- ADD SINGLE BENEFIT -----------------------------------
+      // new Benefit example
    		var newBenefit = {
-   			"benefitId": 1,
-   			"specOfferId": 37,
-   			"note": "new note note"
+   			'benefitId': 1,
+   			'specOfferId': 37,
+   			'note': 'new note note'
    		};
-		// UNCOMMENT FOR DEMO
-		// SpecoffersService.manageBenefits.addSingleBenefit(37, newBenefit);
-
-		// ----------------- GET SINGLE BENEFIT -----------------------------------
-		// UNCOMMENT FOR DEMO
-		// SpecoffersService.manageBenefits.addSingleBenefit(37, 8).then(function (res){
-			// console.log('specoffer id-37, benefit id-8', res);
-		// });
 
 
 }]);
 
-
-
-
+angular.module('admissionSystemApp')
+  .config(['datepickerConfig', 'datepickerPopupConfig',
+    function(datepickerConfig, datepickerPopupConfig) {
+      datepickerConfig.showWeeks = false;
+      datepickerConfig.startingDay = '1';
+      datepickerPopupConfig.showButtonBar = false;
+  }]);

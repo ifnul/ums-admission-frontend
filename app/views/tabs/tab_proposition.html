@@ -5,31 +5,46 @@
       <div class="row">
         <div class="form-group col-md-2">
           <label for="inputCodeDirection">Код напряму</label>
-          <input type="text" class="form-control" id="inputCodeDirection" ng-model="proposition.directionCode"
+          <input ng-model="proposition.directionCode" 
+                 type="text" 
+                 class="form-control" id="inputCodeDirection" 
                  placeholder="Введiть код напряму"
-                 name="directionCode" ng-pattern="/^\d{1,2}\.\d/" required val-bubble>
+                 name="directionCode" 
+                 ng-pattern="/^\d{1,2}\.\d/" 
+                 required val-bubble>
         </div>
 
         <div class="form-group col-md-3">
           <label for="inputDirection">Напрям</label>
-          <input type="text" class="form-control" id="inputDirection" ng-model="proposition.direction"
+          <input type="text" 
+                 class="form-control" 
+                 id="inputDirection" 
+                 ng-model="proposition.direction"
                  placeholder="Введiть напрям"
-                 name="direction" required val-bubble>
+                 name="direction" 
+                 required val-bubble>
         </div>
 
         <!--    specialtyId **СПЕЦІАЛІЗАЦІЯ**     -->
         <div class="form-group col-md-4">
           <label for="inputCodeSpecialty">Код спеціальностi</label>
           <input ng-model="specOffer.specialtyId"
-                 type="text" class="form-control" id="inputCodeSpecialty"
+                 type="text" 
+                 class="form-control" 
+                 id="inputCodeSpecialty"
                  placeholder="Введiть код"
-                 name="codeSpecialty" ng-pattern="/^\d{1,2}\.\d/" required val-bubble>
+                 name="codeSpecialty" 
+                 ng-pattern="/^\d{1,2}\.\d/" 
+                 required val-bubble>
         </div>
 
 
         <div class="form-group col-md-3">
           <label for="inputSpecialty">Спеціальнiсть</label>
-          <input type="text" class="form-control" id="inputSpecialty" ng-model="proposition.specialty"
+          <input ng-model="proposition.specialty"
+                 type="text" 
+                 class="form-control" 
+                 id="inputSpecialty" 
                  placeholder="Введiть спеціальність"
                  name="specialty" required val-bubble>
         </div>
@@ -39,10 +54,13 @@
         <div class="form-group  col-md-5">
         <!--   departmentId    -->
           <label for="inputStructure">Структурний підрозділ</label>
-          <input ng-model="specOffer.departmentId"
-                 type="text" class="form-control" id="inputStructure"
-                 placeholder="Введiть факультет"
-                 name="structure" required val-bubble>
+          <select ng-model="specOffer.departmentId"
+                  ng-options="opt.id as opt.name for opt in departmentId"
+                  class="form-control" 
+                  id="inputStructure" 
+                  name="structure"  
+                  required val-bubble>
+          </select>
         </div>
       </div>
       <div class="row">
@@ -50,9 +68,23 @@
           <label for="inputOKR">Освітньо-кваліфікаційний рівень</label>
           <select ng-model="specOffer.specofferTypeId"
                   ng-options="opt.id as opt.name for opt in specofferTypesOptions"
-                  class="form-control" id="inputOKR" required val-bubble>
-<!-- opt.name for opt in specofferTypesOptions track by opt.id -->
-<!-- opt.id as opt.name for opt in specofferTypesOptions -->
+                  class="form-control" 
+                  id="inputOKR" 
+                  name="inputOKR"  
+                  required val-bubble>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+      <!-- timePeriodCourseId -->
+        <div class="form-group col-md-5">
+          <label for="inputOKR">Курс зарахування</label>
+          <select ng-model="specOffer.timePeriodCourseId"
+                  ng-options="opt.id as opt.name for opt in timePeriodCourseId"
+                  class="form-control" 
+                  id="inputTimePeriodCourseId" 
+                  name="inpuTtimePeriodCourseId"
+                  required val-bubble>
           </select>
         </div>
       </div>
@@ -61,17 +93,24 @@
         <!-- docSeries -->
           <label for="inputLicenseS"> Серія ліцензії</label>
           <input ng-model="specOffer.docSeries"
-                 type="text" class="form-control" id="inputLicenseS"
-                 placeholder="Введiть серiю лiцензiї" name="inputLicenseS" required val-bubble>
+                 type="text" 
+                 class="form-control" 
+                 id="inputLicenseS"
+                 placeholder="Введiть серiю лiцензiї" 
+                 name="inputLicenseS" 
+                 required val-bubble>
         </div>
 
-        <div class="form-group col-md-4 ">
+        <div class="form-group col-md-3 ">
         <!-- docNum -->
           <label for="inputLicenseNumber"> Номер ліцензії</label>
           <input ng-model="specOffer.docNum"
-                 type="number" class="form-control " id="inputLicenseNumber"
-                 placeholder="Введiть номер лiцензiї" name="inputLicenseNumber"  required
-                 val-bubble>
+                 type="text" 
+                 class="form-control" 
+                 id="inputLicenseNumber"
+                 placeholder="Введiть номер лiцензiї" 
+                 name="inputLicenseNumber"  
+                 required val-bubble>
         </div>
       </div>
       <div class="row">
@@ -80,7 +119,10 @@
           <label for="inputFormStuding">Оберiть форму навчання</label>
           <select ng-model="specOffer.eduFormTypeId"
                   ng-options="opt.id as opt.name for opt in eduFormTypesOptions"
-                  id="inputFormStuding" class="form-control" required val-bubble>
+                  id="inputFormStuding" 
+                  class="form-control" 
+                  name="inputFormStuding" 
+                  required val-bubble>
           </select>
         </div>
       </div>
@@ -88,16 +130,23 @@
         <div class="form-group col-md-3">
         <!-- licCount -->
           <label for="inputNumberOfPlaces">Кiлькiсть лiцензованих мiсць</label>
-          <input type="number" class="form-control " id="inputNumberOfPlaces"
-                 placeholder="Введiть кiлькiсть лiцензованих мiсць" name="inputNumberOfPlaces"
-                 ng-model="inputNumberOfPlaces" required val-bubble>
+          <input ng-model="specOffer.licCount" 
+                 type="number" 
+                 class="form-control " 
+                 id="inputNumberOfPlaces"
+                 placeholder="Введiть кiлькiсть лiцензованих мiсць" 
+                 name="inputNumberOfPlaces"
+                 required val-bubble>
         </div>
         <div class="form-group col-md-3">
         <!-- stateCount -->
           <label for="inputNumberOfStateOrder">Кiлькiсть мiсць держзамовлення</label>
-          <input type="number" class="form-control " id="inputNumberOfStateOrder"
-                 placeholder="Введiть кiлькiсть мiсць держзамовлення" name="inputNumberOfStateOrder"
-                 ng-model="inputNumberOfStateOrder" required val-bubble>
+          <input ng-model="specOffer.stateCount"
+                 type="number" class="form-control " 
+                 id="inputNumberOfStateOrder"
+                 placeholder="Введiть кiлькiсть мiсць держзамовлення" 
+                 name="inputNumberOfStateOrder"
+                 required val-bubble>
         </div>
       </div>
       <div class="row">
@@ -105,23 +154,34 @@
         <div class="col-md-3">
         <!-- begDate -->
           <label class="control-label">Дата початку навчання</label>
-          <input ng-model="specOffer.begDate"
-                 type="date" class="form-control"
-                 name="title" required val-bubble/>
+            <input type="text" 
+                  ng-model="specOffer.begDate"
+                  datepicker-popup="yyyy-MM-dd"
+                  is-open="isOpen"
+                  ng-click = "isOpen = true"
+                  ng-required="true"
+                  close-text="Close"
+                  class="form-control" 
+                  required val-bubble 
+                  name="begDate" 
+                  placeholder="РРРР-MM-ДД" />
         </div>
         <div class="col-md-3">
           <!-- endDate -->
-          <label class="control-label">Дата закінчення навчання</label>
-          <input ng-model="specOffer.endDate"
-                type="date" class="form-control" name="title"
-                required val-bubble/>
+          <label class="control-label">Дата закінчення </label>
+            <input type="text" 
+                  ng-model="specOffer.endDate"
+                  datepicker-popup="yyyy-MM-dd"
+                  is-open="isOpen2"
+                  ng-click = "isOpen2 = true"
+                  ng-required="true"
+                  close-text="Close"
+                  class="form-control" 
+                  required val-bubble 
+                  name="endDate" 
+                  placeholder="РРРР-MM-ДД" />
         </div>
       </div>
     </div>
-  </div>
-
-  <div class="top-buffer">
-    <button ng-click="handleClick(message);" type="submit" class="btn btn-primary">Зберегти</button>
-    <button type="submit" class="btn btn-primary">Далі</button>
   </div>
 </form>
