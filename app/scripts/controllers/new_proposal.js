@@ -28,28 +28,13 @@ angular.module('admissionSystemApp')
       });
 
       // DEMO FOR GEtting ALL Departments
-      // SpecofferDictionaryService.getAllDepartments().then(function (allDepartments) {
-        // console.log(allDepartments);
-      // })
+      SpecofferDictionaryService.getAllDepartments().then(function (allDepartments) {
+        // console.log('allDepartments',allDepartments);
+      })
 
-      // timePeriodCourseIds for demo ('курс вступу')
-      // var timePeriodCourseIds = [
-      //     {
-      //       id: 1,
-      //       name: '1'
-      //     },
-      //     {
-      //       id: 2,
-      //       name: '2'
-      //     },
-      //     {
-      //       id: 3,
-      //       name: '3'
-      //     }
-      // ];
-      // $scope.timePeriodCourseId = timePeriodCourseIds;
-      // $scope.specOffer.timePeriodCourseId = timePeriodCourseIds[0].id;
-   	  // --> end demo
+      SpecofferDictionaryService.getAllSpecialties().then(function (specialties) {
+        console.log('Specialties',specialties);
+      })
 
       // watching specOffer object
       $scope.$watch('specOffer', function (newVal) {
