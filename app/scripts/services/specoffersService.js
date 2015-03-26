@@ -25,7 +25,23 @@ angular.module('admissionSystemApp')
         });
     });
 
+    function addEntireSpecoffer (obj) {
+        restAngular.all('specoffers').post(obj.specoffer).then(function (response) {
+            for (var i=0; i<obj.subjects.length; i+=1) {
+                obj.subjects[i].specOfferId = response.id;
+                restAngular.one('specoffers', response.id).one('subjects').customPOST(obj.subjects[i]);
+            }
+            for (var i=0; i<obj.benefites.length; i+=1) {
+                obj.benefites[i].specOfferId = response.id;
+                restAngular.one('specoffers', response.id).one('benefits').post('', obj.benefites[i]);
+            }
+        })
+    }
+
     return {
+        manageEntireSpecoffer: function (entireSpecoffer) {
+            return addEntireSpecoffer(entireSpecoffer);
+        },
         manageSpecoffers: {
             getSpecoffersList: function() {
                 return restAngular.all('specoffers').getList();

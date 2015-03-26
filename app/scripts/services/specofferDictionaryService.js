@@ -73,6 +73,9 @@ angular.module('admissionSystemApp')
       },
       getTimePeriodCourseIds: function () {
         return getAnyItems('/courses/types');
+      },
+      getTimeperiods: function () {
+        return getAnyItems('timeperiods');
       }
     };
   }]);
