@@ -1,0 +1,28 @@
+<div class="modal-header">
+  <h3 class="modal-title">Оберіть потрібний напрям чи спеціальність</h3>
+</div>
+<div class="modal-body">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <table class="table table-bordered">
+        <thead>
+        <tr>
+          <th class="text-center">Шифр</th>
+          <th class="text-center">Назва</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="result in results">
+          <td><a ng-click="selected.result = result">{{result.cipher}}</a></td>
+          <td>{{result.name}}</td>
+        </tr>
+        </tbody>
+      </table>
+      <p>Ви обрали напрям/спеціальність <b>"{{selected.result.name}}"</b> з кодом <b>"{{selected.result.cipher}}"</b></p>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" ng-click="ok()">OK</button>
+  <button class="btn btn-danger" ng-click="cancel()">Cancel</button>
+</div>
