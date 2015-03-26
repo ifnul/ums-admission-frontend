@@ -8,7 +8,7 @@
  * Service in the admissionSystemApp.
  */
 angular.module('admissionSystemApp')
-  .service('ListProposalGettingService', ['$http', '$q', function ($http, $q) {
+  .service('ListProposalGettingService', [, '$http', '$q', 'SpecialtyGettingService', function (, $http, $q, SpecialtyGettingService) {
 
     function getConfig(offset, limit, timePeriod) {
 
@@ -36,21 +36,34 @@ angular.module('admissionSystemApp')
 
       var resolveData = function (data) {
 
-        angular.forEach(data.resources, function(resource){
+        angular.forEach(data.resources, function (resource) {
           proposals.push(resource);
         });
 
-        if(data.resources.length < limit) {
-            var deptDictLenght = deptDictionary.length; //deptDictionary - link to dictionary of departments
-            angular.forEach(proposals, function() {
-                for (var i= 0; i<deptDictLenght; i++) {
-                  if (proposals.departmentId === deptDictionary[i].id) {
-                    proposals.departmentId = deptDictionary.name;
-                    break;
-                  }
-                }
+        if (data.resources.length < limit) {
+          var specialtyNames = [],
+            deptNames = [],
+            timePeriodCourseNames = [],
+            specofferTypeNames = [],
+            eduFormTypeNames = [];
+
+          angular.forEach(proposals, function (SpecialtyGettingService) {
+            specialtyNames[SpecialtyGettingService.getAllSpecialties().id] = SpecialtyGettingService.getAllSpecialties().name;
+            //deptNames[deptDictionary.id] = deptDictionary.name;
+            //timePeriodCourseNames[tpCourseDictionary.id] = tpCourseDictionary.name;
+            //specofferTypeNames[specofferTypesDictionary.id] = specofferTypesDictionary.name;
+            //eduFormTypeNames[eduFormDictionary.id] = eduFormDictionary.name;
+          });
+
+          angular.forEach(proposals, function () {
+              proposals.specialtyId = specialtyNames[proposals.specialtyId];
+              //proposals.departmentId = deptNames[proposals.departmentId];
+              //proposals.timePeriodCourseId = timePeriodCourseNames[proposals.timePeriodCourseId];
+              //proposals.specofferTypeId = specofferTypeNames[proposals.specofferTypeId];
+              //proposals.eduFormTypeId = eduFormTypeNames[proposals.eduFormTypeId];
             }
-          )
+          );
+          console.log(SpecialtyGettingService.getProperty());
 
           deferred.resolve(proposals);
           return;

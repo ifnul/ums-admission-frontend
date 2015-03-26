@@ -14,6 +14,11 @@ angular.module('admissionSystemApp')
       directions = [],
       specialties = [];
 
+    function getAllSpecialties() {
+     return allSpecialties
+    };
+
+
     function getConfig(offset, limit) {
 
       limit = limit || 300;
