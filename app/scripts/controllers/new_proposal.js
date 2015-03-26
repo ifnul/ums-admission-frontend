@@ -30,11 +30,11 @@ angular.module('admissionSystemApp')
       // DEMO FOR GEtting ALL Departments
       SpecofferDictionaryService.getAllDepartments().then(function (allDepartments) {
         // console.log('allDepartments',allDepartments);
-      })
+      });
 
       SpecofferDictionaryService.getAllSpecialties().then(function (specialties) {
-        console.log('Specialties',specialties);
-      })
+        // console.log('Specialties',specialties);
+      });
 
       // watching specOffer object
       $scope.$watch('specOffer', function (newVal) {
