@@ -18,6 +18,8 @@ angular.module('admissionSystemApp')
       deferredName = $q.defer(),
       searchResult = [];
 
+
+
     function getConfig(offset, limit) {
 
       limit = limit || 300;
@@ -107,3 +109,6 @@ angular.module('admissionSystemApp')
     return service;
 
   }]);
+
+
+
