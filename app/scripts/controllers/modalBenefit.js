@@ -7,6 +7,14 @@ angular.module('admissionSystemApp')
       var modalInstance = $modal.open({
         templateUrl: '../views/modal/modalBenefit.html',
         controller: function ($scope, $modalInstance) {
+
+
+
+
+
+
+
+
           $scope.ok = function () {
           };
           $scope.cancel = function () {
