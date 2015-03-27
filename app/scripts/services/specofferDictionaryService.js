@@ -6,12 +6,15 @@ angular.module('admissionSystemApp')
   }]);
 
 angular.module('admissionSystemApp')
-  .factory('SpecofferDictionaryService', ['$http', '$q', function ($http, $q) {
+  .factory('SpecofferDictionaryService', ['$http', '$q', '$timeout', '$cacheFactory',function ($http, $q, $timeout, $cacheFactory) {
 
-    function requestConfig(itemType, deparTypeId, limit, offset) {
-      deparTypeId = deparTypeId || undefined;
-      limit = limit || undefined;
-      offset = offset || undefined;
+
+
+    function requestConfig(itemType, deparTypeId, limit, offset, timePeriodId) {
+      var deparTypeId = deparTypeId || undefined;
+      var limit = limit || undefined;
+      var offset = offset || undefined;
+      var timePeriodId = timePeriodId || undefined;
 
       return {
         method: 'GET',
@@ -19,8 +22,10 @@ angular.module('admissionSystemApp')
         params: {
           departmentTypeId: deparTypeId,
           limit: limit,
-          offset: offset
-        }
+          offset: offset,
+          timePeriodId: timePeriodId
+        },
+        cache: true
       };
     }
 
@@ -32,28 +37,29 @@ angular.module('admissionSystemApp')
       return deferred.promise;
     }
 
-    function getLargeDictionary (route) {
+    function getLargeDictionary (route, timePeriodId) {
       var arrayToFill = [];
       var deferred = $q.defer();
       var limit = 300;
       var offset = 0;
 
-      $http(requestConfig(route, undefined, limit, offset)).success(function callBack (data) {
+      $http(requestConfig(route, undefined, limit, offset, timePeriodId)).success(function callBack (data) {
         
         for (var i=0; i<data.resources.length; i+=1) {
           arrayToFill.push(data.resources[i]);
         }
-        if(data.resources.length < 300) {
+        if(data.resources.length < limit) {
           deferred.resolve(arrayToFill);
           return;
         }
 
         offset += limit;
-        $http(requestConfig(route, undefined, limit, offset)).success(callBack);
+        $http(requestConfig(route, undefined, limit, offset, timePeriodId)).success(callBack);
       });
 
       return deferred.promise;
     }
+
 
     return {
       getDepartmentsByType: function () {
@@ -62,6 +68,9 @@ angular.module('admissionSystemApp')
       getAllDepartments: function () {
         return getLargeDictionary('departments');
       },
+      getAllSpecoffersByTimePeriodId: function (timePeriodId) {
+        return getLargeDictionary('specoffers', timePeriodId);
+      },
       getAllSpecialties: function () {
         return getLargeDictionary('specialties');
       },
@@ -69,7 +78,7 @@ angular.module('admissionSystemApp')
         return getAnyItems('specoffers/types');
       },
       getEduformTypes: function () {
-        return getAnyItems('eduformtypes');
+          return getAnyItems('eduformtypes');
       },
       getTimePeriodCourseIds: function () {
         return getAnyItems('/courses/types');
