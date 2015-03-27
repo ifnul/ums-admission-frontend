@@ -8,11 +8,15 @@
  * Factory in the admissionSystemApp.
  */
 angular.module('admissionSystemApp')
-  .factory('SpecialtyGettingService', ['$http', function ($http) {
+  .factory('SpecialtyGettingService', ['$http', '$q', function ($http, $q) {
 
     var allSpecialties = [],
       directions = [],
-      specialties = [];
+      specialties = [],
+      deferred,
+      deferredId = $q.defer(),
+      deferredName = $q.defer(),
+      searchResult = [];
 
 
 
@@ -34,8 +38,14 @@ angular.module('admissionSystemApp')
 
     function getSpecialties() {
 
+      if (deferred) {
+        return deferred.promise;
+      }
+
       var nextOffset = 0,
         limit = 300;
+
+      deferred = $q.defer();
 
       var resolveData = function (data) {
 
@@ -48,6 +58,7 @@ angular.module('admissionSystemApp')
         });
 
         if (data.resources.length < limit) {
+          deferred.resolve(specialties);
           return;
         }
 
@@ -59,6 +70,8 @@ angular.module('admissionSystemApp')
 
       $http(getConfig(nextOffset, limit)).success(resolveData);
 
+      return deferred.promise;
+
     }
 
     getSpecialties();
@@ -66,25 +79,31 @@ angular.module('admissionSystemApp')
     var service = {};
 
     service.searchSpecialtyByName = function (str) {
-      var searchResult = [];
-      var filter = function (item) {
-        if (item.name.indexOf(str) > -1) {
-          searchResult.push(item);
+      getSpecialties().then(function () {
+        searchResult.length = 0;
+        var filter = function (item) {
+          if (item.name.indexOf(str) > -1) {
+            searchResult.push(item);
+          }
         }
-      }
-      angular.forEach(specialties, filter);
-      return searchResult;
+        angular.forEach(specialties, filter);
+        deferredName.resolve(searchResult);
+      })
+      return deferredName.promise;
     }
 
     service.searchSpecialtyById = function (str) {
-      var searchResult = [];
-      var filter = function (item) {
-        if (item.cipher.indexOf(str) > -1) {
-          searchResult.push(item);
+      getSpecialties().then(function () {
+        searchResult.length = 0;
+        var filter = function (item) {
+          if (item.cipher.indexOf(str) > -1) {
+            searchResult.push(item);
+          }
         }
-      }
-      angular.forEach(specialties, filter);
-      return searchResult;
+        angular.forEach(specialties, filter);
+        deferredId.resolve(searchResult);
+      })
+      return deferredId.promise;
     }
 
     return service;

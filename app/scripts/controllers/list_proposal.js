@@ -21,8 +21,7 @@ angular.module('admissionSystemApp')
         }
       });
     });
-
-  }])
+  }]);
 
 
 
