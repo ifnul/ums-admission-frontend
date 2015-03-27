@@ -26,7 +26,8 @@ angular.module('admissionSystemApp')
     //Get subjects query description
     var req = {
       method: 'GET',
-      url: 'http://104.236.29.16:8080/is-lnu-rest-api/api/enrolments/subjects',
+      //url: 'http://104.236.29.16:8080/is-lnu-rest-api/api/enrolments/subjects',
+      url: 'http://176.36.11.25/api-lnu/enrolments/subjects' ,
       headers: {
         'Authorization': 'Basic YWRtaW46bmltZGE='
       }
@@ -65,9 +66,8 @@ angular.module('admissionSystemApp')
     //Get subjects for chief subject function
     var getSubjectsForParentFunction = function (id) {
 
-      if(flagForSecondFunction === 0) {
-        flagForSecondFunction += 1;
         getChiefSubjects().then(function () {
+          subjectsForParentArray.length = 0;
           if (data[id - 1].hasChildren) {
             for (var y = 0; y < data.length; y++) {
               if (data[y].parentId == id) {
@@ -78,7 +78,7 @@ angular.module('admissionSystemApp')
 
           subjectsForParent.resolve(subjectsForParentArray);
         });
-      }
+
 
       return subjectsForParent.promise;
     };
@@ -88,6 +88,8 @@ angular.module('admissionSystemApp')
       getChiefSubjects: getChiefSubjects,
 
       //function returns Promise with info about children-subjects (like [{id: 30, name: "Французька мова", parentId: 3}, etc.])
-      getSubjectsForParent: function (id) {return getSubjectsForParentFunction(id);}
+      getSubjectsForParent: function (id) {
+        return getSubjectsForParentFunction(id);
+      }
     }
   }]);

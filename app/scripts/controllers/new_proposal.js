@@ -37,7 +37,7 @@ angular.module('admissionSystemApp')
     // **********************************************************************
 
     function createNewSpecoffer() {
-      $scope.specOffer = {};
+     // $scope.entireSpecoffer = {};
 
       // watching specOffer object
       // $scope.$watch('specOffer', function (newVal) {
@@ -92,8 +92,8 @@ angular.module('admissionSystemApp')
       // add entireSpecoffer to server DEMO
       // SpecoffersService.addEntireSpecoffer(entireSpecoffer);
     }
-    // createNewSpecoffer DEMO  
-    // createNewSpecoffer();
+    // createNewSpecoffer DEMO
+     createNewSpecoffer();
 
       // **********************************************************************
       //                      BROWSE OR UPDATE EXISTING SPECOFFER
@@ -117,7 +117,7 @@ angular.module('admissionSystemApp')
       });
     }
 
-    brosweOrEditSpecoffer(407); 
+    brosweOrEditSpecoffer(407);
 
       // DEMO FOR GEtting ALL Departments
       // SpecofferDictionaryService.getAllDepartments().then(function (allDepartments) {
@@ -143,3 +143,7 @@ angular.module('admissionSystemApp')
       datepickerConfig.startingDay = '1';
       datepickerPopupConfig.showButtonBar = false;
   }]);
+
+
+
+
