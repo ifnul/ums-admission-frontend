@@ -44,7 +44,7 @@ angular.module('admissionSystemApp')
       var offset = 0;
 
       $http(requestConfig(route, undefined, limit, offset, timePeriodId)).success(function callBack (data) {
-        
+
         for (var i=0; i<data.resources.length; i+=1) {
           arrayToFill.push(data.resources[i]);
         }
