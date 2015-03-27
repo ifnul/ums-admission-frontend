@@ -16,3 +16,14 @@ input.ng-invalid.ng-dirty {
   padding: 10px;
 }
 
+.inputSpecialtyName {
+  width: 70% !important;
+}
+.inputSpecialty {
+  width: 30% !important;
+  border-right-width: 0;
+}
+.inputSpecialty:focus {
+  width: 30%;
+  border-right-width: 1px;
+}
