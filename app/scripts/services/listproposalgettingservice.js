@@ -8,7 +8,7 @@
  * Service in the admissionSystemApp.
  */
 angular.module('admissionSystemApp')
-  .service('ListProposalGettingService', ['$http', '$q', 'SpecialtyGettingService', function ($http, $q, SpecialtyGettingService) {
+  .service('ListProposalGettingService', ['$http', '$q', 'SpecofferDictionaryService', function ($http, $q, SpecofferDictionaryService) {
 
     function getConfig(offset, limit, timePeriod) {
 
@@ -41,32 +41,9 @@ angular.module('admissionSystemApp')
         });
 
         if (data.resources.length < limit) {
-          var specialtyNames = [],
-            deptNames = [],
-            timePeriodCourseNames = [],
-            specofferTypeNames = [],
-            eduFormTypeNames = [];
 
-          //angular.forEach(proposals, function () {
-            //specialtyNames[SpecialtyGettingService.AllSpecialties.id] = SpecialtyGettingService.AllSpecialties.name;
-            //deptNames[deptDictionary.id] = deptDictionary.name;
-            //timePeriodCourseNames[tpCourseDictionary.id] = tpCourseDictionary.name;
-            //specofferTypeNames[specofferTypesDictionary.id] = specofferTypesDictionary.name;
-            //eduFormTypeNames[eduFormDictionary.id] = eduFormDictionary.name;
-          //});
+           deferred.resolve(proposals);
 
-          //angular.forEach(proposals, function () {
-              //proposals.specialtyId = specialtyNames[proposals.specialtyId];
-              //proposals.departmentId = deptNames[proposals.departmentId];
-              //proposals.timePeriodCourseId = timePeriodCourseNames[proposals.timePeriodCourseId];
-              //proposals.specofferTypeId = specofferTypeNames[proposals.specofferTypeId];
-              //proposals.eduFormTypeId = eduFormTypeNames[proposals.eduFormTypeId];
-            //}
-          //);
-
-          console.log(SpecialtyGettingService.AllSpecialties);
-
-          deferred.resolve(proposals);
           return;
         }
 
@@ -81,5 +58,88 @@ angular.module('admissionSystemApp')
       return deferred.promise;
 
     };
-    console.log(SpecialtyGettingService.AllSpecialties);
+
+    this.allProposalsDecoded = function (TimePeriod) {
+      var deferred = $q.defer(),
+          specialtyNames = [],
+          departmentNames = [],
+          timePeriodCourseNames = [],
+          specofferTypeNames = [],
+          eduFormTypeNames = [];
+
+
+      //SpecofferDictionaryService.getAllSpecialties().then(function(rawProposals) {
+
+      this.getAllProposals(TimePeriod).then(function (rawProposals) {
+        //SpecofferDictionaryService.getAllSpecialties().then(function(data) {
+        //  angular.forEach(data, function (item) {
+        //    specialtyNames[item.id] = item.name;
+        //  });
+        //
+        //  SpecofferDictionaryService.getAllDepartments().then(function(data) {
+        //  angular.forEach(data, function (item) {
+        //    departmentNames[item.id] = item.name;
+        //  });
+        //
+        //    SpecofferDictionaryService.getTimePeriodCourseIds().then(function(data) {
+        //      angular.forEach(data, function (item) {
+        //        timePeriodCourseNames[item.id] = item.name;
+        //      });
+        //      SpecofferDictionaryService.getSpecoffersTypes().then(function(data) {
+        //        angular.forEach(data, function (item) {
+        //          specofferTypeNames[item.id] = item.name;
+        //        });
+        //        SpecofferDictionaryService.getEduformTypes().then(function(data) {
+        //          angular.forEach(data, function (item) {
+        //            eduFormTypeNames[item.id] = item.name;
+        //          });
+        //
+        //          angular.forEach(rawProposals, function (item) {
+        //            item.specialtyId = specialtyNames[item.specialtyId];
+        //            item.departmentId = departmentNames[item.departmentId];
+        //            item.timePeriodCourseId = timePeriodCourseNames[item.timePeriodCourseId];
+        //            item.specofferTypeId = specofferTypeNames[item.specofferTypeId];
+        //            item.eduFormTypeId = eduFormTypeNames[item.eduFormTypeId];
+        //          });
+        //          deferred.resolve(rawProposals);
+        //        })
+        //      })
+        //    })
+        //  })
+        //})
+        var promise1 = SpecofferDictionaryService.getAllSpecialties().then(function(data) {
+            angular.forEach(data, function (item) {
+              specialtyNames[item.id] = item.name;
+            })});
+        var promise2 = SpecofferDictionaryService.getAllDepartments().then(function(data) {
+            angular.forEach(data, function (item) {
+              departmentNames[item.id] = item.name;
+            })});
+        var promise3 = SpecofferDictionaryService.getTimePeriodCourseIds().then(function(data) {
+                angular.forEach(data, function (item) {
+                  timePeriodCourseNames[item.id] = item.name;
+                })});
+        var promise4 = SpecofferDictionaryService.getSpecoffersTypes().then(function(data) {
+                  angular.forEach(data, function (item) {
+                    specofferTypeNames[item.id] = item.name;
+                  })});
+        var promise5 = SpecofferDictionaryService.getEduformTypes().then(function(data) {
+                    angular.forEach(data, function (item) {
+                      eduFormTypeNames[item.id] = item.name;
+                    })});
+        $q.all([promise1, promise2, promise3, promise4, promise5]).then(function(){
+                    angular.forEach(rawProposals, function (item) {
+                      item.specialtyId = specialtyNames[item.specialtyId];
+                      item.departmentId = departmentNames[item.departmentId];
+                      item.timePeriodCourseId = timePeriodCourseNames[item.timePeriodCourseId];
+                      item.specofferTypeId = specofferTypeNames[item.specofferTypeId];
+                      item.eduFormTypeId = eduFormTypeNames[item.eduFormTypeId];
+                    });
+                    deferred.resolve(rawProposals);
+
+        })
+      });
+      return deferred.promise;
+    }
+
   }]);
