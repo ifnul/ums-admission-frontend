@@ -14,9 +14,6 @@ angular.module('admissionSystemApp')
       directions = [],
       specialties = [];
 
-    function getAllSpecialties() {
-     return allSpecialties
-    };
 
 
     function getConfig(offset, limit) {
@@ -93,3 +90,6 @@ angular.module('admissionSystemApp')
     return service;
 
   }]);
+
+
+

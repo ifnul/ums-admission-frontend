@@ -8,7 +8,7 @@
  * Service in the admissionSystemApp.
  */
 angular.module('admissionSystemApp')
-  .service('ListProposalGettingService', [, '$http', '$q', 'SpecialtyGettingService', function (, $http, $q, SpecialtyGettingService) {
+  .service('ListProposalGettingService', ['$http', '$q', 'SpecialtyGettingService', function ($http, $q, SpecialtyGettingService) {
 
     function getConfig(offset, limit, timePeriod) {
 
@@ -47,23 +47,24 @@ angular.module('admissionSystemApp')
             specofferTypeNames = [],
             eduFormTypeNames = [];
 
-          angular.forEach(proposals, function (SpecialtyGettingService) {
-            specialtyNames[SpecialtyGettingService.getAllSpecialties().id] = SpecialtyGettingService.getAllSpecialties().name;
+          //angular.forEach(proposals, function () {
+            //specialtyNames[SpecialtyGettingService.AllSpecialties.id] = SpecialtyGettingService.AllSpecialties.name;
             //deptNames[deptDictionary.id] = deptDictionary.name;
             //timePeriodCourseNames[tpCourseDictionary.id] = tpCourseDictionary.name;
             //specofferTypeNames[specofferTypesDictionary.id] = specofferTypesDictionary.name;
             //eduFormTypeNames[eduFormDictionary.id] = eduFormDictionary.name;
-          });
+          //});
 
-          angular.forEach(proposals, function () {
-              proposals.specialtyId = specialtyNames[proposals.specialtyId];
+          //angular.forEach(proposals, function () {
+              //proposals.specialtyId = specialtyNames[proposals.specialtyId];
               //proposals.departmentId = deptNames[proposals.departmentId];
               //proposals.timePeriodCourseId = timePeriodCourseNames[proposals.timePeriodCourseId];
               //proposals.specofferTypeId = specofferTypeNames[proposals.specofferTypeId];
               //proposals.eduFormTypeId = eduFormTypeNames[proposals.eduFormTypeId];
-            }
-          );
-          console.log(SpecialtyGettingService.getProperty());
+            //}
+          //);
+
+          console.log(SpecialtyGettingService.AllSpecialties);
 
           deferred.resolve(proposals);
           return;
@@ -80,5 +81,5 @@ angular.module('admissionSystemApp')
       return deferred.promise;
 
     };
-
+    console.log(SpecialtyGettingService.AllSpecialties);
   }]);
