@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('admissionSystemApp')
-  .factory('SpecoffersService', ['Restangular',
-    function (Restangular) {
+  .factory('SpecoffersService', ['Restangular', '$q',
+    function (Restangular, $q) {
 
     var restAngular =
       Restangular.withConfig(function(Configurer) {
@@ -38,9 +38,20 @@ angular.module('admissionSystemApp')
         })
     }
 
+    function getEntireSpecoffer (id) {
+        var entireSpecoffer = {};
+        entireSpecoffer.specoffer = restAngular.one('specoffers', id).get();
+        entireSpecoffer.benefites = restAngular.one('specoffers', id).one('benefits').getList();
+        entireSpecoffer.subjects = restAngular.one('specoffers', id).one('subjects').getList();
+        return $q.all(entireSpecoffer);
+    }
+
     return {
-        manageEntireSpecoffer: function (entireSpecoffer) {
+        addEntireSpecoffer: function (entireSpecoffer) {
             return addEntireSpecoffer(entireSpecoffer);
+        },
+        getEntireSpecoffer: function (id) {
+            return getEntireSpecoffer(id);
         },
         manageSpecoffers: {
             getSpecoffersList: function() {
