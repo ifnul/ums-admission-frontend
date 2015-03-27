@@ -28,18 +28,20 @@ angular.module('admissionSystemApp')
       });
 
       // DEMO FOR GEtting ALL Departments
-      SpecofferDictionaryService.getAllDepartments().then(function (allDepartments) {
+      // SpecofferDictionaryService.getAllDepartments().then(function (allDepartments) {
         // console.log('allDepartments',allDepartments);
-      });
+      // })
 
-      SpecofferDictionaryService.getAllSpecialties().then(function (specialties) {
+      // DEMO FOR GEtting ALL specialities
+      // SpecofferDictionaryService.getAllSpecialties().then(function (specialties) {
         // console.log('Specialties',specialties);
-      });
+      // })
+
 
       // watching specOffer object
-      $scope.$watch('specOffer', function (newVal) {
+      // $scope.$watch('specOffer', function (newVal) {
         // console.log(newVal);
-      }, true);
+      // }, true);
 
 
       $scope.$watchGroup(['specOffer.begDate', 'specOffer.endDate'], function(newValues){
@@ -48,41 +50,53 @@ angular.module('admissionSystemApp')
       });
 
 
-      // new SpecOffer example
-  		var newSpecOffer = {
-  			'docSeries': '122211',
-  			'docNum': '234333111',
-  			'licCount': 14,
-  			'stateCount': 14,
-  			'departmentId': 44,
-  			'eduFormTypeId': 1,
-  			'specialtyId': 336,
-  			'specofferTypeId': 12,
-  			'timePeriodId': 10,
-  			'note': 'TEXT',
-  			'begDate': '2015-10-01',
-  			'endDate': '2020-07-05'
-  		};
-
-      // new Subject example
-  		var newSubject = {
-  			'mark': 3,
-  			'isMajor': false,
-  			'alternative': false,
-  			'weightSubject': 0.9,
-  			'specOfferId': 35,
-  			'enrolmentSubjectId': 1,
-  			'note': 'HERE'
-  		};
-
-      // new Benefit example
-   		var newBenefit = {
-   			'benefitId': 1,
-   			'specOfferId': 37,
-   			'note': 'new note note'
-   		};
-
-
+      var entireSpecoffer = {
+        specoffer : {
+            'timePeriodId': 8,
+            'eduFormTypeId': 2,
+            'specofferTypeId': 2,
+            'docSeries': 'RRT',
+            'docNum': '12345',
+            'begDate': '2014-02-08',
+            'endDate': '2018-02-08',
+            'licCount': 12,
+            'stateCount': 13,
+            'departmentId': 21,
+            'specialtyId': 123,
+            'note': 'NEW_NOTE',
+            'timePeriodCourseId': 1
+        },
+        benefites : [
+          {
+            'benefitId': 1,
+            'note': 'newNote'
+          },
+          {
+            'benefitId': 2,
+            'note': 'oldNode'
+          }
+        ],
+        subjects : [
+            {
+              'mark': 3,
+              'isMajor': false,
+              'alternative': false,
+              'weightSubject': 0.9,
+              'enrolmentSubjectId': 1,
+              'note': 'HERE'
+            },
+            {
+              'mark': 2,
+              'isMajor': false,
+              'alternative': false,
+              'weightSubject': 1,
+              'enrolmentSubjectId': 1,
+              'note': 'THERE'
+            }
+        ]
+      }
+      // add entireSpecoffer to server DEMO
+      // SpecoffersService.manageEntireSpecoffer(entireSpecoffer);
 }]);
 
 angular.module('admissionSystemApp')
