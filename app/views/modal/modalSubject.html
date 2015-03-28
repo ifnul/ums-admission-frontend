@@ -10,7 +10,7 @@
       <label for="inputSubject" class="control-label col-xs-2">Предмет</label>
 
       <div class="col-md-10">
-        <select class="form-control" name="genre" id="inputSubject">
+        <select class="form-control" name="genre" id="inputSubject" required ng-model="inputSubject">
           <option value="">Географія</option>
           <option value="action">Математика</option>
           <option value="comedy">Іноземна мова</option>
@@ -43,7 +43,7 @@
     <div class="form-group">
       <label for="inputMinZno" class="control-label col-xs-2">Мінімальний бал ЗНО</label>
       <div class="col-xs-10">
-        <input type="number" class="form-control" id="inputMinZno" placeholder="Мінімальний бал ЗНО">
+        <input type="number" class="form-control" id="inputMinZno" placeholder="Мінімальний бал ЗНО" required ng-model="inputMinZno">
       </div>
     </div>
 

@@ -34,15 +34,16 @@ angular.module('admissionSystemApp')
         nextOffset = 0,
         limit = 300;
 
-
       var resolveData = function (data) {
 
-        if (data.resources.length < limit) {
+        angular.forEach(data.resources, function(resource){
+          proposals.push(resource);
+        });
+
+        if(data.resources.length < limit) {
           deferred.resolve(proposals);
           return;
         }
-
-        angular.extend(proposals, data.resources);
 
         nextOffset += limit;
 
