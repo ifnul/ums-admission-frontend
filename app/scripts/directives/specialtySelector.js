@@ -59,7 +59,7 @@ angular.module('admissionSystemApp')
           });
 
           modalInstance.result.then(function (selectedItem) {
-            ctrl.$setViewValue(selectedItem);
+            ctrl.$setViewValue(selectedItem.id);
             scope.cipher = selectedItem.cipher;
             scope.name = selectedItem.name;
           });

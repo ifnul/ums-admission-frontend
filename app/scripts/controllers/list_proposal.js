@@ -40,7 +40,7 @@ angular.module('admissionSystemApp')
 
 
 
-    ListProposalGettingService.getAllProposals(8).then(function (data) {
+    ListProposalGettingService.allProposalsDecoded(8).then(function (data) {
       $scope.tableParams = new ngTableParams({
         page: 1,            // show first page
         count: 10,           // count per page

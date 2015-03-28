@@ -5,21 +5,23 @@
       <div class="row">
         <div class="form-group col-md-6 double-input">
           <label for="inputSpecialty">Введіть шифр чи назву напряму/спеціальності</label>
-          <specialty-selector ng-model="specialty" id="inputSpecialty" name="specialty" required val-bubble></specialty-selector>
+          <specialty-selector ng-model="entireSpecOffer.specOffer.specialtyId" id="inputSpecialty" name="specialty" required val-bubble></specialty-selector>
         </div>
       </div>
 
       <div class="row">
-        <div class="form-group  col-md-5">
+        <div class="form-group col-md-5">
         <!--   departmentId    -->
           <label for="inputStructure">Структурний підрозділ</label>
-          <select ng-model="specOffer.departmentId"
-                  ng-options="opt.id as opt.name for opt in departmentId"
-                  class="form-control"
-                  id="inputStructure"
-                  name="structure"
-                  required val-bubble>
-          </select>
+          <ui-select ng-model="entireSpecOffer.specOffer.departmentId"
+                     id="inputStructure"
+                     name="structure"
+                     required val-bubble>
+            <ui-select-match placeholder="Оберіть структурний підрозділ">{{$select.selected.name}}</ui-select-match>
+            <ui-select-choices repeat="item.id as item in departments | filter: $select.search">
+              <div ng-bind-html="item.name | highlight: $select.search"></div>
+            </ui-select-choices>
+          </ui-select>
         </div>
       </div>
       <div class="row">

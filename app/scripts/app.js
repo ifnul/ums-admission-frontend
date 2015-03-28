@@ -14,7 +14,9 @@ angular
     'ngRoute',
     'ui.bootstrap',
     'ngTable',
-    'restangular'
+    'restangular',
+    'ngSanitize',
+    'ui.select'
   ])
 
 
@@ -31,5 +33,9 @@ angular
       .otherwise({
         redirectTo: '/'
       });
+  })
+
+  .config(function(uiSelectConfig) {
+    uiSelectConfig.theme = 'bootstrap';
   });
 
