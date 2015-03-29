@@ -1,0 +1,12 @@
+<div class="modal-body">
+          <ul class="list-group">
+            <li class="list-group-item" ng-repeat = "header in headersLocal" ng-click = "header.visible = !header.visible">
+              <label>
+                <input type= "checkbox" ng-checked="header.visible">
+                <span>{{header.display}}</span>
+              </label>
+            </li>
+          </ul>
+  <button class="btn btn-danger" ng-click="apply()">Закрити</button>
+</div>
+
