@@ -5,7 +5,7 @@
       <div class="row">
         <div class="form-group col-md-6 double-input">
           <label for="inputSpecialty">Введіть шифр чи назву напряму/спеціальності</label>
-          <specialty-selector ng-model="entireSpecOffer.specOffer.specialtyId" id="inputSpecialty" name="specialty" required val-bubble></specialty-selector>
+          <specialty-selector ng-model="entireSpecoffer.specoffer.specialtyId" id="inputSpecialty" name="specialty" required val-bubble></specialty-selector>
         </div>
       </div>
 
@@ -13,12 +13,13 @@
         <div class="form-group col-md-5">
         <!--   departmentId    -->
           <label for="inputStructure">Структурний підрозділ</label>
-          <ui-select ng-model="entireSpecOffer.specOffer.departmentId"
+          <ui-select ng-model="entireSpecoffer.specoffer.departmentId"
                      id="inputStructure"
                      name="structure"
                      required val-bubble>
             <ui-select-match placeholder="Оберіть структурний підрозділ">{{$select.selected.name}}</ui-select-match>
-            <ui-select-choices repeat="item.id as item in departments | filter: $select.search">
+            <ui-select-choices repeat="item.id as item in departmentId | filter: $select.search">
+              <!--departments-->
               <div ng-bind-html="item.name | highlight: $select.search"></div>
             </ui-select-choices>
           </ui-select>
@@ -27,7 +28,7 @@
       <div class="row">
         <div class="form-group col-md-5">
           <label for="inputOKR">Освітньо-кваліфікаційний рівень</label>
-          <select ng-model="specOffer.specofferTypeId"
+          <select ng-model="entireSpecoffer.specoffer.specofferTypeId"
                   ng-options="opt.id as opt.name for opt in specofferTypesOptions"
                   class="form-control"
                   id="inputOKR"
@@ -40,7 +41,7 @@
       <!-- timePeriodCourseId -->
         <div class="form-group col-md-5">
           <label for="inputOKR">Курс зарахування</label>
-          <select ng-model="specOffer.timePeriodCourseId"
+          <select ng-model="entireSpecoffer.specoffer.timePeriodCourseId"
                   ng-options="opt.id as opt.name for opt in timePeriodCourseId"
                   class="form-control"
                   id="inputTimePeriodCourseId"
@@ -53,7 +54,7 @@
         <div class="form-group col-md-2 ">
         <!-- docSeries -->
           <label for="inputLicenseS"> Серія ліцензії</label>
-          <input ng-model="specOffer.docSeries"
+          <input ng-model="entireSpecoffer.specoffer.docSeries"
                  type="text"
                  class="form-control"
                  id="inputLicenseS"
@@ -65,7 +66,7 @@
         <div class="form-group col-md-3 ">
         <!-- docNum -->
           <label for="inputLicenseNumber"> Номер ліцензії</label>
-          <input ng-model="specOffer.docNum"
+          <input ng-model="entireSpecoffer.specoffer.docNum"
                  type="text"
                  class="form-control"
                  id="inputLicenseNumber"
@@ -78,7 +79,7 @@
         <div class="form-group col-md-3 ">
         <!-- eduFormTypeId -->
           <label for="inputFormStuding">Оберiть форму навчання</label>
-          <select ng-model="specOffer.eduFormTypeId"
+          <select ng-model="entireSpecoffer.specoffer.eduFormTypeId"
                   ng-options="opt.id as opt.name for opt in eduFormTypesOptions"
                   id="inputFormStuding"
                   class="form-control"
@@ -91,7 +92,7 @@
         <div class="form-group col-md-3">
         <!-- licCount -->
           <label for="inputNumberOfPlaces">Кiлькiсть лiцензованих мiсць</label>
-          <input ng-model="specOffer.licCount"
+          <input ng-model="entireSpecoffer.specoffer.licCount"
                  type="number"
                  class="form-control "
                  id="inputNumberOfPlaces"
@@ -102,7 +103,7 @@
         <div class="form-group col-md-3">
         <!-- stateCount -->
           <label for="inputNumberOfStateOrder">Кiлькiсть мiсць держзамовлення</label>
-          <input ng-model="specOffer.stateCount"
+          <input ng-model="entireSpecoffer.specoffer.stateCount"
                  type="number" class="form-control "
                  id="inputNumberOfStateOrder"
                  placeholder="Введiть кiлькiсть мiсць держзамовлення"
@@ -116,7 +117,7 @@
         <!-- begDate -->
           <label class="control-label">Дата початку навчання</label>
             <input type="text"
-                  ng-model="specOffer.begDate"
+                  ng-model="entireSpecoffer.specoffer.begDate"
                   datepicker-popup="yyyy-MM-dd"
                   is-open="isOpen"
                   ng-click = "isOpen = true"
@@ -131,7 +132,7 @@
           <!-- endDate -->
           <label class="control-label">Дата закінчення </label>
             <input type="text"
-                  ng-model="specOffer.endDate"
+                  ng-model="entireSpecoffer.specoffer.endDate"
                   datepicker-popup="yyyy-MM-dd"
                   is-open="isOpen2"
                   ng-click = "isOpen2 = true"

@@ -2,15 +2,15 @@
 
 
 angular.module('admissionSystemApp')
-.controller('NewProposalCtrl', ['$scope', 'Restangular', 'SpecoffersService', 'SpecofferDictionaryService','$filter',
-	function ($scope, Restangular, SpecoffersService, SpecofferDictionaryService, $filter) {
+.controller('NewProposalCtrl', ['$scope', 'SpecoffersService', 'SpecofferDictionaryService','$filter',
+	function ($scope, SpecoffersService, SpecofferDictionaryService, $filter) {
 
-
-
-    SpecofferDictionaryService.getDepartmentsByType().then(function (departments) {
+    SpecofferDictionaryService.getAllDepartments().then(function (departments) {
       $scope.departmentId = departments;
+      // console.log('departments _ 1',departments);
       // $scope.specOffer.departmentId = departments[0].id;
     });
+
 
     SpecofferDictionaryService.getSpecoffersTypes().then(function (SpecoffersTypes) {
       $scope.specofferTypesOptions = SpecoffersTypes;
@@ -37,58 +37,18 @@ angular.module('admissionSystemApp')
     // **********************************************************************
 
     function createNewSpecoffer() {
-     // $scope.entireSpecoffer = {};
+      $scope.entireSpecoffer = {};
+      $scope.entireSpecoffer.specoffer = {};
 
-      // watching specOffer object
-      // $scope.$watch('specOffer', function (newVal) {
-        // console.log(newVal);
-      // }, true);
+      //watching specOffer object
+      $scope.$watch('entireSpecoffer', function (newVal) {
+        console.log('entireSpecoffer', newVal);
+      }, true);
 
-      var entireSpecoffer = {
-        specoffer : {
-            'timePeriodId': 8,
-            'eduFormTypeId': 2,
-            'specofferTypeId': 2,
-            'docSeries': 'RRT',
-            'docNum': '12345',
-            'begDate': '2014-02-08',
-            'endDate': '2018-02-08',
-            'licCount': 12,
-            'stateCount': 13,
-            'departmentId': 21,
-            'specialtyId': 123,
-            'note': 'NEW_NOTE',
-            'timePeriodCourseId': 1
-        },
-        benefites : [
-          {
-            'benefitId': 1,
-            'note': 'newNote'
-          },
-          {
-            'benefitId': 2,
-            'note': 'oldNode'
-          }
-        ],
-        subjects : [
-            {
-              'mark': 3,
-              'isMajor': false,
-              'alternative': false,
-              'weightSubject': 0.9,
-              'enrolmentSubjectId': 1,
-              'note': 'HERE'
-            },
-            {
-              'mark': 2,
-              'isMajor': false,
-              'alternative': false,
-              'weightSubject': 1,
-              'enrolmentSubjectId': 1,
-              'note': 'THERE'
-            }
-        ]
-      }
+      $scope.$watch('entireSpecoffer.specoffer', function (newVal) {
+        console.log('entireSpecoffer.specoffer', newVal);
+      }, true);
+
       // add entireSpecoffer to server DEMO
       // SpecoffersService.addEntireSpecoffer(entireSpecoffer);
     }

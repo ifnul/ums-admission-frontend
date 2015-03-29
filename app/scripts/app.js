@@ -16,7 +16,8 @@ angular
     'ngTable',
     'restangular',
     'ngSanitize',
-    'ui.select'
+    'ui.select',
+    'LocalStorageModule'
   ])
 
 
