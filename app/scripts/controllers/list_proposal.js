@@ -22,15 +22,15 @@ angular.module('admissionSystemApp')
       {name: "stateCount", display: "stateCount", visible: true}
     ];
 
-    $scope.open = function (size) {
+    $scope.openFiltersModal = function (size) {
 
       var modalInstance = $modal.open({
         templateUrl: '../views/modal/modalFilter.html',
         controller: function ($scope, $modalInstance) {
           $scope.headersLocal = $scope.headers;
-          $scope.cancel = function () {
+          $scope.apply = function () {
             $scope.headers = $scope.headersLocal;
-            $modalInstance.dismiss('cancel');
+            $modalInstance.close('apply');
           };
         },
         size: size,
@@ -38,21 +38,13 @@ angular.module('admissionSystemApp')
       });
     };
 
-
-
     ListProposalGettingService.allProposalsDecoded(8).then(function (data) {
       $scope.tableParams = new ngTableParams({
         page: 1,            // show first page
-        count: 10,           // count per page
-        filter: {
-          name: 'M'       // initial filter
-        }
+        count: 10          // count per page
       }, {
         total: data.length, // length of data
         getData: function ($defer, params) {
-          var orderedData = params.sorting() ?
-            $filter('orderBy')(data, params.orderBy()) :
-            data;
           $defer.resolve(data.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
       });
