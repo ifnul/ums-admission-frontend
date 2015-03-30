@@ -1,15 +1,6 @@
-/**
- * Created by kmuzytc on 23.03.2015.
- */
+
 'use strict';
 
-/**
- * @ngdoc function
- * @name admissionSystemApp.controller:MainCtrl
- * @description
- * # MainCtrl
- * Controller of the admissionSystemApp
- */
 angular.module('admissionSystemApp')
 
 //http://176.36.11.25/api-lnu/enrolments/subjects
