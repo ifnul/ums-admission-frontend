@@ -6,12 +6,7 @@ angular.module('admissionSystemApp')
     $httpProvider.defaults.headers.get = { 'Authorization' : 'Basic YWRtaW46bmltZGE=' };
   }])
 
-  .config(function (localStorageServiceProvider) {
-    localStorageServiceProvider
-      .setPrefix('admissionSystemApp');
-  })
-
-  .factory('SpecofferDictionaryService', ['$http', '$q', 'localStorageService', function ($http, $q, localStorageService) {
+  .factory('SpecofferDictionaryService', ['$http', '$q', function ($http, $q) {
 
     function requestConfig(item, limit, offset, customParams) {
         var normalParams = {
