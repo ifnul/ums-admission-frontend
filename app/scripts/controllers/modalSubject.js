@@ -45,7 +45,7 @@ angular.module('admissionSystemApp')
         weightSubject : 1
       });
 
-      console.log($scope.subject.id);
+      //console.log($scope.subject.id);
 
       $modalInstance.close();
 

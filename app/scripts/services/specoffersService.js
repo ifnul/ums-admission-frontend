@@ -17,7 +17,7 @@ angular.module('admissionSystemApp')
                 return data;
             }
         });
-        Configurer.setRequestInterceptor(function(element, operation, route, url) {
+        Configurer.setRequestInterceptor(function(element, operation) {
             if (operation === 'put') {
                 delete element.uri;
             }
@@ -35,7 +35,7 @@ angular.module('admissionSystemApp')
                 obj.benefites[i].specOfferId = response.id;
                 restAngular.one('specoffers', response.id).one('benefits').post('', obj.benefites[i]);
             }
-        })
+        });
     }
 
     function getEntireSpecoffer (id) {

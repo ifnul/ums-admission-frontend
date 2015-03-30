@@ -10,7 +10,7 @@
 angular.module('admissionSystemApp')
   .service('ListProposalGettingService', ['$http', '$q', 'SpecofferDictionaryService', function ($http, $q, SpecofferDictionaryService) {
 
-     this.allProposalsDecoded = function (TimePeriod) {
+     this.allProposalsDecoded = function (params) {
       var deferred = $q.defer(),
           specialtyNames = [],
           departmentNames = [],
@@ -19,7 +19,7 @@ angular.module('admissionSystemApp')
           eduFormTypeNames = [];
 
 
-      SpecofferDictionaryService.getAllSpecoffersByTimePeriodId().then(function(rawProposals) {
+      SpecofferDictionaryService.getAllSpecoffers(params).then(function(rawProposals) {
 
         var promise1 = SpecofferDictionaryService.getAllSpecialties().then(function(data) {
             angular.forEach(data, function (item) {
