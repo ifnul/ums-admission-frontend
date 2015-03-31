@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('admissionSystemApp')
-  .factory('SpecialtyGettingService',  ['$http', '$q', function ($http, $q) {
+  .factory('SpecialtyGettingService',  ['$http', '$q', 'SpecofferDictionaryService', function ($http, $q, SpecofferDictionaryService) {
 
     var  deferred;
     var  deferredId = $q.defer();
