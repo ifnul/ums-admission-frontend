@@ -13,12 +13,12 @@
         <div class="form-group col-md-5">
         <!--   departmentId    -->
           <label for="inputStructure">Структурний підрозділ</label>
-          <ui-select ng-model="entireSpecoffer.specoffer.departmentId"
+            <ui-select ng-model="entireSpecoffer.specoffer.departmentId"
                      id="inputStructure"
                      name="structure"
                      required val-bubble>
             <ui-select-match placeholder="Оберіть структурний підрозділ">{{$select.selected.name}}</ui-select-match>
-            <ui-select-choices repeat="item.id as item in departmentId | filter: $select.search">
+            <ui-select-choices repeat="item.name as item in departmentId | filter: $select.search">
               <!--departments-->
               <div ng-bind-html="item.name | highlight: $select.search"></div>
             </ui-select-choices>

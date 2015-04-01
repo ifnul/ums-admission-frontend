@@ -6,6 +6,10 @@ angular.module('admissionSystemApp')
     $httpProvider.defaults.headers.get = { 'Authorization' : 'Basic YWRtaW46bmltZGE=' };
   }])
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
   .factory('SpecofferDictionaryService', ['$http', '$q', function ($http, $q) {
 
     function requestConfig(item, limit, offset, customParams) {
@@ -17,22 +21,22 @@ angular.module('admissionSystemApp')
 
         return {
           method: 'GET',
-          url: 'http://104.236.29.16:8080/is-lnu-rest-api/api/' + item,
+          url: 'http://176.36.11.25/api-lnu/' + item,
           params: normalParams
           // ,cache: true
         };
       }
 
-     
+
       var storage = {};
       function getLargeDictionary (route, customParams) {
         var deferred = $q.defer();
-        
+
         if (storage[route]) {
           deferred.resolve(storage[route]);
         } else {
           storage[route] = [];
-          
+
           var limit = 300;
           var offset = 0;
 
@@ -42,7 +46,7 @@ angular.module('admissionSystemApp')
               storage[route].push(data.resources[i]);
             }
             if (data.resources.length < limit) {
-              deferred.resolve(storage[route]);       
+              deferred.resolve(storage[route]);
               return;
             }
             offset += limit;
