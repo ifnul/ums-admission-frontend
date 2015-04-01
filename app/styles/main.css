@@ -27,10 +27,10 @@ input.ng-invalid.ng-dirty {
   width: 30%;
   border-right-width: 1px;
 }
-+.ng-table-counts.btn-group.pull-right.ng-scope{
-+  margin: 20px 5px 20px 5px;
-+}
-+
-+.pagination.ng-table-pagination{
-+  margin: 20px 5px 20px 5px;
-+}
+.ng-table-counts.btn-group.pull-right.ng-scope{
+  margin: 20px 5px 20px 5px;
+}
+
+.pagination.ng-table-pagination{
+  margin: 20px 5px 20px 5px;
+}
