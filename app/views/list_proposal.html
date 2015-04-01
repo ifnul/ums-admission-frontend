@@ -1,12 +1,20 @@
 <div class="container-fluid">
   <div class="row bottom-buffer">
-    <div class="col-md-5">
-      <h2><i class="fa fa-graduation-cap text-danger"></i> Вступна кампанiя 2015 року</h2>
+    <div class="col-md-3">
+      <h2><i class="fa fa-graduation-cap text-danger"></i> Вступна кампанiя</h2>
     </div>
+    <div class="col-md-3 timeperiod">
+      <select class="form-control"
+              ng-model="timeperiod.timePeriodId"
+              ng-options="opt.id as opt.name for opt in timeperiods">
+        <option value="" disabled selected>Оберіть вступну кампанію</option>
+      </select>
+    </div>
+    <button type="button" class="btn btn-primary timeperiod" ng-click="pickTimePeriod()">Обрати</button>
   </div>
   <!-- main content -->
 
-  <div class="row">
+  <div ng-show="timeperiod.timePeriodId" class="row">
     <!-- filter -->
     <div class="col-md-2 col-lg-2 filter">
 

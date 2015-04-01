@@ -27,6 +27,16 @@ input.ng-invalid.ng-dirty {
   width: 30%;
   border-right-width: 1px;
 }
+.ui-select-match-text {
+  width: 100%;
+  overflow: hidden;
+}
+.ui-select-toggle {
+  padding-right: 35px;
+}
+.timeperiod {
+  margin-top: 20px;
+}
 .ng-table-counts.btn-group.pull-right.ng-scope{
   margin: 20px 5px 20px 5px;
 }
