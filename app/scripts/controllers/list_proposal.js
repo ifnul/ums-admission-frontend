@@ -11,16 +11,15 @@ angular.module('admissionSystemApp')
   .controller('ListProposalCtrl', ['$scope','$filter','ngTableParams', 'ListProposalGettingService', '$modal', function ($scope, $filter, ngTableParams, ListProposalGettingService, $modal) {
 
     $scope.headers = [
-      {name: "id", display: "id", visible: true},
-      {name: "specialtyId", display: "speciality", visible: true},
-      {name: "departmentId", display: "department", visible: true},
-      {name: "timePeriodId", display: "timePeriod", visible: true},
-      {name: "timePeriodCourseId", display: "timePeriodCarousel", visible: true},
-      {name: "specofferTypeId", display: "specofferType", visible: true},
-      {name: "eduFormTypeId", display: "eduFormType", visible: true},
-      {name: "licCount", display: "licCount", visible: true},
-      {name: "stateCount", display: "stateCount", visible: true}
-    ];
+  +      {name: "id", display: "№", visible: true},
++      {name: "specialtyId", display: "Спеціальність", visible: true},
++      {name: "departmentId", display: "Структурний підрозділ", visible: true},
++      {name: "timePeriodCourseId", display: "Курс зарахування", visible: true},
++      {name: "specofferTypeId", display: "Тип пропозиції", visible: true},
++      {name: "eduFormTypeId", display: "Форма навчання", visible: true},
++      {name: "licCount", display: "Ліцензований обсяг", visible: true},
++      {name: "stateCount", display: "Державне замовлення", visible: true}
+     ];
 
     $scope.openFiltersModal = function (size) {
 
