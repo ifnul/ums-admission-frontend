@@ -23,16 +23,16 @@ angular.module('admissionSystemApp')
         };
       }
 
-     
+
       var storage = {};
       function getLargeDictionary (route, customParams) {
         var deferred = $q.defer();
-        
+
         if (storage[route]) {
           deferred.resolve(storage[route]);
         } else {
           storage[route] = [];
-          
+
           var limit = 300;
           var offset = 0;
 
@@ -42,7 +42,7 @@ angular.module('admissionSystemApp')
               storage[route].push(data.resources[i]);
             }
             if (data.resources.length < limit) {
-              deferred.resolve(storage[route]);       
+              deferred.resolve(storage[route]);
               return;
             }
             offset += limit;
@@ -75,11 +75,16 @@ angular.module('admissionSystemApp')
         getTimePeriodCourseIds: function () {
           return getLargeDictionary('courses/types');
         },
-        getTimeperiods: function () {
-          return getLargeDictionary('timeperiods');
+        getTimeperiods: function (obj) {
+          return getLargeDictionary('timeperiods', obj);
         },
         clearStorage: function () {
           storage = {};
+        },
+        clearStorageByRoute: function (route) {
+          if(storage[route]) {
+            delete storage[route];
+          }
         }
       };
     }]);

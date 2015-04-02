@@ -8,7 +8,7 @@
  * Controller of the admissionSystemApp
  */
 angular.module('admissionSystemApp')
-  .controller('ListProposalCtrl', ['$scope','$filter','ngTableParams', 'ListProposalGettingService', '$modal', function ($scope, $filter, ngTableParams, ListProposalGettingService, $modal) {
+  .controller('ListProposalCtrl', ['$scope', '$filter', 'ngTableParams', 'ListProposalGettingService', '$modal', 'SpecofferDictionaryService', 'valueSendingService', function ($scope, $filter, ngTableParams, ListProposalGettingService, $modal, SpecofferDictionaryService, valueSendingService) {
 
     $scope.headers = [
         {name: "id", display: "№", visible: true},
@@ -37,19 +37,38 @@ angular.module('admissionSystemApp')
       });
     };
 
-    ListProposalGettingService.allProposalsDecoded({timePeriodId: 8}).then(function (data) {
-      $scope.tableParams = new ngTableParams({
-        page: 1,            // show first page
-        count: 10          // count per page
-      }, {
-        total: data.length, // length of data
-        getData: function ($defer, params) {
-          $defer.resolve(data.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-        }
+    $scope.timeperiod = {};
+
+    SpecofferDictionaryService.getTimeperiods({timePeriodTypeId: 1}).then(function (timeperiods) {
+      $scope.timeperiods = timeperiods;
+    });
+    $scope.dataNew = [];
+    $scope.pickTimePeriod = function () {
+      valueSendingService.timeperiod = $scope.timeperiod.timePeriodId;
+      SpecofferDictionaryService.clearStorageByRoute('specoffers');
+      ListProposalGettingService.allProposalsDecoded($scope.timeperiod).then(function (data) {
+        $scope.dataNew = data;
       });
-    })
-
-
+    };
+    var getData = function () {
+      return $scope.dataNew;
+    };
+    $scope.$watch("dataNew", function () {
+      $scope.tableParams.reload();
+    });
+    $scope.tableParams = new ngTableParams({
+      page: 1,            // show first page
+      count: 10          // count per page
+    }, {
+      total: function () {
+        return getData().length;
+      }, // length of data
+      getData: function ($defer, params) {
+        var moreData = getData();
+        params.total(moreData.length);
+        $defer.resolve(moreData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+      }
+    });
 
   }]);
 
