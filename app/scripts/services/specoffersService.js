@@ -65,13 +65,13 @@ function addBenefitsAndSubjects (subjects, benefits, specOfferId) {
         benefits[i].specOfferId = specOfferId;
         var benefitPromise = restAngular.one('specoffers', specOfferId).one('benefits').post('', benefits[i]);
         promises.push(benefitPromise);
-    } 
+    }
     return $q.all(promises);
 }
 
 function addEntireSpecoffer (obj) {
     var id = $q.defer();
-    restAngular.all('specoffers').post(obj.specoffer).then(function (response) { 
+    restAngular.all('specoffers').post(obj.specoffer).then(function (response) {
         id.resolve(response.id);
             // obj.specoffer.id = response.id;
         });
@@ -94,18 +94,18 @@ function addOrEditSpecoffer (obj) {
 
                 addBenefitsAndSubjects(obj.subjects, obj.benefits, id).then(function () {
                     console.log('we send reques for the new entire object!');
-                    
+
                     getEntireSpecoffer(id).then(function (res) {
                         console.log('updatinh obj (entireSpecoffer)');
                         console.log('obj old',obj);
                         console.log('getEntireSpecoffer(id) )new obj)',res);
-                        
+
                         _.merge(obj, res);
                     });
                 })
-                // 
+                //
             })
-            // 
+            //
         } else {
             // console.log('EDIT specoffer - objCopy', objCopy)
             // console.log(!!objCopy)
@@ -113,7 +113,7 @@ function addOrEditSpecoffer (obj) {
         }
     }
 
-    function editEntireSpecoffer (newOnj) {      
+    function editEntireSpecoffer (newOnj) {
         // console.log('newOnj',newOnj.specoffer);
         // console.log('objCopy',objCopy.specoffer);
 
@@ -123,14 +123,14 @@ function addOrEditSpecoffer (obj) {
             // console.log(!!!angular.equals(newOnj.specoffer, objCopy.specoffer)); // delete this
             console.log('specoffer obj are not equals'); // delete this
             var promiseSpecoffer = restAngular.one('specoffers', specOfferID).customPUT(newOnj.specoffer).then(function () {
-                _.merge(objCopy.specoffer, newOnj.specoffer)             
+                _.merge(objCopy.specoffer, newOnj.specoffer)
             });
-            // largePromisesArray.push(promiseSpecoffer); 
+            // largePromisesArray.push(promiseSpecoffer);
         }
         console.log('specoffer obj they are equals!!');
 
 
-        
+
         // var itemsPromisesArray = compareArrays(newOnj.subjects, objCopy.subjects, specOfferID);
         $q.all([
             compareArrays(newOnj.subjects, objCopy.subjects, specOfferID, 'subjects'),
@@ -142,19 +142,19 @@ function addOrEditSpecoffer (obj) {
                 getEntireSpecoffer(specOfferID).then(function (res) {
                     _.merge(newOnj, res);
                     console.log('merge them', newOnj);
-                })                  
-            })
-        
+                })
+            });
+
         // compareArrays(newOnj.subjects, objCopy.subjects, specOfferID, 'subjects').then(function () {
         //     $q.all(promiseSpecoffer).then(function () {
         //         console.log('we send request for the new entire object!');
         //         getEntireSpecoffer(specOfferID).then(function (res) {
         //             _.merge(newOnj, res);
         //             console.log('merge them', newOnj);
-        //         })                
+        //         })
         //     })
         // });
-    
+
     }
 
     function compareArrays (newArr, oldArr, specOfferID, route) {
@@ -174,14 +174,14 @@ function addOrEditSpecoffer (obj) {
                 var promise = restAngular.one('specoffers', specOfferID).one(route).customPOST(item).then(function (res) {
                     item.id = res.id;
                 });
-                promises.push(promise); 
+                promises.push(promise);
             } else {
                 var oldItem = _.find(oldArr, { 'id': item.id});
                 console.log('oldItem', oldItem);
                 if (!angular.equals(oldItem, item)) {
                     console.log('we have changed item. Here it is', oldItem);
                     var promise = restAngular.one('specoffers', specOfferID).one(route, oldItem.id).customPUT(item).then(function () {});
-                    promises.push(promise); 
+                    promises.push(promise);
                 }
             }
         });
@@ -196,8 +196,8 @@ function addOrEditSpecoffer (obj) {
         });
 
         console.log('promises',promises);
-        return $q.all(promises);            
-        // return promises;            
+        return $q.all(promises);
+        // return promises;
     }
 
   return {
@@ -266,4 +266,4 @@ function addOrEditSpecoffer (obj) {
             }
         }
     };
-}]);
+  }]);

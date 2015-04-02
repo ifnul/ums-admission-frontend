@@ -35,13 +35,13 @@ angular.module('admissionSystemApp')
     //           'note': 'THERE'
     //         }
     //     ];
-    
+
     $scope.entireSpecoffer.specoffer.timePeriodId = 8; // manual !!!!!!!!! fix!!!
 
     SpecofferDictionaryService.getAllSpecialties().then(function (specialties) {
       // $scope.specialties = specialties;
       // $scope.specialtyId = specialties;
-    });    
+    });
     SpecofferDictionaryService.getAllDepartments().then(function (departments) {
       $scope.departmentId = departments;
     });
@@ -70,49 +70,49 @@ angular.module('admissionSystemApp')
         _.merge($scope.entireSpecoffer.subjects, res.subjects);
         _.merge($scope.entireSpecoffer.benefits, res.benefits);
         _.merge($scope.entireSpecoffer.specoffer, res.specoffer);
-        
+
         console.log('$scope.entireSpecoffer.subjects', $scope.entireSpecoffer.subjects);
         console.log('$scope.entireSpecoffer.benefits', $scope.entireSpecoffer.benefits);
         console.log('$scope.entireSpecoffer.specoffer', $scope.entireSpecoffer.specoffer);
 
         // $scope.entireSpecoffer.subjects = res.subjects;
         //!!! note that this doesn't work
-        // $scope.entireSpecoffer.specoffer.specialtyId = res.specoffer.specialtyId;  
+        // $scope.entireSpecoffer.specoffer.specialtyId = res.specoffer.specialtyId;
         // $scope.entireSpecofferCopy = angular.copy($scope.entireSpecoffer);
         // $scope.isEditingFlag = angular.copy($scope.entireSpecoffer);
 
       });
-    } 
+    }
     $scope.brosweOrEditSpecoffer(407);
 
-    
+
 
     $scope.sendToServer = function (entireSpecoffer) {
       // console.log('entireSpecoffer', entireSpecoffer);
       // console.log('sending to server');
-      $scope.entireSpecoffer.specoffer.note = 'some note'; 
+      $scope.entireSpecoffer.specoffer.note = 'some note';
       SpecoffersService.addOrEditSpecoffer(entireSpecoffer);
 
       // if (entireSpecofferCopy) {
       //   console.log('entireSpecoffer', entireSpecoffer);
       //   console.log('entireSpecofferCopy', entireSpecofferCopy);
-      //   console.log('!!entireSpecofferCopy',!!entireSpecofferCopy); // delete this        
+      //   console.log('!!entireSpecofferCopy',!!entireSpecofferCopy); // delete this
       //   console.log('edit'); // delete this
       //   SpecoffersService.editEntireSpecoffer(entireSpecoffer, entireSpecofferCopy);
       // } else {
-      //   console.log('!!entireSpecofferCopy',!!entireSpecofferCopy); // delete this      
-      //   console.log('create new one'); // delete this 
+      //   console.log('!!entireSpecofferCopy',!!entireSpecofferCopy); // delete this
+      //   console.log('create new one'); // delete this
 
-      //   $scope.entireSpecoffer.specoffer.note = 'some note';         
+      //   $scope.entireSpecoffer.specoffer.note = 'some note';
       //   SpecoffersService.addEntireSpecoffer(entireSpecoffer).then(function (id) {
       //     $scope.entireSpecoffer.specoffer.id = id;
       //     $scope.entireSpecofferCopy = angular.copy(entireSpecoffer);
       //   });
       // }
     }
-    
 
-    // delete this 
+
+    // delete this
     // $scope.$watch('entireSpecofferCopy', function (newVal) {
     //   console.log('entireSpecofferCopy watch', newVal);
     // }, true);

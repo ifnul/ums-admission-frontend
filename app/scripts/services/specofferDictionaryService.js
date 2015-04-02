@@ -17,7 +17,7 @@ angular.module('admissionSystemApp')
 
         return {
           method: 'GET',
-          url: 'http://176.36.11.25/api-lnu/' + item,
+          url: 'http://104.236.29.16:8080/is-lnu-rest-api/api/' + item,
           params: normalParams
           // ,cache: true
         };
