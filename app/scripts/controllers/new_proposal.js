@@ -2,15 +2,14 @@
 
 
 angular.module('admissionSystemApp')
-.controller('NewProposalCtrl', ['$scope', 'SpecoffersService', 'SpecofferDictionaryService','$filter', 'valueSendingService',
-	function ($scope, SpecoffersService, SpecofferDictionaryService, $filter, valueSendingService) {
-    $scope.entireSpecoffer = {};
-    $scope.entireSpecoffer.specoffer = {};
-    $scope.entireSpecoffer.specoffer.timePeriodId = valueSendingService.timeperiod;
+.controller('NewProposalCtrl', ['$scope', 'Restangular', 'SpecoffersService', 'SpecofferDictionaryService','$filter',
+	function ($scope, Restangular, SpecoffersService, SpecofferDictionaryService, $filter) {
 
     SpecofferDictionaryService.getAllDepartments().then(function (departments) {
+    $scope.entireSpecoffer = {};
+
+    SpecofferDictionaryService.getDepartmentsByType().then(function (departments) {
       $scope.departmentId = departments;
-      // console.log('departments _ 1',departments);
       // $scope.specOffer.departmentId = departments[0].id;
     });
 

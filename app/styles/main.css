@@ -44,3 +44,12 @@ input.ng-invalid.ng-dirty {
 .pagination.ng-table-pagination{
   margin: 20px 5px 20px 5px;
 }
+
+.ui-select-match-text {
+  width: 100%;
+  overflow: hidden;
+}
+
+.ui-select-toggle {
+  padding-right: 35px;
+}
