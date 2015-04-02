@@ -19,8 +19,8 @@
           <th></th>
           <th></th>
         </tr>
-        <tr ng-repeat="subj in entireSpecoffer.subjects">
-          <td> {{ subj.subject.name}} </td>
+        <tr ng-repeat="subj in viewSubjects">
+          <td> {{ subj.subject}} </td>
           <td> <p ng-repeat = "n in subj.addName  || '&mdash;' "> {{n.name }} </p></td>
           <td> {{subj.isMajor ? 'Так' : 'Нi'}} </td>
           <td> {{ subj.alternative ? 'Так' : 'Нi'}} </td>

@@ -2,8 +2,8 @@ angular.module('admissionSystemApp')
 
   .controller('TabSubjectCtrl', ['$scope', '$modal', function ($scope, $modal) {
     $scope.entireSpecoffer.subjects = [];
+    $scope.viewSubjects = [];
     $scope.allSubjects = [];
-
 
     $scope.open = function (size) {
 
@@ -16,26 +16,9 @@ angular.module('admissionSystemApp')
 
     };
 
-
     $scope.removeRow = function (idx) {
       $scope.entireSpecoffer.subjects.splice(idx, 1);
     };
-
-    //$scope.editingData = [];
-    //
-    //for (var i = 0, length = $scope.tabelsData.length; i < length; i++) {
-    //  $scope.editingData[$scope.tabelsData[i].id] = false;
-    //}
-    //
-    //
-    //$scope.modify = function(tableData){
-    //  $scope.editingData[tableData.id] = true;
-    //};
-    //
-    //
-    //$scope.update = function(tableData){
-    //  $scope.editingData[tableData.id] = false;
-    //};
 
   }])
 
@@ -47,7 +30,7 @@ angular.module('admissionSystemApp')
 
     $scope.additionalSubjects = [];
     $scope.allSubjects = [];
-
+    $scope.subject = '';
     $scope.$watch('allSubjects.subject', function (subject) {
 
       if (subject && subject.hasChildren) {
@@ -61,14 +44,28 @@ angular.module('admissionSystemApp')
 
       $scope.entireSpecoffer.subjects.push({
         enrolmentSubjectId: $scope.allSubjects.subject.id,
-        subject: $scope.allSubjects.subject,
-        addName: $scope.allSubjects.addName,
+        //addName: $scope.allSubjects.addName,
         mark: $scope.mark,
         isMajor: $scope.isMajor,
         alternative: $scope.alternative,
         note: '',
         weightSubject: $scope.weightSubject
       });
+
+
+      Subjects.getSubjectsById($scope.entireSpecoffer.subjects[$scope.entireSpecoffer.subjects.length - 1].enrolmentSubjectId).then(function (data) {
+
+        $scope.viewSubjects.push({
+          subject: data,
+          addName: $scope.allSubjects.addName,
+          mark: $scope.mark,
+          isMajor: $scope.isMajor,
+          alternative: $scope.alternative,
+          note: '',
+          weightSubject: $scope.weightSubject
+        });
+      });
+
 
       $modalInstance.close();
 

@@ -6,10 +6,7 @@ angular.module('admissionSystemApp')
     $httpProvider.defaults.headers.get = { 'Authorization' : 'Basic YWRtaW46bmltZGE=' };
   }])
 
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
   .factory('SpecofferDictionaryService', ['$http', '$q', function ($http, $q) {
 
     function requestConfig(item, limit, offset, customParams) {
