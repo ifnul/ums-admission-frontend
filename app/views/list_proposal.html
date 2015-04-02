@@ -70,7 +70,7 @@
 
         <!-- Table -->
         <div>
-          <table ng-table="tableParams" show-filter="true" class="table">
+          <table ng-table="tableParams" show-filter="true" class="table table-hover">
             <thead>
             <tr>
               <td ng-repeat="column in headers" data-title="'column.display'" ng-show="column.visible" sortable="column.field">
@@ -82,6 +82,10 @@
               <td ng-repeat="column in headers" data-title="'column.display'" ng-show="column.visible" sortable="column.field">
                 {{prop[column.name]}}
               </td>
+              <td>
+                <button class="btn btn-xs btn-warning" ng-click="editeRow($index)"><i class="fa fa-pencil-square-o"></i></button>
+                <button class="btn btn-xs btn-danger" ng-click="removeRow($index)"><i class="fa fa-times"></i></button>
+              </td>
             </tr>
           </table>
       </div>
@@ -90,4 +94,5 @@
       <div class="footer">
     </div>
   </div>
+</div>
 </div>
