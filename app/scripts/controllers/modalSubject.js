@@ -4,6 +4,11 @@ angular.module('admissionSystemApp')
 
     $scope.entireSpecoffer.subjects = [];
 
+    // $scope.entireSpecoffer.currentArray = [{
+      
+    // }];
+
+
     $scope.open = function (size) {
 
       $modal.open({

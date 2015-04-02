@@ -4,95 +4,122 @@
 angular.module('admissionSystemApp')
 .controller('NewProposalCtrl', ['$scope', 'SpecoffersService', 'SpecofferDictionaryService','$filter',
 	function ($scope, SpecoffersService, SpecofferDictionaryService, $filter) {
+    $scope.entireSpecoffer = {};
+    $scope.entireSpecoffer.specoffer = {};
+    $scope.entireSpecoffer.benefits = [];
+    // $scope.entireSpecoffer.benefits = [
+    //       {
+    //         'benefitId': 1,
+    //         'note': 'newNote'
+    //       },
+    //       {
+    //         'benefitId': 2,
+    //         'note': 'oldNode'
+    //       }
+    //     ];
+    // $scope.entireSpecoffer.subjects = [
+    //         {
+    //           'mark': 3,
+    //           'isMajor': false,
+    //           'alternative': false,
+    //           'weightSubject': 0.9,
+    //           'enrolmentSubjectId': 1,
+    //           'note': 'HERE'
+    //         },
+    //         {
+    //           'mark': 2,
+    //           'isMajor': false,
+    //           'alternative': false,
+    //           'weightSubject': 1,
+    //           'enrolmentSubjectId': 1,
+    //           'note': 'THERE'
+    //         }
+    //     ];
+    
+    $scope.entireSpecoffer.specoffer.timePeriodId = 8; // manual !!!!!!!!! fix!!!
 
+    SpecofferDictionaryService.getAllSpecialties().then(function (specialties) {
+      // $scope.specialties = specialties;
+      // $scope.specialtyId = specialties;
+    });    
     SpecofferDictionaryService.getAllDepartments().then(function (departments) {
       $scope.departmentId = departments;
-      // console.log('departments _ 1',departments);
-      // $scope.specOffer.departmentId = departments[0].id;
     });
-
-
     SpecofferDictionaryService.getSpecoffersTypes().then(function (SpecoffersTypes) {
       $scope.specofferTypesOptions = SpecoffersTypes;
-      // $scope.specOffer.specofferTypeId = SpecoffersTypes[0].id;
     });
-
     SpecofferDictionaryService.getEduformTypes().then(function (eduformtypes) {
        $scope.eduFormTypesOptions = eduformtypes;
-      // $scope.specOffer.eduFormTypeId = eduformtypes[0].id;
     });
-
     SpecofferDictionaryService.getTimePeriodCourseIds().then(function (timePeriodCourseIds) {
       $scope.timePeriodCourseId = timePeriodCourseIds;
-      // $scope.specOffer.timePeriodCourseId = timePeriodCourseIds[0].id;
     });
 
-    $scope.$watchGroup(['specOffer.begDate', 'specOffer.endDate'], function(newValues){
-        // $scope.specOffer.begDate = $filter('date')(newValues[0], 'yyyy-MM-dd');
-        // $scope.specOffer.endDate = $filter('date')(newValues[1], 'yyyy-MM-dd');
-    });
-
+    // benefites
     // **********************************************************************
-    //                      CREATE NEW SPECOFFER DEMO
+    //                      BROWSE OR UPDATE EXISTING SPECOFFER
     // **********************************************************************
 
-    function createNewSpecoffer() {
-      $scope.entireSpecoffer = {};
-      $scope.entireSpecoffer.specoffer = {};
-
-      //watching specOffer object
-      $scope.$watch('entireSpecoffer', function (newVal) {
-        console.log('entireSpecoffer', newVal);
-      }, true);
-
-      $scope.$watch('entireSpecoffer.specoffer', function (newVal) {
-        console.log('entireSpecoffer.specoffer', newVal);
-      }, true);
-
-      // add entireSpecoffer to server DEMO
-      // SpecoffersService.addEntireSpecoffer(entireSpecoffer);
-    }
-    // createNewSpecoffer DEMO
-     createNewSpecoffer();
-
-      // **********************************************************************
-      //                      BROWSE OR UPDATE EXISTING SPECOFFER
-      // **********************************************************************
-
-    function brosweOrEditSpecoffer (specofferId) {
+    $scope.brosweOrEditSpecoffer = function  (specofferId) {
       SpecoffersService.getEntireSpecoffer(specofferId).then(function(res){
-        console.log('res',res);
-        $scope.specOffer = {};
-        $scope.specOffer.specialtyId = res.specoffer.specialtyId;
-        // $scope.pecOffer.departmentId = departments[res.specoffer.departmentId - 1].id;
-        $scope.specOffer.specofferTypeId =  $scope.specofferTypesOptions[res.specoffer.specofferTypeId - 1].id;
-        $scope.specOffer.timePeriodCourseId = $scope.timePeriodCourseId[res.specoffer.timePeriodCourseId - 1].id;
-        $scope.specOffer.docSeries = res.specoffer.docSeries;
-        $scope.specOffer.docNum = res.specoffer.docNum;
-        $scope.specOffer.eduFormTypeId = $scope.eduFormTypesOptions[res.specoffer.eduFormTypeId - 1].id;
-        $scope.specOffer.licCount = res.specoffer.licCount;
-        $scope.specOffer.stateCount = res.specoffer.stateCount;
-        $scope.specOffer.begDate = res.specoffer.begDate;
-        $scope.specOffer.endDate = res.specoffer.endDate;
+        console.log('getEntireSpecoffer 407', res);
+        // console.log('getEntireSpecoffer 407 specoffer', res.specoffer);
+        // console.log('getEntireSpecoffer 407 subjects', res.subjects);
+        // console.log('getEntireSpecoffer 407 benefits', res.benefits);
+
+        _.merge($scope.entireSpecoffer.subjects, res.subjects);
+        _.merge($scope.entireSpecoffer.benefits, res.benefits);
+        _.merge($scope.entireSpecoffer.specoffer, res.specoffer);
+        
+        console.log('$scope.entireSpecoffer.subjects', $scope.entireSpecoffer.subjects);
+        console.log('$scope.entireSpecoffer.benefits', $scope.entireSpecoffer.benefits);
+        console.log('$scope.entireSpecoffer.specoffer', $scope.entireSpecoffer.specoffer);
+
+        // $scope.entireSpecoffer.subjects = res.subjects;
+        //!!! note that this doesn't work
+        // $scope.entireSpecoffer.specoffer.specialtyId = res.specoffer.specialtyId;  
+        // $scope.entireSpecofferCopy = angular.copy($scope.entireSpecoffer);
+        // $scope.isEditingFlag = angular.copy($scope.entireSpecoffer);
+
       });
+    } 
+    $scope.brosweOrEditSpecoffer(407);
+
+    
+
+    $scope.sendToServer = function (entireSpecoffer) {
+      // console.log('entireSpecoffer', entireSpecoffer);
+      // console.log('sending to server');
+      $scope.entireSpecoffer.specoffer.note = 'some note'; 
+      SpecoffersService.addOrEditSpecoffer(entireSpecoffer);
+
+      // if (entireSpecofferCopy) {
+      //   console.log('entireSpecoffer', entireSpecoffer);
+      //   console.log('entireSpecofferCopy', entireSpecofferCopy);
+      //   console.log('!!entireSpecofferCopy',!!entireSpecofferCopy); // delete this        
+      //   console.log('edit'); // delete this
+      //   SpecoffersService.editEntireSpecoffer(entireSpecoffer, entireSpecofferCopy);
+      // } else {
+      //   console.log('!!entireSpecofferCopy',!!entireSpecofferCopy); // delete this      
+      //   console.log('create new one'); // delete this 
+
+      //   $scope.entireSpecoffer.specoffer.note = 'some note';         
+      //   SpecoffersService.addEntireSpecoffer(entireSpecoffer).then(function (id) {
+      //     $scope.entireSpecoffer.specoffer.id = id;
+      //     $scope.entireSpecofferCopy = angular.copy(entireSpecoffer);
+      //   });
+      // }
     }
+    
 
-    brosweOrEditSpecoffer(407);
+    // delete this 
+    // $scope.$watch('entireSpecofferCopy', function (newVal) {
+    //   console.log('entireSpecofferCopy watch', newVal);
+    // }, true);
 
-      // DEMO FOR GEtting ALL Departments
-      // SpecofferDictionaryService.getAllDepartments().then(function (allDepartments) {
-        // console.log('allDepartments',allDepartments);
-      // })
-
-      // DEMO FOR GEtting ALL specialities
-      // SpecofferDictionaryService.getAllSpecialties().then(function (specialties) {
-        // console.log('Specialties',specialties);
-      // })
-
-
-
-
-
+    // $scope.$watch('entireSpecoffer', function (newVal) {
+    //   console.log('entireSpecoffer watch', newVal);
+    // }, true);
 
 }]);
 

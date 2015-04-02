@@ -6,12 +6,7 @@ angular.module('admissionSystemApp')
     $httpProvider.defaults.headers.get = { 'Authorization' : 'Basic YWRtaW46bmltZGE=' };
   }])
 
-  .config(function (localStorageServiceProvider) {
-    localStorageServiceProvider
-      .setPrefix('admissionSystemApp');
-  })
-
-  .factory('SpecofferDictionaryService', ['$http', '$q', 'localStorageService', function ($http, $q, localStorageService) {
+  .factory('SpecofferDictionaryService', ['$http', '$q', function ($http, $q) {
 
     function requestConfig(item, limit, offset, customParams) {
         var normalParams = {
@@ -22,7 +17,7 @@ angular.module('admissionSystemApp')
 
         return {
           method: 'GET',
-          url: 'http://104.236.29.16:8080/is-lnu-rest-api/api/' + item,
+          url: 'http://176.36.11.25/api-lnu/' + item,
           params: normalParams
           // ,cache: true
         };
@@ -32,7 +27,7 @@ angular.module('admissionSystemApp')
       var storage = {};
       function getLargeDictionary (route, customParams) {
         var deferred = $q.defer();
-        
+
         if (storage[route]) {
           deferred.resolve(storage[route]);
         } else {
