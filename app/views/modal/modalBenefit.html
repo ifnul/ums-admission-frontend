@@ -10,10 +10,13 @@
         </div>
         <div class="col-md-8">
           <div class='container-fluid'>
+<<<<<<< Updated upstream
+=======
             <!--ng-controller="TypeaheadCtrl"-->
             <!--<input type="text" ng-model="selected" typeahead="benefit as benefit.name for benefit in benefits | filter:{name:$viewValue} | limitTo:8" typeahead-editable="false" class="form-control" id="inputType" placeholder="Тип пiльги" required>-->
 
 
+>>>>>>> Stashed changes
             <ui-select ng-model="allBenefits.benefit"
                        required
                        id="inputType">
@@ -22,7 +25,10 @@
                 <div ng-bind-html="benefit.name | highlight: $select.search"></div>
               </ui-select-choices>
             </ui-select>
+<<<<<<< Updated upstream
+=======
             <!--<pre>Model: {{allBenefits.benefit | json}}</pre>-->
+>>>>>>> Stashed changes
           </div>
         </div>
       </div>
