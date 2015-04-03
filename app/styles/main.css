@@ -27,7 +27,6 @@ input.ng-invalid.ng-dirty {
   width: 30%;
   border-right-width: 1px;
 }
-
 .ui-select-match-text {
   width: 100%;
   overflow: hidden;
@@ -39,10 +38,33 @@ input.ng-invalid.ng-dirty {
   margin-top: 20px;
 }
 .ng-table-counts.btn-group.pull-right.ng-scope{
-  margin: 20px 5px 20px 5px;
-}
+   margin: 20px 5px 20px 5px;
+ }
 
 .pagination.ng-table-pagination{
   margin: 20px 5px 20px 5px;
 }
 
+#spinnerDiv {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1100;
+  background-color: white;
+  opacity: .6;
+}
+.spinner {
+  position: absolute;
+  width: 100px;
+  left: 50%;
+  top: 50%;
+  margin-left: -32px;
+  margin-top: -32px;
+  display: block;
+}
+
+table td a:hover {
+  cursor: pointer;
+}

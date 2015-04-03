@@ -8,7 +8,8 @@
  * Controller of the admissionSystemApp
  */
 angular.module('admissionSystemApp')
-  .controller('ListProposalCtrl', ['$scope', '$filter', 'ngTableParams', 'ListProposalGettingService', '$modal', 'SpecofferDictionaryService', 'valueSendingService', function ($scope, $filter, ngTableParams, ListProposalGettingService, $modal, SpecofferDictionaryService, valueSendingService) {
+  .controller('ListProposalCtrl', ['$scope', '$filter', 'ngTableParams', 'ListProposalGettingService', '$modal', 'SpecofferDictionaryService', 'valueSendingService',
+    function ($scope, $filter, ngTableParams, ListProposalGettingService, $modal, SpecofferDictionaryService, valueSendingService) {
 
     $scope.headers = [
         {name: "id", display: "№", visible: true},
