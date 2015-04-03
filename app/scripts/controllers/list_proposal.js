@@ -69,11 +69,7 @@ angular.module('admissionSystemApp')
         params.total(moreData.length);
         $defer.resolve(moreData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
       }
-    }
-
-);
-
-
+    });
   }]);
 
 
