@@ -8,19 +8,18 @@
  * Controller of the admissionSystemApp
  */
 angular.module('admissionSystemApp')
-  .controller('ListProposalCtrl', ['$scope','$filter','ngTableParams', 'ListProposalGettingService', '$modal', function ($scope, $filter, ngTableParams, ListProposalGettingService, $modal) {
+  .controller('ListProposalCtrl', ['$scope', '$filter', 'ngTableParams', 'ListProposalGettingService', '$modal', 'SpecofferDictionaryService', 'valueSendingService', function ($scope, $filter, ngTableParams, ListProposalGettingService, $modal, SpecofferDictionaryService, valueSendingService) {
 
     $scope.headers = [
-      {name: "id", display: "id", visible: true},
-      {name: "specialtyId", display: "speciality", visible: true},
-      {name: "departmentId", display: "department", visible: true},
-      {name: "timePeriodId", display: "timePeriod", visible: true},
-      {name: "timePeriodCourseId", display: "timePeriodCarousel", visible: true},
-      {name: "specofferTypeId", display: "specofferType", visible: true},
-      {name: "eduFormTypeId", display: "eduFormType", visible: true},
-      {name: "licCount", display: "licCount", visible: true},
-      {name: "stateCount", display: "stateCount", visible: true}
-    ];
+        {name: "id", display: "№", visible: true},
+      {name: "specialtyId", display: "Спеціальність", visible: true},
+      {name: "departmentId", display: "Структурний підрозділ", visible: true},
+      {name: "timePeriodCourseId", display: "Курс зарахування", visible: true},
+      {name: "specofferTypeId", display: "Тип пропозиції", visible: true},
+      {name: "eduFormTypeId", display: "Форма навчання", visible: true},
+      {name: "licCount", display: "Ліцензований обсяг", visible: true},
+      {name: "stateCount", display: "Державне замовлення", visible: true}
+     ];
 
     $scope.openFiltersModal = function (size) {
 
@@ -38,19 +37,38 @@ angular.module('admissionSystemApp')
       });
     };
 
-    ListProposalGettingService.allProposalsDecoded({timePeriodId: 8}).then(function (data) {
-      $scope.tableParams = new ngTableParams({
-        page: 1,            // show first page
-        count: 10          // count per page
-      }, {
-        total: data.length, // length of data
-        getData: function ($defer, params) {
-          $defer.resolve(data.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-        }
+    $scope.timeperiod = {};
+
+    SpecofferDictionaryService.getTimeperiods({timePeriodTypeId: 1}).then(function (timeperiods) {
+      $scope.timeperiods = timeperiods;
+    });
+    $scope.dataNew = [];
+    $scope.pickTimePeriod = function () {
+      valueSendingService.timeperiod = $scope.timeperiod.timePeriodId;
+      SpecofferDictionaryService.clearStorageByRoute('specoffers');
+      ListProposalGettingService.allProposalsDecoded($scope.timeperiod).then(function (data) {
+        $scope.dataNew = data;
       });
-    })
-
-
+    };
+    var getData = function () {
+      return $scope.dataNew;
+    };
+    $scope.$watch("dataNew", function () {
+      $scope.tableParams.reload();
+    });
+    $scope.tableParams = new ngTableParams({
+      page: 1,            // show first page
+      count: 10          // count per page
+    }, {
+      total: function () {
+        return getData().length;
+      }, // length of data
+      getData: function ($defer, params) {
+        var moreData = getData();
+        params.total(moreData.length);
+        $defer.resolve(moreData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+      }
+    });
 
   }]);
 
