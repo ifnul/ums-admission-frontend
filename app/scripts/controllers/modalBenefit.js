@@ -2,8 +2,9 @@ angular.module('admissionSystemApp')
 
 
   .controller('ModalBenefitCtrl', function ($scope, $modal, Benefits) {
-    $scope.entireSpecoffer = {};
-    $scope.entireSpecoffer.benefites = [{benefitId:12}];
+    // $scope.entireSpecoffer = {};
+    // $scope.entireSpecoffer.benefits = [];
+    $scope.entireSpecoffer.benefits = [];
 
     //Internal object for rendering data in table
     $scope.everything = {};
@@ -19,13 +20,13 @@ angular.module('admissionSystemApp')
       $scope.everything.allInformationArray = data.subjectsMainArray;
 
       for (var y = 0; y < $scope.everything.allInformationArray.length; y++) {
-        $scope.entireSpecoffer.benefites.push({benefitId: $scope.everything.allInformationArray[y].id, note: ''});
+        $scope.entireSpecoffer.benefits.push({benefitId: $scope.everything.allInformationArray[y].id, note: ''});
       }
 
       //Render data from server to table
-      for (var i = 0; i < $scope.entireSpecoffer.benefites.length; i++) {
+      for (var i = 0; i < $scope.entireSpecoffer.benefits.length; i++) {
         for (var x = 0; x < $scope.benefits.length; x++) {
-          if ($scope.entireSpecoffer.benefites[i].benefitId === $scope.benefits[x].id) {
+          if ($scope.entireSpecoffer.benefits[i].benefitId === $scope.benefits[x].id) {
             $scope.everything.allInformationArray.push($scope.benefits[x]);
             break;
           }
@@ -44,11 +45,13 @@ angular.module('admissionSystemApp')
 
           $scope.ok = function () {
             $scope.everything.allInformationArray.push({id: $scope.allBenefits.benefit.id, name: $scope.allBenefits.benefit.name, quantity: $scope.quantity});
-            $scope.entireSpecoffer.benefites.push({benefitId: $scope.allBenefits.benefit.id, note:''});
+            $scope.entireSpecoffer.benefits.push({benefitId: $scope.allBenefits.benefit.id, note:''});
+            $scope.allBenefits.benefit = undefined;
             $modalInstance.close();
           };
 
           $scope.cancel = function () {
+            $scope.allBenefits.benefit = undefined;
             $modalInstance.dismiss('cancel');
           };
 
@@ -71,9 +74,9 @@ angular.module('admissionSystemApp')
         alert( "Something gone wrong" );
       }
 
-      for( var x = 0; x < $scope.entireSpecoffer.benefites.length; x++ ) {
-        if( $scope.entireSpecoffer.benefites[x].benefitId === id ) {
-          $scope.entireSpecoffer.benefites.splice( x, 1 );
+      for( var x = 0; x < $scope.entireSpecoffer.benefits.length; x++ ) {
+        if( $scope.entireSpecoffer.benefits[x].benefitId === id ) {
+          $scope.entireSpecoffer.benefits.splice( x, 1 );
           break;
         }
       }

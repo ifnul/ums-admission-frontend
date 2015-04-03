@@ -2,106 +2,73 @@
 
 
 angular.module('admissionSystemApp')
-  .controller('NewProposalCtrl', ['$scope', 'Restangular', 'SpecoffersService', 'SpecofferDictionaryService', '$filter',
-    function ($scope, Restangular, SpecoffersService, SpecofferDictionaryService, $filter) {
+  .controller('NewProposalCtrl', ['$scope', 'SpecoffersService', 'SpecofferDictionaryService', '$q', 'valueSendingService',
+  	function ($scope, SpecoffersService, SpecofferDictionaryService, $q, valueSendingService) {
+      $scope.entireSpecoffer = {};
+      $scope.entireSpecoffer.specoffer = {};
+      $scope.entireSpecoffer.specoffer.timePeriodId = valueSendingService.timeperiod;
 
-      SpecofferDictionaryService.getAllDepartments().then(function (departments) {
-        $scope.entireSpecoffer = {};
+
+      SpecofferDictionaryService.getAllSpecialties().then(function (specialties) {
+        // $scope.specialties = specialties;
+        // $scope.specialtyId = specialties;
       });
-
-      //SpecofferDictionaryService.getDepartmentsByType().then(function (departments) {
-      //  $scope.departmentId = departments;
-      //  // $scope.specOffer.departmentId = departments[0].id;
-      //});
-
+      SpecofferDictionaryService.getAllDepartments().then(function (departments) {
+        $scope.departmentId = departments;
+      });
       SpecofferDictionaryService.getSpecoffersTypes().then(function (SpecoffersTypes) {
         $scope.specofferTypesOptions = SpecoffersTypes;
-        // $scope.specOffer.specofferTypeId = SpecoffersTypes[0].id;
       });
-
       SpecofferDictionaryService.getEduformTypes().then(function (eduformtypes) {
-        $scope.eduFormTypesOptions = eduformtypes;
-        // $scope.specOffer.eduFormTypeId = eduformtypes[0].id;
+         $scope.eduFormTypesOptions = eduformtypes;
       });
 
       SpecofferDictionaryService.getTimePeriodCourseIds().then(function (timePeriodCourseIds) {
         $scope.timePeriodCourseId = timePeriodCourseIds;
-        // $scope.specOffer.timePeriodCourseId = timePeriodCourseIds[0].id;
       });
 
-      $scope.$watchGroup(['specOffer.begDate', 'specOffer.endDate'], function (newValues) {
-        // $scope.specOffer.begDate = $filter('date')(newValues[0], 'yyyy-MM-dd');
-        // $scope.specOffer.endDate = $filter('date')(newValues[1], 'yyyy-MM-dd');
-      });
-
-      // **********************************************************************
-      //                      CREATE NEW SPECOFFER DEMO
-      // **********************************************************************
-
-      function createNewSpecoffer() {
-        $scope.entireSpecoffer = {};
-        $scope.entireSpecoffer.specoffer = {};
-
-        //watching specOffer object
-        $scope.$watch('entireSpecoffer', function (newVal) {
-          console.log('entireSpecoffer', newVal);
-        }, true);
-
-        $scope.$watch('entireSpecoffer.specoffer', function (newVal) {
-          console.log('entireSpecoffer.specoffer', newVal);
-        }, true);
-
-        // add entireSpecoffer to server DEMO
-        // SpecoffersService.addEntireSpecoffer(entireSpecoffer);
-      }
-
-      // createNewSpecoffer DEMO
-      createNewSpecoffer();
-
-      // **********************************************************************
-      //                      BROWSE OR UPDATE EXISTING SPECOFFER
-      // **********************************************************************
-
-      function brosweOrEditSpecoffer(specofferId) {
-        SpecoffersService.getEntireSpecoffer(specofferId).then(function (res) {
-          console.log('res', res);
-          $scope.specOffer = {};
-          $scope.specOffer.specialtyId = res.specoffer.specialtyId;
-          // $scope.pecOffer.departmentId = departments[res.specoffer.departmentId - 1].id;
-          $scope.specOffer.specofferTypeId = $scope.specofferTypesOptions[res.specoffer.specofferTypeId - 1].id;
-          $scope.specOffer.timePeriodCourseId = $scope.timePeriodCourseId[res.specoffer.timePeriodCourseId - 1].id;
-          $scope.specOffer.docSeries = res.specoffer.docSeries;
-          $scope.specOffer.docNum = res.specoffer.docNum;
-          $scope.specOffer.eduFormTypeId = $scope.eduFormTypesOptions[res.specoffer.eduFormTypeId - 1].id;
-          $scope.specOffer.licCount = res.specoffer.licCount;
-          $scope.specOffer.stateCount = res.specoffer.stateCount;
-          $scope.specOffer.begDate = res.specoffer.begDate;
-          $scope.specOffer.endDate = res.specoffer.endDate;
-        });
-      }
-
-      brosweOrEditSpecoffer(407);
+  $scope.brosweOrEditSpecoffer = function  (specofferId) {
+    SpecoffersService.getEntireSpecoffer(specofferId).then(function(res){
+      _.merge($scope.entireSpecoffer.subjects, res.subjects);
+      _.merge($scope.entireSpecoffer.benefits, res.benefits);
+      _.merge($scope.entireSpecoffer.specoffer, res.specoffer);
+    });
+  };
+  // $scope.brosweOrEditSpecoffer(407);
 
       // DEMO FOR GEtting ALL Departments
       // SpecofferDictionaryService.getAllDepartments().then(function (allDepartments) {
-      // console.log('allDepartments',allDepartments);
+        // console.log('allDepartments',allDepartments);
       // })
 
       // DEMO FOR GEtting ALL specialities
       // SpecofferDictionaryService.getAllSpecialties().then(function (specialties) {
-      // console.log('Specialties',specialties);
+        // console.log('Specialties',specialties);
       // })
 
+  $scope.sendToServer = function (entireSpecoffer) {
+    $scope.entireSpecoffer.specoffer.note = 'some note';
+    SpecoffersService.addOrEditSpecoffer(entireSpecoffer);
+  };
 
-    }]);
+      // delete this
+      // $scope.$watch('entireSpecofferCopy', function (newVal) {
+      //   console.log('entireSpecofferCopy watch', newVal);
+      // }, true);
+
+      // $scope.$watch('entireSpecoffer', function (newVal) {
+      //   console.log('entireSpecoffer watch', newVal);
+      // }, true);
+
+  }]);
 
 angular.module('admissionSystemApp')
   .config(['datepickerConfig', 'datepickerPopupConfig',
-    function (datepickerConfig, datepickerPopupConfig) {
+    function(datepickerConfig, datepickerPopupConfig) {
       datepickerConfig.showWeeks = false;
       datepickerConfig.startingDay = '1';
       datepickerPopupConfig.showButtonBar = false;
-    }]);
+  }]);
 
 
 

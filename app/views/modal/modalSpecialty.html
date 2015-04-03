@@ -12,7 +12,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="result in results">
+        <tr ng-repeat="result in results track by $index">
           <td><a ng-click="selected.result = result">{{result.cipher}}</a></td>
           <td>{{result.name}}</td>
         </tr>
