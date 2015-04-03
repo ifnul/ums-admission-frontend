@@ -2,19 +2,12 @@
 
 
 angular.module('admissionSystemApp')
-<<<<<<< Updated upstream
   .controller('NewProposalCtrl', ['$scope', 'Restangular', 'SpecoffersService', 'SpecofferDictionaryService', '$filter',
     function ($scope, Restangular, SpecoffersService, SpecofferDictionaryService, $filter) {
 
       SpecofferDictionaryService.getAllDepartments().then(function (departments) {
         $scope.entireSpecoffer = {};
       });
-=======
-.controller('NewProposalCtrl', ['$scope', 'Restangular', 'SpecoffersService', 'SpecofferDictionaryService','$filter',
-	function ($scope, Restangular, SpecoffersService, SpecofferDictionaryService, $filter) {
-
-    $scope.entireSpecoffer = {};
->>>>>>> Stashed changes
 
       //SpecofferDictionaryService.getDepartmentsByType().then(function (departments) {
       //  $scope.departmentId = departments;

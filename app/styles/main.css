@@ -27,7 +27,7 @@ input.ng-invalid.ng-dirty {
   width: 30%;
   border-right-width: 1px;
 }
-<<<<<<< Updated upstream
+
 .ui-select-match-text {
   width: 100%;
   overflow: hidden;
@@ -45,14 +45,4 @@ input.ng-invalid.ng-dirty {
 .pagination.ng-table-pagination{
   margin: 20px 5px 20px 5px;
 }
-=======
->>>>>>> Stashed changes
 
-.ui-select-match-text {
-  width: 100%;
-  overflow: hidden;
-}
-
-.ui-select-toggle {
-  padding-right: 35px;
-}
