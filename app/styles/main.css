@@ -38,11 +38,13 @@ input.ng-invalid.ng-dirty {
   margin-top: 20px;
 }
 .ng-table-counts.btn-group.pull-right.ng-scope{
-   margin: 20px 5px 20px 5px;
- }
-
+  margin: 20px 5px 20px 5px;
+}
 .pagination.ng-table-pagination{
   margin: 20px 5px 20px 5px;
+}
+#mainTable {
+  padding-bottom: 20px;
 }
 
 #spinnerDiv {
