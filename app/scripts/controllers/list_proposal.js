@@ -65,11 +65,11 @@ angular.module('admissionSystemApp')
       }, // length of data
       getData: function ($defer, params) {
         var moreData = getData();
+        moreData.forEach(function(el,index) {el.id=index+1});
         params.total(moreData.length);
         $defer.resolve(moreData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
       }
     });
-
   }]);
 
 
