@@ -20,7 +20,6 @@ angular.module('admissionSystemApp')
 
 
       SpecofferDictionaryService.getAllSpecoffers(params).then(function(rawProposals) {
-                      var counter = 1;
 
         var promise1 = SpecofferDictionaryService.getAllSpecialties().then(function(data) {
             angular.forEach(data, function (item) {
@@ -49,9 +48,6 @@ angular.module('admissionSystemApp')
                       item.timePeriodCourseId = timePeriodCourseNames[item.timePeriodCourseId];
                       item.specofferTypeId = specofferTypeNames[item.specofferTypeId];
                       item.eduFormTypeId = eduFormTypeNames[item.eduFormTypeId];
-                      item.id = counter++;
-
-
                     });
                     deferred.resolve(rawProposals);
 
