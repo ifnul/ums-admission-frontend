@@ -77,6 +77,10 @@ angular.module('admissionSystemApp')
         getTimeperiods: function (obj) {
           return getLargeDictionary('timeperiods', obj);
         },
+        getBenefits: function () {
+          return getLargeDictionary('benefits');
+        },
+
         clearStorage: function () {
           storage = {};
         },

@@ -70,7 +70,7 @@ angular.module('admissionSystemApp')
     function addOrEditSpecoffer (currentObj) {
         if (!objCopy.specoffer) {
                 addEntireSpecoffer(currentObj).then(function (specOfferID) {
-                    obj.specoffer.id = specOfferID;
+                    currentObj.specoffer.id = specOfferID;
                     $q.all([
                         addArrayOfItems(currentObj.subjects, specOfferID, 'subjects'),
                         addArrayOfItems(currentObj.benefits, specOfferID, 'benefits'),

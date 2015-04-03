@@ -36,7 +36,15 @@ angular.module('admissionSystemApp')
   };
   // $scope.brosweOrEditSpecoffer(407);
 
+      // DEMO FOR GEtting ALL Departments
+      // SpecofferDictionaryService.getAllDepartments().then(function (allDepartments) {
+        // console.log('allDepartments',allDepartments);
+      // })
 
+      // DEMO FOR GEtting ALL specialities
+      // SpecofferDictionaryService.getAllSpecialties().then(function (specialties) {
+        // console.log('Specialties',specialties);
+      // })
 
   $scope.sendToServer = function (entireSpecoffer) {
     $scope.entireSpecoffer.specoffer.note = 'some note';
@@ -61,3 +69,7 @@ angular.module('admissionSystemApp')
       datepickerConfig.startingDay = '1';
       datepickerPopupConfig.showButtonBar = false;
   }]);
+
+
+
+
