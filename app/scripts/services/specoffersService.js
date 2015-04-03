@@ -5,7 +5,7 @@ angular.module('admissionSystemApp')
 
 angular.module('admissionSystemApp')
 .factory('SpecoffersService', ['Restangular', '$q', '$filter',
-    
+
     function (Restangular, $q, $filter) {
 
         var restAngular =
@@ -45,9 +45,9 @@ angular.module('admissionSystemApp')
         $q.all(entireSpecoffer).then(function (res) {
             _.merge(objCopy, res);
             console.log('obj COPY (inside getEntireSpecoffer)  ',objCopy);
-        })
+        });
         return $q.all(entireSpecoffer);
-    };
+    }
 
     function addArrayOfItems (itemsArr, specOfferId, route) {
         var promises = [];
@@ -74,7 +74,7 @@ angular.module('admissionSystemApp')
                     $q.all([
                         addArrayOfItems(currentObj.subjects, specOfferID, 'subjects'),
                         addArrayOfItems(currentObj.benefits, specOfferID, 'benefits'),
-                    ])               
+                    ])
                         .then(function () {
                             getEntireSpecoffer(specOfferID).then(function (newEntireSpecoffer) {
                                 _.merge(currentObj, newEntireSpecoffer);
@@ -84,7 +84,7 @@ angular.module('admissionSystemApp')
         } else {
             editEntireSpecoffer(currentObj);
         }
-    };
+    }
 
     function editEntireSpecoffer (newOnj) {
         var specOfferID = objCopy.specoffer.id;
@@ -106,14 +106,14 @@ angular.module('admissionSystemApp')
                     console.log('merge them', newOnj);
                 })
             });
-    };
+    }
 
     function compareArrays (newArr, oldArr, specOfferID, route) {
         console.log('inside compareArrays');
         var promises = [];
         var x = angular.copy(newArr);  // delete this later
         var y = angular.copy(oldArr);  // delete this later
-        console.log('newArr',x); 
+        console.log('newArr',x);
         console.log('oldArr',y);
 
         _.forEach(newArr, function(item, i) {
