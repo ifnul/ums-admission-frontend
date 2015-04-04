@@ -7,6 +7,7 @@ angular.module('admissionSystemApp')
       $scope.entireSpecoffer = {};
       $scope.entireSpecoffer.specoffer = {};
       $scope.entireSpecoffer.specoffer.timePeriodId = valueSendingService.timeperiod;
+      $scope.entireSpecoffer.specoffer.specialtyId = 344;
 
 
       SpecofferDictionaryService.getAllSpecialties().then(function (specialties) {
