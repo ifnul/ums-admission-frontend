@@ -3,20 +3,18 @@
 angular.module('admissionSystemApp')
   .factory('SpecialtyGettingService', ['$http', '$q', 'SpecofferDictionaryService', function ($http, $q, SpecofferDictionaryService) {
 
-    var  deferred;
-    var  deferredId = $q.defer();
-    var  deferredName = $q.defer();
-    var  searchResult = [];
-    var specialties = [];
+    var deferred,
+      searchResult = [],
+      specialties = [];
 
-    function fillSpecialtiesArray () {
+    function fillSpecialtiesArray() {
       if (deferred) {
         return deferred.promise;
       }
-      var deferred = $q.defer();
+      deferred = $q.defer();
       SpecofferDictionaryService.getAllSpecialties().then(function (data) {
         angular.forEach(data, function (resource) {
-          if (resource.hasOwnProperty('parentId'))  {
+          if (resource.hasOwnProperty('parentId')) {
             specialties.push(resource);
           }
         });
@@ -28,7 +26,7 @@ angular.module('admissionSystemApp')
     var service = {};
 
     service.searchSpecialtyByName = function (str) {
-      fillSpecialtiesArray().then(function () {
+      return fillSpecialtiesArray().then(function (specialties) {
         searchResult.length = 0;
         var filter = function (item) {
           if (item.name.indexOf(str) > -1) {
@@ -36,13 +34,12 @@ angular.module('admissionSystemApp')
           }
         };
         angular.forEach(specialties, filter);
-        deferredName.resolve(searchResult);
+        return searchResult;
       });
-      return deferredName.promise;
     };
 
     service.searchSpecialtyById = function (str) {
-      fillSpecialtiesArray().then(function () {
+      return fillSpecialtiesArray().then(function (specialties) {
         searchResult.length = 0;
         var filter = function (item) {
           if (item.cipher.indexOf(str) > -1) {
@@ -50,9 +47,21 @@ angular.module('admissionSystemApp')
           }
         };
         angular.forEach(specialties, filter);
-        deferredId.resolve(searchResult);
+        return searchResult;
       });
-      return deferredId.promise;
+    };
+
+    service.searchSpecialty = function (str) {
+      return fillSpecialtiesArray().then(function (specialties) {
+        var specialty = null;
+        angular.forEach(specialties, function (item) {
+          if (parseInt(item.id) === parseInt(str)) {
+            specialty = item;
+            return false;
+          }
+        });
+        return specialty;
+      });
     };
 
     return service;

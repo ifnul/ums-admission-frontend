@@ -80,10 +80,6 @@ angular.module('admissionSystemApp')
         getBenefits: function () {
           return getLargeDictionary('benefits');
         },
-
-        clearStorage: function () {
-          storage = {};
-        },
         clearStorageByRoute: function (route) {
           if(storage[route]) {
             delete storage[route];

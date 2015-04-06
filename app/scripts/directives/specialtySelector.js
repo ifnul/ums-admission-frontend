@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('admissionSystemApp')
-  .directive('specialtySelector', function($modal) {
+  .directive('specialtySelector', function ($modal, SpecialtyGettingService) {
 
     var modalCtrl = function (SpecialtyGettingService, $scope, $modalInstance, id, name) {
 
@@ -16,7 +16,7 @@ angular.module('admissionSystemApp')
       } else if (name) {
         SpecialtyGettingService.searchSpecialtyByName(name).then(function (data) {
           $scope.results = data;
-          
+
           $scope.selected = {
             result: $scope.results[0]
           };
@@ -39,9 +39,21 @@ angular.module('admissionSystemApp')
       require: 'ngModel',
       replace: true,
       scope: {},
-      link: function(scope, element, attrs, ctrl) {
+      link: function (scope, element, attrs, ctrl) {
         element.find('input:eq(0)').attr('id', attrs.id);
         element.removeAttr('id');
+
+        ctrl.$render = function() {
+          var specialtyId = ctrl.$modelValue;
+
+          if (specialtyId) {
+            SpecialtyGettingService.searchSpecialty(specialtyId).then(function (data) {
+              scope.cipher = data.cipher;
+              scope.name = data.name;
+            });
+          }
+        };
+
 
         scope.openModalSpecialty = function (size) {
           var modalInstance = $modal.open({
@@ -68,4 +80,4 @@ angular.module('admissionSystemApp')
       }
     };
 
-  })
+  });
