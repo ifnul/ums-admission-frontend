@@ -16,7 +16,7 @@ angular.module('admissionSystemApp')
       } else if (name) {
         SpecialtyGettingService.searchSpecialtyByName(name).then(function (data) {
           $scope.results = data;
-          
+
           $scope.selected = {
             result: $scope.results[0]
           };
@@ -80,4 +80,4 @@ angular.module('admissionSystemApp')
       }
     };
 
-  })
+  });

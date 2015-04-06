@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('loadingSpinner', [])
-  .factory('loadingSpinner', function ($q, $rootScope, $log) {
+  .factory('loadingSpinner', function ($q, $rootScope) {
 
     var numLoadings = 0;
 
@@ -11,15 +11,15 @@ angular.module('loadingSpinner', [])
         numLoadings++;
 
         // Show loader
-        $rootScope.$broadcast("loader_show");
-        return config || $q.when(config)
+        $rootScope.$broadcast('loader_show');
+        return config || $q.when(config);
 
       },
       response: function (response) {
 
         if ((--numLoadings) === 0) {
           // Hide loader
-          $rootScope.$broadcast("loader_hide");
+          $rootScope.$broadcast('loader_hide');
         }
 
         return response || $q.when(response);
@@ -29,7 +29,7 @@ angular.module('loadingSpinner', [])
 
         if (!(--numLoadings)) {
           // Hide loader
-          $rootScope.$broadcast("loader_hide");
+          $rootScope.$broadcast('loader_hide');
         }
 
         return $q.reject(response);

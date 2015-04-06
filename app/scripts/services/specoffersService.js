@@ -79,8 +79,8 @@ angular.module('admissionSystemApp')
                             getEntireSpecoffer(specOfferID).then(function (newEntireSpecoffer) {
                                 _.merge(currentObj, newEntireSpecoffer);
                             });
-                    })
-                })
+                    });
+                });
         } else {
             editEntireSpecoffer(currentObj);
         }
@@ -104,7 +104,7 @@ angular.module('admissionSystemApp')
                 getEntireSpecoffer(specOfferID).then(function (res) {
                     _.merge(newOnj, res);
                     console.log('merge them', newOnj);
-                })
+                });
             });
     }
 
@@ -116,7 +116,7 @@ angular.module('admissionSystemApp')
         console.log('newArr',x);
         console.log('oldArr',y);
 
-        _.forEach(newArr, function(item, i) {
+        _.forEach(newArr, function(item) {
             if (!item.specOfferId) { // if item obj. doesn't have specOfferId property - POST NEW item
                 console.log('we have new item. Here it is', item);
                 item.specOfferId = specOfferID;
@@ -133,7 +133,7 @@ angular.module('admissionSystemApp')
             }
         });
 
-        _.forEach(oldArr, function(item, i) {
+        _.forEach(oldArr, function(item) {
             if (!_.some(newArr, { 'id': item.id})) {
                 console.log('we have item to delete. Here it is', item);
                 var promise = restAngular.one('specoffers', specOfferID).one(route, item.id).remove().then(function () {});
