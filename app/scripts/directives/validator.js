@@ -43,15 +43,16 @@ angular.module('admissionSystemApp')
       getCurrentForm: function(scope) {
         var form = null;
         var requiredFormProps = ['$error', '$name', '$dirty', '$pristine', '$valid', '$invalid', '$addControl', '$removeControl', '$setValidity', '$setDirty'];
+        var ifContains = function(item) {
+          return _.contains(props, item);
+        };
         for (var p in scope) {
           if (_.isObject(scope[p]) && !_.isFunction(scope[p]) && !_.isArray(scope[p]) && p.substr(0, 1) !== '$') {
             var props = _.keys(scope[p]);
             if (props.length < requiredFormProps.length) {
               continue;
             }
-            if (_.every(requiredFormProps, function(item) {
-                return _.contains(props, item);
-              })) {
+            if (_.every(requiredFormProps, ifContains)) {
               form = scope[p];
               break;
             }

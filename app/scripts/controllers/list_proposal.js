@@ -9,7 +9,7 @@
  */
 angular.module('admissionSystemApp')
   .controller('ListProposalCtrl', ['$scope', '$filter', 'ngTableParams', 'ListProposalGettingService', '$modal', 'SpecofferDictionaryService', 'valueSendingService',
-    function ($scope, $filter, ngTableParams, ListProposalGettingService, $modal, SpecofferDictionaryService, valueSendingService) {
+    function ($scope, $filter, NgTableParams, ListProposalGettingService, $modal, SpecofferDictionaryService, valueSendingService) {
 
       $scope.headers = [
         {name: 'id', display: '№', visible: true},
@@ -57,7 +57,7 @@ angular.module('admissionSystemApp')
       $scope.$watch('dataNew', function () {
         $scope.tableParams.reload();
       });
-      $scope.tableParams = new ngTableParams({
+      $scope.tableParams = new NgTableParams({
         page: 1,            // show first page
         count: 10          // count per page
       }, {
