@@ -35,7 +35,9 @@ angular.module('admissionSystemApp')
       SpecoffersService.addOrEditSpecoffer(entireSpecoffer);
     };
 
-    $scope.delete = SpecoffersService.deleteEntireSpecoffer();
+    $scope.delete = function () {
+      SpecoffersService.deleteEntireSpecoffer();
+    };
 
   }]);
 
