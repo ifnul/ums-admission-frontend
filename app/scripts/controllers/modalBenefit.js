@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('admissionSystemApp')
 
 
@@ -38,10 +40,10 @@ angular.module('admissionSystemApp')
     //Function opens modal window
     $scope.open = function (size) {
 
-      var modalInstance = $modal.open({
+      $modal.open({
         templateUrl: '../views/modal/modalBenefit.html',
         scope: $scope,
-        controller: function ($scope, $modalInstance, Benefits) {
+        controller: function ($scope, $modalInstance) {
 
           $scope.ok = function () {
             $scope.everything.allInformationArray.push({id: $scope.allBenefits.benefit.id, name: $scope.allBenefits.benefit.name, quantity: $scope.quantity});
@@ -63,15 +65,12 @@ angular.module('admissionSystemApp')
     //Remove data from table function
     $scope.removeRow = function(id){
       var index = -1;
-      var comArr = eval( $scope.everything.allInformationArray );
+      var comArr = $scope.everything.allInformationArray;
       for( var i = 0; i < comArr.length; i++ ) {
         if( comArr[i].id === id ) {
           index = i;
           break;
         }
-      }
-      if( index === -1 ) {
-        alert( "Something gone wrong" );
       }
 
       for( var x = 0; x < $scope.entireSpecoffer.benefits.length; x++ ) {
@@ -85,8 +84,5 @@ angular.module('admissionSystemApp')
     };
 
   });
-
-// Please note that $modalInstance represents a modal window (instance) dependency.
-// It is not the same as the $modal service used above.
 
 

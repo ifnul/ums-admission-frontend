@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('admissionSystemApp')
 
   .controller('TabSubjectCtrl', ['$scope', '$modal', function ($scope, $modal) {
@@ -76,5 +78,3 @@ angular.module('admissionSystemApp')
     };
 
   });
-// Please note that $modalInstance represents a modal window (instance) dependency.
-// It is not the same as the $modal service used above.

@@ -6,7 +6,6 @@ angular.module('admissionSystemApp')
 //http://104.236.29.16:8080/is-lnu-rest-api/api/enrolments/subjects
   .factory('Subjects', ['$http', '$q', 'SpecofferDictionaryService', function ($http, $q, SpecofferDictionaryService) {
     var flagForFirstFunction = 0;
-    var flagForSecondFunction = 0;
     var data = [];
     var chiefSubjectsArray = [];
     var subjectsForParentArray = [];
@@ -52,7 +51,7 @@ angular.module('admissionSystemApp')
         subjectsForParentArray.length = 0;
         if (data[id - 1].hasChildren) {
           for (var y = 0; y < data.length; y++) {
-            if (data[y].parentId == id) {
+            if (data[y].parentId === id) {
               subjectsForParentArray.push({id: data[y].id, name: data[y].name, parentId: data[y].parentId});
             }
           }
@@ -96,5 +95,5 @@ angular.module('admissionSystemApp')
       getSubjectsById: function (id1) {
         return getSubjectsById(id1);
       }
-    }
+    };
   }]);

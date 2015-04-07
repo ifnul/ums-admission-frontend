@@ -8,11 +8,6 @@ angular.module('admissionSystemApp')
       $scope.entireSpecoffer.specoffer = {};
       $scope.entireSpecoffer.specoffer.timePeriodId = valueSendingService.timeperiod;
 
-
-      SpecofferDictionaryService.getAllSpecialties().then(function (specialties) {
-        // $scope.specialties = specialties;
-        // $scope.specialtyId = specialties;
-      });
       SpecofferDictionaryService.getAllDepartments().then(function (departments) {
         $scope.departmentId = departments;
       });

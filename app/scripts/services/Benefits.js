@@ -38,5 +38,5 @@ angular.module('admissionSystemApp')
     return {
       //function returns Promise with benefits
       getBenefits: getBenefits
-    }
+    };
   }]);
