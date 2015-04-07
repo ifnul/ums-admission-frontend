@@ -7,6 +7,7 @@ angular.module('admissionSystemApp')
   }])
 
   .factory('SpecofferDictionaryService', ['$http', '$q', function ($http, $q) {
+
     function requestConfig(item, limit, offset, customParams) {
         var normalParams = {
           limit: limit,
@@ -21,7 +22,6 @@ angular.module('admissionSystemApp')
           // ,cache: true
         };
       }
-
 
       var storage = {};
       function getLargeDictionary (route, customParams) {
@@ -48,9 +48,9 @@ angular.module('admissionSystemApp')
             $http(requestConfig(route, limit, offset, customParams)).success(callBack);
           });
         }
+
         return deferred.promise;
       }
-
 
       return {
         getAllDepartments: function () {
@@ -69,16 +69,19 @@ angular.module('admissionSystemApp')
           return getLargeDictionary('specoffers/types');
         },
         getEduformTypes: function () {
-          return getLargeDictionary('eduformtypes');
+          return getLargeDictionary('educations/forms/types');
         },
         getTimePeriodCourseIds: function () {
           return getLargeDictionary('courses/types');
         },
-        getTimeperiods: function (obj) {
-          return getLargeDictionary('timeperiods', obj);
+        getTimeperiods: function (params) {
+          return getLargeDictionary('timeperiods', params);
         },
         getBenefits: function () {
           return getLargeDictionary('benefits');
+        },
+        clearStorage: function () {
+          storage = {};
         },
         clearStorageByRoute: function (route) {
           if(storage[route]) {
