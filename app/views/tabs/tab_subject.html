@@ -3,39 +3,38 @@
     <i class="fa fa-plus text-success"></i> Додати предмет
   </button>
 
-
+</div>
+<div class="row">
+  <div class="col-md-8 text-center">
 
   <div class="row">
     <div class="col-md-11 text-center">
 
       <table class="table table-bordered table-hover" ng-show="entireSpecoffer.subjects.length">
         <tr>
-          <th>Назва предмета </th>
+          <th>Назва предмета</th>
           <th class="text-center">Додаткова назва</th>
           <th>Профiльний</th>
           <th>Обов'язковий</th>
           <th>Вага предмета</th>
           <th>Мiнiмальний бал ЗНО</th>
           <th></th>
-          <th></th>
         </tr>
         <tr ng-repeat="subj in viewSubjects">
-          <td> {{ subj.subject}} </td>
-          <td> <p ng-repeat = "n in subj.addName  || '&mdash;' "> {{n.name }} </p></td>
-          <td> {{subj.isMajor ? 'Так' : 'Нi'}} </td>
-          <td> {{ subj.alternative ? 'Так' : 'Нi'}} </td>
-          <td> {{subj.weightSubject}} </td>
+          <td> {{ subj.subject}}</td>
+          <td>{{subj.addName || "&mdash;"}}</td>
+          <td> {{subj.isMajor ? 'Так' : 'Нi'}}</td>
+          <td> {{ subj.alternative ? 'Так' : 'Нi'}}</td>
+          <td> {{subj.weightSubject}}</td>
           <td> {{subj.mark }}</td>
-          <td><button class="btn btn-xs btn-danger" ng-click="removeRow($index)"><i class="fa fa-times"></i></button></td>
-          <!--<td>-->
-            <!--<button ng-hide="editingData[enrolmentSubjectId]" ng-click="modify(tableData)">Modify</button>-->
-            <!--<button ng-show="editingData[enrolmentSubjectId]" ng-click="update(tableData)">Update</button>-->
-          <!--</td>-->
-          <!--<td><button class="btn btn-xs btn-info" ng-click="editRow('lg')"><i class="fa fa-pencil-square-o"></i></button></td>-->
+          <td>
+            <button class="btn btn-xs btn-danger" ng-click="removeRow($index)"><i class="fa fa-times"></i></button>
+            <button class="btn btn-xs btn-warning" ng-click="open('lg',subj.id)"><i class="fa fa-pencil"></i></button>
+
+          </td>
         </tr>
 
       </table>
     </div>
   </div>
 </div>
-

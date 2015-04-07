@@ -48,11 +48,17 @@ angular.module('admissionSystemApp')
     var getSubjectsForParentFunction = function (id) {
 
       getChiefSubjects().then(function () {
+        var i, y;
         subjectsForParentArray.length = 0;
-        if (data[id - 1].hasChildren) {
-          for (var y = 0; y < data.length; y++) {
-            if (data[y].parentId === id) {
-              subjectsForParentArray.push({id: data[y].id, name: data[y].name, parentId: data[y].parentId});
+        for (i = 0; i < data.length; i++) {
+          if (data[i].id === id) {
+            if (data[i].hasChildren) {
+              for (y = 0; y < data.length; y++) {
+                if (data[y].parentId === id) {
+                  subjectsForParentArray.push({id: data[y].id, name: data[y].name, parentId: data[y].parentId});
+                }
+              }
+              break;
             }
           }
         }
@@ -64,19 +70,30 @@ angular.module('admissionSystemApp')
     };
 
 
-    var getSubjectsById = function (id1) {
+    var getSubjectsById = function (id) {
       var returnNameDefer = $q.defer();
+      var returnName = {};
 
-      returnName = '';
       getChiefSubjects().then(function () {
-        for (var i = 0; i < data.length; i++) {
-          if (data[i].id === id1) {
-            returnName = data[i].name;
-            console.log('ghj' + returnName);
-            break;
+        var i, y;
+        for (i = 0; i < data.length; i++) {
+          if (data[i].id === id) {
+            if (data[i].hasOwnProperty('parentId')) {
+              returnName.id = data[i].id;
+              for (y = 0; y < data.length; y++) {
+                if (data[y].id === data[i].parentId) {
+                  returnName.name = data[y].name;
+                }
+              }
+              returnName.additionName = data[i].name;
+            }
+            else if (data[i].hasChildren === false) {
+              returnName.id = data[i].id;
+              returnName.name = data[i].name;
+            }
+            returnNameDefer.resolve(returnName);
           }
         }
-        returnNameDefer.resolve(returnName);
       });
 
       return returnNameDefer.promise;
@@ -92,8 +109,9 @@ angular.module('admissionSystemApp')
         return getSubjectsForParentFunction(id);
       },
 
-      getSubjectsById: function (id1) {
-        return getSubjectsById(id1);
+      getSubjectsById: function (id) {
+        return getSubjectsById(id);
       }
     };
+
   }]);
