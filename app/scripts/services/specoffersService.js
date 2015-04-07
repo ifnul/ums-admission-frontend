@@ -160,7 +160,9 @@ angular.module('admissionSystemApp')
         addOrEditSpecoffer: function(obj) {
           return addOrEditSpecoffer(obj);
         },
-        deleteEntireSpecoffer: deleteEntireSpecoffer(objCopy)
+        deleteEntireSpecoffer: function () {
+          deleteEntireSpecoffer(objCopy);
+        }
       };
     }
   ]);
