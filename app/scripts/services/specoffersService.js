@@ -6,7 +6,7 @@ angular.module('admissionSystemApp')
 angular.module('admissionSystemApp')
   .factory('SpecoffersService', ['Restangular', '$q', '$filter',
 
-    function (Restangular, $q, $filter) {
+    function(Restangular, $q, $filter) {
 
       var restAngular =
         Restangular.withConfig(function (Configurer) {
@@ -43,9 +43,8 @@ angular.module('admissionSystemApp')
         entireSpecoffer.subjects = restAngular.one('specoffers', id).one('subjects').getList();
         entireSpecoffer.benefits = restAngular.one('specoffers', id).one('benefits').getList();
 
-        $q.all(entireSpecoffer).then(function (res) {
+        $q.all(entireSpecoffer).then(function(res) {
           _.merge(objCopy, res);
-          console.log('obj COPY (inside getEntireSpecoffer)  ', objCopy);
         });
         return $q.all(entireSpecoffer);
       }
@@ -62,7 +61,7 @@ angular.module('admissionSystemApp')
 
       function addEntireSpecoffer(obj) {
         var id = $q.defer();
-        restAngular.all('specoffers').post(obj.specoffer).then(function (response) {
+        restAngular.all('specoffers').post(obj.specoffer).then(function(response) {
           id.resolve(response.id);
         });
         return id.promise;
@@ -70,14 +69,14 @@ angular.module('admissionSystemApp')
 
       function addOrEditSpecoffer(currentObj) {
         if (!objCopy.specoffer) {
-          addEntireSpecoffer(currentObj).then(function (specOfferID) {
+          addEntireSpecoffer(currentObj).then(function(specOfferID) {
             currentObj.specoffer.id = specOfferID;
             $q.all([
-              addArrayOfItems(currentObj.subjects, specOfferID, 'subjects'),
-              addArrayOfItems(currentObj.benefits, specOfferID, 'benefits')
-            ])
-              .then(function () {
-                getEntireSpecoffer(specOfferID).then(function (newEntireSpecoffer) {
+                addArrayOfItems(currentObj.subjects, specOfferID, 'subjects'),
+                addArrayOfItems(currentObj.benefits, specOfferID, 'benefits'),
+              ])
+              .then(function() {
+                getEntireSpecoffer(specOfferID).then(function(newEntireSpecoffer) {
                   _.merge(currentObj, newEntireSpecoffer);
                 });
               });
@@ -87,135 +86,81 @@ angular.module('admissionSystemApp')
         }
       }
 
-      function editEntireSpecoffer(newOnj) {
+    function editEntireSpecoffer (newOnj) {
         var specOfferID = objCopy.specoffer.id;
         var promiseSpecoffer;
         if (!angular.equals(newOnj.specoffer, objCopy.specoffer)) {
-          console.log('specoffer obj are not equals'); // delete this
-          promiseSpecoffer = restAngular.one('specoffers', specOfferID).customPUT(newOnj.specoffer).then(function () {
-          });
+          promiseSpecoffer = restAngular.one('specoffers', specOfferID).customPUT(newOnj.specoffer);
         }
-        console.log('specoffer obj equals!!');
 
         $q.all([
-          compareArrays(newOnj.subjects, objCopy.subjects, specOfferID, 'subjects'),
-          compareArrays(newOnj.benefits, objCopy.benefits, specOfferID, 'benefits'),
-          promiseSpecoffer
-        ])
-          .then(function () {
-            console.log('we send request for the new entire object!');
-            getEntireSpecoffer(specOfferID).then(function (res) {
+            compareArrays(newOnj.subjects, objCopy.subjects, specOfferID, 'subjects'),
+            compareArrays(newOnj.benefits, objCopy.benefits, specOfferID, 'benefits'),
+            promiseSpecoffer
+          ])
+          .then(function() {
+            getEntireSpecoffer(specOfferID).then(function(res) {
               _.merge(newOnj, res);
-              console.log('merge them', newOnj);
             });
           });
       }
 
       function compareArrays(newArr, oldArr, specOfferID, route) {
-        console.log('inside compareArrays');
+        /* - if item doesn't have id property - POST NEW item.
+        - else check if item correspond the items with same ID in oldAdd. If false - PUT it.
+        - check if there are there are deleted items  */
         var promises = [];
-        var x = angular.copy(newArr);  // delete this later
-        var y = angular.copy(oldArr);  // delete this later
-        console.log('newArr', x);
-        console.log('oldArr', y);
 
-        _.forEach(newArr, function (item) {
+        _.forEach(newArr, function(item) {
           var promise;
-          if (!item.specOfferId) { // if item obj. doesn't have specOfferId property - POST NEW item
-            console.log('we have new item. Here it is', item);
+          if (!item.specOfferId) {
             item.specOfferId = specOfferID;
-            promise = restAngular.one('specoffers', specOfferID).one(route).customPOST(item).then(function () {
-            });
+            promise = restAngular.one('specoffers', specOfferID).one(route).customPOST(item);
             promises.push(promise);
           } else {
-            var oldItem = _.find(oldArr, {'id': item.id});
-            // console.log('oldItem', oldItem);
+            var oldItem = _.find(oldArr, {
+              'id': item.id
+            });
             if (!angular.equals(oldItem, item)) {
-              console.log('we have changed item. Here it is', oldItem);
-              promise = restAngular.one('specoffers', specOfferID).one(route, oldItem.id).customPUT(item).then(function () {
-              });
+              promise = restAngular.one('specoffers', specOfferID).one(route, oldItem.id).customPUT(item);
               promises.push(promise);
             }
           }
         });
 
-        _.forEach(oldArr, function (item) {
-          if (!_.some(newArr, {'id': item.id})) {
-            console.log('we have item to delete. Here it is', item);
-            var promise = restAngular.one('specoffers', specOfferID).one(route, item.id).remove().then(function () {
-            });
+        _.forEach(oldArr, function(item) {
+          var promise;
+          if (!_.some(newArr, {
+              'id': item.id
+            })) {
+            promise = restAngular.one('specoffers', specOfferID).one(route, item.id).remove();
             promises.push(promise);
           }
         });
 
-        console.log('promises', promises);
         return $q.all(promises);
       }
 
+      function deleteEntireSpecoffer(objToDelete) {
+        var specOfferID = objToDelete.specoffer.id;
+        restAngular.one('specoffers', specOfferID).remove();
+        _.forEach(objToDelete.benefit, function(benefit) {
+          restAngular.one('specoffers', specOfferID).one('subjects', benefit.id).remove();
+        });
+        _.forEach(objToDelete.subjects, function(subject) {
+          restAngular.one('specoffers', specOfferID).one('benefits', subject.id).remove();
+        });
+      }
+
+
       return {
-        addEntireSpecoffer: function (entireSpecoffer) {
-          return addEntireSpecoffer(entireSpecoffer);
-        },
-        getEntireSpecoffer: function (id) {
+        getEntireSpecoffer: function(id) {
           return getEntireSpecoffer(id);
         },
-        editEntireSpecoffer: function (newOnj, oldObj) {
-          return editEntireSpecoffer(newOnj, oldObj);
-        },
-        addOrEditSpecoffer: function (obj) {
+        addOrEditSpecoffer: function(obj) {
           return addOrEditSpecoffer(obj);
         },
-        manageSpecoffers: {
-          getSpecoffersList: function () {
-            return restAngular.all('specoffers').getList();
-          },
-          addSingleSpecoffer: function (params) {
-            return restAngular.all('specoffers').post(params);
-          },
-          getSingleSpecoffer: function (specOfferID) {
-            return restAngular.one('specoffers', specOfferID).get();
-          },
-          updateSingleSpecoffer: function (newOffer, specOfferID) {
-            return restAngular.one('specoffers', specOfferID).customPUT(newOffer);
-          },
-          deleteSingleSpecoffer: function (specOfferID) {
-            return restAngular.one('specoffers', specOfferID).remove();
-          }
-        },
-        manageSubjects: {
-          getListOfSubjects: function (specOfferID) {
-            return restAngular.one('specoffers', specOfferID).one('subjects').getList();
-          },
-          getSingleSubject: function (specOfferID, subjectID) {
-            return restAngular.one('specoffers', specOfferID).one('subjects', subjectID).get();
-          },
-          addSingleSubject: function (specOfferID, subject) {
-            return restAngular.one('specoffers', specOfferID).one('subjects').customPOST(subject);
-            // return restAngular.one('specoffers', specOfferID).one('subjects').post('', subject);
-          },
-          removeSingleSubject: function (specOfferID, subjectID) {
-            return restAngular.one('specoffers', specOfferID).one('subjects', subjectID).remove();
-          },
-          updateSingleSubject: function (specOfferID, subjectID, newSubject) {
-            return restAngular.one('specoffers', specOfferID).one('subjects', subjectID).customPUT(newSubject);
-          }
-        },
-        manageBenefits: {
-          getListOfBenefits: function (specOfferID) {
-            return restAngular.one('specoffers', specOfferID).one('benefits').getList();
-          },
-          getSingleBenefit: function (specOfferID, benefitID) {
-            return restAngular.one('specoffers', specOfferID).one('benefits', benefitID).get();
-          },
-          addSingleBenefit: function (specOfferID, benefit) {
-            return restAngular.one('specoffers', specOfferID).one('benefits').post('', benefit);
-          },
-          removeSingleBenefit: function (specOfferID, benefitID) {
-            return restAngular.one('specoffers', specOfferID).one('benefits', benefitID).remove();
-          },
-          updateSingleBenefit: function (specOfferID, benefitID, newBenefit) {
-            return restAngular.one('specoffers', specOfferID).one('benefits', benefitID).customPUT(newBenefit);
-          }
-        }
+        deleteEntireSpecoffer: deleteEntireSpecoffer(objCopy)
       };
-    }]);
+    }
+  ]);

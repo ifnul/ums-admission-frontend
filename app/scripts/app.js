@@ -23,7 +23,7 @@ angular
 
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/', {
+      .when('/list-proposal', {
         templateUrl: 'views/list_proposal.html',
         controller: 'ListProposalCtrl'
       })
@@ -31,8 +31,12 @@ angular
         templateUrl: 'views/new_proposal.html',
         controller: 'NewProposalCtrl'
       })
+      .when('/list-person', {
+        templateUrl: 'views/list_person.html',
+        controller: 'ListPersonCtrl'
+      })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/list-proposal'
       });
   })
 
