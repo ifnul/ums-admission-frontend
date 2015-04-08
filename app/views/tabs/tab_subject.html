@@ -3,9 +3,6 @@
     <i class="fa fa-plus text-success"></i> Додати предмет
   </button>
 
-</div>
-<div class="row">
-  <div class="col-md-8 text-center">
 
   <div class="row">
     <div class="col-md-11 text-center">
@@ -29,7 +26,8 @@
           <td> {{subj.mark }}</td>
           <td>
             <button class="btn btn-xs btn-danger" ng-click="removeRow($index)"><i class="fa fa-times"></i></button>
-            <button class="btn btn-xs btn-warning" ng-click="open('lg',subj.id)"><i class="fa fa-pencil"></i></button>
+            <button class="btn btn-xs btn-warning" ng-click="open('lg', subj, $index )"><i class="fa fa-pencil"></i>
+            </button>
 
           </td>
         </tr>
@@ -38,3 +36,4 @@
     </div>
   </div>
 </div>
+
