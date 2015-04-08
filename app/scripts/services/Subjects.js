@@ -11,8 +11,6 @@ angular.module('admissionSystemApp')
     var subjectsForParentArray = [];
     var chiefSubjects = $q.defer();
     var subjectsForParent = $q.defer();
-    var returnName = '';
-
 
     //Get chief subjects function
     var getChiefSubjects = function () {

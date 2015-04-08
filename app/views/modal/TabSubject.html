@@ -8,7 +8,7 @@
       <label for="inputSubject" class="control-label col-xs-2">Предмет</label>
 
       <div class="col-md-10">
-        <ui-select ng-model="allSubjects.subject"
+        <ui-select ng-disabled=' idx !== undefined' ng-model="allSubjects.subject"
                    required
                    id="inputSubject">
           <ui-select-match placeholder="Оберiть предмет">{{$select.selected.name}}</ui-select-match>
@@ -47,6 +47,23 @@
       </div>
     </div>
 
+
+    <div class="form-group" ng-if="idx !== undefined && allSubjects.addName.name">
+      <label for="inputSubject" class="control-label col-xs-2">Додаткова назва</label>
+
+      <div class="col-md-10">
+        <ui-select ng-disabled=' idx !== undefined' ng-model="allSubjects.addName"
+                   required
+                   id="inputSubject">
+          <ui-select-match placeholder="Оберiть детальну назву предмету">{{$select.selected.name}}</ui-select-match>
+          <ui-select-choices repeat="subject in subjectName | filter: $select.search">
+            <div ng-bind-html="subject.name | highlight: $select.search"></div>
+          </ui-select-choices>
+        </ui-select>
+      </div>
+    </div>
+
+
     <div class="form-group">
       <label for="inputMinZno" class="control-label col-xs-2">Мінімальний бал ЗНО</label>
 
@@ -78,7 +95,9 @@
     </div>
 
     <div class="modal-footer">
-      <button ng-disabled="formSubjects.$invalid" class="btn btn-success" ng-click="ok()">OK</button>
+      <button ng-if="idx === undefined" ng-disabled="formSubjects.$invalid" class="btn btn-success" ng-click="ok()">OK</button>
+      <button ng-if="idx !== undefined" ng-disabled="formSubjects.$invalid" class="btn btn-success" ng-click="ok()">Зберiгти</button>
+
       <button class="btn btn-default" ng-click="cancel()">Cancel</button>
     </div>
   </form>
