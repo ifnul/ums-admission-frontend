@@ -9,5 +9,4 @@
  */
 angular.module('admissionSystemApp')
   .value('valueSendingService', {
-    timeperiod: 0
   });
