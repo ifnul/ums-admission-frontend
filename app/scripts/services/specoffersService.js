@@ -5,8 +5,7 @@ angular.module('admissionSystemApp')
 
 angular.module('admissionSystemApp')
   .factory('SpecoffersService', ['Restangular', '$q', '$filter',
-
-    function(Restangular, $q, $filter) {
+    function (Restangular, $q, $filter) {
 
       var restAngular =
         Restangular.withConfig(function (Configurer) {
@@ -43,7 +42,7 @@ angular.module('admissionSystemApp')
         entireSpecoffer.subjects = restAngular.one('specoffers', id).one('subjects').getList();
         entireSpecoffer.benefits = restAngular.one('specoffers', id).one('benefits').getList();
 
-        $q.all(entireSpecoffer).then(function(res) {
+        $q.all(entireSpecoffer).then(function (res) {
           _.merge(objCopy, res);
         });
         return $q.all(entireSpecoffer);
@@ -61,7 +60,7 @@ angular.module('admissionSystemApp')
 
       function addEntireSpecoffer(obj) {
         var id = $q.defer();
-        restAngular.all('specoffers').post(obj.specoffer).then(function(response) {
+        restAngular.all('specoffers').post(obj.specoffer).then(function (response) {
           id.resolve(response.id);
         });
         return id.promise;
@@ -69,37 +68,37 @@ angular.module('admissionSystemApp')
 
       function addOrEditSpecoffer(currentObj) {
         if (!objCopy.specoffer) {
-          addEntireSpecoffer(currentObj).then(function(specOfferID) {
+          return addEntireSpecoffer(currentObj).then(function (specOfferID) {
             currentObj.specoffer.id = specOfferID;
-            $q.all([
-                addArrayOfItems(currentObj.subjects, specOfferID, 'subjects'),
-                addArrayOfItems(currentObj.benefits, specOfferID, 'benefits'),
-              ])
-              .then(function() {
-                getEntireSpecoffer(specOfferID).then(function(newEntireSpecoffer) {
+            return $q.all([
+              addArrayOfItems(currentObj.subjects, specOfferID, 'subjects'),
+              addArrayOfItems(currentObj.benefits, specOfferID, 'benefits'),
+            ])
+              .then(function () {
+                return getEntireSpecoffer(specOfferID).then(function (newEntireSpecoffer) {
                   _.merge(currentObj, newEntireSpecoffer);
                 });
               });
           });
         } else {
-          editEntireSpecoffer(currentObj);
+          return editEntireSpecoffer(currentObj);
         }
       }
 
-    function editEntireSpecoffer (newOnj) {
+      function editEntireSpecoffer(newOnj) {
         var specOfferID = objCopy.specoffer.id;
         var promiseSpecoffer;
         if (!angular.equals(newOnj.specoffer, objCopy.specoffer)) {
           promiseSpecoffer = restAngular.one('specoffers', specOfferID).customPUT(newOnj.specoffer);
         }
 
-        $q.all([
-            compareArrays(newOnj.subjects, objCopy.subjects, specOfferID, 'subjects'),
-            compareArrays(newOnj.benefits, objCopy.benefits, specOfferID, 'benefits'),
-            promiseSpecoffer
-          ])
-          .then(function() {
-            getEntireSpecoffer(specOfferID).then(function(res) {
+        return $q.all([
+          compareArrays(newOnj.subjects, objCopy.subjects, specOfferID, 'subjects'),
+          compareArrays(newOnj.benefits, objCopy.benefits, specOfferID, 'benefits'),
+          promiseSpecoffer
+        ])
+          .then(function () {
+            return getEntireSpecoffer(specOfferID).then(function (res) {
               _.merge(newOnj, res);
             });
           });
@@ -107,11 +106,11 @@ angular.module('admissionSystemApp')
 
       function compareArrays(newArr, oldArr, specOfferID, route) {
         /* - if item doesn't have id property - POST NEW item.
-        - else check if item correspond the items with same ID in oldAdd. If false - PUT it.
-        - check if there are there are deleted items  */
+         - else check if item correspond the items with same ID in oldAdd. If false - PUT it.
+         - check if there are there are deleted items  */
         var promises = [];
 
-        _.forEach(newArr, function(item) {
+        _.forEach(newArr, function (item) {
           var promise;
           if (!item.specOfferId) {
             item.specOfferId = specOfferID;
@@ -128,7 +127,7 @@ angular.module('admissionSystemApp')
           }
         });
 
-        _.forEach(oldArr, function(item) {
+        _.forEach(oldArr, function (item) {
           var promise;
           if (!_.some(newArr, {
               'id': item.id
@@ -141,28 +140,41 @@ angular.module('admissionSystemApp')
         return $q.all(promises);
       }
 
-      function deleteEntireSpecoffer(objToDelete) {
+      function deleteSpecoffer(objToDelete) {
+        var promises = [];
         var specOfferID = objToDelete.specoffer.id;
-        restAngular.one('specoffers', specOfferID).remove();
-        _.forEach(objToDelete.benefit, function(benefit) {
-          restAngular.one('specoffers', specOfferID).one('subjects', benefit.id).remove();
+
+        promises.push(restAngular.one('specoffers', specOfferID).remove());
+
+        _.forEach(objToDelete.benefits, function (benefit) {
+          promises.push(restAngular.one('specoffers', specOfferID).one('benefits', benefit.id).remove());
         });
-        _.forEach(objToDelete.subjects, function(subject) {
-          restAngular.one('specoffers', specOfferID).one('benefits', subject.id).remove();
+
+        _.forEach(objToDelete.subjects, function (subject) {
+          promises.push(restAngular.one('specoffers', specOfferID).one('benefits', subject.id).remove());
         });
+
+        return $q.all(promises).then(function () {
+          objCopy = {};
+        });
+      }
+
+      function deleteEntireSpecoffer(objToDelete, id) {
+        if (!objToDelete.specoffer) {
+          return getEntireSpecoffer(id).then(deleteSpecoffer);
+        } else {
+          return deleteSpecoffer(objToDelete);
+        }
       }
 
 
       return {
-        getEntireSpecoffer: function(id) {
-          return getEntireSpecoffer(id);
-        },
-        addOrEditSpecoffer: function(obj) {
-          return addOrEditSpecoffer(obj);
-        },
-        deleteEntireSpecoffer: function () {
-          deleteEntireSpecoffer(objCopy);
+        getEntireSpecoffer: getEntireSpecoffer,
+
+        addOrEditSpecoffer: addOrEditSpecoffer,
+
+        deleteEntireSpecoffer: function (id) {
+          return deleteEntireSpecoffer(objCopy, id);
         }
       };
-    }
-  ]);
+    }]);

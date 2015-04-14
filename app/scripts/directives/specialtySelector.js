@@ -5,6 +5,8 @@ angular.module('admissionSystemApp')
 
     var modalCtrl = function (SpecialtyGettingService, $scope, $modalInstance, id, name) {
 
+      $scope.selected = {};
+
       if (id) {
         SpecialtyGettingService.searchSpecialtyById(id).then(function (data) {
           $scope.results = data;

@@ -10,55 +10,49 @@
 angular.module('admissionSystemApp')
   .service('ListProposalGettingService', ['$http', '$q', 'SpecofferDictionaryService', function ($http, $q, SpecofferDictionaryService) {
 
+    function pushData(data, array) {
+      angular.forEach(data, function (item) {
+        array[item.id] = item.name;
+      });
+    }
+
     this.allProposalsDecoded = function (params) {
-      var deferred = $q.defer(),
-        specialtyNames = [],
+
+      var specialtyNames = [],
         departmentNames = [],
         timePeriodCourseNames = [],
         specofferTypeNames = [],
         eduFormTypeNames = [];
 
+      return SpecofferDictionaryService.getAllSpecoffers(params).then(function (proposals) {
 
-      SpecofferDictionaryService.getAllSpecoffers(params).then(function (rawProposals) {
+        var rawProposals = angular.copy(proposals);
 
-        var promise1 = SpecofferDictionaryService.getAllSpecialties().then(function (data) {
-          angular.forEach(data, function (item) {
-            specialtyNames[item.id] = item.name;
-          });
-        });
-        var promise2 = SpecofferDictionaryService.getAllDepartments().then(function (data) {
-          angular.forEach(data, function (item) {
-            departmentNames[item.id] = item.name;
-          });
-        });
-        var promise3 = SpecofferDictionaryService.getTimePeriodCourseIds().then(function (data) {
-          angular.forEach(data, function (item) {
-            timePeriodCourseNames[item.id] = item.name;
-          });
-        });
-        var promise4 = SpecofferDictionaryService.getSpecoffersTypes().then(function (data) {
-          angular.forEach(data, function (item) {
-            specofferTypeNames[item.id] = item.name;
-          });
-        });
-        var promise5 = SpecofferDictionaryService.getEduformTypes().then(function (data) {
-          angular.forEach(data, function (item) {
-            eduFormTypeNames[item.id] = item.name;
-          });
-        });
-        $q.all([promise1, promise2, promise3, promise4, promise5]).then(function () {
-          angular.forEach(rawProposals, function (item) {
-            item.specialtyId = specialtyNames[item.specialtyId];
-            item.departmentId = departmentNames[item.departmentId];
-            item.timePeriodCourseId = timePeriodCourseNames[item.timePeriodCourseId];
-            item.specofferTypeId = specofferTypeNames[item.specofferTypeId];
-            item.eduFormTypeId = eduFormTypeNames[item.eduFormTypeId];
-          });
-          deferred.resolve(rawProposals);
+        return $q.all([
+          SpecofferDictionaryService.getAllSpecialties(),
+          SpecofferDictionaryService.getAllDepartments(),
+          SpecofferDictionaryService.getTimePeriodCourseIds(),
+          SpecofferDictionaryService.getSpecoffersTypes(),
+          SpecofferDictionaryService.getEduformTypes()
+        ])
+          .then(function (res) {
+            pushData(res[0], specialtyNames);
+            pushData(res[1], departmentNames);
+            pushData(res[2], timePeriodCourseNames);
+            pushData(res[3], specofferTypeNames);
+            pushData(res[4], eduFormTypeNames);
 
-        });
+            angular.forEach(rawProposals, function (item) {
+              item.specialtyId = specialtyNames[item.specialtyId];
+              item.departmentId = departmentNames[item.departmentId];
+              item.timePeriodCourseId = timePeriodCourseNames[item.timePeriodCourseId];
+              item.specofferTypeId = specofferTypeNames[item.specofferTypeId];
+              item.educationFormTypeId = eduFormTypeNames[item.educationFormTypeId];
+            });
+
+            return rawProposals;
+          });
       });
-      return deferred.promise;
     };
 
   }]);

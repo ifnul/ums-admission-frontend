@@ -92,8 +92,10 @@
                 {{prop[column.name]}}
               </td>
               <td>
-                <button class="btn btn-xs btn-warning" ng-click="editeRow($index)"><i class="fa fa-pencil-square-o"></i></button>
-                <button class="btn btn-xs btn-danger" ng-click="removeRow($index)"><i class="fa fa-times"></i></button>
+                <a href="#/edit-proposal/{{prop.id}}">
+                <button class="btn btn-xs btn-warning"><i class="fa fa-pencil-square-o"></i></button>
+                </a>
+                <button class="btn btn-xs btn-danger" ng-click="delete(prop.id)"><i class="fa fa-times"></i></button>
               </td>
             </tr>
           </table>

@@ -11,7 +11,7 @@ describe('Service: getProposal', function () {
     getProposal = _getProposal_;
   }));
 
-  it('should do something', function () {
+  xit('should do something', function () {
     expect(!!getProposal).toBe(true);
   });
 
