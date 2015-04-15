@@ -1,0 +1,105 @@
+<div ng-controller="TabAdressesCtrl">
+	<h3>Адреса реєстрації</h3>
+	<form id="AdressForm">
+		<div class="form-group">
+			<div class="row">
+				
+				<div class="col-xs-2">
+					<label for="inputZipCode">Поштовий індекс</label>
+          <input ng-model="entirePerson.addresses.regAddresses.zipCode"
+                 type="text"
+                 class="form-control"
+                 placeholder="індекс"
+                 name="inputZipCode">
+				</div>
+
+				<div class="col-xs-2">
+					<!-- ng-init="entirePerson.addresses.regAddresses.streetTypeId = streetsTypesOptions[0].id" -->
+					<label for="inputStreetType">Тип</label>
+					<select ng-model="entirePerson.addresses.regAddresses.streetTypeId"
+									ng-options="opt.id as opt.name for opt in streetsTypesOptions"
+									class="form-control"
+									name="inputStreetType">
+					</select>
+				</div>
+
+				<div class="col-xs-4">
+					<label for="inputStreet">Вулия</label>
+          <input ng-model="entirePerson.addresses.regAddresses.street"
+                 type="text"
+                 class="form-control"
+                 placeholder="назва вулиці"
+                 name="inputStreet">
+				</div>
+
+				<div class="col-xs-2">
+					<label for="inputHouse">Будинок</label>
+          <input ng-model="entirePerson.addresses.regAddresses.house"
+                 type="text"
+                 class="form-control"
+                 placeholder="номер будинку"
+                 name="inputHouse">
+				</div>
+
+				<div class="col-xs-2">
+					<label for="inputApartment">Квартира</label>
+          <input ng-model="entirePerson.addresses.regAddresses.apartment"
+                 type="text"
+                 class="form-control"
+                 placeholder="номер квартири"
+                 name="inputApartment">
+				</div>
+				</div>
+
+		</div>
+	</div>
+</form>
+
+<div class="form-group">
+<!-- ng-init="entirePerson.addresses.isAdressesMatch = true" -->
+	<label class="control-label"> 
+		<input 	type="checkbox" 
+		
+		ng-model="entirePerson.addresses.isAdressesMatch">
+		Поштова адреса та адреса реэстрації співпадають </label>
+	</div>
+
+	<hr>
+
+	<div collapse="entirePerson.addresses.isAdressesMatch">
+		
+
+		<h3>Поштова адреса</h3>
+		<form id="AdressForm">
+			<div class="form-group">
+				<div class="row">
+					<div class="col-xs-2">
+						<label class="control-label">Поштовий індекс</label>
+						<input type="text" class="form-control" name="title" />
+					</div>
+					<div class="col-xs-2">
+						<label class="control-label">Тип</label>
+						<select class="form-control" name="genre">
+							<option value="">Вулия</option>
+							<option value="action">Провулок</option>
+						</select>
+					</div>
+					<div class="col-xs-4">
+						<label class="control-label">Вулиця</label>
+						<input type="date" class="form-control" name="title" />
+					</div>
+
+					<div class="col-xs-2">
+						<label class="control-label">Будинок</label>
+						<input type="text" class="form-control" name="title" />
+					</div>
+					<div class="col-xs-2">
+						<label class="control-label">Квартира</label>
+						<input type="text" class="form-control" name="title" />
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+</div>

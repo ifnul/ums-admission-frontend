@@ -1,3 +1,4 @@
+
 'use strict';
 
 angular.module('admissionSystemApp')
@@ -6,7 +7,7 @@ angular.module('admissionSystemApp')
     $httpProvider.defaults.headers.get = { 'Authorization' : 'Basic YWRtaW46bmltZGE=' };
   }])
 
-  .factory('SpecofferDictionaryService', ['$http', '$q', function ($http, $q) {
+  .factory('SpecofferDictionaryService', ['$http', '$q', 'Constants', function ($http, $q, Constants) {
 
     function requestConfig(item, limit, offset, customParams) {
         var normalParams = {
@@ -17,9 +18,8 @@ angular.module('admissionSystemApp')
 
         return {
           method: 'GET',
-          url: 'http://176.36.11.25/api-lnu/' + item,
+          url: Constants.basicURL + item,
           params: normalParams
-          // ,cache: true
         };
       }
 
@@ -80,6 +80,9 @@ angular.module('admissionSystemApp')
         getBenefits: function () {
           return getLargeDictionary('benefits');
         },
+        getBenefitsTypes: function() {
+          return getLargeDictionary('benefits/types');
+        },
         clearStorage: function () {
           storage = {};
         },
@@ -87,6 +90,24 @@ angular.module('admissionSystemApp')
           if(storage[route]) {
             delete storage[route];
           }
+        },
+        getTimeperiodsTypes: function() {
+          return getLargeDictionary('timeperiods/types');
+        },
+        getPersons: function() {
+          return getLargeDictionary('persons');
+        },
+        getPersonsTypes: function() {
+          return getLargeDictionary('persons/types');
+        },
+        getGenderTypes: function() {
+          return getLargeDictionary('gendertypes');
+        },
+        getMarriedTypes: function() {
+          return getLargeDictionary('marriedtypes');
+        },
+        getAdminUnits: function(params) {
+          return getLargeDictionary('adminunits', params);
         }
       };
     }]);

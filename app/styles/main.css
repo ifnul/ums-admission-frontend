@@ -70,3 +70,29 @@ input.ng-invalid.ng-dirty {
 table td a:hover {
   cursor: pointer;
 }
+
+
+ /* Modal layout for choosing table fields in /list-person/ */
+
+#modalHeaderChooser .modal-body {
+  height: 340px;
+  overflow-x: scroll;
+}
+#modalHeaderChooser {
+  display: block;
+}
+
+/* Person table direcive  */
+
+.pointer tr {
+  cursor: pointer;
+}
+.table-footer .pagination-sm{
+  margin: 0px; 
+}
+
+/* table header */
+.content-data a:hover {
+  cursor: pointer;
+  text-decoration: none;
+}

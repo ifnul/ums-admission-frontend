@@ -11,7 +11,7 @@ describe('Service: ListProposalGettingService', function () {
     ListProposalGettingService = _ListProposalGettingService_;
   }));
 
-  it('should do something', function () {
+  xit('should do something', function () {
     expect(!!ListProposalGettingService).toBe(true);
   });
 
