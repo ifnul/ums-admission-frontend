@@ -2,12 +2,38 @@
 
 angular.module('admissionSystemApp')
 
-  .controller('TabSubjectCtrl', ['$scope', '$modal', 'Subjects', function ($scope, $modal, Subjects) {
+  .controller('TabSubjectCtrl', ['$scope', '$modal', '$q', 'Subjects', function ($scope, $modal, $q, Subjects) {
     $scope.entireSpecoffer.subjects = [];
     $scope.viewSubjects = [];
+    var i;
+
+  $scope.$watch(
+    function () {
+      return $scope.entireSpecoffer.subjects;
+    },
+    function (res) {
+        for (i = 0; i < res.length; i++) {
+          $scope.viewSubjects = [];
+          (function(i) {
+              Subjects.getSubjectsById(res[i].enrolmentSubjectId).then(function (result) {
+                if (result.name) {
+                  $scope.viewSubjects.push({    // push data into table
+                    id: result.id,
+                    subject: result.name,
+                    addName: result.additionName,
+                    mark: res[i].mark,
+                    isMajor: res[i].isMajor,
+                    alternative: res[i].alternative,
+                    weightSubject: res[i].weightSubject
+                  });
+                }
+              });
+          })(i);
+        }
+    }, true);
+
 
     $scope.open = function (size, subj, idx) {
-
 
       $modal.open({
         templateUrl: '../views/modal/TabSubject.html',
@@ -24,45 +50,8 @@ angular.module('admissionSystemApp')
         scope: $scope.$new(true)
       }).result.then(function (item) {
           var arrayForId = [],
-            i,
-            SubjectId;
+            i;
 
-          function showSubjectById(id, mark, isMajor, alternative, weight) {
-
-
-            if (idx !== undefined) {
-
-              Subjects.getSubjectsById(id).then(function (result) {
-                if (result.name) {
-                  $scope.viewSubjects[idx] = {
-                    id: subj.id,
-                    subject: subj.subject,
-                    addName: subj.addName,
-                    mark: mark,
-                    isMajor: isMajor,
-                    alternative: alternative,
-                    weightSubject: weight
-                  };
-                }
-              });
-            }
-            else {
-
-              Subjects.getSubjectsById(id).then(function (result) {
-                if (result.name) {
-                  $scope.viewSubjects.push({
-                    id: result.id,
-                    subject: result.name,
-                    addName: result.additionName,
-                    mark: mark,
-                    isMajor: isMajor,
-                    alternative: alternative,
-                    weightSubject: weight
-                  });
-                }
-              });
-            }
-          }
 
           if (!_.isEmpty(item.allSubjects.addName)) {
             arrayForId = item.allSubjects.addName;
@@ -81,15 +70,6 @@ angular.module('admissionSystemApp')
               note: '',
               weightSubject: item.weightSubject
             };
-
-            SubjectId = $scope.entireSpecoffer.subjects[idx];
-
-            showSubjectById(SubjectId.enrolmentSubjectId,
-              SubjectId.mark,
-              SubjectId.isMajor,
-              SubjectId.alternative,
-              SubjectId.weightSubject);
-
           }
           else {
 
@@ -105,15 +85,6 @@ angular.module('admissionSystemApp')
                 weightSubject: item.weightSubject
 
               });
-
-              SubjectId = $scope.entireSpecoffer.subjects[$scope.entireSpecoffer.subjects.length - 1];
-
-
-              showSubjectById(SubjectId.enrolmentSubjectId,
-                SubjectId.mark,
-                SubjectId.isMajor,
-                SubjectId.alternative,
-                SubjectId.weightSubject);
 
             }
           } //end for
