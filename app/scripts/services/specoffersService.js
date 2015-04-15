@@ -4,12 +4,13 @@ angular.module('admissionSystemApp')
   .constant('_', window._);
 
 angular.module('admissionSystemApp')
-  .factory('SpecoffersService', ['Restangular', '$q', '$filter',
-    function (Restangular, $q, $filter) {
+  .factory('SpecoffersService', ['Restangular', '$q', '$filter', 'Constants',
+
+    function(Restangular, $q, $filter, Constants) {
 
       var restAngular =
         Restangular.withConfig(function (Configurer) {
-          Configurer.setBaseUrl('http://104.236.29.16:8080/is-lnu-rest-api/api/');
+          Configurer.setBaseUrl(Constants.basicURL);
           Configurer.setDefaultHeaders({
             Authorization: 'Basic YWRtaW46bmltZGE='
           });
