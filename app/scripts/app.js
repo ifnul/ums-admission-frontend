@@ -44,6 +44,10 @@ angular
         templateUrl: 'views/new_person.html',
         controller: 'NewPersonCtrl'
       })
+      .when('/dictionaries', {
+        templateUrl: 'views/dictionaries.html',
+        controller: 'dictionaryCtrl'
+      })
       .otherwise({
         redirectTo: '/list-proposal'
       });

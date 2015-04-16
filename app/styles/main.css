@@ -88,11 +88,17 @@ table td a:hover {
   cursor: pointer;
 }
 .table-footer .pagination-sm{
-  margin: 0px; 
+  margin: 0px;
 }
 
 /* table header */
 .content-data a:hover {
   cursor: pointer;
   text-decoration: none;
+}
+#dictionariesTable {
+  padding: 0 1% 0 1%
+}
+#dictionariesTable {
+  padding: 0 1% 0 1%
 }
