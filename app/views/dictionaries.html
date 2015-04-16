@@ -1,0 +1,32 @@
+  <div class="container-fluid">
+    <div class="row bottom-buffer">
+      <div class="col-md-3">
+        <h2><i class="fa fa-book text-danger"></i> Всі довідники</h2>
+      </div>
+      <div class="col-md-3 timeperiod">
+        <select class="form-control"
+                ng-model="dictionary"
+                ng-options="dict.id as dict.name for dict in dictionaries"
+                ng-click="pickDictionary()">
+        <option value="" disabled selected>Оберіть довідник</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div id="dictionariesTable">
+    <table ng-table="tableParams" class="table table-hover">
+      <thead>
+      <tr>
+        <td ng-repeat="column in dictionaries[dictionary-1].headers">
+          {{ column.dictHeader }}
+        </td>
+      </tr>
+      </thead>
+      <tr ng-repeat="dict in $data">
+        <td ng-repeat="column in dictionaries[dictionary-1].headers">
+        {{ dict[column.dictKey] }}
+        </td>
+      </tr>
+    </table>
+  </div>

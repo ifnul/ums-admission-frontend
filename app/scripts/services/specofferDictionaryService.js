@@ -1,4 +1,3 @@
-
 'use strict';
 
 angular.module('admissionSystemApp')
@@ -65,6 +64,9 @@ angular.module('admissionSystemApp')
         getAllSpecialties: function () {
           return getLargeDictionary('specialties');
         },
+        getSpecialtiesTypes: function () {
+          return getLargeDictionary('specialties/types');
+        },
         getSpecoffersTypes: function () {
           return getLargeDictionary('specoffers/types');
         },
@@ -91,23 +93,68 @@ angular.module('admissionSystemApp')
             delete storage[route];
           }
         },
-        getTimeperiodsTypes: function() {
+        getTimeperiodsTypes: function () {
           return getLargeDictionary('timeperiods/types');
         },
-        getPersons: function() {
+        getPersons: function () {
           return getLargeDictionary('persons');
         },
-        getPersonsTypes: function() {
+        getPersonsTypes: function () {
           return getLargeDictionary('persons/types');
         },
-        getGenderTypes: function() {
+        getGenderTypes: function () {
           return getLargeDictionary('gendertypes');
         },
-        getMarriedTypes: function() {
+        getMarriedTypes: function () {
           return getLargeDictionary('marriedtypes');
         },
-        getAdminUnits: function(params) {
-          return getLargeDictionary('adminunits', params);
+        getAdminUnits: function () {
+          return getLargeDictionary('adminunits');
+        },
+        getAdminUnitsTypes: function () {
+          return getLargeDictionary('adminunits/types ');
+        },
+        getAddressTypes: function () {
+          return getLargeDictionary('addresstypes');
+        },
+        getStreetsTypes: function () {
+          return getLargeDictionary('streets/types');
+        },
+        getAssets: function () {
+          return getLargeDictionary('assets');
+        },
+        getLanguages: function () {
+          return getLargeDictionary('languages');
+        },
+        getContactsTypes: function () {
+          return getLargeDictionary('contacts/types');
+        },
+        getPaperTypes: function () {
+          return getLargeDictionary('papers/types');
+        },
+        getPaperUsages: function () {
+          return getLargeDictionary('papers/usages');
+        },
+        getHonorsTypes: function () {
+          return getLargeDictionary('honors/types');
+        },
+        getPublicActivities: function () {
+          return getLargeDictionary('publicactivities');
+        },
+        getPublicActivitiesTypes: function () {
+          return getLargeDictionary('publicactivities/types');
+        },
+        getPublicActivitiesAwards: function (params) {
+          return getLargeDictionary('publicactivities/awards');
+        },
+        getEnrolmentsSubjects: function () {
+          return getLargeDictionary('enrolments/subjects');
+        },
+        getEnrolmentsTypes: function () {
+          return getLargeDictionary('enrolments/types');
+        },
+        getEnrolmentsStatusTypes: function () {
+          return getLargeDictionary('enrolments/statustypes');
         }
       };
     }]);
