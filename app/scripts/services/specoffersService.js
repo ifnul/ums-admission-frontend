@@ -44,6 +44,7 @@ angular.module('admissionSystemApp')
         entireSpecoffer.benefits = restAngular.one('specoffers', id).one('benefits').getList();
 
         $q.all(entireSpecoffer).then(function (res) {
+          objCopy = {};
           _.merge(objCopy, res);
         });
         return $q.all(entireSpecoffer);
@@ -73,13 +74,13 @@ angular.module('admissionSystemApp')
             currentObj.specoffer.id = specOfferID;
             return $q.all([
               addArrayOfItems(currentObj.subjects, specOfferID, 'subjects'),
-              addArrayOfItems(currentObj.benefits, specOfferID, 'benefits'),
-            ])
-              .then(function () {
-                return getEntireSpecoffer(specOfferID).then(function (newEntireSpecoffer) {
-                  _.merge(currentObj, newEntireSpecoffer);
-                });
-              });
+              addArrayOfItems(currentObj.benefits, specOfferID, 'benefits')
+            ]);
+            //.then(function () {
+            //  return getEntireSpecoffer(specOfferID).then(function (newEntireSpecoffer) {
+            //    _.merge(currentObj, newEntireSpecoffer);
+            //  });
+            //});
           });
         } else {
           return editEntireSpecoffer(currentObj);
@@ -99,9 +100,10 @@ angular.module('admissionSystemApp')
           promiseSpecoffer
         ])
           .then(function () {
-            return getEntireSpecoffer(specOfferID).then(function (res) {
-              _.merge(newOnj, res);
-            });
+            objCopy = {};
+            //return getEntireSpecoffer(specOfferID).then(function (res) {
+            //  _.merge(newOnj, res);
+            //});
           });
       }
 
@@ -167,7 +169,6 @@ angular.module('admissionSystemApp')
           return deleteSpecoffer(objToDelete);
         }
       }
-
 
       return {
         getEntireSpecoffer: getEntireSpecoffer,
