@@ -47,6 +47,7 @@ angular.module('admissionSystemApp')
         entirePerson.enrolmentsubjects = restAngular.one('persons', id).one('enrolmentsubjects').getList();
 
         $q.all(entirePerson).then(function (res) {
+          objCopy = {};
           _.merge(objCopy, res);
         });
         return $q.all(entirePerson);
@@ -81,12 +82,12 @@ angular.module('admissionSystemApp')
               addArrayOfItems(currentObj.papers, personId, 'papers'),
               addArrayOfItems(currentObj.awards, personId, 'awards'),
               addArrayOfItems(currentObj.enrolmentsubjects, personId, 'enrolmentsubjects')
-            ])
-              .then(function () {
-                return getEntirePerson(personId).then(function (newEntirePerson) {
-                  _.merge(currentObj, newEntirePerson);
-                });
-              });
+            ]);
+              //.then(function () {
+              //  return getEntirePerson(personId).then(function (newEntirePerson) {
+              //    _.merge(currentObj, newEntirePerson);
+              //  });
+              //});
           });
         } else {
           return editEntirePerson(currentObj);
@@ -110,9 +111,10 @@ angular.module('admissionSystemApp')
           promisePerson
         ])
           .then(function () {
-            return getEntirePerson(personId).then(function (res) {
-              _.merge(newObj, res);
-            });
+            objCopy = {};
+            //return getEntirePerson(personId).then(function (res) {
+            //  _.merge(newObj, res);
+            //});
           });
       }
 
