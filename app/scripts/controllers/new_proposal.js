@@ -2,8 +2,8 @@
 
 
 angular.module('admissionSystemApp')
-  .controller('NewProposalCtrl', ['$scope', '$routeParams', '$location', 'SpecoffersService', 'SpecofferDictionaryService', '$q', 'Cookies',
-    function ($scope, $routeParams, $location, SpecoffersService, SpecofferDictionaryService, $q, Cookies) {
+  .controller('NewProposalCtrl', ['$scope', '$stateParams', '$location', 'SpecoffersService', 'SpecofferDictionaryService', '$q', 'Cookies',
+    function ($scope, $stateParams, $location, SpecoffersService, SpecofferDictionaryService, $q, Cookies) {
       $scope.entireSpecoffer = {};
       $scope.entireSpecoffer.specoffer = {};
       $scope.entireSpecoffer.specoffer.timePeriodId = Cookies.getCookie('timeperiod');
@@ -29,8 +29,8 @@ angular.module('admissionSystemApp')
         });
       };
 
-      if ($routeParams.id) {
-        $scope.brosweOrEditSpecoffer($routeParams.id);
+      if ($stateParams.id) {
+        $scope.brosweOrEditSpecoffer($stateParams.id);
       }
 
       $scope.sendToServer = function (entireSpecoffer) {

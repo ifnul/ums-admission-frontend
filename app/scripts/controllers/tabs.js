@@ -9,7 +9,7 @@
  */
 
 angular.module('admissionSystemApp')
-  .controller('TabsCtrl', ['$scope', 'progressBarService', function ($scope, progressBarService) {
+  .controller('TabsCtrl', ['$scope', 'progressBarService', '$state', function ($scope, progressBarService, $state) {
 
     $scope.$on('valBubble', function (evt, args) {  // using directive, which is responsible for changes in each input
 
@@ -20,11 +20,11 @@ angular.module('admissionSystemApp')
       else if (progressBarService.value > 0) {      // value decreases if input content's was deleted
         progressBarService.value--;
       }
-      else {
+
+      else if ($state.is('new-proposal')) {
         progressBarService.inputQuantity++;         // counting the number of inputs
       }
 
     });
-
 
   }]);

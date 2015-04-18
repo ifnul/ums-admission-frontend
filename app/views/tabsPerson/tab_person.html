@@ -1,3 +1,249 @@
 <div ng-controller="TabPersonCtrl">
-	<p>This is the tab_person view.</p>
+  <form id="movieForm" method="post" name="form_prop">
+    <div class="row">
+      <div class="col-md-10">
+
+        <div class="form-group  ">
+          <div class="row">
+            <div class="col-md-6">
+              <div>
+                <label for="personTypeId">Оберiть тип персони</label>
+                <ui-select ng-model="personTypeId"
+                           required
+                           id="personTypeId">
+                  <ui-select-match placeholder="Оберiть тип персони">{{$select.selected.name}}</ui-select-match>
+                  <ui-select-choices repeat="element in personsTypes | filter: $select.search">
+                    <div ng-bind-html="element.name | highlight: $select.search"></div>
+                  </ui-select-choices>
+                </ui-select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group ">
+          <div class="row">
+
+            <div class="col-md-2">
+              <label for="firstName">Iм'я</label>
+            </div>
+            <div class="col-md-4">
+              <input type="text"
+                     id="firstName"
+                     ng-model="name"
+                     required
+                     class="form-control"
+                     name="name"
+                     placeholder="Iм'я"/>
+            </div>
+          </div>
+        </div>
+        <div class="form-group ">
+          <div class="row">
+
+            <div class="col-md-2">
+              <label for="surname">Прiзвище</label>
+            </div>
+            <div class="col-md-4">
+              <input type="text"
+                     ng-model="surname"
+                     id="surname"
+                     required
+                     class="form-control"
+                     name="surname"
+                     placeholder="Прiзвище"/>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+
+            <div class="col-md-2">
+              <label for="fatherName">По-батьковi</label>
+            </div>
+            <div class="col-md-4">
+              <input type="text"
+                     ng-model="fatherName"
+                     required
+                     class="form-control"
+                     id="fatherName"
+                     name="fatherName"
+                     placeholder="По-батьковi"/>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-5">
+              <label for="photo">Завантажити фото</label>
+              <input type="file"
+                     ng-model="photo"
+                     id="photo"
+                     required
+                     name="photo"
+                     placeholder="фото"/>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-6">
+              <label for="genderTypeId">Стать</label>
+
+              <ui-select ng-model="genderTypeId"
+                         required
+                         id="genderTypeId">
+                <ui-select-match placeholder="Оберiть стать">{{$select.selected.name}}</ui-select-match>
+                <ui-select-choices repeat="element in genderTypes | filter: $select.search">
+                  <div ng-bind-html="element.name | highlight: $select.search"></div>
+                </ui-select-choices>
+              </ui-select>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-6">
+
+              <label for="marriedTypeId">Сiмейний стан</label>
+
+              <ui-select ng-model="marriedTypeId"
+                         required
+                         id="genderTypeId">
+                <ui-select-match placeholder="Оберiть сiмейний стан">{{$select.selected.name}}</ui-select-match>
+                <ui-select-choices repeat="element in genderTypes | filter: $select.search">
+                  <div ng-bind-html="element.name | highlight: $select.search"></div>
+                </ui-select-choices>
+              </ui-select>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-6">
+
+              <label for="citizenCountryId">Громадянство</label>
+              <ui-select ng-model="genderTypeId"
+                         required
+                         id="genderTypeId">
+                <ui-select-match placeholder="Оберiть громадянство">{{$select.selected.name}}</ui-select-match>
+                <ui-select-choices repeat="element in adminUnits | filter: $select.search">
+                  <div ng-bind-html="element.name | highlight: $select.search"></div>
+                </ui-select-choices>
+              </ui-select>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-3">
+              <label for="docSeries">Серія особової справи</label>
+              <input ng-model="docSeries"
+                     type="text"
+                     placeholder="Введiть серiю ОС"
+                     id="docSeries"
+                     class="form-control"
+                     name="docSeries"/>
+            </div>
+            <div class=" col-md-3">
+              <label for="docNum">Номер особової справи</label>
+              <input ng-model="docNum"
+                     type="text"
+                     id="docNum"
+                     placeholder="Введiть номер ОС"
+                     class="form-control"
+                     name="docNum"/>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-6">
+              <label for="identifier">Індекс матеріально відповідального</label>
+              <input type="text"
+                     ng-model="identifier"
+                     id="identifier"
+                     required
+                     name="identifier"
+                     class="form-control"
+                     placeholder="Введiть iндекс"/>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label class="control-label">
+              <input type="checkbox"
+                     ng-model="resident">
+              Чи є персона iноземцем? </label>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="form-group col-md-6">
+
+            <label for="birthPlace">Мiсце народження</label>
+
+            <ui-select ng-model="genderTypeId"
+                       required
+                       id="genderTypeId">
+              <ui-select-match placeholder="Оберiть мiсце народження">{{$select.selected.name}}</ui-select-match>
+              <ui-select-choices repeat="element in adminUnits | filter: $select.search">
+                <div ng-bind-html="element.name | highlight: $select.search"></div>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-3">
+              <label class="control-label">Дата народження</label>
+              <input type="text"
+                     ng-model="birthPlace"
+                     datepicker-popup="yyyy-MM-dd"
+                     is-open="isOpen"
+                     ng-click="isOpen = true"
+                     ng-required="true"
+                     close-text="Close"
+                     class="form-control"
+                     required val-bubble
+                     name="begDate"
+                     placeholder="РРРР-MM-ДД"/>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-6">
+              <label class="control-label">
+                <input type="checkbox"
+                       ng-model="isMilitary">
+                Чи є персона військово­зобов’язаною?</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-6">
+              <label class="control-label">
+                <input type="checkbox"
+                       ng-model="isMilitary">
+                Чи потребує персона гуртожиток?</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
 </div>
