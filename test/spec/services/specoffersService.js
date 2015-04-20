@@ -62,14 +62,14 @@ describe('Service: SpecoffersService', function () {
           ]
         }
 
-        return 'mockReturnValue';
-      }
-    }
-  });
+    return 'mockReturnValue';
+  }
+}
+;
 
-  module(function ($provide) {
-    $provide.value('myDependency', mockDependency);
-  });
+module(function ($provide) {
+  $provide.value('myDependency', mockDependency);
+});
 });
 
 it('should return value from mock dependency', inject(function (myService) {

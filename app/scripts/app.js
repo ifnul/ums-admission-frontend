@@ -11,7 +11,7 @@
 angular
   .module('admissionSystemApp', [
     'ngResource',
-    'ngRoute',
+    'ui.router',
     'ui.bootstrap',
     'ngTable',
     'restangular',
@@ -22,35 +22,42 @@ angular
   ])
 
 
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/list-proposal', {
+  .config(function ($stateProvider, $urlRouterProvider) {
+    $stateProvider
+      .state('list-proposal', {
+        url: '/list-proposal',
         templateUrl: 'views/list_proposal.html',
         controller: 'ListProposalCtrl'
       })
-      .when('/new-proposal', {
+      .state('new-proposal', {
+        url: '/new-proposal',
         templateUrl: 'views/new_proposal.html',
         controller: 'NewProposalCtrl'
       })
-      .when('/edit-proposal/:id', {
+      .state('edit-proposal', {
+        url: '/edit-proposal/:id',
         templateUrl: 'views/new_proposal.html',
         controller: 'NewProposalCtrl'
       })
-      .when('/list-person', {
+      .state('list-person', {
+        url: '/list-person',
+
         templateUrl: 'views/list_person.html',
         controller: 'ListPersonCtrl'
       })
-      .when('/new-person', {
+      .state('new-person', {
+        url: '/new-person',
+
         templateUrl: 'views/new_person.html',
         controller: 'NewPersonCtrl'
       })
-      .when('/dictionaries', {
+      .state('dictionaries', {
+        url: '/dictionaries',
+
         templateUrl: 'views/dictionaries.html',
         controller: 'dictionaryCtrl'
-      })
-      .otherwise({
-        redirectTo: '/list-proposal'
       });
+    $urlRouterProvider.otherwise('/list-proposal');
   })
 
   .config(function (uiSelectConfig) {
