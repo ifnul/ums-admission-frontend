@@ -25,7 +25,7 @@ angular.module('admissionSystemApp')
         addresses.regAddresses = arr[0].addressTypeId === 1 ? arr[0] : arr[1];
         addresses.postAddresses = arr[1].addressTypeId === 2 ? arr[1] : arr[0];
         addresses.isAdressesMatch = _.isEqual(
-          [arr[0].street, arr[0].zipCode, arr[0].apartment], 
+          [arr[0].street, arr[0].zipCode, arr[0].apartment],
           [arr[1].street, arr[1].zipCode, arr[1].apartment]);
         return addresses;
       }
@@ -34,7 +34,7 @@ angular.module('admissionSystemApp')
         var arr = [];
         if (obj.isAdressesMatch) {
           _.forEach(obj.regAddresses, function(value, key) {
-              if (!(key === 'id' || key === 'uri')) {
+              if (!(key === 'id' || key === 'uri' || key === 'addressTypeId')) {
                   obj.postAddresses[key] = value;
               }
           });

@@ -2,7 +2,7 @@
 
 angular.module('admissionSystemApp')
 
-  .controller('TabSubjectCtrl', ['$scope', '$modal', '$q', 'SubjectsSvc', function ($scope, $modal, $q, Subjects) {
+  .controller('TabSubjectCtrl', ['$scope', '$modal', '$q', 'SubjectsSvc', function ($scope, $modal, $q, SubjectsSvc) {
     $scope.entireSpecoffer.subjects = [];
     $scope.viewSubjects = [];
     var i;
@@ -15,7 +15,7 @@ angular.module('admissionSystemApp')
         for (i = 0; i < res.length; i++) {
           $scope.viewSubjects = [];
           (function(i) {
-              Subjects.getSubjectsById(res[i].enrolmentSubjectId).then(function (result) {
+              SubjectsSvc.getSubjectsById(res[i].enrolmentSubjectId).then(function (result) {
                 if (result.name) {
                   $scope.viewSubjects.push({    // push data into table
                     id: result.id,
@@ -102,7 +102,7 @@ angular.module('admissionSystemApp')
   }])
 
 
-  .controller('ModalSubjectCtrl', function ($scope, $modalInstance, Subjects, subj, idx) {
+  .controller('ModalSubjectCtrl', function ($scope, $modalInstance, SubjectsSvc, subj, idx) {
     $scope.additionalSubjects = [];
     $scope.allSubjects = [];
     $scope.allSubjects.subject = {};
@@ -112,13 +112,13 @@ angular.module('admissionSystemApp')
     $scope.$watch('allSubjects.subject', function (subject) {
 
       if (subject && subject.hasChildren) {
-        Subjects.getSubjectsForParent(subject.id).then(function (data) {
+        SubjectsSvc.getSubjectsForParent(subject.id).then(function (data) {
           $scope.additionalSubjects = data;
         });
       }
     });
 
-    Subjects.getChiefSubjects().then(function (data) {
+    SubjectsSvc.getChiefSubjects().then(function (data) {
       $scope.subjectName = data;
       if (idx !== undefined) {
         $scope.allSubjects.subject.name = subj.subject;

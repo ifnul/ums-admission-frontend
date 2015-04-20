@@ -2,8 +2,8 @@
 
 
 angular.module('admissionSystemApp')
-  .controller('NewSpecofferCtrl', ['$scope', '$stateParams', '$location', 'SpecoffersService', 'DictionariesSvc',
-    function ($scope, $stateParams, $location, SpecoffersService, DictionariesSvc) {
+  .controller('NewSpecofferCtrl', ['$scope', '$stateParams', '$location', 'SpecoffersService', 'DictionariesSvc', 'progressBarService', '$state',
+    function ($scope, $stateParams, $location, SpecoffersService, DictionariesSvc, progressBarService, $state) {
       $scope.entireSpecoffer = {};
 
       $scope.brosweOrEditSpecoffer = function (specofferId) {
@@ -32,6 +32,19 @@ angular.module('admissionSystemApp')
           $location.path('/#/list-specoffer');
         });
       };
+
+      $scope.$on('valBubble', function (evt, args) {  // using directive, which is responsible for changes in each input
+        if (args.isValid) {                           // checking if input is valid
+          progressBarService.value++;                 // value increases if the field is valid
+        }
+        else if (progressBarService.value > 0) {      // value decreases if input content's was deleted
+          progressBarService.value--;
+        }
+        else if ($state.is('new-specoffer')) {
+          progressBarService.inputQuantity++;
+        }
+
+      });
 
     }]);
 

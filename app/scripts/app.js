@@ -29,7 +29,7 @@ angular
       .state('edit-specoffer', {
         url: '/edit-specoffer/:id',
         templateUrl: '../views/specoffer/new_specoffer.html',
-        controller: 'NewProposalCtrl'
+        controller: 'NewSpecofferCtrl'
       })
       .state('list-person', {
         url: '/list-person',
