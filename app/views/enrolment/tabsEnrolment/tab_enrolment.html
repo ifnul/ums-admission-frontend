@@ -1,0 +1,177 @@
+
+
+<form id="movieForm" method="post">
+	<h5 class="">Пошук по:</h5>
+	
+	<div class="form-group">
+		<div class="row">
+			 
+			<div class="col-xs-4">
+				<div class="form-group">
+						<select class="form-control"
+						ng-init="fieldSearchBy = search[0]"
+						ng-model="fieldSearchBy"
+						ng-options="opt.title for opt in search">
+					</select>
+				</div>
+			</div>
+
+			<div class="col-xs-8">
+				<div class="input-group">
+					<input type="text" class="form-control"
+					ng-model="querySearchBy" 
+					placeholder="Шукати по {{fieldSearchBy.title}} &hellip;">
+					<span class="input-group-btn">
+						<button type="button" 
+						class="btn btn-primary"
+						ng-click="">Ок</button>
+					</span>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<div class="row">
+			<div class="col-xs-3">
+				<label for="inputDocSeries">Серія документу</label>
+				<input ng-model="entireEnrolment.enrolment.docSeries"
+				type="text"
+				class="form-control"
+				placeholder="Серія документу"
+				name="inputDocSeries">
+			</div>
+
+			<div class="col-xs-3">
+				<label for="inputdocNum">Номер документу</label>
+				<input ng-model="entireEnrolment.enrolment.docNum"
+				type="text"
+				class="form-control"
+				placeholder="Номер документу"
+				name="inputdocNum">
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<div class="row">
+			<div class="col-xs-2">
+				<label>Бюджет</label>
+						<select class="form-control"
+						ng-model="entireEnrolment.enrolment.isState">
+							<option value="1">так</option>
+							<option value="2">ні</option>
+					</select>
+			</div>
+
+			<div class="col-xs-2">
+				<label>Контакт</label>
+						<select class="form-control"
+						ng-model="entireEnrolment.enrolment.isContract">
+							<option value="1">так</option>
+							<option value="2">ні</option>
+					</select>
+			</div>
+		</div>
+	</div>
+
+<pre>{{entireEnrolment.enrolment.isState}}</pre>
+
+	<div class="form-group">
+		<div class="row">
+			<div class="col-xs-2">
+        <div  class="checkbox">
+          <label> <input type="checkbox" 
+          				ng-init="entireEnrolment.enrolment.isState = 2"
+                  checklist-model="entireEnrolment.enrolment.isState"
+                  checklist-value="1"> Бюджет
+          </label>
+        </div>
+			</div>
+		</div>
+	</div>
+
+	
+	<div class="form-group">
+		<div class="row">
+			<p>Ідентифікатор пропозиції specOfferId url:/api/specoffers</p>
+		</div>
+	</div>			
+
+	<div class="form-group">
+		<div class="row">
+			<p>Ідентифікатор документу персони personPaperId (url:/api/persons/{personId}/papers </p>
+		</div>
+	</div>	
+
+	<div class="form-group">
+		<div class="row">
+		  <div class="col-md-5">
+		    <label for="inputStructure">Структурний підрозділ</label>
+		      <ui-select ng-model="entireEnrolment.enrolment.departmentId"
+		               name="inputStructure">
+		      <ui-select-match placeholder="Оберіть структурний підрозділ">{{$select.selected.name}}</ui-select-match>
+		      <ui-select-choices repeat="item.id as item in departmentId | filter: $select.search">
+		        <div ng-bind-html="item.name | highlight: $select.search"></div>
+		      </ui-select-choices>
+		    </ui-select>
+		  </div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<div class="row">
+			<div class="col-xs-4">
+						<label for="inputenrolmentTypeId">Тип поступлення</label>
+						<select class="form-control"
+						ng-model="entireEnrolment.enrolment.enrolmentTypeId"
+						ng-options="opt.id as opt.name for opt in enrolmentTypeId"
+						name="inputenrolmentTypeId"
+						id="inputenrolmentTypeId">
+					</select>
+			</div>
+		</div>
+	</div>	
+
+  <div class="row">
+
+    <div class="col-md-3">
+      <label class="control-label" for="evDate">Дата створення заяви</label>
+        <input type="text"
+              ng-model="entireEnrolment.enrolment.evDate"
+              datepicker-popup="yyyy-MM-dd"
+              is-open="isOpen"
+              ng-click = "isOpen = true"
+              close-text="Close"
+              class="form-control"
+              name="evDate"
+              placeholder="РРРР-MM-ДД" />
+    </div>
+    <div class="col-md-3">
+      <label class="control-label" for="begDate">Дата вступання документу в дію</label>
+        <input type="text"
+              ng-model="entireEnrolment.enrolment.begDate"
+              datepicker-popup="yyyy-MM-dd"
+              is-open="isOpen2"
+              ng-click = "isOpen2 = true"
+              close-text="Close"
+              class="form-control"
+              name="begDate"
+              placeholder="РРРР-MM-ДД" />
+    </div>
+    <div class="col-md-3">
+      <label class="control-label" for="endDate">Дата закриття заяви</label>
+        <input type="text"
+              ng-model="entireEnrolment.enrolment.endDate"
+              datepicker-popup="yyyy-MM-dd"
+              is-open="isOpen3"
+              ng-click = "isOpen3 = true"
+              close-text="Close"
+              class="form-control"
+              name="endDate"
+              placeholder="РРРР-MM-ДД" />
+    </div>
+  </div>
+
+</form>

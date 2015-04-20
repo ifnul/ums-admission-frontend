@@ -1,12 +1,6 @@
 'use strict';
 
-/**
- * @ngdoc function
- * @name admissionSystemApp.controller:TabsctrlCtrl
- * @description
- * # TabsctrlCtrl
- * Controller of the admissionSystemApp
- */
+
 
 angular.module('admissionSystemApp')
   .controller('TabsCtrl', ['$scope', 'progressBarService', '$state', function ($scope, progressBarService, $state) {
@@ -21,8 +15,8 @@ angular.module('admissionSystemApp')
         progressBarService.value--;
       }
 
-      else if ($state.is('new-proposal')) {
-        progressBarService.inputQuantity++;         // counting the number of inputs
+      else if ($state.is('new-specoffer')) {
+        progressBarService.inputQuantity++;
       }
 
     });

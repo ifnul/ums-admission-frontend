@@ -1,14 +1,14 @@
 'use strict';
 
 angular.module('admissionSystemApp')
-  .directive('specialtySelector', function ($modal, SpecialtyGettingService) {
+  .directive('specialtySelector', function ($modal, SpecialtiesSvc) {
 
-    var modalCtrl = function (SpecialtyGettingService, $scope, $modalInstance, id, name) {
+    var modalCtrl = function (SpecialtiesSvc, $scope, $modalInstance, id, name) {
 
       $scope.selected = {};
 
       if (id) {
-        SpecialtyGettingService.searchSpecialtyById(id).then(function (data) {
+        SpecialtiesSvc.searchSpecialtyById(id).then(function (data) {
           $scope.results = data;
 
           $scope.selected = {
@@ -16,7 +16,7 @@ angular.module('admissionSystemApp')
           };
         });
       } else if (name) {
-        SpecialtyGettingService.searchSpecialtyByName(name).then(function (data) {
+        SpecialtiesSvc.searchSpecialtyByName(name).then(function (data) {
           $scope.results = data;
 
           $scope.selected = {
@@ -49,7 +49,7 @@ angular.module('admissionSystemApp')
           var specialtyId = ctrl.$modelValue;
 
           if (specialtyId) {
-            SpecialtyGettingService.searchSpecialty(specialtyId).then(function (data) {
+            SpecialtiesSvc.searchSpecialty(specialtyId).then(function (data) {
               scope.cipher = data.cipher;
               scope.name = data.name;
             });

@@ -1,0 +1,49 @@
+<div class="container-fluid">
+  <div class="row bottom-buffer">
+    <div class="col-md-3">
+      <h2><i class="fa fa-file-text text-danger"></i> Нова заява</h2>
+    </div>
+  </div>
+
+
+	<!-- main content -->
+	<div class="col-sm-12 col-md-12 new-proposal-wrapper">
+
+	<p>This is the new_enrolment view.</p>
+	<p>entolment id: {{entolmentId}}</p>
+
+	  <div>
+	    <div class="row">
+		    <div class="tabset col-md-9">
+			    <tabset >
+			      <tab heading="Основна інформація">
+			        <div class="top-buffer" ng-include="'views/enrolment/tabsEnrolment/tab_enrolment.html'"></div>
+			      </tab>
+			      <tab heading="Пільги">
+			        <div class="top-buffer" ng-include="'views/enrolment/tabsEnrolment/tab_benefits.html'"></div>
+			      </tab>
+			      <tab heading="Предмети ЗНО">
+			        <div class="top-buffer" ng-include="'views/enrolment/tabsEnrolment/tab_enrolmentsubjects.html'"></div>
+			      </tab>
+			      <tab heading="Статус заяви">
+			        <div class="top-buffer" ng-include="'views/enrolment/tabsEnrolment/tab_statuses.html'"></div>
+			      </tab>
+			    </tabset>
+		    </div>
+	    </div>
+
+	    <div class="top-buffer bottom-buffer row">
+	      <button ng-click="" type="submit" class="btn btn-primary">Зберегти</button>
+	      <button ng-click="" type="submit" class="btn btn-danger">Видалити</button>
+	    </div>
+
+	  </div>
+	</div>
+
+	<div class="footer">
+	</div>
+
+</div>
+
+
+

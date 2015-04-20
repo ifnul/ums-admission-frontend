@@ -1,7 +1,7 @@
 'use strict';
 
-describe('Service: personDecodeServise', function() {
-  
+describe('Service: personDecodeSvc', function() {
+
   describe('when I call personDecoded(rawData) method', function(){
     // load the service's module
     beforeEach(module('admissionSystemApp'));
@@ -14,7 +14,6 @@ describe('Service: personDecodeServise', function() {
 
     it('decoded data shoul match the pattern', inject(function(personDecodeServise, $httpBackend) {
 
-      // $httpBackend.when('GET', 'http://176.36.11.25/api-lnu/persons/types?limit=300&offset=0')
         // .respond()
 
       // expect(foo.setBar).toHaveBeenCalled();

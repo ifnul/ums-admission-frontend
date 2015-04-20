@@ -72,8 +72,7 @@ table td a:hover {
 }
 
 
-
- /* Modal layout for choosing table fields in /list-person/ */
+ /* Modal layout for choosing table fields in general-table */
 
 #modalHeaderChooser .modal-body {
   height: 340px;
@@ -83,7 +82,7 @@ table td a:hover {
   display: block;
 }
 
-/* Person table direcive  */
+/* general-table  table direcive  */
 
 .pointer tr {
   cursor: pointer;

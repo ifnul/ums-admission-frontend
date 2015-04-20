@@ -1,0 +1,19 @@
+<div class="container-fluid">
+  <div class="row bottom-buffer">
+    <div class="col-md-3">
+      <h2><i class="fa fa-file-text text-danger"></i> Заяви</h2>
+    </div>
+  </div>
+
+  <!-- main content -->
+  <general-table class="generalTable"
+                data="enrolDecoded"
+                filters="enrolFilters"
+                search="enrolSearch"
+                headers="enrolHeaders"
+                getdata="getEnrolments(currentPage, itemsPerPage, userFilterPick, sort)"
+                newItemLinkTitle ="Додати заяву"
+                linkToNewItem="#/new-enrolment"
+                total="{{totalEnrol}}">
+  </general-table>
+</div>

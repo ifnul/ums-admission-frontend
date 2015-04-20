@@ -1,0 +1,20 @@
+<div class="container-fluid">
+  <div class="row bottom-buffer">
+    <div class="col-md-3">
+      <h2><i class="fa fa-user text-danger"></i> Персони</h2>
+    </div>
+  </div>
+
+  <!-- main content -->
+  <general-table class="generalTable"
+                data="personDecoded"
+                filters="personFilters"
+                search="personSearch"
+                headers="headers"
+                getdata=""
+                newItemLinkTitle ="Додати персону"
+                linkToNewItem="#/new-person"
+                total="">
+  </general-table>
+
+</div>

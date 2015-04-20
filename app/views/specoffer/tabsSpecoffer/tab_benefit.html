@@ -1,0 +1,31 @@
+<div ng-controller="TabBenefitCtrl">
+  <div>
+    <button class="btn btn-default top-buffer bottom-buffer" ng-click="open('lg')"><i class="fa fa-plus text-success"></i>
+      Додати пiльгу
+    </button>
+  </div>
+  <!-- TABLE WITH quotas -->
+
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <table class="table table-bordered">
+        <thead>
+        <tr>
+          <th class="text-center">ID</th>
+          <th class="text-center">Тип</th>
+          <th class="text-center">Кількість</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="x in everything.allInformationArray">
+          <td> {{ x.id}} </td>
+          <td> {{ x.name }} </td>
+          <td> {{ x.quantity }} </td>
+          <td><button class="btn btn-xs btn-danger" ng-click="removeRow(x.id)"><i class="fa fa-times"></i></button></td>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>

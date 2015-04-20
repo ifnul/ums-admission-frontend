@@ -1,13 +1,5 @@
 'use strict';
 
-/**
- * @ngdoc overview
- * @name admissionSystemApp
- * @description
- * # admissionSystemApp
- *
- * Main module of the application.
- */
 angular
   .module('admissionSystemApp', [
     'ngResource',
@@ -24,43 +16,63 @@ angular
 
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
-      .state('list-proposal', {
-        url: '/list-proposal',
-        templateUrl: 'views/list_proposal.html',
-        controller: 'ListProposalCtrl'
+      .state('list-specoffer', {
+        url: '/list-specoffer',
+        templateUrl: '../views/specoffer/list_specoffer.html',
+        controller: 'ListSpecofferCtrl'
       })
-      .state('new-proposal', {
-        url: '/new-proposal',
-        templateUrl: 'views/new_proposal.html',
-        controller: 'NewProposalCtrl'
+      .state('new-specoffer', {
+        url: '/new-specoffer',
+        templateUrl: '../views/specoffer/new_specoffer.html',
+        controller: 'NewSpecofferCtrl'
       })
-      .state('edit-proposal', {
-        url: '/edit-proposal/:id',
-        templateUrl: 'views/new_proposal.html',
+      .state('edit-specoffer', {
+        url: '/edit-specoffer/:id',
+        templateUrl: '../views/specoffer/new_specoffer.html',
         controller: 'NewProposalCtrl'
       })
       .state('list-person', {
         url: '/list-person',
-
-        templateUrl: 'views/list_person.html',
+        templateUrl: '../views/person/list_person.html',
         controller: 'ListPersonCtrl'
       })
       .state('new-person', {
         url: '/new-person',
-
-        templateUrl: 'views/new_person.html',
+        templateUrl: '../views/person/new_person.html',
         controller: 'NewPersonCtrl'
       })
       .state('dictionaries', {
         url: '/dictionaries',
-
         templateUrl: 'views/dictionaries.html',
         controller: 'dictionaryCtrl'
+      })
+      .state('edit-person', {
+        url: '/edit-person/:id',
+        templateUrl: '../views/person/new_person.html',
+        controller: 'NewPersonCtrl'
+      })
+      .state('list-enrolments', {
+        url: '/list-enrolments',
+        templateUrl: '../views/enrolment/list_enrolments.html',
+        controller: 'ListEnrolmentsCtrl'
+      })
+      .state('new-enrolment', {
+        url: '/new-enrolment',
+        templateUrl: '../views/enrolment/new_enrolment.html',
+        controller: 'NewEnrolmentCtrl'
+      })
+      .state('edit-enrolment', {
+        url: '/edit-enrolment/:id',
+        templateUrl: '../views/enrolment/new_enrolment.html',
+        controller: 'NewEnrolmentCtrl'
       });
-    $urlRouterProvider.otherwise('/list-proposal');
+    $urlRouterProvider.otherwise('/list-specoffer');
   })
 
   .config(function (uiSelectConfig) {
     uiSelectConfig.theme = 'bootstrap';
-  });
+  })
 
+  .config(['$httpProvider', function($httpProvider) {
+    $httpProvider.defaults.headers.get = { 'Authorization' : 'Basic YWRtaW46bmltZGE=' };
+  }]);
