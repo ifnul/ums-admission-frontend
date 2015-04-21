@@ -1,9 +1,13 @@
 <div ng-controller="TabAdressesCtrl">
 	<h3>Адреса реєстрації</h3>
+
 	<form id="FromForRegAdress">
+
+		<adminunits-selector ng-model="entirePerson.addresses.regAddresses.adminUnitId">
+		</adminunits-selector>
+
 		<div class="form-group">
-			<div class="row">
-				
+			<div class="row">	
 				<div class="col-xs-2">
 					<label for="inputZipCodeReg">Індекс</label>
 					<input ng-model="entirePerson.addresses.regAddresses.zipCode"
@@ -66,6 +70,10 @@
 	<div collapse="entirePerson.addresses.isAdressesMatch">
 		<h3>Поштова адреса</h3>
 		<form id="FromForPostAdress">
+
+			<adminunits-selector ng-model="entirePerson.addresses.postAddresses.adminUnitId">
+			</adminunits-selector>
+			
 			<div class="form-group">
 				<div class="row">
 

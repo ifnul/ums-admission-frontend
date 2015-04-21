@@ -108,7 +108,7 @@ angular.module('admissionSystemApp')
           return getLargeDictionary('adminunits', params);
         },
         getAdminUnitsTypes: function () {
-          return getLargeDictionary('adminunits/types ');
+          return getLargeDictionary('adminunits/types');
         },
         getAddressTypes: function () {
           return getLargeDictionary('addresstypes');

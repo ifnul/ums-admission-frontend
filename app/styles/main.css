@@ -102,3 +102,7 @@ table td a:hover {
 #dictionariesTable {
   padding: 0 1% 0 1%
 }
+
+.adminunits {
+  display: inline;
+}
