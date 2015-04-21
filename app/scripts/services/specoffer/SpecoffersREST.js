@@ -91,6 +91,8 @@ angular.module('admissionSystemApp')
         }
       }
 
+
+
       function editEntireSpecoffer(newOnj) {
         var specOfferID = objCopy.specoffer.id;
         var promiseSpecoffer;
