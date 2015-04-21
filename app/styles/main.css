@@ -19,30 +19,38 @@ input.ng-invalid.ng-dirty {
 .inputSpecialtyName {
   width: 70% !important;
 }
+
 .inputSpecialty {
   width: 30% !important;
   border-right-width: 0;
 }
+
 .inputSpecialty:focus {
   width: 30%;
   border-right-width: 1px;
 }
+
 .ui-select-match-text {
   width: 100%;
   overflow: hidden;
 }
+
 .ui-select-toggle {
   padding-right: 35px;
 }
+
 .timeperiod {
   margin-top: 20px;
 }
-.ng-table-counts.btn-group.pull-right.ng-scope{
+
+.ng-table-counts.btn-group.pull-right.ng-scope {
   margin: 20px 5px 20px 5px;
 }
-.pagination.ng-table-pagination{
+
+.pagination.ng-table-pagination {
   margin: 20px 5px 20px 5px;
 }
+
 #mainTable {
   padding-bottom: 20px;
 }
@@ -57,6 +65,7 @@ input.ng-invalid.ng-dirty {
   background-color: white;
   opacity: .6;
 }
+
 .spinner {
   position: absolute;
   width: 100px;
@@ -71,13 +80,13 @@ table td a:hover {
   cursor: pointer;
 }
 
-
- /* Modal layout for choosing table fields in general-table */
+/* Modal layout for choosing table fields in general-table */
 
 #modalHeaderChooser .modal-body {
   height: 340px;
   overflow-x: scroll;
 }
+
 #modalHeaderChooser {
   display: block;
 }
@@ -87,7 +96,8 @@ table td a:hover {
 .pointer tr {
   cursor: pointer;
 }
-.table-footer .pagination-sm{
+
+.table-footer .pagination-sm {
   margin: 0px;
 }
 
@@ -96,9 +106,11 @@ table td a:hover {
   cursor: pointer;
   text-decoration: none;
 }
+
 #dictionariesTable {
   padding: 0 1% 0 1%
 }
+
 #dictionariesTable {
   padding: 0 1% 0 1%
 }
@@ -106,3 +118,4 @@ table td a:hover {
 .adminunits {
   display: inline;
 }
+
