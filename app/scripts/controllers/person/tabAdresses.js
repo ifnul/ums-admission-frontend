@@ -13,12 +13,6 @@ angular.module('admissionSystemApp')
 				},
 				isAdressesMatch: true
 			};
-			// personId
-			// adminUnitId
-
-			$scope.$watch('entirePerson.addresses', function(newVal) {
-				console.log('entireSpecofferCopy watch', newVal);
-			}, true);
 
 			DictionariesSvc.getStreetsTypes().then(function (streetTypes) {
 				$scope.streetsTypesOptions = streetTypes;

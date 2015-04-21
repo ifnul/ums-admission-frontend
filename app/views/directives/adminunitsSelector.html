@@ -1,0 +1,34 @@
+	<div>
+		<div class="form-group">
+			<div class="row">
+				<div class="col-xs-12">
+					<h5 class="adminunits" ng-repeat="unit in wholeAdress track by $index">{{unit}}, </h5>
+				</div>
+			</div>	
+		</div>
+		
+		<div class="form-group">
+			<div class="row">
+				<div class="col-xs-5">
+	        <ui-select ng-model="adminUnitId.selected"
+	                     name="country"
+	                     allow-clear
+	                     ng-disabled="disabled" 
+	                     on-select="adminUtinSelected($model, $item)">
+	          <ui-select-match 
+		          	placeholder="Територіальна одиниця">{{$select.selected.name}}
+	          </ui-select-match>
+	          <ui-select-choices 
+	          		repeat="item.id as item in adminunits | filter: $select.search">
+	            	<div ng-bind-html="item.name | highlight: $select.search"></div>
+	          </ui-select-choices>
+	        </ui-select>
+				</div>
+
+				<div class="col-xs-5">
+			     <button ng-click="clearAdress()" type="submit" class="btn btn-primary">Скинути</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
