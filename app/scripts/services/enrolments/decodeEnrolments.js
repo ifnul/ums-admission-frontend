@@ -18,7 +18,7 @@ angular.module('admissionSystemApp')
           });
         }
         return $q.all([
-            DictionariesSvc.getAllDepartments(),
+            DictionariesSvc.getAllDepartments({departmentTypeId: 1}),
             DictionariesSvc.getEnrolmentsTypes()
           ])
           .then(function(res) {

@@ -39,7 +39,7 @@ describe('Service: SpecofferDictionaryServise', function () {
           "resources": sampleDepartments
         });
 
-      var departments = SpecofferDictionaryService.getAllDepartments();
+      var departments = SpecofferDictionaryService.getAllDepartments({departmentTypeId: 1});
       $httpBackend.flush();
 
       departments.then(function (items) {

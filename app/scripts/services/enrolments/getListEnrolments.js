@@ -31,7 +31,7 @@ angular.module('admissionSystemApp')
       _.extend(requestParams.params, sort);
 
       $http(requestParams).success(function(data) {
-
+        
         decodeEnrolmentsSvc.enrolmentsDecoded(data.resources).then(function(decodedItems) {
           var dataToReturn = {
             data: decodedItems,

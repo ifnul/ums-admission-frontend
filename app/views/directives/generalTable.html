@@ -110,7 +110,7 @@
             </tr>
           </thead>
           <tbody class="pointer">
-            <tr ng-repeat="itemObj in data track by $index" ng-repeat="no in dataCount">
+            <tr ng-repeat="itemObj in data track by $index">
               <td> <input type="checkbox"> </td>
               <td ng-repeat="column in headers track by $index"
                   ng-show="column.visible"

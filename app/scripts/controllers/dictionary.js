@@ -35,7 +35,7 @@ angular.module('admissionSystemApp')
           {dictKey: 'departmentTypeId', dictHeader: 'Ідентифікатор типу підрозділу'},
           {dictKey: 'orderId', dictHeader: 'Ідентифікатор наказу'},
           {dictKey: 'parentId', dictHeader: 'Ієрархічний ідентифікатор'}
-        ], id:4, dict: function() {DictionariesSvc.getAllDepartments().then(function (data){$scope.newData = data;})}},
+        ], id:4, dict: function() {DictionariesSvc.getAllDepartments({departmentTypeId: 1}).then(function (data){$scope.newData = data;})}},
         {name: 'Тип пропозиції', headers: [
           {dictKey: 'abbrName', dictHeader: 'Скорочена назва'},
           {dictKey: 'name', dictHeader: 'Hазва'},
