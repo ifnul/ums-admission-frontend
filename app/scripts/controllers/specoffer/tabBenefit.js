@@ -45,7 +45,7 @@ angular.module('admissionSystemApp')
         controller: function ($scope, $modalInstance) {
 
           $scope.ok = function () {
-            $scope.everything.allInformationArray.push({id: $scope.allBenefits.benefit.id, name: $scope.allBenefits.benefit.name, quantity: $scope.quantity});
+            $scope.everything.allInformationArray.push({id: $scope.allBenefits.benefit.id, name: $scope.allBenefits.benefit.name});
             $scope.entireSpecoffer.benefits.push({benefitId: $scope.allBenefits.benefit.id, note:''});
             $scope.allBenefits.benefit = undefined;
             $modalInstance.close();

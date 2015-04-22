@@ -20,7 +20,7 @@ angular.module('admissionSystemApp')
 
         return $q.all([
           DictionariesSvc.getAllSpecialties(),
-          DictionariesSvc.getAllDepartments(),
+          DictionariesSvc.getAllDepartments({departmentTypeId: 1}),
           DictionariesSvc.getTimePeriodCourseIds(),
           DictionariesSvc.getSpecoffersTypes(),
           DictionariesSvc.getEduformTypes()

@@ -171,7 +171,8 @@ angular.module('admissionSystemApp')
 
         promises.push(restAngular.one('persons', personId).remove());
 
-        _.forEach(objToDelete.addresses, function (address) {
+        // _.forEach(objToDelete.addresses, function (address) {
+        _.forEach(assembleAddresses(objToDelete.addresses), function (address) {
           promises.push(restAngular.one('persons', personId).one('addresses', address.id).remove());
         });
 

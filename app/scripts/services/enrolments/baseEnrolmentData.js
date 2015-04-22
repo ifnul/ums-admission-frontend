@@ -108,5 +108,28 @@ angular.module('admissionSystemApp')
         var opt = {id: value.id, name: value.name };
         neededObj.content.push(opt);
       });    
-    }
+    },
+    searchPerson: [
+        {
+          title: 'по ПІБ',
+          route: 'persons',
+          property: 'name'
+        },
+        {
+          title: 'по призвіщу',
+          route: 'persons',
+          property: 'surname'
+        },
+        {
+          title: 'по id персони',
+          route: 'persons',
+          property: 'id'
+        },
+        {
+          title: 'по номеру документу',
+          route: 'persons/papers',
+          property: 'docNum',
+          propertyFaculty: 'docSeries'
+        }
+      ]
   });

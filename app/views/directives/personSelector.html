@@ -1,0 +1,28 @@
+	<div class="form-group">
+		<div class="row">
+			 
+			<div class="col-xs-4">
+				<div class="form-group">
+						<select class="form-control"
+						ng-init="fieldSearchBy = search[0]"
+						ng-model="fieldSearchBy"
+						ng-options="opt.title for opt in search">
+					</select>
+				</div>
+			</div>
+
+			<div class="col-xs-8">
+				<div class="input-group">
+					<input type="text" class="form-control"
+					ng-model="querySearchBy" 
+					placeholder="Шукати по {{fieldSearchBy.title}} &hellip;">
+					<span class="input-group-btn">
+						<button type="button" 
+						class="btn btn-primary"
+						ng-click="openModalSpecialty('lg')">Ок</button>
+					</span>
+				</div>
+			</div>
+
+		</div>
+	</div>

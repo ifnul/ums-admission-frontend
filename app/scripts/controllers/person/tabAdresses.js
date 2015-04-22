@@ -13,7 +13,9 @@ angular.module('admissionSystemApp')
 				},
 				isAdressesMatch: true
 			};
-
+			// uncomment it to check whether directive can receive adminUnitId and display it properly
+			// $scope.entirePerson.addresses.regAddresses.adminUnitId = 1332;
+			
 			DictionariesSvc.getStreetsTypes().then(function (streetTypes) {
 				$scope.streetsTypesOptions = streetTypes;
 			});

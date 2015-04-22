@@ -19,10 +19,11 @@ angular.module('admissionSystemApp')
       }
 
       var storage = {};
-      function getLargeDictionary (route, customParams) {
+      function getLargeDictionary (route, customParams, ifCache) {
         var deferred = $q.defer();
+        ifCache = (ifCache === undefined) ? true : ifCache;
 
-        if (storage[route]) {
+        if (storage[route] && ifCache) {
           deferred.resolve(storage[route]);
         } else {
           storage[route] = [];
@@ -48,8 +49,8 @@ angular.module('admissionSystemApp')
       }
 
       return {
-        getAllDepartments: function () {
-          return getLargeDictionary('departments');
+        getAllDepartments: function (params) {
+          return getLargeDictionary('departments', params);
         },
         getAllSpecoffers: function (params) {
           return getLargeDictionary('specoffers', params);
@@ -92,8 +93,8 @@ angular.module('admissionSystemApp')
         getTimeperiodsTypes: function () {
           return getLargeDictionary('timeperiods/types');
         },
-        getPersons: function () {
-          return getLargeDictionary('persons');
+        getPersons: function (params) {
+          return getLargeDictionary('persons', params, false);
         },
         getPersonsTypes: function () {
           return getLargeDictionary('persons/types');
@@ -105,7 +106,7 @@ angular.module('admissionSystemApp')
           return getLargeDictionary('marriedtypes');
         },
         getAdminUnits: function (params) {
-          return getLargeDictionary('adminunits', params);
+          return getLargeDictionary('adminunits', params, false);
         },
         getAdminUnitsTypes: function () {
           return getLargeDictionary('adminunits/types');
@@ -127,6 +128,9 @@ angular.module('admissionSystemApp')
         },
         getPaperTypes: function () {
           return getLargeDictionary('papers/types');
+        },
+        getAllPapers: function (params) {
+          return getLargeDictionary('persons/papers', params);
         },
         getPaperUsages: function () {
           return getLargeDictionary('papers/usages');

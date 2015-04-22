@@ -1,0 +1,43 @@
+
+<div class="modal-header">
+  <button type="button" class="close" ng-click="cancel()" ><span>&times;</span></button>
+  <h3 class="modal-title">Оберіть персону</h3>
+</div>
+<div class="modal-body">
+<!--   <div class="row">
+    <div class="col-md-12 text-center">
+			<pre>setSelected {{setSelected}}</pre>
+    </div>
+  </div> -->
+
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover ">
+     <thead>
+      <tr>
+        <td><input type="checkbox"></td>
+        <th ng-repeat="column in headers" ng-show="column.visible">
+          <a>
+            {{column.display}}
+          </a>
+        </th>
+      </tr>
+    </thead>
+    <tbody class="pointer">
+      <tr ng-repeat="itemObj in data">
+        <td> <input type="checkbox"> </td>
+        <td ng-repeat="column in headers"
+            ng-show="column.visible"
+            ng-click="ok(itemObj)"> {{itemObj[column.name]}}  </td>
+      </tr>
+    </tbody>
+    </table>
+  </div>
+
+
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" ng-click="ok()">OK</button>
+  <button class="btn btn-danger" ng-click="cancel()">Cancel</button>
+</div>
+

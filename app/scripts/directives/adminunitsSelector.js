@@ -25,7 +25,6 @@ angular.module('admissionSystemApp')
   		// upload new adminunit on-select event
   		$scope.adminUtinSelected = function (model, item) {
   			$scope.wholeAdress.push(item.name);
-  			DictionariesSvc.clearStorageByRoute('adminunits');
 	  		DictionariesSvc.getAdminUnits({parentId: model}).then(function (adminunits) {
 	  			if (adminunits.length < 1) {
 	  				$scope.disabled = true;
