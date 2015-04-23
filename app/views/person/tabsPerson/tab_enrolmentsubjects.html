@@ -1,1 +1,62 @@
-<p>This is the tab_enrolmentsubjects view.</p>
+<div ng-controller="tabSubjects">
+  <form id="subjectsForm">
+    <div class="form-group">
+
+        <table class="table table-hover">
+          <thead>
+            <tr>
+                <td>№</td>
+                <td>Предмет ЗНО</td>
+                <td>Бал предмету ЗНО</td>
+                <td></td>
+            </tr>
+          </thead>
+
+          <tr ng-repeat="subject in entirePerson.enrolmentsubjects">
+            <td>{{ $index+1 }}</td>
+
+            <td>{{ getSubjectTitleById(subject.enrolmentSubjectId) }}</td>
+            <td>{{ subject.mark }}</td>
+
+            <td>
+              <button class="btn btn-xs btn-warning" ng-click="editSubject(subject)"><i class="fa fa-pencil-square-o"></i></button>
+              <button class="btn btn-xs btn-danger" ng-click="deleteSubject(subject)"><i class="fa fa-times"></i></button>
+            </td>
+          </tr>
+        </table>
+
+      <hr/>
+
+      <h3>Додавання предмету</h3>
+      <div class="row">
+
+
+        <div class="col-xs-3">
+          <label for="enrolmentSubjectId">Предмет ЗНО</label>
+          <select ng-model="enrolmentsubject"
+                  ng-options="opt as opt.name for opt in subjects | filter: filterExistsSubjects"
+                  class="form-control"
+                  name="enrolmentSubjectId"
+                  id="enrolmentSubjectId">
+          </select>
+        </div>
+
+
+        <div class="col-xs-3">
+          <label for="mark">Бал предмету ЗНО</label>
+          <input ng-model="subjectMark"
+                 id="mark"
+                 type="text"
+                 class="form-control"
+                 placeholder="Бал"
+                 name="mark">
+        </div>
+
+        <div class="col-xs-2" id="subjPlus">
+          <button class="btn btn-xl btn-success" ng-click="addPersonSubject()"><i class="fa fa-plus"></i> Додати</button>
+        </div>
+
+       </div>
+    </div>
+  </form>
+</div>
