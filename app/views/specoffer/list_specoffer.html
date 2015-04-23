@@ -10,10 +10,72 @@
         <option value="" disabled selected>Оберіть вступну кампанію</option>
       </select>
     </div>
-    <div class="col-md-3 timeperiod">
-      <button type="button" class="btn btn-primary" ng-click="pickTimePeriod()">Обрати</button>
+    <div class="col-md-4 timeperiod">
+        <button type="button" class="btn btn-primary" ng-click="pickTimePeriod()">Обрати</button>
     </div>
+
+    <div class="col-md-2 timeperiod">
+      <button class="btn btn-primary buttonForCollapse" ng-click="sweeper()">
+        Створити нову вступну кампанію
+      </button>
+      <div collapse="isCollapsed">
+        <div class="well">
+          <form name="myForm">
+            <div>
+              <label for="campaign">Вступна кампанія</label>
+              <input
+                type="number"
+                class="form-control"
+                id="campaign"
+                placeholder="Введіть рік"
+                name="campaign"
+                min="2015"
+                ng-model="numValue"
+                required>
+            </div>
+            <div>
+              <label for="begDate">Дата початку</label>
+              <input type="text"
+                     id = "begDate"
+                     ng-model="begDate"
+                     datepicker-popup="yyyy-MM-dd"
+                     is-open="isOpen3"
+                     ng-click = "isOpen3 = true"
+                     ng-required="true"
+                     close-text="Close"
+                     class="form-control"
+                     required
+                     name="begDate"
+                     placeholder="РРРР-MM-ДД" />
+            </div>
+            <div>
+              <label for="endDate">Дата закінчення</label>
+              <input type="text"
+                     id = "endDate"
+                     ng-model="endDate"
+                     datepicker-popup="yyyy-MM-dd"
+                     is-open="isOpen4"
+                     ng-click = "isOpen4 = true"
+                     ng-required="true"
+                     close-text="Close"
+                     class="form-control"
+                     required
+                     name="endDate"
+                     placeholder="РРРР-MM-ДД" />
+            </div>
+          </form>
+
+          <br/>
+
+          <div>
+            <button type="button" class="btn btn-primary" ng-click="createNewTimeperiod('lg')" ng-disabled="myForm.$invalid">Створити</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
+
   <!-- main content -->
   <div ng-show="timeperiod.timePeriodId" class="row">
     <!-- filter -->

@@ -3,7 +3,7 @@
 angular.module('admissionSystemApp')
 
   .controller('TabSubjectCtrl', ['$scope', '$modal', '$q', 'SubjectsSvc', function ($scope, $modal, $q, SubjectsSvc) {
-    $scope.entireSpecoffer.subjects = [];
+
     $scope.viewSubjects = [];
     var i;
 

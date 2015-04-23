@@ -4,7 +4,7 @@ angular.module('admissionSystemApp')
   .controller('tabProposalCtrl', ['$scope', 'DictionariesSvc', 'Cookies', '$q',
     function ($scope, DictionariesSvc, Cookies, $q) {
 
-      $scope.entireSpecoffer.specoffer = {};
+
       $scope.entireSpecoffer.specoffer.timePeriodId = Cookies.getCookie('timeperiod');
 
       $q.all([

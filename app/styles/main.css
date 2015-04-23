@@ -80,7 +80,10 @@ table td a:hover {
   cursor: pointer;
 }
 
+.buttonForCollapse {width: 100%}
+
 /* Modal layout for choosing table fields in general-table */
+
 
 #modalHeaderChooser .modal-body {
   height: 340px;

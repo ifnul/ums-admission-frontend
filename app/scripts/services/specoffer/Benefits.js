@@ -6,8 +6,8 @@ angular.module('admissionSystemApp')
     var flag = 0;
     var data= [];
     var subjectObject = {};
-    subjectObject.subjectsArray = [];
-    subjectObject.subjectsMainArray = [];
+    subjectObject.benefitsArray = [];
+    subjectObject.benefitsMainArray = [];
     var benefits = $q.defer();
 
     //Get benefits function
@@ -19,10 +19,10 @@ angular.module('admissionSystemApp')
 
           for (var i = 0; i < data.length; i++) {
             if (data[i].benefitTypeId === 3 || data[i].benefitTypeId === 5) {
-              subjectObject.subjectsArray.push(data[i]);
+              subjectObject.benefitsArray.push(data[i]);
             }
             else if (data[i].benefitTypeId === 6 || data[i].benefitTypeId === 7) {
-              subjectObject.subjectsMainArray.push(data[i]);
+              subjectObject.benefitsMainArray.push(data[i]);
             }
           }
 

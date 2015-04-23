@@ -1,8 +1,53 @@
 'use strict';
 
 angular.module('admissionSystemApp')
-  .controller('ListSpecofferCtrl', ['$scope', '$filter', 'ngTableParams', 'SpecoffersService', 'decodeSpecofferSvc', '$modal', 'DictionariesSvc', 'Cookies',
-    function ($scope, $filter, NgTableParams, SpecoffersService, decodeSpecofferSvc, $modal, DictionariesSvc, Cookies) {
+  .controller('ListSpecofferCtrl', ['$scope', '$filter', 'ngTableParams', 'copyTimeperiod', 'SpecoffersService', 'decodeSpecofferSvc', '$modal', 'DictionariesSvc', 'Cookies',
+    function ($scope, $filter, NgTableParams, copyTimeperiod, SpecoffersService, decodeSpecofferSvc, $modal, DictionariesSvc, Cookies) {
+
+      $scope.isCollapsed = true;
+      $scope.sweeper = function () {
+        $scope.isCollapsed = !$scope.isCollapsed;
+        if ($scope.isCollapsed) {
+          $scope.numValue = undefined;
+          $scope.begDate = undefined;
+          $scope.endDate = undefined;
+        }
+      };
+
+      $scope.createNewTimeperiod = function (size) {
+        copyTimeperiod.createTimeperiod($scope.numValue, 'Вступна кампанія' + $scope.numValue, $scope.begDate, $scope.endDate).then(function(data){
+          $scope.createdTimeperiodId = data;
+
+          DictionariesSvc.clearStorageByRoute('timeperiods');
+          DictionariesSvc.getTimeperiods({timePeriodTypeId: 1}).then(function (timeperiods) {
+            $scope.timeperiods = timeperiods;
+          });
+        });
+
+        $modal.open({
+          templateUrl: '../views/modal/modalCopyTimeperiod.html',
+          scope: $scope,
+          controller: function ($scope, $modalInstance) {
+
+            $scope.switch = false;
+            $scope.switcher = function () {
+              $scope.switch = !$scope.switch;
+              $scope.selectedTimeperiod = undefined;
+            };
+
+            $scope.ok = function () {
+              copyTimeperiod.copyToTimeperiod($scope.selectedTimeperiod, $scope.createdTimeperiodId, $scope.begDate, $scope.endDate);
+              $modalInstance.close();
+            };
+
+            $scope.cancel = function () {
+              $modalInstance.dismiss('cancel');
+            };
+
+          },
+          size: size
+        });
+      };
 
       $scope.headers = [
         {name: 'num', display: '№', visible: true},
@@ -32,11 +77,13 @@ angular.module('admissionSystemApp')
       };
 
       $scope.timeperiod = {};
+      $scope.timeperiodsForCopy = {};
       $scope.timeperiod.timePeriodId = Cookies.getCookie('timeperiod');
       $scope.dataNew = [];
 
       DictionariesSvc.getTimeperiods({timePeriodTypeId: 1}).then(function (timeperiods) {
         $scope.timeperiods = timeperiods;
+        $scope.timeperiodsForCopy = timeperiods;
       });
 
       if ($scope.timeperiod.timePeriodId) {
