@@ -39,7 +39,7 @@ angular.module('admissionSystemApp')
         var specofferArray = specoffers;
         var x = 0;
 
-        for (x; x < 2; x++) {
+        for (x; x < 5; x++) {
           var y = 0;
           var z = 0;
 
