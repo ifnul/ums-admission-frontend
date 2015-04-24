@@ -44,10 +44,10 @@ angular.module('admissionSystemApp')
     });
 
     $scope.addPersonSubject = function () {
-      var newSubj = {};
-      newSubj.enrolmentSubjectId = $scope.enrolmentsubject.id;
-      newSubj.mark = $scope.subjectMark;
-      $scope.entirePerson.enrolmentsubjects.push(newSubj);
+      $scope.entirePerson.enrolmentsubjects.push({
+        enrolmentSubjectId: $scope.enrolmentsubject.id,
+        mark: $scope.subjectMark
+      });
     };
 
     $scope.deleteSubject = function (subject) {
