@@ -42,12 +42,10 @@ input.ng-invalid.ng-dirty {
 .timeperiod {
   margin-top: 20px;
 }
-
-.ng-table-counts.btn-group.pull-right.ng-scope {
+.ng-table-counts.btn-group.pull-right.ng-scope{
   margin: 20px 5px 20px 5px;
 }
-
-.pagination.ng-table-pagination {
+.pagination.ng-table-pagination{
   margin: 20px 5px 20px 5px;
 }
 
@@ -85,6 +83,9 @@ table td a:hover {
 /* Modal layout for choosing table fields in general-table */
 
 
+
+ /* Modal layout for choosing table fields in /list-person/ */
+
 #modalHeaderChooser .modal-body {
   height: 340px;
   overflow-x: scroll;
@@ -94,14 +95,13 @@ table td a:hover {
   display: block;
 }
 
-/* general-table  table direcive  */
+/* Person table direcive  */
 
 .pointer tr {
   cursor: pointer;
 }
-
-.table-footer .pagination-sm {
-  margin: 0px;
+.table-footer .pagination-sm{
+  margin: 0;
 }
 
 /* table header */
@@ -109,7 +109,6 @@ table td a:hover {
   cursor: pointer;
   text-decoration: none;
 }
-
 #dictionariesTable {
   padding: 0 1% 0 1%
 }
@@ -117,7 +116,9 @@ table td a:hover {
 #dictionariesTable {
   padding: 0 1% 0 1%
 }
-
+#subjPlus {
+  top: 25px
+}
 .adminunits {
   display: inline;
 }

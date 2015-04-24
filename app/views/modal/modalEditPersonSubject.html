@@ -1,0 +1,36 @@
+<div class="modal-header">
+  <h3 class="modal-title">Редагування предмету</h3>
+</div>
+
+<div class="modal-body">
+    <div class="row">
+      <div class="form-group">
+
+        <div class="col-md-3">
+          <label for="modalEnrolmentSubjectId">Предмет ЗНО</label>
+          <select ng-model="modalEnrolmentSubject"
+                  ng-options="opt as opt.name for opt in subjects | filter:filterExistsSubjects"
+                  id="modalEnrolmentSubjectId"
+                  class="form-control"
+                  name="modalEnrolmentSubjectId">
+          </select>
+        </div>
+
+        <div class="col-md-3">
+          <label for="modalMark">Бал предмету ЗНО</label>
+          <input ng-model="modalMark"
+                 id="modalMark"
+                 type="text"
+                 class="form-control"
+                 placeholder="Бал"
+                 name="modalMark">
+        </div>
+
+      </div>
+    </div>
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-primary" ng-click="ok()" ng-disabled="myForm.$invalid">OK</button>
+  <button class="btn btn-danger" ng-click="$dismiss()">Cancel</button>
+</div>
