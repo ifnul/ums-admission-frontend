@@ -5,6 +5,9 @@ angular.module('admissionSystemApp')
   .controller('NewSpecofferCtrl', ['$scope', '$stateParams', '$location', 'SpecoffersService', 'DictionariesSvc', 'progressBarService', '$state',
     function ($scope, $stateParams, $location, SpecoffersService, DictionariesSvc, progressBarService, $state) {
       $scope.entireSpecoffer = {};
+      $scope.entireSpecoffer.subjects = [];
+      $scope.entireSpecoffer.benefits = [];
+      $scope.entireSpecoffer.specoffer = {};
 
       $scope.brosweOrEditSpecoffer = function (specofferId) {
         SpecoffersService.getEntireSpecoffer(specofferId).then(function (res) {
@@ -16,6 +19,8 @@ angular.module('admissionSystemApp')
 
       if ($stateParams.id) {
         $scope.brosweOrEditSpecoffer($stateParams.id);
+      } else {
+        SpecoffersService.clearCopy();
       }
 
       $scope.sendToServer = function (entireSpecoffer) {

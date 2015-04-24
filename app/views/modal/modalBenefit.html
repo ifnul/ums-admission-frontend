@@ -13,7 +13,7 @@
             <ui-select ng-model="allBenefits.benefit"
                        required
                        id="inputType">
-              <ui-select-match placeholder="Оберiть предмет">{{$select.selected.name}}</ui-select-match>
+              <ui-select-match placeholder="Оберiть пільгу">{{$select.selected.name}}</ui-select-match>
               <ui-select-choices repeat="benefit in benefits | filter: $select.search">
                 <div ng-bind-html="benefit.name | highlight: $select.search"></div>
               </ui-select-choices>

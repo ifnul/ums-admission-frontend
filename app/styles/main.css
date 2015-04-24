@@ -24,17 +24,21 @@ input.ng-invalid.ng-dirty {
   width: 30% !important;
   border-right-width: 0;
 }
+
 .inputSpecialty:focus {
   width: 30%;
   border-right-width: 1px;
 }
+
 .ui-select-match-text {
   width: 100%;
   overflow: hidden;
 }
+
 .ui-select-toggle {
   padding-right: 35px;
 }
+
 .timeperiod {
   margin-top: 20px;
 }
@@ -44,9 +48,11 @@ input.ng-invalid.ng-dirty {
 .pagination.ng-table-pagination{
   margin: 20px 5px 20px 5px;
 }
+
 #mainTable {
   padding-bottom: 20px;
 }
+
 #spinnerDiv {
   position: fixed;
   top: 0;
@@ -57,6 +63,7 @@ input.ng-invalid.ng-dirty {
   background-color: white;
   opacity: .6;
 }
+
 .spinner {
   position: absolute;
   width: 100px;
@@ -71,6 +78,10 @@ table td a:hover {
   cursor: pointer;
 }
 
+.buttonForCollapse {width: 100%}
+
+/* Modal layout for choosing table fields in general-table */
+
 
 
  /* Modal layout for choosing table fields in /list-person/ */
@@ -79,6 +90,7 @@ table td a:hover {
   height: 340px;
   overflow-x: scroll;
 }
+
 #modalHeaderChooser {
   display: block;
 }
@@ -100,6 +112,7 @@ table td a:hover {
 #dictionariesTable {
   padding: 0 1% 0 1%
 }
+
 #dictionariesTable {
   padding: 0 1% 0 1%
 }

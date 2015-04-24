@@ -1,0 +1,41 @@
+
+<div class="modal-header">
+  <h3 class="modal-title">Вступна кампанія {{numValue}}</h3>
+</div>
+
+<div class="modal-body">
+  <form name="modalCopyTimeperiod">
+    <div class="row">
+      <div class="col-md-10">
+
+        <div class="row">
+          <div class="col-md-8">
+            <p>У вас є можливість імпортувати дані з попередньої вступної кампанії</p>
+            <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="switcher()">
+              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            </button>
+          </div>
+        </div>
+
+        <br/>
+
+        <div class="row">
+          <div class="col-md-5" ng-show="switch">
+            <select required
+                    class="form-control"
+                    ng-model="selectedTimeperiod"
+                    ng-options="opt.id as opt.name for opt in timeperiodsForCopy">
+              <option value="" disabled selected>Оберіть вступну кампанію</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-primary" ng-click="ok(); sweeper();" ng-disabled="modalCopyTimeperiod.$invalid" ng-show="switch">Імпортувати</button>
+  <button class="btn btn-danger" ng-click="cancel(); sweeper();">Завершити</button>
+</div>
