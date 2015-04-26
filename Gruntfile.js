@@ -127,11 +127,29 @@ module.exports = function (grunt) {
           '<%= yeoman.app %>/scripts/{,*/}*.js'
         ]
       },
+      dist: {
+        src: '<%= yeoman.dist %>/{,*/}*.js'
+      },
       test: {
         options: {
           jshintrc: 'test/.jshintrc'
         },
         src: ['test/spec/{,*/}*.js']
+      }
+    },
+
+    jscs: {
+      options: {
+        config: '.jscsrc'
+      },
+      sources: {
+        src: '<%= yeoman.app %>/scripts/{,*/}*.js'
+      },
+      dist: {
+        src: '<%= yeoman.dist %>/{,*/}*.js'
+      },
+      test: {
+        src: 'test/spec/{,*/}*.js'
       }
     },
 
@@ -157,7 +175,7 @@ module.exports = function (grunt) {
       },
       server: {
         options: {
-          map: true,
+          map: true
         },
         files: [{
           expand: true,
@@ -180,23 +198,23 @@ module.exports = function (grunt) {
     wiredep: {
       app: {
         src: ['<%= yeoman.app %>/index.html'],
-        ignorePath:  /\.\.\//
+        ignorePath: /\.\.\//
       },
       test: {
         devDependencies: true,
         src: '<%= karma.unit.configFile %>',
-        ignorePath:  /\.\.\//,
-        fileTypes:{
+        ignorePath: /\.\.\//,
+        fileTypes: {
           js: {
             block: /(([\s\t]*)\/{2}\s*?bower:\s*?(\S*))(\n|\r|.)*?(\/{2}\s*endbower)/gi,
-              detect: {
-                js: /'(.*\.js)'/gi
-              },
-              replace: {
-                js: '\'{{filePath}}\','
-              }
+            detect: {
+              js: /'(.*\.js)'/gi
+            },
+            replace: {
+              js: '\'{{filePath}}\','
             }
           }
+        }
       }
     },
 
@@ -390,7 +408,6 @@ module.exports = function (grunt) {
     }
   });
 
-
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {
       return grunt.task.run(['build', 'connect:dist:keepalive']);
@@ -429,6 +446,8 @@ module.exports = function (grunt) {
     'concat',
     'ngAnnotate',
     'copy:dist',
+    'jshint:dist',
+    'jscs:dist',
     'cdnify',
     'cssmin',
     'uglify',
@@ -437,8 +456,14 @@ module.exports = function (grunt) {
     'htmlmin'
   ]);
 
+  grunt.registerTask('check-style', [
+    'jshint',
+    'jscs:sources',
+    'jscs:test'
+  ]);
+
   grunt.registerTask('default', [
-    'newer:jshint',
+    'newer:jshint:all',
     'test',
     'build'
   ]);
