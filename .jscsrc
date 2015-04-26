@@ -20,6 +20,7 @@
   },
   "validateIndentation": 2,
   "validateQuoteMarks": "'",
+  "validateParameterSeparator": ", ",
 
   "disallowMultipleLineStrings": true,
   "disallowMixedSpacesAndTabs": true,
@@ -51,10 +52,21 @@
     "<=", "<", ">", "!=", "!=="
   ],
 
+  "requireSpacesInFunctionDeclaration": {
+    "beforeOpeningCurlyBrace": true
+  },
+
+  "requireSpacesInFunctionExpression": {
+    "beforeOpeningRoundBrace": true,
+    "beforeOpeningCurlyBrace": true
+  },
+
   "requireSpaceAfterBinaryOperators": true,
   "requireSpacesInConditionalExpression": true,
+  "requireSpacesInForStatement": true,
+  "requireSpaceBetweenArguments": true,
   "requireSpaceBeforeBlockStatements": true,
-  "requireLineFeedAtFileEnd": true,
+  "requireSpaceBeforeObjectValues": true,
   "disallowSpacesInsideObjectBrackets": "all",
   "disallowSpacesInsideArrayBrackets": "all",
   "disallowSpacesInsideParentheses": true,
@@ -69,9 +81,17 @@
   "disallowEmptyBlocks": true,
 
   "disallowCommaBeforeLineBreak": null,
-  "requireCommaBeforeLineBreak": null,
+  "requireCommaBeforeLineBreak": true,
   "disallowTrailingComma": true,
 
   "requireParenthesesAroundIIFE": true,
-  "requireCapitalizedConstructors": true
+  "requireCapitalizedConstructors": true,
+
+  "requireSemicolons": true,
+
+  "requireBlocksOnNewline": 1,
+  "requirePaddingNewLinesInObjects": true,
+  "requirePaddingNewLineAfterVariableDeclaration": true,
+  "requireLineBreakAfterVariableAssignment": true,
+  "requireLineFeedAtFileEnd": true
 }
