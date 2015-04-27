@@ -8,7 +8,7 @@
             <div class="col-md-6">
               <div>
                 <label for="personTypeId">Оберiть тип персони</label>
-                <ui-select ng-model="entirePerson.persons.personTypeId"
+                <ui-select ng-model="entirePerson.person.personTypeId"
                            required
                            id="personTypeId">
                   <ui-select-match placeholder="Оберiть тип персони">{{$select.selected.name}}</ui-select-match>
@@ -30,7 +30,7 @@
             <div class="col-md-4">
               <input type="text"
                      id="firstName"
-                     ng-model="entirePerson.persons.firstName"
+                     ng-model="entirePerson.person.firstName"
                      required
                      class="form-control"
                      name="name"
@@ -61,7 +61,7 @@
             </div>
             <div class="col-md-4">
               <input type="text"
-                     ng-model="entirePerson.persons.surname"
+                     ng-model="entirePerson.person.surname"
                      id="surname"
                      required
                      class="form-control"
@@ -94,7 +94,7 @@
             </div>
             <div class="col-md-4">
               <input type="text"
-                     ng-model="entirePerson.persons.fatherName"
+                     ng-model="entirePerson.person.fatherName"
                      required
                      class="form-control"
                      id="fatherName"
@@ -108,7 +108,7 @@
             <div class="col-md-5">
               <label for="photo">Завантажити фото</label>
               <input type="file"
-                     ng-model="entirePerson.persons.photo"
+                     ng-model="entirePerson.person.photo"
                      id="photo"
                      required
                      name="photo"
@@ -121,7 +121,7 @@
             <div class="col-md-6">
               <label for="genderTypeId">Стать</label>
 
-              <ui-select ng-model="entirePerson.persons.genderTypeId"
+              <ui-select ng-model="entirePerson.person.genderTypeId"
                          required
                          id="genderTypeId">
                 <ui-select-match placeholder="Оберiть стать">{{$select.selected.name}}</ui-select-match>
@@ -140,7 +140,7 @@
 
               <label for="marriedTypeId">Сiмейний стан</label>
 
-              <ui-select ng-model="entirePerson.persons.marriedTypeId"
+              <ui-select ng-model="entirePerson.person.marriedTypeId"
                          required
                          id="marriedTypeId">
                 <ui-select-match placeholder="Оберiть сiмейний стан">{{$select.selected.name}}</ui-select-match>
@@ -158,7 +158,7 @@
             <div class="col-md-6">
 
               <label for="citizenCountryId">Громадянство</label>
-              <ui-select ng-model="entirePerson.persons.citizenCountryId"
+              <ui-select ng-model="entirePerson.person.citizenCountryId"
                          required
                          id="citizenCountryId">
                 <ui-select-match placeholder="Оберiть громадянство">{{$select.selected.name}}</ui-select-match>
@@ -173,7 +173,7 @@
           <div class="row">
             <div class="col-md-3">
               <label for="docSeries">Серія особової справи</label>
-              <input ng-model="entirePerson.persons.docSeries"
+              <input ng-model="entirePerson.person.docSeries"
                      type="text"
                      placeholder="Введiть серiю ОС"
                      id="docSeries"
@@ -182,7 +182,7 @@
             </div>
             <div class=" col-md-3">
               <label for="docNum">Номер особової справи</label>
-              <input ng-model="entirePerson.persons.docNum"
+              <input ng-model="entirePerson.person.docNum"
                      type="text"
                      id="docNum"
                      ng-pattern="/^[0-9]*$/"
@@ -197,8 +197,8 @@
           <div class="row">
             <div class="col-md-6">
               <label for="identifier">Індекс матеріально відповідального</label>
-              <input type="number"
-                     ng-model="entirePerson.persons.identifier"
+              <input type="text"
+                     ng-model="entirePerson.person.identifier"
                      id="identifier"
                      required
                      name="identifier"
@@ -212,7 +212,8 @@
           <div class="form-group col-md-6">
             <label class="control-label">
               <input type="checkbox"
-                     ng-model="entirePerson.persons.resident">
+                     ng-model="entirePerson.person.resident"
+                     ng-checked="entirePerson.person.resident">
               Чи є персона iноземцем? </label>
           </div>
 
@@ -221,7 +222,7 @@
         <div class="row">
           <div class="form-group col-md-10">
             <label>Мiсце народження</label>
-            <adminunits-selector ng-model="entirePerson.persons.birthPlace">
+            <adminunits-selector ng-model="entirePerson.person.birthPlace">
             </adminunits-selector>
           </div>
         </div>
@@ -232,7 +233,7 @@
             <div class="col-md-3">
               <label class="control-label">Дата народження</label>
               <input type="text"
-                     ng-model="entirePerson.persons.begDate"
+                     ng-model="entirePerson.person.begDate"
                      datepicker-popup="yyyy-MM-dd"
                      is-open="isOpen"
                      ng-click="isOpen = true"
@@ -251,8 +252,8 @@
             <div class="col-md-6">
               <label class="control-label">
                 <input type="checkbox"
-                       ng-model="entirePerson.persons.isMilitary"
-                       ng-checked="entirePerson.persons.isMilitary">
+                       ng-model="entirePerson.person.isMilitary"
+                       ng-checked="entirePerson.person.isMilitary">
                 Чи є персона військово­зобов’язаною?</label>
             </div>
           </div>
@@ -263,8 +264,8 @@
             <div class="col-md-6">
               <label class="control-label">
                 <input type="checkbox"
-                       ng-model="entirePerson.persons.isHostel"
-                       ng-checked="entirePerson.persons.isHostel">
+                       ng-model="entirePerson.person.isHostel"
+                       ng-checked="entirePerson.person.isHostel">
                 Чи потребує персона гуртожиток?</label>
             </div>
           </div>
