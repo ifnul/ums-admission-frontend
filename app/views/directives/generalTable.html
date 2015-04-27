@@ -117,14 +117,19 @@
                   ng-click="setSelected = itemObj"> {{itemObj[column.name]}}  </td>
               <td>
 
-                <a href="{{linkToNewItem.replace('new', 'edit')}}/{{itemObj.id}}">
-                  <button class="btn btn-xs btn-warning"><i class="fa fa-pencil-square-o"></i></button>
-                </a>
-                <button class="btn btn-xs btn-danger" ng-click="">
-                  <i class="fa fa-times"></i>
-                </button>
-              </td>
-            </tr>
+              <button class="btn btn-xs btn-warning"
+                      ng-show="onEdit"
+                      ng-click="changeItem(itemObj)">
+                <i class="fa fa-pencil-square-o"></i>
+              </button>
+
+              <button class="btn btn-xs btn-danger"
+                      ng-show="onDelete"
+                      ng-click="deleteItem(itemObj)">
+                <i class="fa fa-times"></i>
+              </button>
+            </td>
+          </tr>
           </tbody>
         </table>
       </div>

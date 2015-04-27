@@ -29,14 +29,14 @@ angular.module('admissionSystemApp')
         $scope.entireSpecoffer.specoffer.note = 'some note';
         SpecoffersService.addOrEditSpecoffer(entireSpecoffer).then(function () {
           DictionariesSvc.clearStorageByRoute('specoffers');
-          $location.path('/#/list-specoffer');
+          $location.path('/list-specoffer');
         });
       };
 
       $scope.delete = function () {
         SpecoffersService.deleteEntireSpecoffer().then(function () {
           DictionariesSvc.clearStorageByRoute('specoffers');
-          $location.path('/#/list-specoffer');
+          $location.path('/list-specoffer');
         });
       };
 

@@ -28,9 +28,6 @@
           <tab heading="Документи">
             <div class="top-buffer" ng-include="'views/person/tabsPerson/tab_papers.html'"></div>
           </tab>
-          <tab heading="Олімпіади">
-            <div class="top-buffer" ng-include="'views/person/tabsPerson/tab_awards.html'"></div>
-          </tab>
           <tab heading="Предмети ЗНО">
             <div class="top-buffer" ng-include="'views/person/tabsPerson/tab_enrolmentsubjects.html'"></div>
           </tab>
@@ -42,8 +39,8 @@
     </div>
 
     <div class="top-buffer bottom-buffer row">
-      <button ng-click="sendToServerPerson()" type="submit" class="btn btn-primary">Зберегти</button>
-      <button ng-click="" type="submit" class="btn btn-danger">Видалити</button>
+      <button ng-click="sendToServerPerson(entirePerson)" type="submit" class="btn btn-primary">Зберегти</button>
+      <button ng-click="deletePerson()" type="submit" class="btn btn-danger">Видалити</button>
     </div>
 
   </div>

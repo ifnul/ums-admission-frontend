@@ -8,7 +8,7 @@ angular
 
     // filter (checkboxes) options
     $scope.userFilterPick = {};
-    $scope.oneAtATime = {open : false};  
+    $scope.oneAtATime = {open : false};
     $scope.removeFromUserPick = function (property, obj) {
       var index = $scope.userFilterPick[property].indexOf(obj);
       $scope.userFilterPick[property].splice(index, 1);
@@ -19,17 +19,17 @@ angular
       var searchObj = {};
       searchObj[fieldSearchBy.property] = [{'id':query,'length':2}];
       $scope.getdata({
-        currentPage: $scope.currentPage, 
-        itemsPerPage: $scope.itemsPerPage, 
+        currentPage: $scope.currentPage,
+        itemsPerPage: $scope.itemsPerPage,
         userFilterPick:searchObj
       });
-      $scope.userFilterPick = {};      
+      $scope.userFilterPick = {};
     };
 
     // pagination options
-    $scope.maxSize = 5;  
+    $scope.maxSize = 5;
     $scope.currentPage = 1;
-    
+
     // item per page chooser
     $scope.itemsPerPageOptions = ['10', '25', '50', '100'];
     $scope.itemsPerPage = $scope.itemsPerPageOptions[0];
@@ -37,18 +37,29 @@ angular
     $scope.itemPerPageChanged = function (option) {
       $scope.currentPage = 1;
       $scope.getdata({
-        currentPage:$scope.currentPage, 
-        itemsPerPage:option, 
+        currentPage:$scope.currentPage,
+        itemsPerPage:option,
         userFilterPick:$scope.userFilterPick
       });
     };
 
     $scope.itemPerPageChanged($scope.itemsPerPage);
 
+    $scope.deleteItem = function(item) {
+      $scope.onDelete({
+        id: item.id
+      });
+    };
+
+    $scope.changeItem = function(item) {
+      $scope.onEdit({
+        id: item.id
+      });
+    };
   }
 
   function link(scope, element, attr) {
-    
+
     scope.newItemLinkTitle = attr.newitemlinktitle;
     scope.linkToNewItem = attr.linktonewitem;
 
@@ -60,23 +71,23 @@ angular
       tableNode.toggleClass('col-sm-10 col-md-10');
       tableNode.toggleClass('col-sm-12 col-md-12');
     };
-    
+
     // sotring
     scope.sort = function (columnName, event) {
       scope.descending = !scope.descending;
-      
+
       var params = {
-        currentPage: scope.currentPage, 
-        itemsPerPage: scope.itemsPerPage, 
+        currentPage: scope.currentPage,
+        itemsPerPage: scope.itemsPerPage,
         userFilterPick: scope.userFilterPick,
-        sort: {}       
+        sort: {}
       };
 
       scope.params = params;
 
       var arrow = angular.element(event.target.getElementsByClassName('fa'));
       arrow.removeClass('fa-sort');
-      
+
       if (scope.descending) {
         arrow.removeClass('fa-caret-up ').addClass('fa-caret-down');
         params.sort.orderBy = columnName +'-desc';
@@ -102,10 +113,12 @@ angular
       filters: '=?',
       search: '=?',
       getdata: '&',
-      total: '@'
+      total: '@',
+      onDelete: '&?',
+      onEdit: '&?'
     }
   };
-  
+
   return directive;
  });
 
