@@ -1,0 +1,136 @@
+<div class="modal-header">
+  <h3 class="modal-title">Додати хвилю</h3>
+</div>
+<div class="modal-body">
+
+  <form class="form-horizontal" name="formWave">
+
+    <div class="form-group">
+      <label class="control-label col-md-4">Етап хвилi</label>
+
+      <div class="col-md-5">
+
+        <ui-select ng-disabled=' idx !== undefined' ng-model="idWave.waveTypeId"
+                   required
+                   id="waveTypeId">
+          <ui-select-match placeholder="Етап хвилi">{{$select.selected.name}}</ui-select-match>
+          <ui-select-choices repeat="elem.id as elem in wavesTypes | filter: $select.search">
+            <div ng-bind-html="elem.name | highlight: $select.search"></div>
+          </ui-select-choices>
+        </ui-select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-md-4">Дата початку навчання</label>
+
+      <div class="col-md-5">
+
+        <input type="text"
+               ng-model="beginDate"
+               datepicker-popup="yyyy-MM-dd"
+               is-open="isOpen"
+               ng-click="isOpen = true"
+               close-text="Close"
+               class="form-control"
+               required
+               name="begDate"
+               placeholder="РРРР-MM-ДД"/>
+      </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-4">Дата закінчення </label>
+      <div class="col-md-5">
+      <input type="text"
+               ng-model="endDate"
+               datepicker-popup="yyyy-MM-dd"
+               is-open="isOpen2"
+               ng-click="isOpen2 = true"
+               close-text="Close"
+               class="form-control"
+               required
+               name="endDate"
+               placeholder="РРРР-MM-ДД"/>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-5">
+      <hr class="divider">
+      <h5 class="text-uppercase">Кiлькiсть мiсць:</h5>
+      <!--<hr class="divider">-->
+      </div>
+    </div>
+
+    <div class="form-group ">
+
+        <label for="licCount" class="control-label col-md-4"> Ліцензованих </label>
+
+        <div class="col-md-4">
+          <input type="number"
+                 id="licCount"
+                 ng-model="licCount"
+                 required
+                 class="form-control"
+                 name="name"/>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+
+        <label for="stateCount" class="control-label col-md-4 ">Державного замовлення</label>
+
+        <div class="col-md-4">
+          <input type="number"
+                 id="stateCount"
+                 ng-model="stateCount"
+                 required
+                 class="form-control"
+                 name="name"/>
+        </div>
+    </div>
+
+    <div class="form-group ">
+
+        <label for="benefitCount" class="control-label col-md-4 ">Пільгових </label>
+
+        <div class="col-md-4">
+          <input type="number"
+                 id="benefitCount"
+                 ng-model="benefitCount"
+                 required
+                 class="form-control"
+                 name="name"/>
+      </div>
+    </div>
+
+
+    <div class="form-group ">
+
+        <label for="targetCount" class="control-label col-md-4 ">Цільових</label>
+
+        <div class="col-md-4">
+          <input type="number"
+                 id="targetCount"
+                 ng-model="targetCount"
+                 required
+                 class="form-control"
+                 name="name"/>
+      </div>
+    </div>
+
+
+    <div class="modal-footer">
+      <button ng-if="idx === undefined" ng-disabled="formWave.$invalid" class="btn btn-success" ng-click="ok()">OK
+      </button>
+      <button ng-if="idx !== undefined" ng-disabled="formWave.$invalid" class="btn btn-success" ng-click="ok()">
+        Зберiгти
+      </button>
+
+      <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+    </div>
+  </form>
+</div>
+
