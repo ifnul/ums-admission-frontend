@@ -1,3 +1,41 @@
 <div ng-controller="TabWavesCtrl">
-	<p>This is the tab_waves view.</p>
+  <button class="btn btn-default top-buffer bottom-buffer" ng-click="open()">
+    <i class="fa fa-plus text-success"></i> Додати хвилю
+  </button>
+
+
+  <div class="row">
+    <div class="col-md-12 text-center">
+
+      <table class="table table-bordered table-hover" ng-show="viewWaves.length">
+        <tr>
+          <th> Хвиля</th>
+          <th class="text-center">Кількість ліцензованих місць</th>
+          <th class="text-center">Кількість місць держзамовлення</th>
+          <th class="text-center">Кількість пільгових місць</th>
+          <th class="text-center">Кількість цільових місць у хвилі</th>
+          <th class="text-center">Дата початку хвилі</th>
+          <th class="text-center">Дата закінчення хвилі</th>
+          <th></th>
+        </tr>
+        <tr ng-repeat="wave in viewWaves">
+          <td> {{ wave.wavesTypesName}}</td>
+          <td>{{wave.licCount}}</td>
+          <td> {{wave.stateCount}}</td>
+          <td> {{ wave.benefitCount}}</td>
+          <td> {{wave.targetCount}}</td>
+          <td>{{wave.beginDate}}</td>
+          <td>{{wave.endDate }}</td>
+          <td>
+            <button class="btn btn-xs btn-danger" ng-click="removeRow($index)"><i class="fa fa-times"></i></button>
+            <button class="btn btn-xs btn-warning" ng-click="open(wave, $index )"><i class="fa fa-pencil"></i>
+            </button>
+
+          </td>
+        </tr>
+
+      </table>
+    </div>
+
+  </div>
 </div>

@@ -6,27 +6,12 @@ describe('Service: SpecoffersService', function () {
   beforeEach(module('admissionSystemApp'));
 
   // instantiate service
-  var SpecoffersService, mockDependency;
+  var SpecoffersService;
   beforeEach(inject(function (_SpecoffersService_) {
     SpecoffersService = _SpecoffersService_;
   }));
 
-
-  beforeEach(function () {
-
-    mockDependency = {
-      getEntireSpecoffer: function (id) {
-
-
-    return 'mockReturnValue';
-  }
-}
-;
-
-module(function ($provide) {
-  $provide.value('myDependency', mockDependency);
-});
-});
+    beforeEach(angular.mock.module('userMock'));
 
 it('should return value from mock dependency', inject(function (myService) {
   expect(myService.useDependency()).toBe('mockReturnValue');

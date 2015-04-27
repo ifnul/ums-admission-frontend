@@ -5,7 +5,6 @@ angular.module('admissionSystemApp')
   .controller('NewPersonCtrl', function ($scope) {
 
     $scope.entirePerson = {};
-    //$scope.entirePerson.persons = {};
     $scope.entirePerson.persons = {};
     $scope.entirePerson.names = [];
     $scope.entirePerson.names[0] = {

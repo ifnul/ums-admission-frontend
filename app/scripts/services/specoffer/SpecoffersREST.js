@@ -46,6 +46,7 @@ angular.module('admissionSystemApp')
         entireSpecoffer.specoffer = restAngular.one('specoffers', id).get();
         entireSpecoffer.subjects = restAngular.one('specoffers', id).one('subjects').getList();
         entireSpecoffer.benefits = restAngular.one('specoffers', id).one('benefits').getList();
+        entireSpecoffer.waves = restAngular.one('specoffers', id).one('waves').getList();
 
         $q.all(entireSpecoffer).then(function (res) {
           objCopy = {};
@@ -78,7 +79,8 @@ angular.module('admissionSystemApp')
             currentObj.specoffer.id = specOfferID;
             return $q.all([
               addArrayOfItems(currentObj.subjects, specOfferID, 'subjects'),
-              addArrayOfItems(currentObj.benefits, specOfferID, 'benefits')
+              addArrayOfItems(currentObj.benefits, specOfferID, 'benefits'),
+              addArrayOfItems(currentObj.waves, specOfferID, 'waves')
             ]);
             //.then(function () {
             //  return getEntireSpecoffer(specOfferID).then(function (newEntireSpecoffer) {
@@ -103,6 +105,7 @@ angular.module('admissionSystemApp')
         return $q.all([
           compareArrays(newOnj.subjects, objCopy.subjects, specOfferID, 'subjects'),
           compareArrays(newOnj.benefits, objCopy.benefits, specOfferID, 'benefits'),
+          compareArrays(newOnj.waves, objCopy.waves, specOfferID, 'waves'),
           promiseSpecoffer
         ])
           .then(function () {
@@ -160,7 +163,11 @@ angular.module('admissionSystemApp')
         });
 
         _.forEach(objToDelete.subjects, function (subject) {
-          promises.push(restAngular.one('specoffers', specOfferID).one('benefits', subject.id).remove());
+          promises.push(restAngular.one('specoffers', specOfferID).one('subjects', subject.id).remove());
+        });
+
+        _.forEach(objToDelete.waves, function (waves) {
+          promises.push(restAngular.one('specoffers', specOfferID).one('waves', waves.id).remove());
         });
 
         return $q.all(promises).then(function () {
