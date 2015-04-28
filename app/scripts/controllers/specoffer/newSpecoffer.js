@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('admissionSystemApp')
-  .controller('NewSpecofferCtrl', ['$scope', '$stateParams', '$location', 'SpecoffersService', 'DictionariesSvc', 'progressBarService', '$state',
+  .controller('NewSpecofferCtrl', ['$scope', '$stateParams', '$location', 'SpecoffersService', 'DictionariesSvc',
+    'progressBarService', '$state',
     function ($scope, $stateParams, $location, SpecoffersService, DictionariesSvc, progressBarService, $state) {
       $scope.entireSpecoffer = {};
       $scope.entireSpecoffer.subjects = [];
@@ -32,13 +33,12 @@ angular.module('admissionSystemApp')
         });
       };
 
-      $scope.delete = function () {
+      $scope.deleteSpecoffer = function () {
         SpecoffersService.deleteEntireSpecoffer().then(function () {
           DictionariesSvc.clearStorageByRoute('specoffers');
           $location.path('/list-specoffer');
         });
       };
-
 
       $scope.$on('valBubble', function (evt, args) {  // using directive, which is responsible for changes in each input
 
@@ -58,9 +58,6 @@ angular.module('admissionSystemApp')
 
     }]);
 
-
-
-
 angular.module('admissionSystemApp')
   .config(['datepickerConfig', 'datepickerPopupConfig',
     function (datepickerConfig, datepickerPopupConfig) {
@@ -68,7 +65,3 @@ angular.module('admissionSystemApp')
       datepickerConfig.startingDay = '1';
       datepickerPopupConfig.showButtonBar = false;
     }]);
-
-
-
-

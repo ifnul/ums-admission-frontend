@@ -1,11 +1,15 @@
 'use strict';
 
-
 angular.module('admissionSystemApp')
   .factory('Person', ['Restangular', '$q', '$filter',
     function (Restangular, $q, $filter) {
 
-      var restAngular =
+      var restAngular,
+        objCopy,
+        promises,
+        newPromise;
+
+      restAngular =
         Restangular.withConfig(function (Configurer) {
           Configurer.setRequestInterceptor(function (element, operation) {
             if (operation === 'post' || operation === 'put') {
@@ -17,11 +21,11 @@ angular.module('admissionSystemApp')
           });
         });
 
-
-      var objCopy = {};
+      objCopy = {};
 
       function separateAddresses(arr) {
         var addresses = {};
+
         addresses.regAddresses = arr[0].addressTypeId === 1 ? arr[0] : arr[1];
         addresses.postAddresses = arr[1].addressTypeId === 2 ? arr[1] : arr[0];
         addresses.isAdressesMatch = _.isEqual(
@@ -32,6 +36,7 @@ angular.module('admissionSystemApp')
 
       function assembleAddresses(obj) {
         var arr = [];
+
         if (obj.isAdressesMatch) {
           _.forEach(obj.regAddresses, function (value, key) {
             if (!(key === 'id' || key === 'uri' || key === 'addressTypeId')) {
@@ -45,10 +50,13 @@ angular.module('admissionSystemApp')
       }
 
       function getEntirePerson(id) {
-        var entirePerson = {};
+        var entirePerson, i;
+
+        entirePerson = {};
         entirePerson.person = restAngular.one('persons', id).get();
-        // entirePerson.addresses = restAngular.one('persons', id).one('addresses').getList();
-        entirePerson.addresses = restAngular.one("persons", id).customGET("addresses", {personId: id}).then(function (arr) {
+        entirePerson.addresses = restAngular.one('persons', id).customGET('addresses', {
+          personId: id
+        }).then(function (arr) {
           return separateAddresses(arr.resources);
         });
         entirePerson.contacts = restAngular.one('persons', id).one('contacts').getList();
@@ -58,12 +66,12 @@ angular.module('admissionSystemApp')
         entirePerson.enrolmentsubjects = restAngular.one('persons', id).one('enrolmentsubjects').getList();
 
         $q.all(entirePerson).then(function (res) {
-          for (var i = 0; i < res.papers.length; i++) {
+          for (i = 0; i < res.papers.length; i++) {
             angular.forEach(res.awards, function (award) {
               if (res.papers[i].id === award.personPaperId) {
                 res.papers[i].award = award;
               }
-            })
+            });
           }
           delete res.awards;
           objCopy = {};
@@ -74,20 +82,21 @@ angular.module('admissionSystemApp')
       }
 
       function addArrayOfItems(itemsArr, personId, route) {
-        var promises = [];
-        for (var i = 0; i < itemsArr.length; i += 1) {
+        var promises, newPromise, i;
+
+        promises = [];
+        for (i = 0; i < itemsArr.length; i += 1) {
           itemsArr[i].personId = personId;
-          var newPromise = restAngular.one('persons', personId).one(route).post('', itemsArr[i]);
+          newPromise = restAngular.one('persons', personId).one(route).post('', itemsArr[i]);
           promises.push(newPromise);
         }
         return $q.all(promises);
       }
 
-      var promises = [],
-        newPromise;
-
       function addPapersAwardsSubjects(itemsArr, itemsArrSubj, personId) {
-        for (var i = 0; i < itemsArr.length; i += 1) {
+        var i;
+
+        for (i = 0; i < itemsArr.length; i += 1) {
           itemsArr[i].personId = personId;
           if (itemsArr[i].hasOwnProperty('award')) {
             addAward(itemsArr[i], personId);
@@ -98,11 +107,12 @@ angular.module('admissionSystemApp')
             promises.push(newPromise);
           }
         }
-        return $q.all(promises)
+        return $q.all(promises);
       }
 
       function addAward(item, personId) {
         var awardToPut = {};
+
         _.merge(awardToPut, item.award);
         delete item.award;
         awardToPut.personId = personId;
@@ -114,11 +124,13 @@ angular.module('admissionSystemApp')
       }
 
       function addSubjects(item, itemsArrSubj, personId) {
+        var subjPromises, subjPromise, i;
+
         newPromise = restAngular.one('persons', personId).one('papers').post('', item).then(function (response) {
-          var subjPromises = [];
-          for (var i = 0; i < itemsArrSubj.length; i += 1) {
+          subjPromises = [];
+          for (i = 0; i < itemsArrSubj.length; i += 1) {
             itemsArrSubj[i].personPaperId = response.id;
-            var subjPromise = restAngular.one('persons', personId).one('enrolmentsubjects').post('', itemsArrSubj[i]);
+            subjPromise = restAngular.one('persons', personId).one('enrolmentsubjects').post('', itemsArrSubj[i]);
             subjPromises.push(subjPromise);
           }
           return $q.all(subjPromises);
@@ -128,6 +140,7 @@ angular.module('admissionSystemApp')
 
       function addEntirePerson(obj) {
         var id = $q.defer();
+
         restAngular.all('persons').post(obj.person).then(function (response) {
           id.resolve(response.id);
         });
@@ -144,11 +157,6 @@ angular.module('admissionSystemApp')
               addArrayOfItems(currentObj.names, personId, 'names'),
               addPapersAwardsSubjects(currentObj.papers, currentObj.enrolmentsubjects, personId)
             ]);
-            //.then(function () {
-            //  return getEntirePerson(personId).then(function (newEntirePerson) {
-            //    _.merge(currentObj, newEntirePerson);
-            //  });
-            //});
           });
         } else {
           return editEntirePerson(currentObj);
@@ -156,41 +164,39 @@ angular.module('admissionSystemApp')
       }
 
       function editEntirePerson(newObj) {
-        var personId = objCopy.person.id;
-        var promisePerson;
+        var promisePerson, personId;
+
+        personId = objCopy.person.id;
         if (!angular.equals(newObj.person, objCopy.person)) {
           promisePerson = restAngular.one('persons', personId).customPUT(newObj.person);
         }
 
         return $q.all([
-          compareArrays(assembleAddresses(newObj.addresses), assembleAddresses(objCopy.addresses), personId, 'addresses'),
+          compareArrays(assembleAddresses(newObj.addresses), assembleAddresses(objCopy.addresses),
+            personId, 'addresses'),
           compareArrays(newObj.contacts, objCopy.contacts, personId, 'contacts'),
           compareArrays(newObj.names, objCopy.names, personId, 'names'),
-          comparePapersAwardsSubjects(newObj.papers, objCopy.papers, newObj.enrolmentsubjects, objCopy.enrolmentsubjects, personId),
+          comparePapersAwardsSubjects(newObj.papers, objCopy.papers, newObj.enrolmentsubjects,
+            objCopy.enrolmentsubjects, personId),
           promisePerson
         ])
           .then(function () {
             objCopy = {};
-            //return getEntirePerson(personId).then(function (res) {
-            //  _.merge(newObj, res);
-            //});
           });
       }
 
       function compareArrays(newArr, oldArr, personId, route) {
-        /* - if item doesn't have id property - POST NEW item.
-         - else check if item correspond the items with same ID in oldAdd. If false - PUT it.
-         - check if there are there are deleted items  */
         var promises = [];
 
         _.forEach(newArr, function (item) {
-          var promise;
+          var promise, oldItem;
+
           if (!item.personId) {
             item.personId = personId;
             promise = restAngular.one('persons', personId).one(route).customPOST(item);
             promises.push(promise);
           } else {
-            var oldItem = _.find(oldArr, {
+            oldItem = _.find(oldArr, {
               'id': item.id
             });
             if (!angular.equals(oldItem, item)) {
@@ -202,6 +208,7 @@ angular.module('admissionSystemApp')
 
         _.forEach(oldArr, function (item) {
           var promise;
+
           if (!_.some(newArr, {
               'id': item.id
             })) {
@@ -214,18 +221,18 @@ angular.module('admissionSystemApp')
       }
 
       function compareSubjectArrays(newArr, oldArr, personId, personPaperId) {
-
         var promises = [];
 
         _.forEach(newArr, function (item) {
-          var promise;
+          var promise, oldItem;
+
           if (!item.personId) {
             item.personId = personId;
             item.personPaperId = personPaperId;
             promise = restAngular.one('persons', personId).one('enrolmentsubjects').customPOST(item);
             promises.push(promise);
           } else {
-            var oldItem = _.find(oldArr, {
+            oldItem = _.find(oldArr, {
               'id': item.id
             });
             if (!angular.equals(oldItem, item)) {
@@ -237,6 +244,7 @@ angular.module('admissionSystemApp')
 
         _.forEach(oldArr, function (item) {
           var promise;
+
           if (!_.some(newArr, {
               'id': item.id
             })) {
@@ -251,6 +259,8 @@ angular.module('admissionSystemApp')
       function comparePapersAwardsSubjects(newArrPapers, oldArrPapers, newArrSubjects, oldArrSubjects, personId) {
 
         _.forEach(newArrPapers, function (item) {
+          var oldItem, newAward, oldAward;
+
           if (!item.personId) {
             item.personId = personId;
             if (item.hasOwnProperty('award')) {
@@ -262,12 +272,12 @@ angular.module('admissionSystemApp')
               promises.push(newPromise);
             }
           } else {
-            var oldItem = _.find(oldArrPapers, {
+            oldItem = _.find(oldArrPapers, {
               'id': item.id
             });
             if (item.hasOwnProperty('award')) {
-              var newAward = {},
-                oldAward = {};
+              newAward = {};
+              oldAward = {};
               _.merge(newAward, item.award);
               _.merge(oldAward, oldItem.award);
               delete item.award;
@@ -292,12 +302,14 @@ angular.module('admissionSystemApp')
             })) {
             if (item.hasOwnProperty('award')) {
               var awardToDel = {};
-              _.merge(awardToDel, paper.award);
-              delete paper.award;
+
+              _.merge(awardToDel, item.award);
+              delete item.award;
               promises.push(restAngular.one('persons', personId).one('awards', awardToDel.id).remove());
             } else if (item.paperTypeId === 4) {
               _.forEach(oldArrSubjects, function (enrolmentsubject) {
-                promises.push(restAngular.one('persons', personId).one('enrolmentsubjects', enrolmentsubject.id).remove());
+                promises.push(restAngular.one('persons', personId).one('enrolmentsubjects', enrolmentsubject.id)
+                  .remove());
               });
             }
             promises.push(restAngular.one('persons', personId).one('papers', item.id).remove());
@@ -308,8 +320,8 @@ angular.module('admissionSystemApp')
       }
 
       function deletePerson(objToDelete) {
-        var promises = [];
-        var personId = objToDelete.person.id;
+        var promises = [],
+          personId = objToDelete.person.id;
 
         promises.push(restAngular.one('persons', personId).remove());
 
@@ -328,6 +340,7 @@ angular.module('admissionSystemApp')
         _.forEach(objToDelete.papers, function (paper) {
           if (paper.hasOwnProperty('award')) {
             var awardToDel = {};
+
             _.merge(awardToDel, paper.award);
             delete paper.award;
             promises.push(restAngular.one('persons', personId).one('awards', awardToDel.id).remove());
@@ -353,7 +366,6 @@ angular.module('admissionSystemApp')
           return deletePerson(objToDelete);
         }
       }
-
 
       return {
         getEntirePerson: getEntirePerson,

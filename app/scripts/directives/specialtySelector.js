@@ -45,7 +45,7 @@ angular.module('admissionSystemApp')
         element.find('input:eq(0)').attr('id', attrs.id);
         element.removeAttr('id');
 
-        ctrl.$render = function() {
+        ctrl.$render = function () {
           var specialtyId = ctrl.$modelValue;
 
           if (specialtyId) {
@@ -55,7 +55,6 @@ angular.module('admissionSystemApp')
             });
           }
         };
-
 
         scope.openModalSpecialty = function (size) {
           var modalInstance = $modal.open({

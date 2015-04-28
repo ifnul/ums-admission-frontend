@@ -13,10 +13,14 @@ angular.module('admissionSystemApp')
 
         scope.contacts = [];
 
-        scope.$watch(function() { return ctrl.$modelValue; }, function (personContacts) {
+        scope.$watch(function () {
+          return ctrl.$modelValue;
+        }, function (personContacts) {
 
-          for (var i = 1; i < 9; i++) {
-            for (var j = 0; j < personContacts.length; j++) {
+          var i, j;
+
+          for (i = 1; i < 9; i++) {
+            for (j = 0; j < personContacts.length; j++) {
               if (personContacts[j].contactTypeId === i) {
                 scope.contacts[i] = {
                   id: personContacts[j].id,
