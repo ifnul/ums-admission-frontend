@@ -1,21 +1,23 @@
-
 <div class="modal-header">
   <button type="button" class="close" ng-click="cancel()" ><span>&times;</span></button>
-  <h3 class="modal-title">Оберіть персону</h3>
+  <h3 class="modal-title">Оберіть пропозицію</h3>
 </div>
 <div class="modal-body">
-<!--   <div class="row">
-    <div class="col-md-12 text-center">
-			<pre>setSelected {{setSelected}}</pre>
+  
+  <div class="row">    
+    <div class="col-sm-3" >
+      <div class="form-group">
+        <div class="right-inner-addon">
+          <input type="search" class="form-control" ng-model="query" placeholder="Пошук"/>
+        </div>
+      </div>
     </div>
-  </div> -->
-
+  </div>
 
   <div class="table-responsive">
     <table class="table table-bordered table-hover ">
      <thead>
       <tr>
-        <td><input type="checkbox"></td>
         <th ng-repeat="column in headers" ng-show="column.visible">
           <a>
             {{column.display}}
@@ -24,8 +26,7 @@
       </tr>
     </thead>
     <tbody class="pointer">
-      <tr ng-repeat="itemObj in data">
-        <td> <input type="checkbox"> </td>
+      <tr ng-repeat="itemObj in data | filter:query">
         <td ng-repeat="column in headers"
             ng-show="column.visible"
             ng-click="ok(itemObj)"> {{itemObj[column.name]}}  </td>
@@ -34,10 +35,9 @@
     </table>
   </div>
 
-
 </div>
 <div class="modal-footer">
-  <button class="btn btn-primary" ng-click="ok()">OK</button>
+  <!-- <button class="btn btn-primary" ng-click="ok()">OK</button> -->
   <button class="btn btn-danger" ng-click="cancel()">Cancel</button>
 </div>
 

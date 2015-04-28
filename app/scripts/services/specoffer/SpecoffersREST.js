@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('admissionSystemApp')
-
-  .config( function (RestangularProvider, Constants) {
+angular
+  .module('admissionSystemApp')
+  .config(function (RestangularProvider, Constants) {
 
     RestangularProvider.setBaseUrl(Constants.basicURL);
     RestangularProvider.setDefaultHeaders({
@@ -20,8 +20,8 @@ angular.module('admissionSystemApp')
     });
   });
 
-
-angular.module('admissionSystemApp')
+angular
+  .module('admissionSystemApp')
   .factory('SpecoffersService', ['Restangular', '$q', '$filter',
 
     function (Restangular, $q, $filter) {
@@ -37,7 +37,6 @@ angular.module('admissionSystemApp')
             return element;
           });
         });
-
 
       var objCopy = {};
 
@@ -93,11 +92,10 @@ angular.module('admissionSystemApp')
         }
       }
 
-
-
       function editEntireSpecoffer(newOnj) {
-        var specOfferID = objCopy.specoffer.id;
-        var promiseSpecoffer;
+        var specOfferID = objCopy.specoffer.id,
+          promiseSpecoffer;
+
         if (!angular.equals(newOnj.specoffer, objCopy.specoffer)) {
           promiseSpecoffer = restAngular.one('specoffers', specOfferID).customPUT(newOnj.specoffer);
         }
@@ -123,13 +121,15 @@ angular.module('admissionSystemApp')
         var promises = [];
 
         _.forEach(newArr, function (item) {
-          var promise;
+          var promise,
+            oldItem;
+
           if (!item.specOfferId) {
             item.specOfferId = specOfferID;
             promise = restAngular.one('specoffers', specOfferID).one(route).customPOST(item);
             promises.push(promise);
           } else {
-            var oldItem = _.find(oldArr, {
+            oldItem = _.find(oldArr, {
               'id': item.id
             });
             if (!angular.equals(oldItem, item)) {
@@ -153,8 +153,8 @@ angular.module('admissionSystemApp')
       }
 
       function deleteSpecoffer(objToDelete) {
-        var promises = [];
-        var specOfferID = objToDelete.specoffer.id;
+        var promises = [],
+          specOfferID = objToDelete.specoffer.id;
 
         promises.push(restAngular.one('specoffers', specOfferID).remove());
 

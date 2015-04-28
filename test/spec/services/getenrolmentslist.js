@@ -11,7 +11,7 @@ describe('Service: getEnrolmentsList', function () {
     getEnrolmentsList = _getEnrolmentsList_;
   }));
 
-  it('should do something', function () {
+  xit('should do something', function () {
     expect(!!getEnrolmentsList).toBe(true);
   });
 

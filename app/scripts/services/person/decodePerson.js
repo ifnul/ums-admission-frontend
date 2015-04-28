@@ -1,34 +1,37 @@
 'use strict';
 
-
-angular.module('admissionSystemApp')
+angular
+  .module('admissionSystemApp')
   .factory('personDecodeSvc', function ($q, DictionariesSvc) {
 
     function decode (rawPersons) {
-      var personTypeIdNames = [];
-      var genderTypeIdNames = [];
-      var marriedTypeIdNames = [];
-      var citizenCountryIdNames = [];
-      var residentNames = [undefined, 'інозем.', 'не інозем.'];
-      var isMilitaryNames = [undefined, 'ВЗ', 'не ВЗ'];
-      var isHostelNames = [undefined, 'потреб. гуртож.', ' не потреб. гуртож.'];
+      var personTypeIdNames = [],
+        genderTypeIdNames = [],
+        marriedTypeIdNames = [],
+        citizenCountryIdNames = [],
+        residentNames = [undefined, 'інозем.', 'не інозем.'],
+        isMilitaryNames = [undefined, 'ВЗ', 'не ВЗ'],
+        isHostelNames = [undefined, 'потреб. гуртож.', ' не потреб. гуртож.'];
 
       function pushData (data, array) {
         angular.forEach(data, function (item) {
           array[item.id] = item.name;
         });
       }
-        return $q.all([
+
+      return $q.all([
           DictionariesSvc.getPersonsTypes(),
           DictionariesSvc.getGenderTypes(),
           DictionariesSvc.getMarriedTypes(),
-          DictionariesSvc.getAdminUnits( { adminUnitTypeId: 6 } )
+          DictionariesSvc.getAdminUnits({
+            adminUnitTypeId: 6
+          })
         ])
-        .then(function(res) {
-            pushData(res[0], personTypeIdNames);
-            pushData(res[1], genderTypeIdNames);
-            pushData(res[2], marriedTypeIdNames);
-            pushData(res[3], citizenCountryIdNames);
+        .then(function (res) {
+          pushData(res[0], personTypeIdNames);
+          pushData(res[1], genderTypeIdNames);
+          pushData(res[2], marriedTypeIdNames);
+          pushData(res[3], citizenCountryIdNames);
 
           angular.forEach(rawPersons, function (item) {
             item.personTypeId = personTypeIdNames[item.personTypeId];
@@ -48,4 +51,5 @@ angular.module('admissionSystemApp')
         return decode(rawData);
       }
     };
-});
+  });
+

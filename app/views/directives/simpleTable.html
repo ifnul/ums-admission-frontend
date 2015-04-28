@@ -1,0 +1,20 @@
+<div class="table-responsive">
+	<table class="table table-bordered table-hover ">
+		<thead>
+			<tr>
+				<th ng-repeat="column in headers" ng-show="column.visible">
+					<a>
+						{{column.display}}
+					</a>
+				</th>
+			</tr>
+		</thead>
+		<tbody class="pointer">
+			<tr ng-repeat="itemObj in data">
+				<td ng-repeat="column in headers"
+				ng-show="column.visible"
+				ng-click=""> {{itemObj[column.name]}}  </td>
+			</tr>
+		</tbody>
+	</table>
+</div>

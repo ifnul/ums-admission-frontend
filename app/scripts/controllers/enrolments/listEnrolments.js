@@ -2,27 +2,27 @@
 
 
 angular.module('admissionSystemApp')
-	.controller('ListEnrolmentsCtrl', ['$scope', 'getListEnrolmentsSvc', 'DictionariesSvc', 'baseEnrolmentData', '$q',
-    function($scope, getListEnrolmentsSvc, SpecofferDictionaryService, baseEnrolmentData, $q) {
+	.controller('ListEnrolmentsCtrl', ['$scope', 'getFiltredListSvc', 'DictionariesSvc', 'baseListData', '$q',
+    function ($scope, getFiltredListSvc, SpecofferDictionaryService, baseListData, $q) {
 
       $scope.getEnrolments = function (pageNumber, perPage, filters, sort) {
-        getListEnrolmentsSvc.getListEnrolments(pageNumber, perPage, filters, sort).then(function(res) {
+        getFiltredListSvc.getListEnrolments(pageNumber, perPage, filters, sort).then(function (res) {
           $scope.enrolDecoded = res.data;
           $scope.totalEnrol = res.total;
         });
       };
 
-      $scope.enrolSearch = baseEnrolmentData.search;
-      $scope.enrolHeaders = baseEnrolmentData.headers;
-      $scope.enrolFilters = baseEnrolmentData.filters;
+      $scope.enrolSearch = baseListData.search;
+      $scope.enrolHeaders = baseListData.headers;
+      $scope.enrolFilters = baseListData.filters;
 
       $q.all([
         SpecofferDictionaryService.getEnrolmentsTypes(),
         SpecofferDictionaryService.getAllDepartments({departmentTypeId: 1})
       ])
         .then(function (promisesResult) {
-          baseEnrolmentData.expandFilters(promisesResult[0], 'enrolmentTypeId');
-          baseEnrolmentData.expandFilters(promisesResult[1], 'departmentId');
+          baseListData.expandFilters(promisesResult[0], 'enrolmentTypeId');
+          baseListData.expandFilters(promisesResult[1], 'departmentId');
         });
 
 	}]);

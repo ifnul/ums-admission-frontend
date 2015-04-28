@@ -1,8 +1,10 @@
 'use strict';
 
-angular.module('admissionSystemApp')
-  .controller('ListSpecofferCtrl', ['$scope', '$filter', 'ngTableParams', 'copyTimeperiod', 'SpecoffersService', 'decodeSpecofferSvc', '$modal', 'DictionariesSvc', 'Cookies',
-    function ($scope, $filter, NgTableParams, copyTimeperiod, SpecoffersService, decodeSpecofferSvc, $modal, DictionariesSvc, Cookies) {
+angular
+  .module('admissionSystemApp')
+  .controller('ListSpecofferCtrl', ['$scope', '$filter', 'ngTableParams', 'SpecoffersService',
+    'decodeSpecofferSvc', '$modal', 'DictionariesSvc', 'Cookies', 'baseSpecofferData', 'copyTimeperiod',
+    function ($scope, $filter, NgTableParams, SpecoffersService, decodeSpecofferSvc, $modal, DictionariesSvc, Cookies, baseSpecofferData, copyTimeperiod) {
 
       $scope.isCollapsed = true;
       $scope.sweeper = function () {
@@ -49,16 +51,7 @@ angular.module('admissionSystemApp')
         });
       };
 
-      $scope.headers = [
-        {name: 'num', display: '№', visible: true},
-        {name: 'specialtyId', display: 'Спеціальність', visible: true},
-        {name: 'departmentId', display: 'Структурний підрозділ', visible: true},
-        {name: 'timePeriodCourseId', display: 'Курс зарахування', visible: true},
-        {name: 'specofferTypeId', display: 'Тип пропозиції', visible: true},
-        {name: 'educationFormTypeId', display: 'Форма навчання', visible: true},
-        {name: 'licCount', display: 'Ліцензований обсяг', visible: true},
-        {name: 'stateCount', display: 'Державне замовлення', visible: true}
-      ];
+      $scope.headers = baseSpecofferData.headers;
 
       $scope.openFiltersModal = function (size) {
 
@@ -87,16 +80,20 @@ angular.module('admissionSystemApp')
       });
 
       if ($scope.timeperiod.timePeriodId) {
-        decodeSpecofferSvc.allProposalsDecoded($scope.timeperiod).then(function (data) {
-          $scope.dataNew = data;
+        DictionariesSvc.getAllSpecoffers($scope.timeperiod).then(function (rawSpecoffers) {
+          decodeSpecofferSvc.specofferDecoded(rawSpecoffers).then(function (decodedSpecoffers) {
+            $scope.dataNew = decodedSpecoffers;
+          });
         });
       }
 
       $scope.pickTimePeriod = function () {
         Cookies.setCookie('timeperiod', $scope.timeperiod.timePeriodId, 120);
         DictionariesSvc.clearStorageByRoute('specoffers');
-        decodeSpecofferSvc.allProposalsDecoded($scope.timeperiod).then(function (data) {
-          $scope.dataNew = data;
+        DictionariesSvc.getAllSpecoffers($scope.timeperiod).then(function (rawSpecoffers) {
+          decodeSpecofferSvc.specofferDecoded(rawSpecoffers).then(function (decodedSpecoffers) {
+            $scope.dataNew = decodedSpecoffers;
+          });
         });
       };
       var getData = function () {
@@ -125,8 +122,10 @@ angular.module('admissionSystemApp')
       $scope.delete = function (id) {
         SpecoffersService.deleteEntireSpecoffer(id).then(function() {
           DictionariesSvc.clearStorageByRoute('specoffers');
-          decodeSpecofferSvc.allProposalsDecoded($scope.timeperiod).then(function (data) {
-            $scope.dataNew = data;
+          DictionariesSvc.getAllSpecoffers($scope.timeperiod).then(function (rawSpecoffers) {
+            decodeSpecofferSvc.specofferDecoded(rawSpecoffers).then(function (decodedSpecoffers) {
+              $scope.dataNew = decodedSpecoffers;
+            });
           });
         });
       };

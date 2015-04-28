@@ -2,19 +2,19 @@
 
 describe('Service: personDecodeSvc', function() {
 
-  describe('when I call personDecoded(rawData) method', function(){
+  describe('when I call personDecoded(rawData) method', function() {
     // load the service's module
     beforeEach(module('admissionSystemApp'));
 
     // instantiate service
-    var personDecodeServise;
-    beforeEach(inject(function(_personDecodeServise_) {
-      personDecodeServise = _personDecodeServise_;
+    var personDecodeSvc;
+    beforeEach(inject(function(_personDecodeSvc_) {
+      personDecodeSvc = _personDecodeSvc_;
     }));
 
-    it('decoded data shoul match the pattern', inject(function(personDecodeServise, $httpBackend) {
+    it('decoded data shoul match the pattern', inject(function(personDecodeSvc) {
 
-        // .respond()
+      // .respond()
 
       // expect(foo.setBar).toHaveBeenCalled();
 
@@ -62,9 +62,10 @@ describe('Service: personDecodeSvc', function() {
         'isMilitary': 'ВЗ',
         'isHostel': 'потреб. гуртож.',
         'uri': '/persons/25'
-      }];
-      personDecodeServise.personDecoded(rawData).then(function(data) {
-          expect(data).toEqual(dataDecoded);
+      }]; 
+
+      personDecodeSvc.personDecoded(rawData).then(function(data) {
+        expect(data).toEqual(dataDecoded);
       });
 
     }));

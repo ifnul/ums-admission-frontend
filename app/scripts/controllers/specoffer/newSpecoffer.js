@@ -1,6 +1,5 @@
 'use strict';
 
-
 angular.module('admissionSystemApp')
   .controller('NewSpecofferCtrl', ['$scope', '$stateParams', '$location', 'SpecoffersService', 'DictionariesSvc', 'progressBarService', '$state',
     function ($scope, $stateParams, $location, SpecoffersService, DictionariesSvc, progressBarService, $state) {
