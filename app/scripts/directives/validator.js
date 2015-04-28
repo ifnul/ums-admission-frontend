@@ -18,6 +18,7 @@ angular.module('admissionSystemApp')
         }
 
         var currentForm = formHelper.getCurrentForm(scope);
+
         if (!currentForm || !currentForm.$name) {
           throw 'valBubble requires that a name is assigned to the ng-form containing the validated input';
         }
@@ -38,17 +39,20 @@ angular.module('admissionSystemApp')
     };
   })
 
-  .factory('formHelper', function() {
+  .factory('formHelper', function () {
     return {
-      getCurrentForm: function(scope) {
-        var form = null;
-        var requiredFormProps = ['$error', '$name', '$dirty', '$pristine', '$valid', '$invalid', '$addControl', '$removeControl', '$setValidity', '$setDirty'];
-        var ifContains = function(item) {
+      getCurrentForm: function (scope) {
+        var form = null,
+          p,
+          props,
+         requiredFormProps = ['$error', '$name', '$dirty', '$pristine', '$valid', '$invalid', '$addControl',
+          '$removeControl', '$setValidity', '$setDirty'],
+          ifContains = function (item) {
           return _.contains(props, item);
         };
-        for (var p in scope) {
+        for (p in scope) {
           if (_.isObject(scope[p]) && !_.isFunction(scope[p]) && !_.isArray(scope[p]) && p.substr(0, 1) !== '$') {
-            var props = _.keys(scope[p]);
+            props = _.keys(scope[p]);
             if (props.length < requiredFormProps.length) {
               continue;
             }

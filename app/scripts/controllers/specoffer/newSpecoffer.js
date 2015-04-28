@@ -1,8 +1,9 @@
 'use strict';
 
-angular.module('admissionSystemApp')
-  .controller('NewSpecofferCtrl', ['$scope', '$stateParams', '$location', 'SpecoffersService', 'DictionariesSvc',
-    'progressBarService', '$state',
+
+angular
+  .module('admissionSystemApp')
+  .controller('NewSpecofferCtrl', ['$scope', '$stateParams', '$location', 'SpecoffersService', 'DictionariesSvc', 'progressBarService', '$state',
     function ($scope, $stateParams, $location, SpecoffersService, DictionariesSvc, progressBarService, $state) {
       $scope.entireSpecoffer = {};
       $scope.entireSpecoffer.subjects = [];
@@ -29,16 +30,17 @@ angular.module('admissionSystemApp')
         $scope.entireSpecoffer.specoffer.note = 'some note';
         SpecoffersService.addOrEditSpecoffer(entireSpecoffer).then(function () {
           DictionariesSvc.clearStorageByRoute('specoffers');
-          $location.path('/list-specoffer');
+          $location.path('/#/list-specoffer');
         });
       };
 
-      $scope.deleteSpecoffer = function () {
+      $scope.delete = function () {
         SpecoffersService.deleteEntireSpecoffer().then(function () {
           DictionariesSvc.clearStorageByRoute('specoffers');
-          $location.path('/list-specoffer');
+          $location.path('/#/list-specoffer');
         });
       };
+
 
       $scope.$on('valBubble', function (evt, args) {  // using directive, which is responsible for changes in each input
 
@@ -58,6 +60,9 @@ angular.module('admissionSystemApp')
 
     }]);
 
+
+
+
 angular.module('admissionSystemApp')
   .config(['datepickerConfig', 'datepickerPopupConfig',
     function (datepickerConfig, datepickerPopupConfig) {
@@ -65,3 +70,7 @@ angular.module('admissionSystemApp')
       datepickerConfig.startingDay = '1';
       datepickerPopupConfig.showButtonBar = false;
     }]);
+
+
+
+
