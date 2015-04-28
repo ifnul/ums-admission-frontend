@@ -4,7 +4,8 @@ angular
   .module('admissionSystemApp')
   .controller('ListSpecofferCtrl', ['$scope', '$filter', 'ngTableParams', 'SpecoffersService',
     'decodeSpecofferSvc', '$modal', 'DictionariesSvc', 'Cookies', 'baseSpecofferData', 'copyTimeperiod',
-    function ($scope, $filter, NgTableParams, SpecoffersService, decodeSpecofferSvc, $modal, DictionariesSvc, Cookies, baseSpecofferData, copyTimeperiod) {
+    function ($scope, $filter, NgTableParams, SpecoffersService, decodeSpecofferSvc, $modal, DictionariesSvc, Cookies,
+              baseSpecofferData, copyTimeperiod) {
 
       $scope.isCollapsed = true;
       $scope.sweeper = function () {
@@ -17,11 +18,14 @@ angular
       };
 
       $scope.createNewTimeperiod = function (size) {
-        copyTimeperiod.createTimeperiod($scope.numValue, 'Вступна кампанія' + $scope.numValue, $scope.begDate, $scope.endDate).then(function(data){
+        copyTimeperiod.createTimeperiod($scope.numValue, 'Вступна кампанія' + $scope.numValue, $scope.begDate,
+          $scope.endDate).then(function (data) {
           $scope.createdTimeperiodId = data;
 
           DictionariesSvc.clearStorageByRoute('timeperiods');
-          DictionariesSvc.getTimeperiods({timePeriodTypeId: 1}).then(function (timeperiods) {
+          DictionariesSvc.getTimeperiods({
+            timePeriodTypeId: 1
+          }).then(function (timeperiods) {
             $scope.timeperiods = timeperiods;
           });
         });
@@ -38,7 +42,8 @@ angular
             };
 
             $scope.ok = function () {
-              copyTimeperiod.copyToTimeperiod($scope.selectedTimeperiod, $scope.createdTimeperiodId, $scope.begDate, $scope.endDate);
+              copyTimeperiod.copyToTimeperiod($scope.selectedTimeperiod, $scope.createdTimeperiodId, $scope.begDate,
+                $scope.endDate);
               $modalInstance.close();
             };
 
@@ -74,7 +79,9 @@ angular
       $scope.timeperiod.timePeriodId = Cookies.getCookie('timeperiod');
       $scope.dataNew = [];
 
-      DictionariesSvc.getTimeperiods({timePeriodTypeId: 1}).then(function (timeperiods) {
+      DictionariesSvc.getTimeperiods({
+        timePeriodTypeId: 1
+      }).then(function (timeperiods) {
         $scope.timeperiods = timeperiods;
         $scope.timeperiodsForCopy = timeperiods;
       });
@@ -111,6 +118,7 @@ angular
         }, // length of data
         getData: function ($defer, params) {
           var moreData = getData();
+
           moreData.forEach(function (el, index) {
             el.num = index + 1;
           });
@@ -119,8 +127,8 @@ angular
         }
       });
 
-      $scope.delete = function (id) {
-        SpecoffersService.deleteEntireSpecoffer(id).then(function() {
+      $scope.deleteSpecoffer = function (id) {
+        SpecoffersService.deleteEntireSpecoffer(id).then(function () {
           DictionariesSvc.clearStorageByRoute('specoffers');
           DictionariesSvc.getAllSpecoffers($scope.timeperiod).then(function (rawSpecoffers) {
             decodeSpecofferSvc.specofferDecoded(rawSpecoffers).then(function (decodedSpecoffers) {
@@ -131,7 +139,3 @@ angular
       };
 
     }]);
-
-
-
-

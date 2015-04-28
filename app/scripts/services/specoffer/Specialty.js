@@ -5,7 +5,8 @@ angular.module('admissionSystemApp')
 
     var deferred,
       searchResult = [],
-      specialties = [];
+      specialties = [],
+      service = {};
 
     function fillSpecialtiesArray() {
       if (deferred) {
@@ -22,8 +23,6 @@ angular.module('admissionSystemApp')
       });
       return deferred.promise;
     }
-
-    var service = {};
 
     service.searchSpecialtyByName = function (str) {
       return fillSpecialtiesArray().then(function (specialties) {
@@ -54,6 +53,7 @@ angular.module('admissionSystemApp')
     service.searchSpecialty = function (str) {
       return fillSpecialtiesArray().then(function (specialties) {
         var specialty = null;
+
         angular.forEach(specialties, function (item) {
           if (parseInt(item.id) === parseInt(str)) {
             specialty = item;
@@ -67,6 +67,3 @@ angular.module('admissionSystemApp')
     return service;
 
   }]);
-
-
-
