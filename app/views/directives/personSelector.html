@@ -11,7 +11,7 @@
 				</div>
 			</div>
 
-			<div class="col-xs-8">
+			<div class="col-xs-7">
 				<div class="input-group">
 					<input type="text" class="form-control"
 					ng-model="querySearchBy" 
@@ -19,10 +19,12 @@
 					<span class="input-group-btn">
 						<button type="button" 
 						class="btn btn-primary"
-						ng-click="openModalSpecialty('lg')">Ок</button>
+						ng-click="openModalPeson('lg')">Ок</button>
 					</span>
 				</div>
 			</div>
-
 		</div>
+		
+		<simple-table data="selected" headers="headers"></simple-table> 
+
 	</div>

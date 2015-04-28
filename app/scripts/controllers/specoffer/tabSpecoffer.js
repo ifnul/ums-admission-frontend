@@ -4,11 +4,12 @@ angular.module('admissionSystemApp')
   .controller('tabProposalCtrl', ['$scope', 'DictionariesSvc', 'Cookies', '$q',
     function ($scope, DictionariesSvc, Cookies, $q) {
 
-
       $scope.entireSpecoffer.specoffer.timePeriodId = Cookies.getCookie('timeperiod');
 
       $q.all([
-        DictionariesSvc.getAllDepartments({departmentTypeId: 1}),
+        DictionariesSvc.getAllDepartments({
+          departmentTypeId: 1
+        }),
         DictionariesSvc.getSpecoffersTypes(),
         DictionariesSvc.getEduformTypes(),
         DictionariesSvc.getTimePeriodCourseIds()
@@ -20,4 +21,4 @@ angular.module('admissionSystemApp')
           $scope.timePeriodCourseId = promisesResult[3];
         });
 
-  }]);
+    }]);

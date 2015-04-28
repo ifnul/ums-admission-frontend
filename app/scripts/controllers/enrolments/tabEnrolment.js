@@ -2,27 +2,42 @@
 
 angular.module('admissionSystemApp')
   .controller('TabEnrolmentCtrl',
-	  	function ($scope, DictionariesSvc, baseEnrolmentData, basePersonData) {
+    function ($scope, DictionariesSvc, baseFormData, basePersonData, $q, baseSpecofferData) {
 
-			DictionariesSvc.getAllDepartments({departmentTypeId: 1}).then(function (departments) {
-				$scope.departmentId = departments;
-			});
+      $q.all([
+        DictionariesSvc.getAllDepartments({
+          departmentTypeId: 1
+        }),
+        DictionariesSvc.getEnrolmentsTypes(),
+        DictionariesSvc.getSpecoffersTypes()
+      ])
+        .then(function (promisesResult) {
+          $scope.departmentId = promisesResult[0];
+          $scope.specofferTypes = promisesResult[2];
+          var enrolmentTypes = promisesResult[1];
 
-			DictionariesSvc.getEnrolmentsTypes().then(function (enrolmentsTypes) {
-				$scope.enrolmentTypeId = enrolmentsTypes;
-			});
+          $scope.chiefEnrolTypes = _.filter(enrolmentTypes, function (n) {
+            return !n.parentId;
+          });
 
-			$scope.entireEnrolment.enrolment = {};
+          $scope.updateChildsEnrolTypes = function (chiefID) {
+            $scope.enrolmentTypeId = _.filter(enrolmentTypes, function (n) {
+              return n.parentId === chiefID;
+            });
+          };
+        });
 
-	    // watch entirePerson
-	    $scope.$watch('entireEnrolment.enrolment', function(newVal) {
-	     console.log('entireEnrolment.enrolment watch', newVal);
-	    }, true);
+      $scope.entireEnrolment.enrolment = {};
+      $scope.entireEnrolment.enrolment.specOfferId = 141;
 
-	    $scope.fieldSearchBy = [];
+      $scope.entireEnrolment.enrolment.personId = 33;
+      $scope.entireEnrolment.enrolment.personPaperId = 35; // 22
 
-	    $scope.personSearch = baseEnrolmentData.searchPerson;
-	    $scope.personHeaders = basePersonData.headers;
+      $scope.fieldSearchBy = [];
 
-
-	  });
+      $scope.personSearch = baseFormData.searchPerson;
+      $scope.isedustateOpt = baseFormData.isedustateOpt;
+      $scope.isinterviewOpt = baseFormData.isinterviewOpt;
+      $scope.personHeaders = basePersonData.headers;
+      $scope.specofferHeaders = baseSpecofferData.headers;
+    });

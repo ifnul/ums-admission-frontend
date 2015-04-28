@@ -12,20 +12,14 @@
 	  <div>
 	    <div class="row">
 		    <div class="tabset col-md-9">
-			    <tabset >
-			      <tab heading="Основна інформація">
-			        <div class="top-buffer" ng-include="'views/enrolment/tabsEnrolment/tab_enrolment.html'"></div>
-			      </tab>
-			      <tab heading="Пільги">
-			        <div class="top-buffer" ng-include="'views/enrolment/tabsEnrolment/tab_benefits.html'"></div>
-			      </tab>
-			      <tab heading="Предмети ЗНО">
-			        <div class="top-buffer" ng-include="'views/enrolment/tabsEnrolment/tab_enrolmentsubjects.html'"></div>
-			      </tab>
-			      <tab heading="Статус заяви">
-			        <div class="top-buffer" ng-include="'views/enrolment/tabsEnrolment/tab_statuses.html'"></div>
-			      </tab>
-			    </tabset>
+    			<tabset>
+       	 		<tab 	ng-repeat="t in enrolTabs"
+       	 				 	heading="{{t.heading}}"
+       	 				 	ui-sref="{{t.route}}"
+       	 				 	ui-sref-active="active">
+        		</tab>
+    			</tabset>
+    			<div ui-view></div>
 		    </div>
 	    </div>
 

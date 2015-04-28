@@ -11,7 +11,7 @@ describe('Service: enrolmentsDecode', function () {
     enrolmentsDecode = _enrolmentsDecode_;
   }));
 
-  it('should do something', function () {
+  xit('should do something', function () {
     expect(!!enrolmentsDecode).toBe(true);
   });
 

@@ -1,5 +1,11 @@
 'use strict';
 
+/* 
+  1) clear out adminutins and set root adminuin - country
+  2) upload new adminunit on-select event
+  3) make directive receive adminUnit id from outside and parse to html
+ */
+
 angular.module('admissionSystemApp')
   .directive('adminunitsSelector', function (DictionariesSvc, Restangular) {
 
@@ -12,8 +18,7 @@ angular.module('admissionSystemApp')
 	  		$scope.adminunits = [country];
 	  	});
 
-	   	// clear out adminutins 
-  		$scope.clearAdress = function () {
+  		$scope.clearAdress = function () { // (1)
 	   		Restangular.one('adminunits', 1).get().then(function (country) {
 	  			$scope.adminunits = [country];
 	  		});
@@ -22,21 +27,19 @@ angular.module('admissionSystemApp')
 	  		$scope.disabled = false;
   		};
 
-  		// upload new adminunit on-select event
-  		$scope.adminUtinSelected = function (model, item) {
+  		$scope.adminUtinSelected = function (model, item) { // (2)
   			$scope.wholeAdress.push(item.name);
+        $scope.sendValueOutside(item.id);
 	  		DictionariesSvc.getAdminUnits({parentId: model}).then(function (adminunits) {
 	  			if (adminunits.length < 1) {
 	  				$scope.disabled = true;
-	  				$scope.sendValueOutside($scope.adminunits[0].id);
 	  			} else {
 	  				$scope.adminunits = adminunits;
 	  			}
 	  		});
   		};
 
-  		// make directive receive adminUnit id from outside and parse to html
-  		$scope.parseAdminUnit = function (id) {
+  		$scope.parseAdminUnit = function (id) { // (3)
         $scope.disabled = true;
         var i = 0;
 			  Restangular.one('adminunits', id).get().then(function callBack (adminunits) {
