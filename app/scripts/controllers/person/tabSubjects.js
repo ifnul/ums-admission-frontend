@@ -1,41 +1,42 @@
 'use strict';
 
-angular.module('admissionSystemApp')
-  .controller('tabSubjects', ['$scope', '$modal', '$rootScope', 'DictionariesSvc', function ($scope, $modal, $rootScope, DictionariesSvc) {
-
-
+angular
+  .module('admissionSystemApp')
+  .controller('tabSubjects', ['$scope', '$modal', '$rootScope', 'DictionariesSvc',
+    function ($scope, $modal, $rootScope, DictionariesSvc) {
     // temp data --------begin---------
     $scope.entirePerson.enrolmentsubjects = [
       {
-        "id": 1,
-        "personId": 11,
-        "personPaperId": 3,
-        "enrolmentSubjectId": 3,
-        "mark": 3
+        'id': 1,
+        'personId': 11,
+        'personPaperId': 3,
+        'enrolmentSubjectId': 3,
+        'mark': 3
       },
       {
-        "id": 2,
-        "personId": 11,
-        "personPaperId": 2,
-        "enrolmentSubjectId": 2,
-        "mark": 5
+        'id': 2,
+        'personId': 11,
+        'personPaperId': 2,
+        'enrolmentSubjectId': 2,
+        'mark': 5
       }
     ];
     // temp data --------end---------
 
     $scope.getSubjectTitleById = function (id) {
       var subjectTitle = '';
+
       angular.forEach($scope.subjects, function (subject) {
         if (subject.id === id) {
           subjectTitle = subject.name;
         }
       });
-      return subjectTitle
+      return subjectTitle;
     };
 
     $scope.filterExistsSubjects = function (subject) {
       return !_.find($scope.entirePerson.enrolmentsubjects, function (item) {
-        return item.enrolmentSubjectId == subject.id
+        return item.enrolmentSubjectId == subject.id;
       });
     };
 
@@ -52,6 +53,7 @@ angular.module('admissionSystemApp')
 
     $scope.deleteSubject = function (subject) {
       var index = $scope.entirePerson.enrolmentsubjects.indexOf(subject);
+
       $scope.entirePerson.enrolmentsubjects.splice(index, 1);
     };
 
@@ -62,7 +64,7 @@ angular.module('admissionSystemApp')
         size: 'lg',
         resolve: {
           subjects: function () {
-            return $scope.subjects
+            return $scope.subjects;
           },
           subject: function () {
             return subject;
