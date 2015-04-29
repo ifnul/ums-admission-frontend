@@ -42,9 +42,12 @@ angular.module('admissionSystemApp')
             data: decodedItems,
             total: data.count
           };
-          
+
           deferred.resolve(dataToReturn);
         });
+      })
+      .error(function (msg) {
+        deferred.reject(msg);
       });
       return deferred.promise;
     }

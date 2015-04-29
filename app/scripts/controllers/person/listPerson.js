@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('admissionSystemApp')
-  .controller('ListPersonCtrl', ['$scope', 'personDecodeSvc', 'DictionariesSvc', 'basePersonData', 'Person', '$state',
-    'getFiltredListSvc',
-    function ($scope, personDecodeSvc, DictionariesSvc, basePersonData, Person, $state, getFiltredListSvc) {
+  .controller('ListPersonCtrl', ['$scope', 'personDecodeSvc', 'DictionariesSvc',
+    'basePersonData', 'Person', '$state', 'getFiltredListSvc', 'toaster',
+    function ($scope, personDecodeSvc, DictionariesSvc, basePersonData, Person, $state, getFiltredListSvc, toaster) {
 
       $scope.personDecoded = [];
 
@@ -11,6 +11,8 @@ angular.module('admissionSystemApp')
         getFiltredListSvc.getListPersons(pageNumber, perPage, filters, sort).then(function (res) {
           $scope.personDecoded = res.data;
           $scope.totalPersons = res.total;
+        }, function (resp) {
+          toaster.pop('error', resp.messageType, resp.message);
         });
       };
 
@@ -30,9 +32,8 @@ angular.module('admissionSystemApp')
       };
 
       $scope.changePerson = function (id) {
-        $state.go('edit-person', {
+        $state.go('person.edit.main', {
           id: id
         });
       };
-
     }]);

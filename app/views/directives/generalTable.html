@@ -22,7 +22,7 @@
         <div class="input-group">
             <input type="text" class="form-control"
                    ng-model="querySearchBy"
-                   placeholder="Шукати по {{fieldSearchBy.title}}&hellip;">
+                   placeholder="Шукати по {{::fieldSearchBy.title}}&hellip;">
             <span class="input-group-btn">
                 <button type="button"
                         class="btn btn-primary"
@@ -36,9 +36,8 @@
 
     <ul class="list-group" ng-repeat="(key, value) in userFilterPick">
         <li class="list-group-item"
-
             ng-repeat="item in value">
-            {{item.name}}
+            {{::item.name}}
               <button type="button"
                       class="close"
                       aria-label="Close"
@@ -52,7 +51,7 @@
       <accordion-group  ng-repeat="group in filters track by $index"
                         is-open="group.open">
         <accordion-heading>
-           {{group.title}}
+           {{::group.title}}
            <i class="pull-right glyphicon"
               ng-class="{'glyphicon-chevron-down': group.open, 'glyphicon-chevron-right': !group.open }"> </i>
         </accordion-heading>
@@ -60,7 +59,7 @@
               ng-repeat="opt in group.content">
           <label> <input type="checkbox"
                   checklist-model="userFilterPick[group.property]"
-                  checklist-value="{id: opt.id, length: group.length, name: opt.name}"> {{opt.name}}
+                  checklist-value="{id: opt.id, length: group.length, name: opt.name}"> {{::opt.name}}
           </label>
         </div>
       </accordion-group>
@@ -79,7 +78,7 @@
     </p>
   </div> <!-- end filter -->
 
-  <div class="col-sm-12 col-md-10  content-data ">
+  <div class="col-sm-12 col-md-10  content-data">
     <div class="panel panel-default ">
       <div class="panel-heading">
         <button type="button"
@@ -87,8 +86,8 @@
                 ng-click="hideFilterFunc()" >
                 <i class="fa fa-filter"></i>
         </button>
-        <a href="{{linkToNewItem}}" class="col-md-offset-1">
-          <button type="button" class="btn btn-success "><i class="fa fa-plus"></i> {{newItemLinkTitle}}</button>
+        <a href="{{::linkToNewItem}}" class="col-md-offset-1">
+          <button type="button" class="btn btn-success "><i class="fa fa-plus"></i> {{::newItemLinkTitle}}</button>
         </a>
         <button type="button"
                 class="field-chooser-button pull-right btn btn-primary"
@@ -100,10 +99,10 @@
           <table class="table table-bordered table-hover ">
            <thead>
             <tr>
-              <td><input type="checkbox"></td>
+              <!-- <td><input type="checkbox"></td> -->
               <th ng-repeat="column in headers track by $index" ng-show="column.visible">
                 <a ng-click="sort(column.name, $event)">
-                  {{column.display}} <i class="fa fa-sort"></i>
+                  {{::column.display}} <i class="fa fa-sort"></i>
                 </a>
               </th>
               <td></td>
@@ -111,23 +110,24 @@
           </thead>
           <tbody class="pointer">
             <tr ng-repeat="itemObj in data track by $index">
-              <td> <input type="checkbox"> </td>
+              <!-- <td> <input type="checkbox"> </td> -->
               <td ng-repeat="column in headers track by $index"
                   ng-show="column.visible"
                   ng-click="setSelected = itemObj"> {{itemObj[column.name]}}  </td>
-              <td>
+             
+              <td class="content-data_manage-buttons">
 
-              <button class="btn btn-xs btn-warning"
-                      ng-show="onEdit"
-                      ng-click="changeItem(itemObj)">
-                <i class="fa fa-pencil-square-o"></i>
-              </button>
+                <button class="btn btn-xs btn-warning"
+                        ng-show="onChange"
+                        ng-click="onChange({id: itemObj.id})">
+                  <i class="fa fa-pencil-square-o"></i>
+                </button>
 
-              <button class="btn btn-xs btn-danger"
-                      ng-show="onDelete"
-                      ng-click="deleteItem(itemObj)">
-                <i class="fa fa-times"></i>
-              </button>
+                <button class="btn btn-xs btn-danger"
+                        ng-show="onDelete"
+                        ng-click="onDelete({id: itemObj.id})">
+                  <i class="fa fa-times"></i>
+                </button>
             </td>
           </tr>
           </tbody>
@@ -156,7 +156,7 @@
                 type="button"
                 ng-click="itemPerPageChanged(opt);"
                 btn-radio="opt"
-                >{{opt}}</button >
+                >{{::opt}}</button >
       </div>
     </div>
   </div>  <!-- end content data -->

@@ -10,7 +10,9 @@ angular
     'ngSanitize',
     'ui.select',
     'loadingSpinner',
-    'checklist-model'
+    'checklist-model',
+    'toaster',
+    'ngAnimate'
   ])
 
   .config(function ($stateProvider, $urlRouterProvider) {
@@ -30,88 +32,170 @@ angular
         templateUrl: '../views/specoffer/new_specoffer.html',
         controller: 'NewSpecofferCtrl'
       })
-      .state('list-person', {
-        url: '/list-person',
-        templateUrl: '../views/person/list_person.html',
-        controller: 'ListPersonCtrl'
-      })
-      .state('new-person', {
-        url: '/new-person',
-        templateUrl: '../views/person/new_person.html',
-        controller: 'NewPersonCtrl'
-      })
       .state('dictionaries', {
         url: '/dictionaries',
         templateUrl: 'views/dictionaries.html',
         controller: 'dictionaryCtrl'
       })
-      .state('edit-person', {
-        url: '/edit-person/:id',
-        templateUrl: '../views/person/new_person.html',
-        controller: 'NewPersonCtrl'
-      })
-      .state('list-enrolments', {
-        url: '/list-enrolments',
-        templateUrl: '../views/enrolment/list_enrolments.html',
-        controller: 'ListEnrolmentsCtrl'
-      })
 
-    /** ----- new-enrolment view ----- **/
-      .state('new-enrolment', {
-        url: '/new-enrolment',
-        templateUrl: '../views/enrolment/new_enrolment.html',
-        controller: 'NewEnrolmentCtrl'
+      //////////////////////////////////////////////////////////
+      // ----------------PERSONS-----------------------------///
+      //////////////////////////////////////////////////////////
+      .state('person', {
+        url: '/person',
+        abstract: true,
+        template: '<ui-view/>'
       })
-      .state('new-enrolment.tab-enrolment', {
-        url: '/tab-enrolment',
-        params: {
-          personId: null
-        },
-        templateUrl: '../views/enrolment/tabsEnrolment/tab_enrolment.html',
-        controller: 'TabEnrolmentCtrl'
+        .state('person.list', {
+          url: '/list',
+          templateUrl: '../views/person/list_person.html',
+          controller: 'ListPersonCtrl'
+        })
+        /** ----- new person ----- **/
+        .state('person.new', {
+          url: '/new',
+          templateUrl: '../views/person/new_person.html',
+          controller: 'NewPersonCtrl'
+        })
+          .state('person.new.main', {
+            url: '/main',
+            templateUrl: '../views/person/tabsPerson/tab_person.html',
+            controller: 'TabPersonCtrl'
+          })
+          .state('person.new.addresses', {
+            url: '/addresses',
+            templateUrl: '../views/person/tabsPerson/tab_addresses.html',
+            controller: 'TabAdressesCtrl'
+          })
+          .state('person.new.contacts', {
+            url: '/contacts',
+            templateUrl: '../views/person/tabsPerson/tab_contacts.html',
+            controller: ''
+          })
+          .state('person.new.papers', {
+            url: '/papers',
+            templateUrl: '../views/person/tabsPerson/tab_papers.html',
+            controller: ''
+          })
+          .state('person.new.personsubjects', {
+            url: '/personsubjects',
+            templateUrl: '../views/person/tabsPerson/tab_personsubjects.html',
+            controller: ''
+          })
+          .state('person.new.enrolments', {
+            url: '/enrolments',
+            templateUrl: '../views/person/tabsPerson/tab_enrolments.html',
+            controller: 'tabSubjects'
+          })
+        /** ----- edit person ----- **/
+        .state('person.edit', {
+          url: '/edit/:id',
+          templateUrl: '../views/person/new_person.html',
+          controller: 'NewPersonCtrl'
+        })
+          .state('person.edit.main', {
+            url: '/main',
+            templateUrl: '../views/person/tabsPerson/tab_person.html',
+            controller: 'TabPersonCtrl'
+          })
+          .state('person.edit.addresses', {
+            url: '/addresses',
+            templateUrl: '../views/person/tabsPerson/tab_addresses.html',
+            controller: 'TabAdressesCtrl'
+          })
+          .state('person.edit.contacts', {
+            url: '/contacts',
+            templateUrl: '../views/person/tabsPerson/tab_contacts.html',
+            controller: ''
+          })
+          .state('person.edit.papers', {
+            url: '/papers',
+            templateUrl: '../views/person/tabsPerson/tab_papers.html',
+            controller: ''
+          })
+          .state('person.edit.personsubjects', {
+            url: '/personsubjects',
+            templateUrl: '../views/person/tabsPerson/tab_personsubjects.html',
+            controller: ''
+          })
+          .state('person.edit.enrolments', {
+            url: '/enrolments',
+            templateUrl: '../views/person/tabsPerson/tab_enrolments.html',
+            controller: 'tabSubjects'
+          })
+
+      //////////////////////////////////////////////////////////
+      // ----------------ENROLMENTS--------------------------///
+      //////////////////////////////////////////////////////////
+      .state('enrolment', {
+        url: '/enrolment',
+        abstract: true,
+        template: '<ui-view/>'
       })
-      .state('new-enrolment.tab-benefits', {
-        url: '/tab-benefits',
-        templateUrl: '../views/enrolment/tabsEnrolment/tab_benefits.html',
-        controller: ''
-      })
-      .state('new-enrolment.tab-enrolmentsubjects', {
-        url: '/tab-enrolmentsubjects',
-        templateUrl: '../views/enrolment/tabsEnrolment/tab_enrolmentsubjects.html',
-        controller: ''
-      })
-      .state('new-enrolment.tab-statuses', {
-        url: '/tab-statuses',
-        templateUrl: '../views/enrolment/tabsEnrolment/tab_statuses.html',
-        controller: ''
-      })
-    /** ----- edit-enrolment view ----- **/
-      .state('edit-enrolment', {
-        url: '/edit-enrolment/:id',
-        templateUrl: '../views/enrolment/new_enrolment.html',
-        controller: 'NewEnrolmentCtrl'
-      })
-      .state('edit-enrolment.tab-enrolment', {
-        url: '/tab-enrolment',
-        templateUrl: '../views/enrolment/tabsEnrolment/tab_enrolment.html',
-        controller: 'TabEnrolmentCtrl'
-      })
-      .state('edit-enrolment.tab-benefits', {
-        url: '/tab-benefits',
-        templateUrl: '../views/enrolment/tabsEnrolment/tab_benefits.html',
-        controller: ''
-      })
-      .state('edit-enrolment.tab-enrolmentsubjects', {
-        url: '/tab-enrolmentsubjects',
-        templateUrl: '../views/enrolment/tabsEnrolment/tab_enrolmentsubjects.html',
-        controller: ''
-      })
-      .state('edit-enrolment.tab-statuses', {
-        url: '/tab-statuses',
-        templateUrl: '../views/enrolment/tabsEnrolment/tab_statuses.html',
-        controller: ''
-      });
-    $urlRouterProvider.otherwise('/list-specoffer');
+        .state('enrolment.list', {
+          url: '/list',
+          templateUrl: '../views/enrolment/list_enrolments.html',
+          controller: 'ListEnrolmentsCtrl'
+        })
+        /** ----- new enrolment ----- **/
+        .state('enrolment.new', {
+          url: '/new',
+          templateUrl: '../views/enrolment/new_enrolment.html',
+          controller: 'NewEnrolmentCtrl'
+        })
+          .state('enrolment.new.main', {
+            url: '/main',
+            templateUrl: '../views/enrolment/tabsEnrolment/tab_enrolment.html',
+            controller: 'TabEnrolmentCtrl',
+            params: {
+              personId: null
+            }
+          })
+          .state('enrolment.new.benefits', {
+            url: '/benefits',
+            templateUrl: '../views/enrolment/tabsEnrolment/tab_benefits.html',
+            controller: ''
+          })
+          .state('enrolment.new.enrolmentsubjects', {
+            url: '/enrolmentsubjects',
+            templateUrl: '../views/enrolment/tabsEnrolment/tab_enrolmentsubjects.html',
+            controller: ''
+          })
+          .state('enrolment.new.statuses', {
+            url: '/statuses',
+            templateUrl: '../views/enrolment/tabsEnrolment/tab_statuses.html',
+            controller: ''
+          })
+        /** ----- edit enrolment ----- **/
+        .state('enrolment.edit', {
+          url: '/edit/:id',
+          templateUrl: '../views/enrolment/new_enrolment.html',
+          controller: 'NewEnrolmentCtrl'
+        })
+          .state('enrolment.edit.main', {
+            url: '/main',
+            templateUrl: '../views/enrolment/tabsEnrolment/tab_enrolment.html',
+            controller: 'TabEnrolmentCtrl'
+          })
+          .state('enrolment.edit.benefits', {
+            url: '/benefits',
+            templateUrl: '../views/enrolment/tabsEnrolment/tab_benefits.html',
+            controller: ''
+          })
+          .state('enrolment.edit.enrolmentsubjects', {
+            url: '/enrolmentsubjects',
+            templateUrl: '../views/enrolment/tabsEnrolment/tab_enrolmentsubjects.html',
+            controller: ''
+          })
+          .state('enrolment.edit.statuses', {
+            url: '/statuses',
+            templateUrl: '../views/enrolment/tabsEnrolment/tab_statuses.html',
+            controller: ''
+          });
+    $urlRouterProvider
+      .when('/person', '/person/list')
+      .when('/enrolment', '/enrolment/list')
+      .otherwise('/list-specoffer');
   })
 
   .config(function (uiSelectConfig) {

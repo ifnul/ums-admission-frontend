@@ -1,16 +1,19 @@
 'use strict';
 
-
 angular.module('admissionSystemApp')
-	.controller('ListEnrolmentsCtrl', ['$scope', 'getFiltredListSvc', 'DictionariesSvc', 'baseListData', '$q',
-    function ($scope, getFiltredListSvc, SpecofferDictionaryService, baseListData, $q) {
+	.controller('ListEnrolmentsCtrl', ['$scope', 'getFiltredListSvc', 'DictionariesSvc',
+    'baseListData', '$q', 'toaster', '$state',
+    function ($scope, getFiltredListSvc, SpecofferDictionaryService, baseListData, $q, toaster, $state) {
 
       $scope.getEnrolments = function (pageNumber, perPage, filters, sort) {
         getFiltredListSvc.getListEnrolments(pageNumber, perPage, filters, sort).then(function (res) {
           $scope.enrolDecoded = res.data;
           $scope.totalEnrol = res.total;
+        }, function (resp) {
+          toaster.pop('error', resp.messageType, resp.message);
         });
       };
+      $scope.demoClickedToasts = [];
 
       $scope.enrolSearch = baseListData.search;
       $scope.enrolHeaders = baseListData.headers;
@@ -18,11 +21,21 @@ angular.module('admissionSystemApp')
 
       $q.all([
         SpecofferDictionaryService.getEnrolmentsTypes(),
-        SpecofferDictionaryService.getAllDepartments({departmentTypeId: 1})
+        SpecofferDictionaryService.getAllDepartments({
+          departmentTypeId: 1
+        })
       ])
         .then(function (promisesResult) {
           baseListData.expandFilters(promisesResult[0], 'enrolmentTypeId');
           baseListData.expandFilters(promisesResult[1], 'departmentId');
         });
+      $scope.deleteEnrol = function (id) {
+        console.log('delete enrol with id:', id);
+      };
+      $scope.changeEnrol = function (id) {
+        $state.go('enrolment.edit.main', {
+          id: id
+        });
+      };
+    }]);
 
-	}]);

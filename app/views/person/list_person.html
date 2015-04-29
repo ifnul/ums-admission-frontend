@@ -13,9 +13,9 @@
                 headers="headers"
                 getdata="getPersons(currentPage, itemsPerPage, userFilterPick, sort)"
                 newItemLinkTitle ="Додати персону"
-                linkToNewItem="#/new-person"
+                linkToNewItem="#/person/new/main"
                 on-delete="deletePerson(id)"
-                on-edit="changePerson(id)"
+                on-change="changePerson(id)"
                 total="{{totalPersons}}">
   </general-table>
 

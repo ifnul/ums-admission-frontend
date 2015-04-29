@@ -8,6 +8,8 @@
 angular
   .module('admissionSystemApp')
   .directive('paperSelector', function () {
+
+    paperSelectorDirectiveCtrl.$inject = ['$scope', 'getPersonPapersSvc'];
     function paperSelectorDirectiveCtrl($scope, getPersonPapersSvc) {
       $scope.papertypeId = getPersonPapersSvc.getRightPapersTypes;
 

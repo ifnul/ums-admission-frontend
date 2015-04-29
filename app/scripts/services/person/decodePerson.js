@@ -2,7 +2,7 @@
 
 angular
   .module('admissionSystemApp')
-  .factory('personDecodeSvc', function ($q, DictionariesSvc) {
+  .factory('personDecodeSvc', ['$q', 'DictionariesSvc', function ($q, DictionariesSvc) {
 
     function decode (rawPersons) {
       var personTypeIdNames = [],
@@ -51,5 +51,5 @@ angular
         return decode(rawData);
       }
     };
-  });
+  }]);
 

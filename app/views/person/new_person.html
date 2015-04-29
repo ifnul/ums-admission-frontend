@@ -15,26 +15,14 @@
   <div>
     <div class="row">
       <div class="tabset col-md-9">
-        <tabset>
-          <tab heading="Основна інформація">
-            <div class="top-buffer" ng-include="'views/person/tabsPerson/tab_person.html'"></div>
-          </tab>
-          <tab heading="Адреса">
-            <div class="top-buffer" ng-include="'views/person/tabsPerson/tab_addresses.html'"></div>
-          </tab>
-          <tab heading="Контакти">
-            <div class="top-buffer" ng-include="'views/person/tabsPerson/tab_contacts.html'"></div>
-          </tab>
-          <tab heading="Документи">
-            <div class="top-buffer" ng-include="'views/person/tabsPerson/tab_papers.html'"></div>
-          </tab>
-          <tab heading="Предмети ЗНО">
-            <div class="top-buffer" ng-include="'views/person/tabsPerson/tab_enrolmentsubjects.html'"></div>
-          </tab>
-          <tab heading="Заяви">
-            <div class="top-buffer" ng-include="'views/person/tabsPerson/tab_enrolments.html'"></div>
-          </tab>
-        </tabset>
+          <tabset>
+            <tab  ng-repeat="t in personTabs"
+                  heading="{{t.heading}}"
+                  ng-click="go(t.route)"
+                  ui-sref-active="active">
+            </tab>
+          </tabset>
+          <div ui-view></div>
       </div>
     </div>
 

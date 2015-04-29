@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('admissionSystemApp')
-
+angular
+  .module('admissionSystemApp')
   .config(function (RestangularProvider, Constants) {
 
     RestangularProvider.setBaseUrl(Constants.basicURL);
@@ -20,7 +20,8 @@ angular.module('admissionSystemApp')
     });
   });
 
-angular.module('admissionSystemApp')
+angular
+  .module('admissionSystemApp')
   .factory('SpecoffersService', ['Restangular', '$q', '$filter',
 
     function (Restangular, $q, $filter) {
