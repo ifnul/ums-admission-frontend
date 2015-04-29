@@ -33,7 +33,7 @@ angular
         deferred.resolve(storage[route]);
       } else {
         storage[route] = [];
-        limit = 300,
+        limit = 300;
         offset = 0;
 
         $http(requestConfig(route, limit, offset, customParams)).success(function callBack (data) {
@@ -90,9 +90,6 @@ angular
       getBenefitsTypes: function () {
         return getLargeDictionary('benefits/types');
       },
-      clearStorage: function () {
-        storage = {};
-      },
       clearStorageByRoute: function (route) {
         if (storage[route]) {
           delete storage[route];
@@ -125,20 +122,11 @@ angular
       getStreetsTypes: function () {
         return getLargeDictionary('streets/types');
       },
-      getAssets: function () {
-        return getLargeDictionary('assets');
-      },
-      getLanguages: function () {
-        return getLargeDictionary('languages');
-      },
       getContactsTypes: function () {
         return getLargeDictionary('contacts/types');
       },
       getPaperTypes: function (params) {
         return getLargeDictionary('papers/types', params, false);
-      },
-      getAllPapers: function (params) {
-        return getLargeDictionary('persons/papers', params, false);
       },
       getPaperUsages: function () {
         return getLargeDictionary('papers/usages');
@@ -166,6 +154,9 @@ angular
       },
       getWavesTypes: function () {
         return getLargeDictionary('wave/types');
+      },
+      getEnrolments: function (params) {
+        return getLargeDictionary('enrolments', params, false);
       }
     };
   }]);

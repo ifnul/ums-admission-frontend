@@ -7,6 +7,7 @@
 						{{column.display}}
 					</a>
 				</th>
+        <td ng-show="isChange"></td>
 			</tr>
 		</thead>
 		<tbody class="pointer">
@@ -14,6 +15,12 @@
 				<td ng-repeat="column in headers"
 				ng-show="column.visible"
 				ng-click=""> {{itemObj[column.name]}}  </td>
+        <td ng-show="isChange">
+          <button class="btn btn-xs btn-warning"
+                  ng-click="onChange({id: itemObj.id})">
+            <i class="fa fa-pencil-square-o"></i>
+          </button>
+        </td>
 			</tr>
 		</tbody>
 	</table>

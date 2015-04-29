@@ -1,6 +1,6 @@
 	<div class="form-group">
 		<div class="row">
-			 
+
 			<div class="col-xs-4">
 				<div class="form-group">
 						<select class="form-control"
@@ -14,17 +14,17 @@
 			<div class="col-xs-7">
 				<div class="input-group">
 					<input type="text" class="form-control"
-					ng-model="querySearchBy" 
+					ng-model="querySearchBy"
 					placeholder="Шукати по {{fieldSearchBy.title}} &hellip;">
 					<span class="input-group-btn">
-						<button type="button" 
+						<button type="button"
 						class="btn btn-primary"
 						ng-click="openModalPeson('lg')">Ок</button>
 					</span>
 				</div>
 			</div>
 		</div>
-		
-		<simple-table data="selected" headers="headers"></simple-table> 
+
+		<simple-table is-change="false" data="selected" headers="headers"></simple-table>
 
 	</div>

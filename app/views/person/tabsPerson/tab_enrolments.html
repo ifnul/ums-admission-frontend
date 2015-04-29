@@ -1,3 +1,14 @@
-<!-- <div ng-controller="TabEnrolmentsCtrl"> -->
-	<p>This is the tab_enrolments view.</p>
-<!-- </div> -->
+<div ng-controller="TabPersonEnrolmentsCtrl">
+  <div class="form-group">
+    <button class="btn btn-default bottom-buffer" ng-click="newEnrolment()">
+      <i class="fa fa-plus text-primary"></i> Додати заяву
+    </button>
+
+    <simple-table ng-show="enrolments.length"
+                  data="enrolments"
+                  headers="headers"
+                  is-change="true"
+                  on-change="editEnrolment(id)"></simple-table>
+    <h4 ng-show="!enrolments.length">У даної персони немає заяв</h4>
+  </div>
+</div>
