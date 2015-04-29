@@ -2,7 +2,15 @@
 
 angular.module('admissionSystemApp')
   .controller('TabEnrolmentCtrl',
-    function ($scope, DictionariesSvc, baseFormData, basePersonData, $q, baseSpecofferData) {
+    function ($scope, DictionariesSvc, baseFormData, basePersonData, $q, baseSpecofferData, $stateParams) {
+
+      if ($stateParams.personId) {
+        $scope.personId = $stateParams.personId;
+      }
+
+      if ($stateParams.id) {
+        $scope.enrolmentId = $stateParams.id;
+      }
 
       $q.all([
         DictionariesSvc.getAllDepartments({
