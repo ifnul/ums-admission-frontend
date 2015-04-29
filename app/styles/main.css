@@ -80,10 +80,6 @@ table td a:hover {
 
 .buttonForCollapse {width: 100%}
 
-/* Modal layout for choosing table fields in general-table */
-
-
-
  /* Modal layout for choosing table fields in /list-person/ */
 
 #modalHeaderChooser .modal-body {
@@ -95,13 +91,24 @@ table td a:hover {
   display: block;
 }
 
-/* Person table direcive  */
+@media (max-width: 1250px) {
+  .panel-title {
+    font-size: 12px;
+  }
+}
+
+
+/* General table direcive  */
 
 .pointer tr {
   cursor: pointer;
 }
 .table-footer .pagination-sm{
   margin: 0;
+}
+
+.content-data_manage-buttons {
+  min-width: 70px;
 }
 
 /* table header */

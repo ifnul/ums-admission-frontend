@@ -3,7 +3,7 @@
 angular.module('admissionSystemApp')
   .factory('decodeSpecofferSvc', ['$q', 'DictionariesSvc', function ($q, DictionariesSvc) {
 
-    function allSpecofferDecoded(rawSpecoffers) {
+    function allSpecofferDecoded (rawSpecoffers) {
       var specialtyNames = [],
         departmentNames = [],
         timePeriodCourseNames = [],

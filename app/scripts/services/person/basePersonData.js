@@ -182,5 +182,49 @@ angular
         display: 'Мат. відп',
         visible: false
       }
-    ]
+    ],
+    tabs: [
+      {
+        heading: 'Основна інформація',
+        route: {
+          new: 'person.new.main',
+          edit: 'perosn/edit/main'
+        }
+      },
+      {
+        heading: 'Адреса',
+        route: {
+          new: 'person.new.addresses',
+          edit: 'perosn.edit.addresses'
+        }
+      },
+      {
+        heading: 'Контакти',
+        route: {
+          new: 'person.new.contacts',
+          edit: 'perosn.edit.contacts'
+        }
+      },
+      {
+        heading: 'Документи',
+        route: {
+          new: 'person.new.papers',
+          edit: 'perosn.edit.papers'
+        }
+      },
+      {
+        heading: 'Предмети ЗНО',
+        route: {
+          new: 'person.new.personsubjects',
+          edit: 'perosn.edit.personsubjects'
+        }
+      },
+      {
+        heading: 'Заяви',
+        route: {
+          new: 'person.new.enrolments',
+          edit: 'perosn.edit.enrolments'
+        }
+      }
+   ]
   });

@@ -15,7 +15,7 @@
     			<tabset>
        	 		<tab 	ng-repeat="t in enrolTabs"
        	 				 	heading="{{t.heading}}"
-       	 				 	ui-sref="{{t.route}}"
+       	 				 	ng-click="go(t.route)"
        	 				 	ui-sref-active="active">
         		</tab>
     			</tabset>

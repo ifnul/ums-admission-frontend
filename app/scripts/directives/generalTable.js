@@ -3,6 +3,8 @@
 angular
 	.module('admissionSystemApp')
   .directive('generalTable', function () {
+
+    personTableController.$inject = ['$scope'];
     function personTableController($scope) {
       var index,
         searchObj;
@@ -48,17 +50,6 @@ angular
           userFilterPick: $scope.userFilterPick
         });
       };
-      $scope.deleteItem = function (item) {
-        $scope.onDelete({
-          id: item.id
-        });
-      };
-
-      $scope.changeItem = function (item) {
-        $scope.onEdit({
-          id: item.id
-        });
-      };
 
       $scope.itemPerPageChanged($scope.itemsPerPage);
     }
@@ -67,6 +58,7 @@ angular
 
       scope.newItemLinkTitle = attr.newitemlinktitle;
       scope.linkToNewItem = attr.linktonewitem;
+      scope.linkToEditItem = attr.linktoedititem;
 
       // show or hide filter div
       scope.hideFilter = false;
@@ -121,10 +113,10 @@ angular
         getdata: '&?',
         total: '@?',
         onDelete: '&?',
-        onEdit: '&?'
+        onChange: '&?'
       }
     };
-    
+
     return directive;
   });
 

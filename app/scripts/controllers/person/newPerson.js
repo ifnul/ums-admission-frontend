@@ -1,8 +1,9 @@
 'use strict';
 
 angular.module('admissionSystemApp')
-  .controller('NewPersonCtrl', ['$scope', '$stateParams', 'Person', '$location', 'DictionariesSvc',
-    function ($scope, $stateParams, Person, $location, DictionariesSvc) {
+  .controller('NewPersonCtrl', ['$scope', '$stateParams', 'Person', '$location',
+    'DictionariesSvc', '$state', 'basePersonData',
+    function ($scope, $stateParams, Person, $location, DictionariesSvc, $state, basePersonData) {
 
       $scope.entirePerson = {};
       $scope.entirePerson.person = {};
@@ -51,6 +52,18 @@ angular.module('admissionSystemApp')
           DictionariesSvc.clearStorageByRoute('persons');
           $location.path('/list-person');
         });
+      };
+
+      $scope.personTabs = basePersonData.tabs;
+
+      $scope.go = function (route) {
+        if ($stateParams.id) {
+          $state.go(route.edit, {
+            id: $stateParams.id
+          });
+        } else {
+          $state.go(route.new);
+        }
       };
 
     }]);

@@ -13,7 +13,9 @@
                 headers="enrolHeaders"
                 getdata="getEnrolments(currentPage, itemsPerPage, userFilterPick, sort)"
                 newItemLinkTitle ="Додати заяву"
-                linkToNewItem="#/new-enrolment/tab-enrolment"
-                total="{{totalEnrol}}">
+                linkToNewItem="#/enrolment/new/main"
+                total="{{totalEnrol}}"
+                on-delete="deleteEnrol(id)"
+                on-change="changeEnrol(id)">
   </general-table>
 </div>

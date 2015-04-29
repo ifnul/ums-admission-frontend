@@ -4,6 +4,7 @@ angular
   .module('admissionSystemApp')
   .directive('specofferSelector', function () {
 
+    specofferSelectorDirectiveCtrl.$inject = ['$scope', '$modal', 'DictionariesSvc', 'decodeSpecofferSvc', 'Restangular'];
     function specofferSelectorDirectiveCtrl ($scope, $modal, DictionariesSvc, decodeSpecofferSvc, Restangular) {
       $scope.searchBy = {};
       var modalInstance;
