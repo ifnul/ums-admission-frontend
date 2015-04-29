@@ -3,22 +3,25 @@
 angular.module('admissionSystemApp')
 
   .factory('SubjectsSvc', ['$http', '$q', 'DictionariesSvc', function ($http, $q, DictionariesSvc) {
-    var flagForFirstFunction = 0;
-    var data = [];
-    var chiefSubjectsArray = [];
-    var subjectsForParentArray = [];
-    var chiefSubjects = $q.defer();
-    var subjectsForParent = $q.defer();
-
+    var flagForFirstFunction = 0,
+      data = [],
+      chiefSubjectsArray = [],
+      subjectsForParentArray = [],
+      chiefSubjects = $q.defer(),
+      subjectsForParent = $q.defer(),
+      getChiefSubjects,
+      i,
+      y;
     //Get chief subjects function
-    var getChiefSubjects = function () {
+
+    getChiefSubjects = function () {
 
       if (flagForFirstFunction === 0) {
         flagForFirstFunction += 1;
         DictionariesSvc.getAllSubjects().then(function (res) {
           angular.extend(data, res);
 
-          for (var i = 0; i < data.length; i++) {
+          for (i = 0; i < data.length; i++) {
             if (!data[i].hasOwnProperty('hasChildren')) {
               data[i].hasChildren = false;
               if (data[i].hasOwnProperty('parentId')) {
@@ -26,9 +29,12 @@ angular.module('admissionSystemApp')
               }
             }
           }
-          for (var y = 0; y < data.length; y++) {
+          for (y = 0; y < data.length; y++) {
             if (!data[y].hasOwnProperty('parentId')) {
-              chiefSubjectsArray.push({id: data[y].id, name: data[y].name, hasChildren: data[y].hasChildren});
+              chiefSubjectsArray.push({
+                id: data[y].id,
+                name: data[y].name,
+                hasChildren: data[y].hasChildren});
             }
           }
 
@@ -44,14 +50,19 @@ angular.module('admissionSystemApp')
     var getSubjectsForParentFunction = function (id) {
 
       getChiefSubjects().then(function () {
-        var i, y;
+        var i,
+          y;
         subjectsForParentArray.length = 0;
         for (i = 0; i < data.length; i++) {
           if (data[i].id === id) {
             if (data[i].hasChildren) {
               for (y = 0; y < data.length; y++) {
                 if (data[y].parentId === id) {
-                  subjectsForParentArray.push({id: data[y].id, name: data[y].name, parentId: data[y].parentId});
+                  subjectsForParentArray.push({
+                    id: data[y].id,
+                    name: data[y].name,
+                    parentId: data[y].parentId
+                  });
                 }
               }
               break;

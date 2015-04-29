@@ -19,7 +19,7 @@
         </tr>
         <tr ng-repeat="subj in viewSubjects">
           <td> {{ subj.subject}}</td>
-          <td>{{subj.addName || "&mdash;"}}</td>
+          <td>{{subj.addName || dash}}</td>
           <td> {{subj.isMajor ? 'Так' : 'Нi'}}</td>
           <td> {{ subj.alternative ? 'Так' : 'Нi'}}</td>
           <td> {{subj.weightSubject}}</td>
