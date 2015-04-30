@@ -4,8 +4,10 @@ angular
 	.module('admissionSystemApp')
   .directive('generalTable', function () {
 
-    personTableController.$inject = ['$scope'];
-    function personTableController($scope) {
+    personTableController.$inject = ['$scope', '$state'];
+    function personTableController($scope, $state) {
+      console.log();
+
       var index,
         searchObj;
 
@@ -36,13 +38,18 @@ angular
 
       // pagination options
       $scope.maxSize = 5;
-      $scope.currentPage = 1;
+      $scope.page = {};
+      $scope.page.current = 1;
 
       // item per page chooser
       $scope.itemsPerPageOptions = ['10', '25', '50', '100'];
-      $scope.itemsPerPage = $scope.itemsPerPageOptions[0];
+      $scope.itemsPerPage = ($state.params.count) ? $state.params.count : '10';
 
       $scope.itemPerPageChanged = function (option) {
+        $state.go($scope.currentstate, {
+            count: option
+          });
+        $state.params.count = option;
         $scope.currentPage = 1;
         $scope.getdata({
           currentPage: $scope.currentPage,
@@ -54,11 +61,7 @@ angular
       $scope.itemPerPageChanged($scope.itemsPerPage);
     }
 
-    function link(scope, element, attr) {
-
-      scope.newItemLinkTitle = attr.newitemlinktitle;
-      scope.linkToNewItem = attr.linktonewitem;
-      scope.linkToEditItem = attr.linktoedititem;
+    function link(scope, element) {
 
       // show or hide filter div
       scope.hideFilter = false;
@@ -113,7 +116,10 @@ angular
         getdata: '&?',
         total: '@?',
         onDelete: '&?',
-        onChange: '&?'
+        onChange: '&?',
+        currentstate: '@?',
+        newitemstate: '@?',
+        newitemlinktitle: '@?'
       }
     };
 
