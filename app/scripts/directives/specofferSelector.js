@@ -4,8 +4,9 @@ angular
   .module('admissionSystemApp')
   .directive('specofferSelector', function () {
 
-    specofferSelectorDirectiveCtrl.$inject = ['$scope', '$modal', 'DictionariesSvc', 'decodeSpecofferSvc', 'Restangular'];
-    function specofferSelectorDirectiveCtrl ($scope, $modal, DictionariesSvc, decodeSpecofferSvc, Restangular) {
+    specofferSelectorDirectiveCtrl.$inject = ['$scope', '$modal', 'DictionariesSvc',
+    'decodeSpecofferSvc', 'Restangular', 'translHttpStatusSvc'];
+    function specofferSelectorDirectiveCtrl ($scope, $modal, DictionariesSvc, decodeSpecofferSvc, Restangular, translHttpStatusSvc) {
       $scope.searchBy = {};
       var modalInstance;
 
@@ -41,7 +42,7 @@ angular
           decodeSpecofferSvc.specofferDecoded([rawSpecOffer]).then(function (decodedSpecoffer) {
             $scope.selected = decodedSpecoffer;
           });
-        });
+        }, translHttpStatusSvc.notifyAboutError);
       };
 
     }

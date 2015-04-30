@@ -86,8 +86,8 @@
                 ng-click="hideFilterFunc()" >
                 <i class="fa fa-filter"></i>
         </button>
-        <a href="{{::linkToNewItem}}" class="col-md-offset-1">
-          <button type="button" class="btn btn-success "><i class="fa fa-plus"></i> {{::newItemLinkTitle}}</button>
+        <a ui-sref="{{newitemstate}}" class="col-md-offset-1">
+          <button type="button" class="btn btn-success "><i class="fa fa-plus"></i> {{::newitemlinktitle}}</button>
         </a>
         <button type="button"
                 class="field-chooser-button pull-right btn btn-primary"
@@ -114,7 +114,7 @@
               <td ng-repeat="column in headers track by $index"
                   ng-show="column.visible"
                   ng-click="setSelected = itemObj"> {{itemObj[column.name]}}  </td>
-             
+
               <td class="content-data_manage-buttons">
 
                 <button class="btn btn-xs btn-warning"
@@ -136,7 +136,7 @@
     </div>
     <div class="raw table-footer">
       <pagination total-items="total"
-                  ng-model="currentPage"
+                  ng-model="page.current"
                   items-per-page ="itemsPerPage"
                   ng-change="getdata({currentPage:currentPage, itemsPerPage:itemsPerPage, userFilterPick:userFilterPick})"
                   num-pages="numPages"
