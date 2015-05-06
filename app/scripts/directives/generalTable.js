@@ -117,6 +117,8 @@ angular
         total: '@?',
         onDelete: '&?',
         onChange: '&?',
+        onView: '&?',
+        isView: '=',
         currentstate: '@?',
         newitemstate: '@?',
         newitemlinktitle: '@?'

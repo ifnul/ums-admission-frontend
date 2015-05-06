@@ -1,7 +1,6 @@
 'use strict';
 
-angular
-  .module('admissionSystemApp')
+angular.module('admissionSystemApp')
   .controller('TabPersonCtrl', ['$scope', 'DictionariesSvc', '$q', function ($scope, DictionariesSvc, $q) {
 
     $q.all([
@@ -20,6 +19,5 @@ angular
         $scope.adminUnitsTypes = promisesResult[3];
         $scope.adminUnits = promisesResult[4];
       });
-
 
   }]);

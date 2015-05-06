@@ -1,11 +1,19 @@
 'use strict';
 
 angular.module('admissionSystemApp')
-  .directive('personContacts', function () {
+  .directive('personContacts', function ($state) {
+
+    function changeView () {
+      if ($state.is('person.view')) {
+        return '../views/directives/personViewContacts.html';
+      } else {
+        return '../views/directives/personContacts.html';
+      }
+    }
 
     return {
       restrict: 'E',
-      templateUrl: '../views/directives/personContacts.html',
+      templateUrl: changeView,
       require: 'ngModel',
       replace: false,
       scope: {},

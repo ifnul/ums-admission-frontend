@@ -36,4 +36,10 @@ angular.module('admissionSystemApp')
           id: id
         });
       };
+
+      $scope.viewPerson = function (id) {
+        $state.go('person.view', {
+          id: id
+        });
+      };
     }]);
