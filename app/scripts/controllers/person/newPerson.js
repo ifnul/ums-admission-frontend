@@ -1,9 +1,8 @@
 'use strict';
 
 angular.module('admissionSystemApp')
-  .controller('NewPersonCtrl', ['$scope', '$stateParams', 'Person', '$location',
-    'DictionariesSvc', '$state', 'basePersonData',
-    function ($scope, $stateParams, Person, $location, DictionariesSvc, $state, basePersonData) {
+  .controller('NewPersonCtrl', ['$scope', '$stateParams', 'Person', 'DictionariesSvc', '$state', 'basePersonData',
+    function ($scope, $stateParams, Person, DictionariesSvc, $state, basePersonData) {
 
       $scope.entirePerson = {};
       $scope.entirePerson.person = {};
@@ -30,16 +29,16 @@ angular.module('admissionSystemApp')
       $scope.deletePerson = function () {
         Person.deleteEntirePerson().then(function () {
           DictionariesSvc.clearStorageByRoute('persons');
-          $location.path('/list-person');
+          $state.go('person.list');
         });
       };
 
       $scope.sendToServerPerson = function (entirePerson) {
-        $scope.entirePerson.names[0].name = $scope.entirePerson.names[0].firstName +
-        ' ' + $scope.entirePerson.names[0].surname +
+        $scope.entirePerson.names[0].name = $scope.entirePerson.names[0].surname +
+        ' ' + $scope.entirePerson.names[0].firstName +
         ' ' + $scope.entirePerson.names[0].fatherName;
-        $scope.entirePerson.person.name = $scope.entirePerson.person.firstName +
-        ' ' + $scope.entirePerson.person.surname +
+        $scope.entirePerson.person.name = $scope.entirePerson.person.surname +
+        ' ' + $scope.entirePerson.person.firstName +
         ' ' + $scope.entirePerson.person.fatherName;
 
         if (!$scope.entirePerson.person.photo) {
@@ -50,7 +49,7 @@ angular.module('admissionSystemApp')
         $scope.entirePerson.person.resident = ($scope.entirePerson.person.resident) ? 1 : 0;
         Person.addOrEditPerson(entirePerson).then(function () {
           DictionariesSvc.clearStorageByRoute('persons');
-          $location.path('/list-person');
+          $state.go('person.list');
         });
       };
 

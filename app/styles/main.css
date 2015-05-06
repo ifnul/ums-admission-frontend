@@ -11,9 +11,13 @@ input.ng-invalid.ng-dirty {
   background-color: #ffcccc;
 }
 
-.tabset {
+.tabset, .view-form {
   border: 1px solid grey;
   padding: 10px;
+}
+
+.photo {
+  margin: 10px;
 }
 
 .inputSpecialtyName {
@@ -108,7 +112,7 @@ table td a:hover {
 }
 
 .content-data_manage-buttons {
-  min-width: 70px;
+  min-width: 93px;
 }
 
 /* table header */

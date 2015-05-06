@@ -80,12 +80,12 @@ angular
           .state('person.new.personsubjects', {
             url: '/personsubjects',
             templateUrl: '../views/person/tabsPerson/tab_personsubjects.html',
-            controller: ''
+            controller: 'tabSubjects'
           })
           .state('person.new.enrolments', {
             url: '/enrolments',
             templateUrl: '../views/person/tabsPerson/tab_enrolments.html',
-            controller: 'tabSubjects'
+            controller: 'TabPersonEnrolmentsCtrl'
           })
         /** ----- edit person ----- **/
         .state('person.edit', {
@@ -116,14 +116,19 @@ angular
           .state('person.edit.personsubjects', {
             url: '/personsubjects',
             templateUrl: '../views/person/tabsPerson/tab_personsubjects.html',
-            controller: ''
+            controller: 'tabSubjects'
           })
           .state('person.edit.enrolments', {
             url: '/enrolments',
             templateUrl: '../views/person/tabsPerson/tab_enrolments.html',
-            controller: 'tabSubjects'
+            controller: 'TabPersonEnrolmentsCtrl'
           })
-
+          /** ----- view person ----- **/
+        .state('person.view', {
+          url: '/view/:id',
+          templateUrl: '../views/person/view_person.html',
+          controller: 'ViewPersonCtrl'
+        })
       //////////////////////////////////////////////////////////
       // ----------------ENROLMENTS--------------------------///
       //////////////////////////////////////////////////////////
