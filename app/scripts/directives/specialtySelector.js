@@ -3,38 +3,6 @@
 angular.module('admissionSystemApp')
   .directive('specialtySelector', function ($modal, SpecialtiesSvc) {
 
-    var modalCtrl = function (SpecialtiesSvc, $scope, $modalInstance, id, name) {
-
-      $scope.selected = {};
-
-      if (id) {
-        SpecialtiesSvc.searchSpecialtyById(id).then(function (data) {
-          $scope.results = data;
-
-          $scope.selected = {
-            result: $scope.results[0]
-          };
-        });
-      } else if (name) {
-        SpecialtiesSvc.searchSpecialtyByName(name).then(function (data) {
-          $scope.results = data;
-
-          $scope.selected = {
-            result: $scope.results[0]
-          };
-        });
-      }
-
-      $scope.ok = function () {
-        $modalInstance.close($scope.selected.result);
-      };
-
-      $scope.cancel = function () {
-        $modalInstance.dismiss('cancel');
-      };
-
-    };
-
     return {
       restrict: 'E',
       templateUrl: '../views/directives/specialtySelector.html',
@@ -56,28 +24,37 @@ angular.module('admissionSystemApp')
           }
         };
 
+        var modalInstance;
+
         scope.openModalSpecialty = function (size) {
-          var modalInstance = $modal.open({
+          modalInstance = $modal.open({
             templateUrl: '../views/modal/modalSpecialty.html',
-            controller: modalCtrl,
             size: size,
-            resolve: {
-              id: function () {
-                return scope.cipher;
-              },
-              name: function () {
-                return scope.name;
-              }
-            }
+            scope: scope
           });
 
-          modalInstance.result.then(function (selectedItem) {
-            ctrl.$setViewValue(selectedItem.id);
-            scope.cipher = selectedItem.cipher;
-            scope.name = selectedItem.name;
-          });
-
+          if (scope.cipher) {
+            SpecialtiesSvc.searchSpecialtyById(scope.cipher).then(function (data) {
+              scope.results = data;
+            });
+          } else if (scope.name) {
+            SpecialtiesSvc.searchSpecialtyByName(scope.name).then(function (data) {
+              scope.results = data;
+            });
+          }
         };
+
+        scope.ok = function (selectedItem) {
+          modalInstance.close();
+          ctrl.$setViewValue(selectedItem.id);
+          scope.cipher = selectedItem.cipher;
+          scope.name = selectedItem.name;
+        };
+
+        scope.cancel = function () {
+          modalInstance.dismiss('cancel');
+        };
+
       }
     };
 
