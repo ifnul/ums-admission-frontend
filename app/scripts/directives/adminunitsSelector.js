@@ -17,7 +17,7 @@ angular
         $scope.wholeAdress = [];
         $scope.adminUnitId = {};
 
-        if ($state.is('person.view')) {
+        if ($state.includes('person.view.*')) {
           $scope.personView = true;
         }
 

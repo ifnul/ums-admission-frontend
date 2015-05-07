@@ -1,8 +1,9 @@
 'use strict';
 
 angular.module('admissionSystemApp')
-  .controller('ViewPersonCtrl', ['$scope', 'DictionariesSvc', '$q', '$stateParams', 'Person',
-    function ($scope, DictionariesSvc, $q, $stateParams, Person) {
+  .controller('ViewPersonCtrl', ['$scope', 'DictionariesSvc', '$q', '$stateParams', 'Person', '$state',
+    'basePersonData',
+    function ($scope, DictionariesSvc, $q, $stateParams, Person, $state, basePersonData) {
 
       $scope.entirePerson = {};
       $scope.entirePerson.contacts = [];
@@ -43,6 +44,14 @@ angular.module('admissionSystemApp')
           pushData(res[3], $scope.adminUnits);
           pushData(res[4], $scope.streetsTypes);
         });
+
+      $scope.personTabs = basePersonData.tabsView;
+
+      $scope.go = function (route) {
+        $state.go(route, {
+          id: $stateParams.id
+        });
+      };
 
     }])
 

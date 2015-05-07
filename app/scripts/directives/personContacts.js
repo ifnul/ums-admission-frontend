@@ -4,7 +4,7 @@ angular.module('admissionSystemApp')
   .directive('personContacts', function ($state) {
 
     function changeView () {
-      if ($state.is('person.view')) {
+      if ($state.includes('person.view.*')) {
         return '../views/directives/personViewContacts.html';
       } else {
         return '../views/directives/personContacts.html';
