@@ -11,13 +11,13 @@ input.ng-invalid.ng-dirty {
   background-color: #ffcccc;
 }
 
-.tabset, .view-form {
+.tabset {
   border: 1px solid grey;
   padding: 10px;
 }
 
 .photo {
-  margin: 10px;
+  margin-top: 20px;
 }
 
 .inputSpecialtyName {

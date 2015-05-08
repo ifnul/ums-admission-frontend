@@ -226,5 +226,15 @@ angular
           edit: 'person.edit.enrolments'
         }
       }
-   ]
+   ],
+    tabsView: [
+      {
+        heading: 'Персона',
+        route: 'person.view.main'
+      },
+      {
+        heading: 'Заяви',
+        route: 'person.view.enrolments'
+      }
+    ]
   });

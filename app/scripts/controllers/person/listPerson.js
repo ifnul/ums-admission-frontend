@@ -38,7 +38,7 @@ angular.module('admissionSystemApp')
       };
 
       $scope.viewPerson = function (id) {
-        $state.go('person.view', {
+        $state.go('person.view.main', {
           id: id
         });
       };
