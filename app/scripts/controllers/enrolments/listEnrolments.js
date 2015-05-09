@@ -32,7 +32,7 @@ angular
         console.log('delete enrol with id:', id);
       };
       $scope.changeEnrol = function (id) {
-        $state.go('enrolment.edit.main', {
+        $state.go('root.enrolment.edit.main', {
           id: id
         });
       };

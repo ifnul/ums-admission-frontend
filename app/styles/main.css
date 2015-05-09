@@ -134,3 +134,19 @@ table td a:hover {
   display: inline;
 }
 
+.form-signin {
+  max-width: 330px;
+  margin: 0 auto;
+  padding-top: 10%;
+}
+.form-signin #inputLogin {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+.form-signin #inputPassword {
+  margin-bottom: -1px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+
