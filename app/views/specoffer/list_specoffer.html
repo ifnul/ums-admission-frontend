@@ -132,7 +132,7 @@
         <div class="panel-heading">
           <button type="button" class="pull-left btn btn-primary"><i class="fa fa-filter "></i></button>
 
-          <a ui-sref="new-specoffer" class="col-md-offset-1">
+          <a ui-sref="root.new-specoffer" class="col-md-offset-1">
             <button type="button" class="btn btn-success "><i class="fa fa-plus"></i> Додати пропозицію</button>
           </a>
           <button type="button" class="pull-right btn btn-primary" ng-click="openFiltersModal('sm')"><i
@@ -154,7 +154,7 @@
                 {{prop[column.name]}}
               </td>
               <td>
-                <a ui-sref="edit-specoffer({id:prop.id})">
+                <a ui-sref="root.edit-specoffer({id:prop.id})">
                 <button class="btn btn-xs btn-warning"><i class="fa fa-pencil-square-o"></i></button>
                 </a>
                 <button class="btn btn-xs btn-danger" ng-click="deleteSpecoffer(prop.id)"><i class="fa fa-times"></i></button>

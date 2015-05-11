@@ -187,54 +187,54 @@ angular
       {
         heading: 'Основна інформація',
         route: {
-          new: 'person.new.main',
-          edit: 'person.edit.main'
+          new: 'root.person.new.main',
+          edit: 'root.person.edit.main'
         }
       },
       {
         heading: 'Адреса',
         route: {
-          new: 'person.new.addresses',
-          edit: 'person.edit.addresses'
+          new: 'root.person.new.addresses',
+          edit: 'root.person.edit.addresses'
         }
       },
       {
         heading: 'Контакти',
         route: {
-          new: 'person.new.contacts',
-          edit: 'person.edit.contacts'
+          new: 'root.person.new.contacts',
+          edit: 'root.person.edit.contacts'
         }
       },
       {
         heading: 'Документи',
         route: {
-          new: 'person.new.papers',
-          edit: 'person.edit.papers'
+          new: 'root.person.new.papers',
+          edit: 'root.person.edit.papers'
         }
       },
       {
         heading: 'Предмети ЗНО',
         route: {
-          new: 'person.new.personsubjects',
-          edit: 'person.edit.personsubjects'
+          new: 'root.person.new.personsubjects',
+          edit: 'root.person.edit.personsubjects'
         }
       },
       {
         heading: 'Заяви',
         route: {
-          new: 'person.new.enrolments',
-          edit: 'person.edit.enrolments'
+          new: 'root.person.new.enrolments',
+          edit: 'root.person.edit.enrolments'
         }
       }
    ],
     tabsView: [
       {
         heading: 'Персона',
-        route: 'person.view.main'
+        route: 'root.person.view.main'
       },
       {
         heading: 'Заяви',
-        route: 'person.view.enrolments'
+        route: 'root.person.view.enrolments'
       }
     ]
   });

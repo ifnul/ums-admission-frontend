@@ -19,13 +19,13 @@ angular.module('admissionSystemApp')
       }
 
       $scope.newEnrolment = function () {
-        $state.go('enrolment.new.main', {
+        $state.go('root.new-enrolment.tab-enrolment', {
           personId: $stateParams.id
         });
       };
 
       $scope.editEnrolment = function (id) {
-        $state.go('enrolment.edit.main', {
+        $state.go('root.edit-enrolment.tab-enrolment', {
           id: id
         });
       };

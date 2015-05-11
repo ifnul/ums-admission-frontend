@@ -60,29 +60,29 @@ angular
       {
         heading: 'Основна інформація',
         route: {
-          new: 'enrolment.new.main',
-          edit: 'enrolment.edit.main'
+          new: 'root.enrolment.new.main',
+          edit: 'root.enrolment.edit.main'
         }
       },
       {
         heading: 'Пільги',
         route: {
-          new: 'enrolment.new.benefits',
-          edit: 'enrolment.edit.benefits'
+          new: 'root.enrolment.new.benefits',
+          edit: 'root.enrolment.edit.benefits'
         }
       },
       {
         heading: 'Предмети ЗНО',
         route: {
-          new: 'enrolment.new.enrolmentsubjects',
-          edit: 'enrolment.edit.enrolmentsubjects'
+          new: 'root.enrolment.new.enrolmentsubjects',
+          edit: 'root.enrolment.edit.enrolmentsubjects'
         }
       },
       {
         heading: 'Статус заяви',
         route: {
-          new: 'enrolment.new.statuses',
-          edit: 'enrolment.edit.statuses'
+          new: 'root.enrolment.new.statuses',
+          edit: 'root.enrolment.edit.statuses'
         }
       }
    ]

@@ -5,9 +5,6 @@ angular
   .config(function (RestangularProvider, Constants) {
 
     RestangularProvider.setBaseUrl(Constants.basicURL);
-    RestangularProvider.setDefaultHeaders({
-      Authorization: Constants.BasicAuth
-    });
     RestangularProvider.addResponseInterceptor(function (data, operation) {
       if (operation === 'get') {
         delete data.uri;
