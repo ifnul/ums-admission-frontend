@@ -5,14 +5,14 @@ angular
   .controller('TabWavesCtrl', ['$scope', '$modal', '$q', 'DictionariesSvc', '$filter',
     function ($scope, $modal, $q, DictionariesSvc, $filter) {
 
-      $scope.entireSpecoffer.waves = [];
       $scope.viewWaves = [];
       var i, m;
 
       $scope.$watchCollection('entireSpecoffer.waves',
         function () {
-          $scope.viewWaves = [];
           for (i = 0; i < $scope.entireSpecoffer.waves.length; i++) {
+            $scope.viewWaves = [];
+
             (function (i) {
 
               $q.all([

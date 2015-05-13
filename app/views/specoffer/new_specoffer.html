@@ -28,22 +28,16 @@
 
   <div>
     <div class="row">
-    <div class="tabset col-md-9">
-    <tabset >
-      <tab heading="Пропозицiї">
-        <div class="top-buffer" ng-include="'views/specoffer/tabsSpecoffer/tab_specoffer.html'"></div>
-      </tab>
-      <tab heading="Предмети">
-        <div class="top-buffer" ng-include="'views/specoffer/tabsSpecoffer/tab_subject.html'"></div>
-      </tab>
-      <tab heading="Пiльги">
-        <div class="top-buffer" ng-include="'views/specoffer/tabsSpecoffer/tab_benefit.html'"></div>
-      </tab>
-      <tab heading="Хвилі">
-        <div class="top-buffer" ng-include="'views/specoffer/tabsSpecoffer/tab_waves.html'"></div>
-      </tab>
-    </tabset>
-    </div>
+      <div class="tabset col-md-9">
+        <tabset>
+          <tab ng-repeat="t in specofferTabs"
+               heading="{{t.heading}}"
+               ng-click="go(t.route)"
+               active="t.active">
+          </tab>
+        </tabset>
+        <div ui-view></div>
+      </div>
     </div>
     <div class="top-buffer bottom-buffer row">
       <button ng-click="sendToServer(entireSpecoffer)" type="submit" class="btn btn-primary">Зберегти</button>

@@ -12,10 +12,9 @@
 </div>
 
 <!-- main content -->
-<div class="col-sm-12 col-md-12 new-proposal-wrapper">
+<div class="col-sm-12 col-md-12 new-proposal-wrapper" ng-controller="ProgressBarCtrl">
 
   <div class="row">
-    <div ng-controller="ProgressBarCtrl">
       <p class="text-center col-md-6">
         <progressbar value="progressBarPercent" type="{{type}}">Заповнено на: {{progressBarPercent}}%</progressbar>
       </p>
@@ -24,8 +23,6 @@
       </p>
 
     </div>
-  </div>
-
   <div>
     <div class="row">
       <div class="tabset col-md-9">
@@ -33,7 +30,7 @@
             <tab  ng-repeat="t in personTabs"
                   heading="{{t.heading}}"
                   ng-click="go(t.route)"
-                  ui-sref-active="active">
+                  active="t.active">
             </tab>
           </tabset>
           <div ui-view></div>
@@ -41,7 +38,8 @@
     </div>
 
     <div class="top-buffer bottom-buffer row">
-      <button ng-click="sendToServerPerson(entirePerson)" type="submit" class="btn btn-primary">Зберегти</button>
+      <button ng-click="sendToServerPerson(entirePerson)" ng-disabled="(progressBarPercent !== 100) ||
+      (!entirePerson.addresses.regAddresses.house)" type="submit" class="btn btn-primary">Зберегти</button>
       <button ng-click="deletePerson()" type="submit" class="btn btn-danger">Видалити</button>
     </div>
 

@@ -83,9 +83,9 @@
       <div class="panel panel-default">
         <!-- Default panel contents -->
         <div class="panel-heading">
-          <a ui-sref="root.new-specoffer">
+          <a ui-sref="root.specoffer.new.main" class="col-md-offset-1">
             <button type="button" class="btn btn-success "><i class="fa fa-plus"></i> Додати пропозицію</button>
-          </a>
+         </a>
 
           <button type="button" class="pull-right btn btn-primary" ng-click="openFiltersModal('sm')"><i
             class="fa fa-bars "></i></button>
@@ -105,8 +105,9 @@
               <td ng-repeat="column in headers" data-title="'column.display'" ng-show="column.visible" sortable="column.field">
                 {{prop[column.name]}}
               </td>
+              <td>
               <td class="editing">
-                <a ui-sref="root.edit-specoffer({id:prop.id})">
+              <a ui-sref="root.specoffer.edit.main({id:prop.id})">
                 <button class="btn btn-xs btn-warning"><i class="fa fa-pencil-square-o"></i></button>
                 </a>
                 <button class="btn btn-xs btn-danger" ng-click="deleteSpecoffer(prop.id)"><i class="fa fa-times"></i></button>

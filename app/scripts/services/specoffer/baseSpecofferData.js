@@ -48,5 +48,35 @@ angular.module('admissionSystemApp')
         display: 'Державне замовлення',
         visible: true
       }
+    ],
+    tabs: [
+      {
+        heading: 'Пропозицiя',
+        route: {
+          new: 'root.specoffer.new.main',
+          edit: 'root.specoffer.edit.main'
+        }
+      },
+      {
+        heading: 'Предмети',
+        route: {
+          new: 'root.specoffer.new.subjects',
+          edit: 'root.specoffer.edit.subjects'
+        }
+      },
+      {
+        heading: 'Пiльги',
+        route: {
+          new: 'root.specoffer.new.benefit',
+          edit: 'root.specoffer.edit.benefit'
+        }
+      },
+      {
+        heading: 'Хвилi',
+        route: {
+          new: 'root.specoffer.new.waves',
+          edit: 'root.specoffer.edit.waves'
+        }
+      }
     ]
   });

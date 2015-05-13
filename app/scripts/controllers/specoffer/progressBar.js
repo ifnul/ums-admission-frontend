@@ -1,38 +1,46 @@
 'use strict';
 
 angular.module('admissionSystemApp')
-  .controller('ProgressBarCtrl', ['$scope', 'progressBarService', function ($scope, progressBarService) {
+  .controller('ProgressBarCtrl', ['$scope', 'progressBarService', '$state',
+    function ($scope, progressBarService, $state) {
+      $scope.$watch(
+        function () {
+          return progressBarService.value;
+        },
 
-    $scope.$watch(
-      function () {
-        return progressBarService.value;
-      },
+        function (value) {
 
-      function (value) {
+          $scope.progressBarPercent = Math.round((value * 100) / progressBarService.inputQuantity);
 
-        $scope.progressBarPercent = Math.round((value * 100) / progressBarService.inputQuantity);
+          var type;
 
-        var type;
+          if ($scope.progressBarPercent < 25) {
+            type = 'danger';
+          } else if ($scope.progressBarPercent < 50) {
+            type = 'warning';
+          } else if ($scope.progressBarPercent < 99) {
+            type = 'info';
+          } else {
+            type = 'success';
+          }
+          $scope.type = type;
 
-        if ($scope.progressBarPercent < 25) {
-          type = 'danger';
-        } else if ($scope.progressBarPercent < 50) {
-          type = 'warning';
-        } else if ($scope.progressBarPercent < 99) {
-          type = 'info';
-        } else {
-          type = 'success';
-        }
-        $scope.type = type;
+          if ($scope.progressBarPercent === 100 && ($state.is('root.specoffer.new.main') ||
+            $state.is('root.specoffer.edit.main'))) {
+            $scope.propositionMessage = 'Будь ласка, додайте предмети та пiльги!';
+          } else {
+            $scope.propositionMessage = ' ';
+          }
 
-        if ($scope.progressBarPercent === 100) {
-          $scope.propositionMessage = 'Будь ласка, додайте предмети та пiльги!';
-        } else {
-          $scope.propositionMessage = ' ';
+          if ($scope.progressBarPercent === 100 && ($state.is('root.person.new.main') ||
+            $state.is('root.person.edit.main'))) {
+            $scope.propositionMessage = 'Будь ласка, додайте адресу!';
+          } 
+          else {
+            $scope.propositionMessage = ' ';
+          }
 
-        }
+        });
 
-      });
-
-  }]);
+    }]);
 
