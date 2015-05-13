@@ -1,8 +1,9 @@
 'use strict';
 
 angular.module('admissionSystemApp')
-  .controller('NewPersonCtrl', ['$scope', '$stateParams', 'Person', 'DictionariesSvc', '$state', 'basePersonData',
-    function ($scope, $stateParams, Person, DictionariesSvc, $state, basePersonData) {
+  .controller('NewPersonCtrl', ['$scope', '$stateParams', 'Person', '$location',
+    'DictionariesSvc', '$state', 'basePersonData', 'progressBarService',
+    function ($scope, $stateParams, Person, $location, DictionariesSvc, $state, basePersonData, progressBarService) {
 
       $scope.entirePerson = {};
       $scope.entirePerson.person = {};
@@ -65,4 +66,15 @@ angular.module('admissionSystemApp')
         }
       };
 
+      $scope.$on('valBubble', function (evt, args) {  // using directive, which is responsible for changes in each input
+        if (args.isValid) {                           // checking if input is valid
+          progressBarService.value++;                 // value increases if the field is valid
+        }
+        else if (progressBarService.value > 0) {      // value decreases if input content's was deleted
+          progressBarService.value--;
+        }
+        else if ($state.is('root.person.new.main')) {
+          progressBarService.inputQuantity++;
+        }
+      });
     }]);

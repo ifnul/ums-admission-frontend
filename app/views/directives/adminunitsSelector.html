@@ -1,15 +1,17 @@
 <div>
   <div class="form-group">
     <div class="row">
-      <div class="col-xs-12">
-        <h5 class="adminunits " ng-repeat="unit in wholeAdress track by $index">{{unit}}, </h5>
+      <div class="col-md-10">
+        <h5 class="adminunits" ng-repeat="unit in wholeAdress track by $index">{{unit}}, </h5>
       </div>
     </div>
   </div>
 
   <div ng-show="!personView" class="form-group">
     <div class="row">
-      <div class="col-xs-5">
+      <label ng-show="placeOfBirth" class="col-md-2 control-label">Мiсце народження</label>
+
+      <div class="col-md-4">
         <ui-select ng-model="adminUnitId.selected"
                    name="country"
                    allow-clear
@@ -23,10 +25,9 @@
         </ui-select>
       </div>
 
-      <div class="col-xs-5">
+      <div class="col-md-3">
         <button ng-click="clearAdress()" type="submit" class="btn btn-primary">Скинути</button>
       </div>
-
     </div>
   </div>
 </div>
