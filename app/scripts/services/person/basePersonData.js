@@ -135,12 +135,12 @@ angular
       {
         name: 'marriedTypeId',
         display: 'Сімейний стан',
-        visible: true
+        visible: false
       },
       {
         name: 'citizenCountryId',
         display: 'Громад-во',
-        visible: true
+        visible: false
       },
       {
         name: 'docSeries',
@@ -155,12 +155,12 @@ angular
       {
         name: 'resident',
         display: 'Резидент',
-        visible: true
+        visible: false
       },
       {
         name: 'birthPlace',
         display: 'Місце народж.',
-        visible: true
+        visible: false
       },
       {
         name: 'begDate',
@@ -170,7 +170,7 @@ angular
       {
         name: 'isMilitary',
         display: 'ВЗ',
-        visible: true
+        visible: false
       },
       {
         name: 'isHostel',

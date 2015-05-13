@@ -100,7 +100,7 @@ angular
         },
         {
           name: 'personId',
-          display: 'Персона',
+          display: 'Персона (id)',
           visible: true
         },
         {
@@ -111,17 +111,17 @@ angular
         {
           name: 'isState',
           display: 'Бюджет',
-          visible: true
+          visible: false
         },
         {
           name: 'isContract',
           display: 'Контракт',
-          visible: true
+          visible: false
         },
         {
           name: 'departmentId',
           display: 'Підрозділ',
-          visible: true
+          visible: false
         },
         {
           name: 'personPaperId',
@@ -156,7 +156,7 @@ angular
         {
           name: 'enrolmentTypeId',
           display: 'Тип поступлення',
-          visible: true
+          visible: false
         },
         {
           name: 'evDate',
@@ -178,6 +178,32 @@ angular
           display: 'Ієрарх. ідетиф.',
           visible: false
         }
+      ],
+    stateHeaders: [
+      {
+        name: 'id', display: '№',
+        visible: false
+      },
+      {
+        name: 'specOfferWaveId',
+        display: 'Хвиля вступу (id)',
+        visible: true
+      },
+      {
+        name: 'enrolmentStatusTypeId',
+        display: 'Статус заяви',
+        visible: true
+      },
+      {
+        name: 'isState',
+        display: 'Бюджет',
+        visible: true
+      },
+      {
+        name: 'isContract',
+        display: 'Контракт',
+        visible: true
+      }
       ],
     expandFilters: function (data, prop) {
       var neededObj = _.find(this.filters, {

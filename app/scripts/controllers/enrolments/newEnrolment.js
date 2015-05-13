@@ -8,9 +8,11 @@ angular
       $scope.enrolmentId = $stateParams.id;
 
       $scope.entireEnrolment = {};
+      $scope.entireEnrolment.enrolment = {};
+      $scope.entireEnrolment.enrolment.isContract = 0;
+      $scope.entireEnrolment.enrolment.isState = 0;
       $scope.entireEnrolment.enrolmentsubjects = [];
       $scope.entireEnrolment.benefits = [];
-      $scope.entireEnrolment.enrolment = {};
 
       $scope.enrolTabs = baseFormData.tabs;
 

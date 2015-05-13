@@ -1,0 +1,29 @@
+<script src="bower_components/d3/d3.min.js"></script>
+<link rel="stylesheet" href="styles/statistics.css">
+
+<div class="container-fluid">
+  <div class="row bottom-buffer">
+    <div class="col-md-3">
+      <h2><i class="fa fa-bar-chart text-danger"></i> Статистика</h2>
+    </div>
+    <div class="col-md-3 timeperiod">
+      <select class="form-control"
+              ng-model="timeperiod.timePeriodId"
+              ng-options="opt.id as opt.name for opt in timeperiods"
+              ng-change="pickTimePeriod()">
+        <option value="" disabled selected>Оберіть вступну кампанію</option>
+      </select>
+    </div>
+  </div>
+  <div ng-show="timeperiod.timePeriodId">
+    <div class="row"><h3>Розподіл факультетів за формами навчання</h3>
+      <dash-board-chart data="chartForDashBoard"></dash-board-chart>
+    </div>
+    <div class="row"><h3>Розподіл пропозицій за факультетами, спеціальностями та ОКР</h3>
+      <bar-chart data="chart"></bar-chart>
+    </div>
+    <div class="row"><h3>Ієрархична структура факультетів</h3>
+      <tree-chart data="chart"></tree-chart>
+    </div>
+  </div>
+</div>

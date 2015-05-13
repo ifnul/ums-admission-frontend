@@ -7,25 +7,29 @@ angular.module('admissionSystemApp')
       function decode(rawEnrolments) {
         var departmentsNames = [],
           enrolmentsTypesNames = [],
-          isStateNames = [undefined, 'бюджет', 'не бюджет'],
-          isContractNames = [undefined, 'контракт', 'не контракт'],
-          isPrivilegeNames = [undefined, 'є пільги', 'пільги відсутні'],
-          isHostelNames = [undefined, 'потреб. гуртож.', ' не потреб. гуртож.'];
+          enrolmentsStatusTypes = [],
+          isStateNames = ['\u2718', '\u2713'],
+          isContractNames = ['\u2718', '\u2713'],
+          isPrivilegeNames = ['пільги відсутні', 'є пільги'],
+          isHostelNames = ['не потреб. гуртож.', 'потреб. гуртож.'];
 
         function pushData(data, array) {
           angular.forEach(data, function (item) {
             array[item.id] = item.name;
           });
         }
+
         return $q.all([
-            DictionariesSvc.getAllDepartments({
-              departmentTypeId: 1
-            }),
-            DictionariesSvc.getEnrolmentsTypes()
-          ])
+          DictionariesSvc.getAllDepartments({
+            departmentTypeId: 1
+          }),
+          DictionariesSvc.getEnrolmentsTypes(),
+          DictionariesSvc.getEnrolmentsStatusTypes()
+        ])
           .then(function (res) {
             pushData(res[0], departmentsNames);
             pushData(res[1], enrolmentsTypesNames);
+            pushData(res[2], enrolmentsStatusTypes);
 
             angular.forEach(rawEnrolments, function (item) {
               item.departmentId = departmentsNames[item.departmentId];
@@ -34,6 +38,7 @@ angular.module('admissionSystemApp')
               item.isContract = isContractNames[item.isContract];
               item.isPrivilege = isPrivilegeNames[item.isPrivilege];
               item.isHostel = isHostelNames[item.isHostel];
+              item.enrolmentStatusTypeId = enrolmentsStatusTypes[item.enrolmentStatusTypeId];
             });
             return rawEnrolments;
           });
