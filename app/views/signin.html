@@ -1,0 +1,32 @@
+<div class="container">
+
+	<form name="auth" 
+        ng-submit="signin.clicked(signin.auth.login, signin.auth.password, signin.auth.isRemember)" 
+        class="form-signin">
+
+  	<h3>Будь ласка, авторизуйтеся</h3>
+    <input ng-model="signin.auth.login" 
+          type="text" 
+          class="form-control input-lg" 
+          id="inputLogin" 
+          placeholder="Логін"
+          ng-pattern="/^[A-Za-z0-9 \-_.]*$/"
+          required>
+    <input ng-model="signin.auth.password"
+          type="password" 
+          class="form-control input-lg" 
+          id="inputPassword" 
+          placeholder="Пароль"
+          ng-pattern="/^[A-Za-z0-9 \-_.]*$/"
+          required>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox"
+                ng-model="signin.auth.isRemember" 
+                value="isRemember"> Запам'ятати мене
+      </label>
+    </div>
+    <button type="submit" 
+            class="btn btn-lg btn-primary btn-block">Ввійти</button>
+  </form>
+</div>

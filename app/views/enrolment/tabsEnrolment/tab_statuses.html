@@ -1,1 +1,49 @@
-<p>This is the tab_statuses view.</p>
+<div class="form-group top-buffer">
+  <simple-table data="states"
+                headers="headers"></simple-table>
+
+  <div ng-show="enrolmentId">
+
+  <h4>Змінити статус заяви</h4>
+
+    <div class="row">
+      <div class="col-xs-8">
+        <select ng-model="newStatus.enrolmentStatusTypeId"
+                ng-options="opt.id as opt.name for opt in resultStates"
+                class="form-control">
+          <option value="" disabled selected>Оберіть статус заяви</option>
+        </select>
+      </div>
+
+      <div class="col-xs-2">
+        <button class="btn btn-success" ng-click="addState()"><i class="fa fa-plus"></i> Додати статус</button>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-xs-2">
+        <div class="checkbox">
+          <label> <input type="checkbox"
+                         ng-true-value="1"
+                         ng-false-value="0"
+                         ng-model="newStatus.isState"
+                         ng-init="newStatus.isState = 0"> Бюджет
+          </label>
+        </div>
+      </div>
+      <div class="col-xs-2">
+        <div class="checkbox">
+          <label> <input type="checkbox"
+                         ng-true-value="1"
+                         ng-false-value="0"
+                         ng-model="newStatus.isContract"
+                         ng-init="newStatus.isContract = 0"> Контракт
+          </label>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

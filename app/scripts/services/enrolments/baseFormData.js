@@ -59,19 +59,31 @@ angular
     tabs: [
       {
         heading: 'Основна інформація',
-        route: 'edit-enrolment.tab-enrolment'
+        route: {
+          new: 'root.enrolment.new.main',
+          edit: 'root.enrolment.edit.main'
+        }
       },
       {
         heading: 'Пільги',
-        route: 'edit-enrolment.tab-benefits'
+        route: {
+          new: 'root.enrolment.new.benefits',
+          edit: 'root.enrolment.edit.benefits'
+        }
       },
       {
         heading: 'Предмети ЗНО',
-        route: 'edit-enrolment.tab-enrolmentsubjects'
+        route: {
+          new: 'root.enrolment.new.enrolmentsubjects',
+          edit: 'root.enrolment.edit.enrolmentsubjects'
+        }
       },
       {
         heading: 'Статус заяви',
-        route: 'edit-enrolment.tab-statuses'
+        route: {
+          new: 'root.enrolment.new.statuses',
+          edit: 'root.enrolment.edit.statuses'
+        }
       }
    ]
   });

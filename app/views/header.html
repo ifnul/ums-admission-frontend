@@ -11,7 +11,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#/"> Вступна кампанія</a>
+          <a class="navbar-brand" href="#/"> ЛНУ</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -19,25 +19,19 @@
           <ul class="nav navbar-nav">
 
             <li ui-sref-active="active">
-              <a ui-sref="list-specoffer">Пропозиції
+              <a ui-sref="root.list-specoffer">Пропозиції
                 <span class="sr-only">(current)</span>
               </a>
             </li>
 
-            <li ui-sref-active="active"><a ui-sref="list-person">Персони</a></li>
+            <li ui-sref-active="active"><a ui-sref="root.person.list({count: 25})">Персони</a></li>
 
-            <li ui-sref-active="active"><a ui-sref="list-enrolments">Заяви</a></li>
+            <li ui-sref-active="active"><a ui-sref="root.enrolment.list({count: 25})">Заяви</a></li>
 
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Керування
-                <span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
-                <li>
-                  <a ui-sref="#"><i class="fa fa-user-plus"></i> Додати користувача</a>
-                </li>
-              </ul>
+            <li ui-sref-active="active"><a ui-sref="root.dictionaries">Довідники</a></li>
+            <li>
             </li>
-            <li ui-sref-active="active"><a ui-sref="dictionaries">Довідники</a></li>
+            <li ui-sref-active="active"><a ui-sref="root.statistics">Статистика</a></li>
             <li>
 
             </li>
@@ -45,13 +39,12 @@
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Допомога</a></li>
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                <i class="fa fa-user fa-fw"></i> Ви зайшли як Адмiн <span class="caret"></span></a>
+                <i class="fa fa-user fa-fw"></i> Ви зайшли як Адмін <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="#"><i class="fa fa-cog  fa-fw"></i>Налаштування</a></li>
-                <li><a href="#"><i class="fa  fa-power-off  fa-fw"></i>Вийти </a></li>
+                <!-- <li><a href="#"><i class="fa fa-cog  fa-fw"></i>Налаштування</a></li> -->
+                <li ><a href="#" ng-click="header.logout()"><i class="fa  fa-power-off  fa-fw"></i>Вийти </a></li>
               </ul>
             </li>
           </ul>

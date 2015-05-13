@@ -135,12 +135,12 @@ angular
       {
         name: 'marriedTypeId',
         display: 'Сімейний стан',
-        visible: true
+        visible: false
       },
       {
         name: 'citizenCountryId',
         display: 'Громад-во',
-        visible: true
+        visible: false
       },
       {
         name: 'docSeries',
@@ -155,12 +155,12 @@ angular
       {
         name: 'resident',
         display: 'Резидент',
-        visible: true
+        visible: false
       },
       {
         name: 'birthPlace',
         display: 'Місце народж.',
-        visible: true
+        visible: false
       },
       {
         name: 'begDate',
@@ -170,7 +170,7 @@ angular
       {
         name: 'isMilitary',
         display: 'ВЗ',
-        visible: true
+        visible: false
       },
       {
         name: 'isHostel',
@@ -181,6 +181,60 @@ angular
         name: 'identifier',
         display: 'Мат. відп',
         visible: false
+      }
+    ],
+    tabs: [
+      {
+        heading: 'Основна інформація',
+        route: {
+          new: 'root.person.new.main',
+          edit: 'root.person.edit.main'
+        }
+      },
+      {
+        heading: 'Адреса',
+        route: {
+          new: 'root.person.new.addresses',
+          edit: 'root.person.edit.addresses'
+        }
+      },
+      {
+        heading: 'Контакти',
+        route: {
+          new: 'root.person.new.contacts',
+          edit: 'root.person.edit.contacts'
+        }
+      },
+      {
+        heading: 'Документи',
+        route: {
+          new: 'root.person.new.papers',
+          edit: 'root.person.edit.papers'
+        }
+      },
+      {
+        heading: 'Предмети ЗНО',
+        route: {
+          new: 'root.person.new.personsubjects',
+          edit: 'root.person.edit.personsubjects'
+        }
+      },
+      {
+        heading: 'Заяви',
+        route: {
+          new: 'root.person.new.enrolments',
+          edit: 'root.person.edit.enrolments'
+        }
+      }
+   ],
+    tabsView: [
+      {
+        heading: 'Персона',
+        route: 'root.person.view.main'
+      },
+      {
+        heading: 'Заяви',
+        route: 'root.person.view.enrolments'
       }
     ]
   });

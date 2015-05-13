@@ -1,8 +1,9 @@
 'use strict';
 
 angular.module('admissionSystemApp')
-.factory('getFiltredListSvc', ['$http', '$q', 'decodeEnrolmentsSvc', 'Constants', 'personDecodeSvc',
-  function ($http, $q, decodeEnrolmentsSvc, Constants, personDecodeSvc) {
+.factory('getFiltredListSvc', ['$http', '$q', 'decodeEnrolmentsSvc', 'Constants',
+  'personDecodeSvc', 'translHttpStatusSvc', 'toaster',
+  function ($http, $q, decodeEnrolSvc, Constants, personDecodeSvc, translHttpStatusSvc, toaster) {
 
     function makeFiltersPretty (rawFilters) {
       var readyToUseFiltres = {};
@@ -18,7 +19,7 @@ angular.module('admissionSystemApp')
     }
 
     var decodeSvcs = {
-      enrolments: decodeEnrolmentsSvc.enrolmentsDecoded,
+      enrolments: decodeEnrolSvc.enrolmentsDecoded,
       persons: personDecodeSvc.personDecoded
     };
 
@@ -42,9 +43,13 @@ angular.module('admissionSystemApp')
             data: decodedItems,
             total: data.count
           };
-          
+
           deferred.resolve(dataToReturn);
         });
+      })
+      .error(function (msg) {
+        toaster.pop(translHttpStatusSvc.translate(msg));
+        deferred.reject(msg);
       });
       return deferred.promise;
     }

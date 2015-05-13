@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.css" />
   <link rel="stylesheet" href="bower_components/ng-table/dist/ng-table.min.css" />
   <link rel="stylesheet" href="bower_components/angular-ui-select/dist/select.css" />
+  <link rel="stylesheet" href="bower_components/angularjs-toaster/toaster.css" />
   <!-- endbower -->
   <!-- endbuild -->
   <!-- build:css(.tmp) styles/main.css -->
@@ -21,14 +22,15 @@
 <body ng-app="admissionSystemApp">
 
 <div class="container-fluid">
-  <div ng-include="'views/header.html'"></div>
-  <div ui-view></div>
+  <div ui-view="header"></div>
+  <div ui-view="container"></div>
 </div>
 
 <div id="spinnerDiv" loader>
   <img src="images/spinner.gif" class="spinner"/>
 </div>
 
+<toaster-container></toaster-container>
 <!-- build:js(.) scripts/vendor.js -->
 <!-- bower:js -->
 <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -43,12 +45,16 @@
 <script src="bower_components/angular-ui-select/dist/select.js"></script>
 <script src="bower_components/checklist-model/checklist-model.js"></script>
 <script src="bower_components/ui-router/release/angular-ui-router.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angularjs-toaster/toaster.js"></script>
+<script src="bower_components/ngstorage/ngStorage.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 
 <!-- build:js({.tmp,app}) scripts/scripts.js -->
 <script src="scripts/app.js"></script>
 <script src="scripts/controllers/dictionary.js"></script>
+<script src="scripts/controllers/statistics.js"></script>
 <script src="scripts/controllers/specoffer/listSpecoffer.js"></script>
 <script src="scripts/controllers/specoffer/newSpecoffer.js"></script>
 <script src="scripts/controllers/specoffer/tabSpecoffer.js"></script>
@@ -65,31 +71,34 @@
 <script src="scripts/services/Cookies.js"></script>
 <script src="scripts/services/specoffer/decodeSpecoffer.js"></script>
 <script src="scripts/services/specoffer/Specialty.js"></script>
+<script src="scripts/directives/statistics/barChart.js"></script>
+<script src="scripts/directives/statistics/treeChart.js"></script>
+<script src="scripts/directives/statistics/dashBoardChart.js"></script>
 <script src="scripts/directives/validator.js"></script>
 <script src="scripts/services/Dictionaries.js"></script>
 <script src="scripts/directives/specialtySelector.js"></script>
 <script src="scripts/services/Constants.js"></script>
-<script src="scripts/modules/loadingSpinner.js"></script>
+<script src="scripts/services/httpInterceptor.js"></script>
 <script src="scripts/directives/loader.js"></script>
 <script src="scripts/directives/generalTable.js"></script>
 <script src="scripts/controllers/person/listPerson.js"></script>
 <script src="scripts/services/person/decodePerson.js"></script>
-<script src="scripts/controllers/person/newPerson.js"></script>
-<script src="scripts/controllers/person/tabPerson.js"></script>
-<script src="scripts/controllers/person/tabAdresses.js"></script>
 <script src="scripts/controllers/specoffer/tabWaves.js"></script>
 <script src="scripts/services/getFiltredList.js"></script>
 <script src="scripts/services/enrolments/decodeEnrolments.js"></script>
 <script src="scripts/controllers/enrolments/listEnrolments.js"></script>
 <script src="scripts/controllers/enrolments/newEnrolment.js"></script>
+<script src="scripts/controllers/enrolments/tabStates.js"></script>
 <script src="scripts/directives/personContacts.js"></script>
 <script src="scripts/services/enrolments/baseListData.js"></script>
 <script src="scripts/controllers/person/listPerson.js"></script>
 <script src="scripts/services/person/decodePerson.js"></script>
 <script src="scripts/controllers/person/newPerson.js"></script>
+<script src="scripts/controllers/person/viewPerson.js"></script>
 <script src="scripts/controllers/person/tabPerson.js"></script>
 <script src="scripts/controllers/person/tabAdresses.js"></script>
 <script src="scripts/controllers/person/tabSubjects.js"></script>
+<script src="scripts/controllers/person/tabPersonEnrolments.js"></script>
 <script src="scripts/services/person/basePersonData.js"></script>
 <script src="scripts/directives/adminunitsSelector.js"></script>
 <script src="scripts/directives/personSelector.js"></script>
@@ -101,6 +110,12 @@
 <script src="scripts/services/enrolments/getpersonpapers.js"></script>
 <script src="scripts/services/enrolments/searchPerson.js"></script>
 <script src="scripts/services/enrolments/baseFormData.js"></script>
+<script src="scripts/services/enrolments/enrolmentStates.js"></script>
+<script src="scripts/services/enrolments/EnrolmentREST.js"></script>
+<script src="scripts/services/translateHttpStatus.js"></script>
+<script src="scripts/controllers/signin.js"></script>
+<script src="scripts/services/authorization.js"></script>
+<script src="scripts/controllers/header.js"></script>
 <!-- endbuild -->
 </body>
 </html>

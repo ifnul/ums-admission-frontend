@@ -29,14 +29,14 @@ angular.module('admissionSystemApp')
         $scope.entireSpecoffer.specoffer.note = 'some note';
         SpecoffersService.addOrEditSpecoffer(entireSpecoffer).then(function () {
           DictionariesSvc.clearStorageByRoute('specoffers');
-          $location.path('/list-specoffer');
+          $location.path('/#/list-specoffer');
         });
       };
 
       $scope.deleteSpecoffer = function () {
         SpecoffersService.deleteEntireSpecoffer().then(function () {
           DictionariesSvc.clearStorageByRoute('specoffers');
-          $location.path('/list-specoffer');
+          $location.path('/#/list-specoffer');
         });
       };
 
@@ -50,7 +50,7 @@ angular.module('admissionSystemApp')
           progressBarService.value--;
         }
 
-        else if ($state.is('new-specoffer')) {
+        else if ($state.is('root.new-specoffer')) {
           progressBarService.inputQuantity++;
         }
 

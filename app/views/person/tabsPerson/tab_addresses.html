@@ -1,4 +1,4 @@
-<div ng-controller="TabAdressesCtrl">
+<div>
 	<h3>Адреса реєстрації</h3>
 
 	<form id="FromForRegAdress">
@@ -14,7 +14,7 @@
 					type="text"
 					class="form-control"
 					placeholder="Поштовий індекс"
-					name="inputZipCodeReg">
+					id="inputZipCodeReg">
 				</div>
 
 				<div class="col-xs-2">
@@ -22,17 +22,17 @@
 						<select ng-model="entirePerson.addresses.regAddresses.streetTypeId"
 						ng-options="opt.id as opt.name for opt in streetsTypesOptions"
 						class="form-control"
-						name="inputStreetTypeReg">
+						id="inputStreetTypeReg">
 					</select>
 				</div>
 
 				<div class="col-xs-4">
-					<label for="inputStreetReg">Вулия</label>
+					<label for="inputStreetReg">Вулиця</label>
 					<input ng-model="entirePerson.addresses.regAddresses.street"
 					type="text"
 					class="form-control"
 					placeholder="назва вулиці"
-					name="inputStreetReg">
+					id="inputStreetReg">
 				</div>
 
 				<div class="col-xs-2">
@@ -41,7 +41,7 @@
 					type="text"
 					class="form-control"
 					placeholder="номер будинку"
-					name="inputHouseReg">
+					id="inputHouseReg">
 				</div>
 
 				<div class="col-xs-2">
@@ -50,7 +50,7 @@
 					type="text"
 					class="form-control"
 					placeholder="номер квартири"
-					name="inputApartmentReg">
+					id="inputApartmentReg">
 				</div>
 
 			</div>
@@ -62,7 +62,7 @@
 		<label class="control-label">
 			<input 	type="checkbox"
 			ng-model="entirePerson.addresses.isAdressesMatch">
-			Поштова адреса та адреса реэстрації співпадають </label>
+			Поштова адреса та адреса реєстрації співпадають </label>
 	</div>
 
 	<hr>
@@ -83,7 +83,7 @@
 						type="text"
 						class="form-control"
 						placeholder="Поштовий індекс"
-						name="inputZipCodePost">
+						id="inputZipCodePost">
 					</div>
 
 					<div class="col-xs-2">
@@ -91,7 +91,7 @@
 						<select ng-model="entirePerson.addresses.postAddresses.streetTypeId"
 						ng-options="x.id as x.name for x in streetsTypesOptions"
 						class="form-control"
-						name="inputStreetTypePost">
+						id="inputStreetTypePost">
 					</select>
 				</div>
 
@@ -101,7 +101,7 @@
 					type="text"
 					class="form-control"
 					placeholder="назва вулиці"
-					name="inputStreetPost">
+					id="inputStreetPost">
 				</div>
 
 				<div class="col-xs-2">
@@ -110,7 +110,7 @@
 					type="text"
 					class="form-control"
 					placeholder="номер будинку"
-					name="inputHousePost">
+					id="inputHousePost">
 				</div>
 
 				<div class="col-xs-2">
@@ -119,7 +119,7 @@
 					type="text"
 					class="form-control"
 					placeholder="номер квартири"
-					name="inputApartmentPost">
+					id="inputApartmentPost">
 				</div>
 
 			</div>

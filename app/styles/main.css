@@ -16,6 +16,10 @@ input.ng-invalid.ng-dirty {
   padding: 10px;
 }
 
+.photo {
+  margin-top: 20px;
+}
+
 .inputSpecialtyName {
   width: 70% !important;
 }
@@ -80,28 +84,26 @@ table td a:hover {
 
 .buttonForCollapse {width: 100%}
 
-/* Modal layout for choosing table fields in general-table */
-
-
-
  /* Modal layout for choosing table fields in /list-person/ */
 
-#modalHeaderChooser .modal-body {
-  height: 340px;
-  overflow-x: scroll;
+@media (max-width: 1250px) {
+  .panel-title {
+    font-size: 12px;
+  }
 }
 
-#modalHeaderChooser {
-  display: block;
-}
-
-/* Person table direcive  */
+/* General table direcive  */
 
 .pointer tr {
   cursor: pointer;
 }
 .table-footer .pagination-sm{
   margin: 0;
+}
+
+.content-data_manage-buttons {
+  min-width: 93px;
+  text-align: center;
 }
 
 /* table header */
@@ -123,3 +125,24 @@ table td a:hover {
   display: inline;
 }
 
+.form-signin {
+  max-width: 330px;
+  margin: 0 auto;
+  padding-top: 10%;
+}
+.form-signin #inputLogin {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+.form-signin #inputPassword {
+  margin-bottom: -1px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+.btn-xs {
+  min-width: 24px;
+}
+.editing {
+  min-width: 70px;
+}

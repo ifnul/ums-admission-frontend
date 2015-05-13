@@ -2,14 +2,14 @@
   <div class="row">
     <div class="col-md-10">
       <div class="row">
-        <div class="form-group col-md-6 double-input">
+        <div class="form-group col-md-10 double-input">
           <label for="inputSpecialty">Введіть шифр чи назву напряму/спеціальності</label>
           <specialty-selector ng-model="entireSpecoffer.specoffer.specialtyId" id="inputSpecialty" name="specialty" required val-bubble></specialty-selector>
         </div>
       </div>
 
       <div class="row">
-        <div class="form-group col-md-5">
+        <div class="form-group col-md-10">
         <!--   departmentId    -->
           <label for="inputStructure">Структурний підрозділ</label>
             <ui-select ng-model="entireSpecoffer.specoffer.departmentId"
@@ -25,7 +25,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-md-5">
+        <div class="form-group col-md-10">
           <label for="inputOKR">Освітньо-кваліфікаційний рівень</label>
           <select ng-model="entireSpecoffer.specoffer.specofferTypeId"
                   ng-options="opt.id as opt.name for opt in specofferTypesOptions"
@@ -38,7 +38,7 @@
       </div>
       <div class="row">
       <!-- timePeriodCourseId -->
-        <div class="form-group col-md-5">
+        <div class="form-group col-md-10">
           <label for="inputOKR">Курс зарахування</label>
           <select ng-model="entireSpecoffer.specoffer.timePeriodCourseId"
                   ng-options="opt.id as opt.name for opt in timePeriodCourseId"
@@ -50,7 +50,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-md-2 ">
+        <div class="form-group col-md-5">
         <!-- docSeries -->
           <label for="inputLicenseS"> Серія ліцензії</label>
           <input ng-model="entireSpecoffer.specoffer.docSeries"
@@ -62,7 +62,7 @@
                  required val-bubble>
         </div>
 
-        <div class="form-group col-md-3 ">
+        <div class="form-group col-md-5">
         <!-- docNum -->
           <label for="inputLicenseNumber"> Номер ліцензії</label>
           <input ng-model="entireSpecoffer.specoffer.docNum"
@@ -75,7 +75,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-md-3 ">
+        <div class="form-group col-md-5">
         <!-- eduFormTypeId -->
           <label for="inputFormStuding">Оберiть форму навчання</label>
           <select ng-model="entireSpecoffer.specoffer.educationFormTypeId"
@@ -86,33 +86,44 @@
                   required val-bubble>
           </select>
         </div>
+        <div class="form-group col-md-5">
+          <!-- duration -->
+          <label for="duration">Тривалість навчання</label>
+          <input ng-model="entireSpecoffer.specoffer.duration"
+                 type="text"
+                 class="form-control"
+                 id="duration"
+                 placeholder="Введiть тривалість"
+                 name="duration"
+                 required val-bubble>
+        </div>
       </div>
       <div class="row">
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-5">
         <!-- licCount -->
           <label for="inputNumberOfPlaces">Кiлькiсть лiцензованих мiсць</label>
           <input ng-model="entireSpecoffer.specoffer.licCount"
                  type="number"
-                 class="form-control "
+                 class="form-control inputNumberOfPlaces"
                  id="inputNumberOfPlaces"
-                 placeholder="Введiть кiлькiсть лiцензованих мiсць"
+                 placeholder="Введiть кiлькiсть мiсць"
                  name="inputNumberOfPlaces"
                  required val-bubble>
         </div>
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-5">
         <!-- stateCount -->
           <label for="inputNumberOfStateOrder">Кiлькiсть мiсць держзамовлення</label>
           <input ng-model="entireSpecoffer.specoffer.stateCount"
-                 type="number" class="form-control "
+                 type="number" class="form-control"
                  id="inputNumberOfStateOrder"
-                 placeholder="Введiть кiлькiсть мiсць держзамовлення"
+                 placeholder="Введiть кiлькiсть мiсць"
                  name="inputNumberOfStateOrder"
                  required val-bubble>
         </div>
       </div>
       <div class="row">
 
-        <div class="col-md-3">
+        <div class="col-md-5">
         <!-- begDate -->
           <label class="control-label">Дата початку навчання</label>
             <input type="text"
@@ -127,7 +138,7 @@
                   name="begDate"
                   placeholder="РРРР-MM-ДД" />
         </div>
-        <div class="col-md-3">
+        <div class="col-md-5">
           <!-- endDate -->
           <label class="control-label">Дата закінчення </label>
             <input type="text"

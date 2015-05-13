@@ -12,8 +12,11 @@
                 search="enrolSearch"
                 headers="enrolHeaders"
                 getdata="getEnrolments(currentPage, itemsPerPage, userFilterPick, sort)"
-                newItemLinkTitle ="Додати заяву"
-                linkToNewItem="#/new-enrolment/tab-enrolment"
-                total="{{totalEnrol}}">
+                newitemlinktitle ="Додати заяву"
+                newitemstate="root.enrolment.new.main"
+                total="{{totalEnrol}}"
+                on-delete="deleteEnrol(id)"
+                on-change="changeEnrol(id)"
+                currentstate="root.enrolment.list">
   </general-table>
 </div>

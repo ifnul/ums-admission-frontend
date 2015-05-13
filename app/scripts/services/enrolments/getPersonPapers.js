@@ -4,11 +4,12 @@
   1) get person by ID; 2) get paperTypes (stored in wholePapersTypes)
   3) paperTypes filters under next rule:  if paperType object in wholePapersTypes
      match an paperTypeID in personPapers, it goes to rightPapersTypes. Else it doesn't.
-  4) Every paperType object expands with property personPaperId which value equal to personPaper ID. */
+  4) Every paperType object expands with property personPaperId which value equal to personPaper ID.
+  5) On error - notify user */
 
 angular.module('admissionSystemApp')
-  .factory('getPersonPapersSvc', ['DictionariesSvc', 'Restangular',
-    function (DictionariesSvc, Restangular) {
+  .factory('getPersonPapersSvc', ['DictionariesSvc', 'Restangular', 'translHttpStatusSvc',
+    function (DictionariesSvc, Restangular, translHttpStatusSvc) {
 
       var papersTypes = {
         wholePapersTypes: [],
@@ -33,7 +34,7 @@ angular.module('admissionSystemApp')
                 }
               });
             });
-          });
+          }, translHttpStatusSvc.notifyAboutError); //(5)
         });
       }
 

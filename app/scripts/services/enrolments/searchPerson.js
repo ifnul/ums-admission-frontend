@@ -3,7 +3,8 @@
 angular
   .module('admissionSystemApp')
   .factory('searchPersonSvc', ['Restangular', 'personDecodeSvc', 'DictionariesSvc',
-    function (Restangular, personDecodeSvc, DictionariesSvc) {
+    'translHttpStatusSvc',
+    function (Restangular, personDecodeSvc, DictionariesSvc, translHttpStatusSvc) {
 
       var data = {
         searchResult : [],
@@ -27,7 +28,7 @@ angular
           Restangular.one('persons', n).get().then(function (singlePerson) {
             personsToDecode.push(singlePerson);
             decodePersons('searchResult', personsToDecode);
-          });
+          }, translHttpStatusSvc.notifyAboutError);
         });
       }
 
@@ -36,7 +37,7 @@ angular
         if (prop === 'id') {
           Restangular.one('persons', query).get().then(function (singlePerson) {
             decodePersons('searchResult', [singlePerson]);
-          });
+          }, translHttpStatusSvc.notifyAboutError);
           return;
         }
 
@@ -55,7 +56,7 @@ angular
       function getSinglePerson (id) {
         Restangular.one('persons', id).get().then(function (singlePerson) {
           decodePersons('selectedPerson', [singlePerson]);
-        });
+        }, translHttpStatusSvc.notifyAboutError);
       }
 
       return {

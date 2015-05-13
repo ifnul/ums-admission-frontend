@@ -4,25 +4,23 @@
 <div class="modal-body">
   <div class="row">
     <div class="col-md-12 text-center">
-      <table class="table table-bordered">
+      <table class="table table-bordered table-hover">
         <thead>
         <tr>
-          <th class="text-center">Шифр</th>
-          <th class="text-center">Назва</th>
+          <th class="text-center"><a>Шифр</a></th>
+          <th class="text-center"><a>Назва</a></th>
         </tr>
         </thead>
-        <tbody>
-        <tr ng-repeat="result in results track by $index">
-          <td><a ng-click="selected.result = result">{{result.cipher}}</a></td>
+        <tbody class="pointer">
+        <tr ng-click="ok(result)" ng-repeat="result in results track by $index">
+          <td>{{result.cipher}}</td>
           <td>{{result.name}}</td>
         </tr>
         </tbody>
       </table>
-      <p>Ви обрали напрям/спеціальність <b>"{{selected.result.name}}"</b> з кодом <b>"{{selected.result.cipher}}"</b></p>
     </div>
   </div>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-primary" ng-click="ok()">OK</button>
   <button class="btn btn-danger" ng-click="cancel()">Cancel</button>
 </div>

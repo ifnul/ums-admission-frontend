@@ -2,65 +2,65 @@
 
   <!-- start filter -->
   <div class="col-md-2 col-lg-2 filter"
-        ng-hide="hideFilter">
+       ng-hide="hideFilter">
     <h4>Пошук по:</h4>
 
 
-<form class="form-horizontal">
-  <div class="form-group">
-    <div class="col-sm-12">
-      <select class="form-control"
-              ng-init="fieldSearchBy = search[0]"
-              ng-model="fieldSearchBy"
-              ng-options="opt.title for opt in search">
-      </select>
-    </div>
-  </div>
-</form>
+    <form class="form-horizontal">
+      <div class="form-group">
+        <div class="col-sm-12">
+          <select class="form-control"
+                  ng-init="fieldSearchBy = search[0]"
+                  ng-model="fieldSearchBy"
+                  ng-options="opt.title for opt in search">
+          </select>
+        </div>
+      </div>
+    </form>
 
     <form>
-        <div class="input-group">
-            <input type="text" class="form-control"
-                   ng-model="querySearchBy"
-                   placeholder="Шукати по {{fieldSearchBy.title}}&hellip;">
+      <div class="input-group">
+        <input type="text" class="form-control"
+               ng-model="querySearchBy"
+               placeholder="Шукати по {{::fieldSearchBy.title}}&hellip;">
             <span class="input-group-btn">
                 <button type="button"
                         class="btn btn-primary"
-                        ng-click="startSearch(fieldSearchBy, querySearchBy)">Ок</button>
+                        ng-click="startSearch(fieldSearchBy, querySearchBy)">Ок
+                </button>
             </span>
-        </div>
+      </div>
     </form>
 
     <hr>
     <h4>Фільтрація</h4>
 
     <ul class="list-group" ng-repeat="(key, value) in userFilterPick">
-        <li class="list-group-item"
-
-            ng-repeat="item in value">
-            {{item.name}}
-              <button type="button"
-                      class="close"
-                      aria-label="Close"
-                      ng-click="removeFromUserPick(key, item)">
-                <span aria-hidden="true">&times;</span>
-              </button>
-          </li>
+      <li class="list-group-item"
+          ng-repeat="item in value">
+        {{::item.name}}
+        <button type="button"
+                class="close"
+                aria-label="Close"
+                ng-click="removeFromUserPick(key, item)">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </li>
     </ul>
 
     <accordion close-others="oneAtATime.open">
-      <accordion-group  ng-repeat="group in filters track by $index"
-                        is-open="group.open">
+      <accordion-group ng-repeat="group in filters track by $index"
+                       is-open="group.open">
         <accordion-heading>
-           {{group.title}}
-           <i class="pull-right glyphicon"
-              ng-class="{'glyphicon-chevron-down': group.open, 'glyphicon-chevron-right': !group.open }"> </i>
+          {{::group.title}}
+          <i class="pull-right glyphicon"
+             ng-class="{'glyphicon-chevron-down': group.open, 'glyphicon-chevron-right': !group.open }"> </i>
         </accordion-heading>
-        <div  class="checkbox"
-              ng-repeat="opt in group.content">
+        <div class="checkbox"
+             ng-repeat="opt in group.content">
           <label> <input type="checkbox"
-                  checklist-model="userFilterPick[group.property]"
-                  checklist-value="{id: opt.id, length: group.length, name: opt.name}"> {{opt.name}}
+                         checklist-model="userFilterPick[group.property]"
+                         checklist-value="{id: opt.id, length: group.length, name: opt.name}"> {{::opt.name}}
           </label>
         </div>
       </accordion-group>
@@ -75,59 +75,72 @@
                             itemsPerPage:itemsPerPage,
                             userFilterPick:userFilterPick
                           })"
-              >Оновити</button>
+        >Оновити
+      </button>
     </p>
-  </div> <!-- end filter -->
+  </div>
+  <!-- end filter -->
 
-  <div class="col-sm-12 col-md-10  content-data ">
+  <div class="col-sm-12 col-md-10  content-data">
     <div class="panel panel-default ">
       <div class="panel-heading">
         <button type="button"
                 class="pull-left btn btn-primary"
-                ng-click="hideFilterFunc()" >
-                <i class="fa fa-filter"></i>
+                ng-click="hideFilterFunc()">
+          <i class="fa fa-filter"></i>
         </button>
-        <a href="{{linkToNewItem}}" class="col-md-offset-1">
-          <button type="button" class="btn btn-success "><i class="fa fa-plus"></i> {{newItemLinkTitle}}</button>
+        <a ui-sref="{{newitemstate}}" class="col-md-offset-1">
+          <button type="button" class="btn btn-success "><i class="fa fa-plus"></i> {{::newitemlinktitle}}</button>
         </a>
         <button type="button"
+                data-toggle="modal"
+                data-target=".bs-example-modal-sm"
                 class="field-chooser-button pull-right btn btn-primary"
                 ng-click="isShowingFields = ! isShowingFields">
-        <i class="fa fa-bars "></i></button>
-        </div>
+          <i class="fa fa-bars "></i></button>
+      </div>
 
-          <div class="table-responsive">
-          <table class="table table-bordered table-hover ">
-           <thead>
-            <tr>
-              <td><input type="checkbox"></td>
-              <th ng-repeat="column in headers track by $index" ng-show="column.visible">
-                <a ng-click="sort(column.name, $event)">
-                  {{column.display}} <i class="fa fa-sort"></i>
-                </a>
-              </th>
-              <td></td>
-            </tr>
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover ">
+          <thead>
+          <tr>
+            <!-- <td><input type="checkbox"></td> -->
+            <th ng-repeat="column in headers track by $index" ng-show="column.visible">
+              <a ng-click="sort(column.name, $event)">
+                {{::column.display}} <i class="fa fa-sort"></i>
+              </a>
+            </th>
+            <td></td>
+          </tr>
           </thead>
           <tbody class="pointer">
-            <tr ng-repeat="itemObj in data track by $index">
-              <td> <input type="checkbox"> </td>
-              <td ng-repeat="column in headers track by $index"
-                  ng-show="column.visible"
-                  ng-click="setSelected = itemObj"> {{itemObj[column.name]}}  </td>
-              <td>
+          <tr ng-repeat="itemObj in data track by $index">
+            <!-- <td> <input type="checkbox"> </td> -->
+            <td ng-repeat="column in headers track by $index"
+                ng-show="column.visible"
+                ng-click="setSelected = itemObj"> {{itemObj[column.name]}}
+            </td>
 
-              <button class="btn btn-xs btn-warning"
-                      ng-show="onEdit"
-                      ng-click="changeItem(itemObj)">
-                <i class="fa fa-pencil-square-o"></i>
-              </button>
+            <td class="content-data_manage-buttons">
 
-              <button class="btn btn-xs btn-danger"
-                      ng-show="onDelete"
-                      ng-click="deleteItem(itemObj)">
-                <i class="fa fa-times"></i>
-              </button>
+              <div class="btn-group">
+                <button class="btn btn-xs btn-warning"
+                        ng-click="onChange({id: itemObj.id})">
+                  <i class="fa fa-pencil-square-o"></i>
+                </button>
+
+                <button class="btn btn-xs btn-primary"
+                        ng-show="isView"
+                        ng-click="onView({id: itemObj.id})">
+                  <i class="fa fa-search"></i>
+                </button>
+
+                <button class="btn btn-xs btn-danger"
+                        ng-click="onDelete({id: itemObj.id})">
+                  <i class="fa fa-times"></i>
+                </button>
+              </div>
+
             </td>
           </tr>
           </tbody>
@@ -136,8 +149,8 @@
     </div>
     <div class="raw table-footer">
       <pagination total-items="total"
-                  ng-model="currentPage"
-                  items-per-page ="itemsPerPage"
+                  ng-model="page.current"
+                  items-per-page="itemsPerPage"
                   ng-change="getdata({currentPage:currentPage, itemsPerPage:itemsPerPage, userFilterPick:userFilterPick})"
                   num-pages="numPages"
                   max-size="maxSize"
@@ -148,55 +161,59 @@
                   class="pagination-sm"
                   boundary-links="true"
                   rotate="false"
-      ></pagination>
+        ></pagination>
       <div class="btn-group pull-right">
-        <button  class="btn btn-default"
+        <button class="btn btn-default"
                 ng-repeat="opt in itemsPerPageOptions"
                 ng-model="$parent.itemsPerPage"
                 type="button"
                 ng-click="itemPerPageChanged(opt);"
                 btn-radio="opt"
-                >{{opt}}</button >
+          >{{::opt}}
+        </button>
       </div>
     </div>
-  </div>  <!-- end content data -->
+  </div>
+  <!-- end content data -->
 
-      <!-- MODAL FOR COLUMN CHOOSER -->
-      <div class="modal bs-example-modal-sm" id="modalHeaderChooser"
-          tabindex="-1" role="dialog"
-          ng-show="isShowingFields"
-          >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button"
-                      class="close"
-                      ng-click="isShowingFields = ! isShowingFields"
-                      ><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="myModalLabel"> Обрати поля для відображення</h4>
-            </div>
+  <!-- MODAL FOR COLUMN CHOOSER -->
+  <div class="modal fade bs-example-modal-sm" id="modalHeaderChooser"
+       tabindex="-1" role="dialog" aria-hidden="true"
+       ng-show="isShowingFields"
+    >
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button"
+                  class="close"
+                  ng-click="isShowingFields = ! isShowingFields"
+            ><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel"> Обрати поля для відображення</h4>
+        </div>
 
-            <div class="modal-body">
-              <ul class="list-group">
-                <li class="list-group-item" ng-repeat = "header in headers track by $index" ng-click = "header.visible = !header.visible">
-                  <label for="showHideHeader">
-                    <input  name="showHideHeader"
-                            type= "checkbox"
-                            ng-checked="header.visible">
-                    <span>{{header.display}}</span>
-                  </label>
-                </li>
-              </ul>
-            </div>
-            <div class="modal-footer">
-              <button type="button"
-                      class="btn btn-danger"
-                      ng-click="isShowingFields = ! isShowingFields"
-                      >Закрити</button>
-            </div>
-          </div>
+        <div class="modal-body">
+          <ul class="list-group">
+            <li class="list-group-item" ng-repeat="header in headers track by $index"
+                ng-click="header.visible = !header.visible">
+              <label for="showHideHeader">
+                <input id="showHideHeader"
+                       type="checkbox"
+                       ng-checked="header.visible">
+                <span>{{header.display}}</span>
+              </label>
+            </li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button"
+                  data-dismiss="modal"
+                  class="btn btn-danger"
+                  ng-click="isShowingFields = ! isShowingFields">Закрити
+          </button>
         </div>
       </div>
-      <!-- END MODAL FOR COLUMN CHOOSER -->
+    </div>
+  </div>
+  <!-- END MODAL FOR COLUMN CHOOSER -->
 
 </div>

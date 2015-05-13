@@ -1,40 +1,42 @@
-<div class=" content-header">
+<div class="content-header">
   <div class="col-md-6">
     <ol class="breadcrumb">
-      <li><a href="#/list-person">Персони</a></li>
+      <li><a ui-sref="root.person.list">Персони</a></li>
       <li class="active">Нова персона</li>
     </ol>
-    <h2 class="content-header-title top-buffer bottom-buffer"><i class="fa fa-user-plus text-danger  "></i>
+    <h2 ng-show="!entirePerson.person.id" class="content-header-title top-buffer bottom-buffer"><i class="fa fa-user-plus text-danger"></i>
       Додавання персони</h2>
+    <h2 ng-show="entirePerson.person.id" class="content-header-title top-buffer bottom-buffer"><i class="fa fa-user-plus text-danger"></i>
+      Редагування персони</h2>
   </div>
 </div>
 
 <!-- main content -->
 <div class="col-sm-12 col-md-12 new-proposal-wrapper">
 
+  <div class="row">
+    <div ng-controller="ProgressBarCtrl">
+      <p class="text-center col-md-6">
+        <progressbar value="progressBarPercent" type="{{type}}">Заповнено на: {{progressBarPercent}}%</progressbar>
+      </p>
+      <p class="text-center col-md-3 text-danger">
+        {{propositionMessage}}
+      </p>
+
+    </div>
+  </div>
+
   <div>
     <div class="row">
       <div class="tabset col-md-9">
-        <tabset>
-          <tab heading="Основна інформація">
-            <div class="top-buffer" ng-include="'views/person/tabsPerson/tab_person.html'"></div>
-          </tab>
-          <tab heading="Адреса">
-            <div class="top-buffer" ng-include="'views/person/tabsPerson/tab_addresses.html'"></div>
-          </tab>
-          <tab heading="Контакти">
-            <div class="top-buffer" ng-include="'views/person/tabsPerson/tab_contacts.html'"></div>
-          </tab>
-          <tab heading="Документи">
-            <div class="top-buffer" ng-include="'views/person/tabsPerson/tab_papers.html'"></div>
-          </tab>
-          <tab heading="Предмети ЗНО">
-            <div class="top-buffer" ng-include="'views/person/tabsPerson/tab_enrolmentsubjects.html'"></div>
-          </tab>
-          <tab heading="Заяви">
-            <div class="top-buffer" ng-include="'views/person/tabsPerson/tab_enrolments.html'"></div>
-          </tab>
-        </tabset>
+          <tabset>
+            <tab  ng-repeat="t in personTabs"
+                  heading="{{t.heading}}"
+                  ng-click="go(t.route)"
+                  ui-sref-active="active">
+            </tab>
+          </tabset>
+          <div ui-view></div>
       </div>
     </div>
 

@@ -1,13 +1,10 @@
 'use strict';
 
-angular.module('admissionSystemApp')
-
+angular
+  .module('admissionSystemApp')
   .config(function (RestangularProvider, Constants) {
 
     RestangularProvider.setBaseUrl(Constants.basicURL);
-    RestangularProvider.setDefaultHeaders({
-      Authorization: Constants.BasicAuth
-    });
     RestangularProvider.addResponseInterceptor(function (data, operation) {
       if (operation === 'get') {
         delete data.uri;
@@ -20,7 +17,8 @@ angular.module('admissionSystemApp')
     });
   });
 
-angular.module('admissionSystemApp')
+angular
+  .module('admissionSystemApp')
   .factory('SpecoffersService', ['Restangular', '$q', '$filter',
 
     function (Restangular, $q, $filter) {

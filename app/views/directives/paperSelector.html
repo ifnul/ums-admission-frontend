@@ -4,7 +4,7 @@
 	  	<div class="form-group">
 		    <label for="inputStructure">Документ</label>
 		      <ui-select ng-model="enrolment.personPaperId"
-		               	 name="inputStructure"
+		               	 id="inputStructure"
 		               	 on-select="paperSelected($model)">
 		      <ui-select-match placeholder="Оберіть документ" >{{$select.selected.name}} </ui-select-match>
 		      <ui-select-choices repeat="item.personPaperId as item in papertypeId track by $index | filter: $select.search">
@@ -14,10 +14,9 @@
 	    </div>
 	  </div>
 
-		<div class="col-md-2">
-		<label></label>
+		<div class="col-md-2" id="subjPlus">
 	    <a ui-sref="new-person">
-        <button type="button" class="btn btn-success "><i class="fa fa-plus"></i> Додати новий документ</button>
+        <button is-change="false" type="button" class="btn btn-success "><i class="fa fa-plus"></i> Додати новий документ</button>
       </a>
 		</div>
 

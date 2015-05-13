@@ -8,6 +8,7 @@ angular
 .module('admissionSystemApp')
   .directive('personSelector', function () {
 
+    personSelectorDirectiveCtrl.$inject = ['$scope', '$modal', '$rootScope', 'searchPersonSvc'];
     function personSelectorDirectiveCtrl ($scope, $modal, $rootScope, searchPersonSvc) {
       $scope.data = searchPersonSvc.searchResult;
       $scope.selected = searchPersonSvc.selectedPerson;

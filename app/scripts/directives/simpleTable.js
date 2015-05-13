@@ -9,7 +9,9 @@ angular.module('admissionSystemApp')
       replace: true,
       scope: {
         data: '=',
-        headers: '='
+        headers: '=',
+        onChange: '&?',
+        isChange: '='
       }
     };
   });
