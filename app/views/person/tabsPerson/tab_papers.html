@@ -1,1 +1,151 @@
-<p>This is the tab_papers view.</p>
+<div>
+  <form >
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <td>{{headers[0].display}}</td>
+        <td>{{headers[1].display}}</td>
+        <td>{{headers[2].display}}</td>
+        <td>{{headers[3].display}}</td>
+        <td>{{headers[4].display}}</td>
+        <td>{{headers[5].display}}</td>
+        <td ng-show = "isVisible.publicActiveTable">{{headers[6].display}}</td>
+        <td ng-show = "isVisible.publicActiveTable">{{headers[7].display}}</td>
+
+
+
+      </tr>
+      </thead>
+      <tr ng-repeat="item in entirePerson.papers track by $index">
+
+        <td>{{item.abbrName}}</td>
+        <td>{{item.name}}</td>
+        <td>{{item.docSeries}}</td>
+        <td>{{item.docNum}}</td>
+        <td>{{item.dataIssued}}</td>
+        <td>{{item.dataDate}}</td>
+        <td ng-show = "isVisible.publicActiveTable">{{item.insideArray.publicActivityTypeId}}</td>
+        <td ng-show = "isVisible.publicActiveTable">{{item.insideArray.awardName}}</td>
+
+
+        <td>
+          <button class="btn btn-xs btn-warning" ng-click="editData(item)"><i class="fa fa-pencil-square-o"></i></button>
+          <button class="btn btn-xs btn-danger" ng-click="deleteData(item)"><i class="fa fa-times"></i></button>
+        </td>
+      </tr>
+    </table>
+    <hr/>
+    <!--is editing-->
+    <div class="row">
+      <div class="col-xs-2">
+        <button class="btn btn-xl btn-primary " ng-click="isVisible.isCreating = !isVisible.isCreating">  Додати предмет </button>
+      </div>
+    </div>
+
+    <div collapse="isVisible.isCreating">
+      <div class="row">
+        <div class="form-horizontal" name="formSubjects">
+
+          <div class="col-xs-4">
+            <label>Категорії документів</label>
+            <select ng-model="currentObj.abbrName"
+                    ng-options="opt.id as opt.abbrName for opt in paperUsage"
+                    class="form-control"
+                    ng-change="setNewData(currentObj.abbrName)">
+            </select>
+          </div>
+
+          <div class="col-xs-4">
+            <label>Назва документу</label>
+            <select ng-model="currentObj.name"
+                    ng-options="opt.id as opt.name for opt in newData"
+                    class="form-control"
+                    ng-change="addSelect(currentObj.name)">
+              >
+            </select><br/>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-4">
+          <label>Серія документу</label>
+          <input ng-model="currentObj.docSeries"
+                 type="text"
+                 class="form-control"
+                 placeholder="серія">
+        </div>
+
+        <div class="col-xs-4">
+          <label>Номер документу</label>
+          <input ng-model="currentObj.docNum"
+                 type="text"
+                 class="form-control"
+                 placeholder="номер"
+            ><br/>
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="col-xs-4">
+          <label>Дата видачі</label>
+          <input ng-model="currentObj.dataIssued"
+                 datepicker-popup="yyyy-MM-dd"
+                 is-open="isOpen"
+                 ng-click = "isOpen = true"
+                 close-text="Close"
+                 class="form-control"
+                 class="form-control"
+                 placeholder="РРРР-MM-ДД"
+            >
+        </div>
+
+        <div class="col-xs-4">
+          <label>Дата завершення</label>
+          <input ng-model="currentObj.dataDate"
+                 datepicker-popup="yyyy-MM-dd"
+                 is-open="isOpen2"
+                 ng-click = "isOpen2 = true"
+                 close-text="Close"
+                 class="form-control"
+                 class="form-control"
+                 placeholder="РРРР-MM-ДД"
+            ><br/>
+        </div>
+
+      </div>
+
+      <div class = "row">
+        <div class="col-xs-4">
+          <label ng-show = "isVisible.publicActivSelect">Категорії нагород</label>
+          <select ng-model="currentObj.publicActivityTypeId"
+                  ng-options="opt.publicActivityTypeId as opt.name for opt in publicActiv"
+                  class="form-control"
+                  ng-show = "isVisible.publicActivSelect"
+                  ng-change="setAdditionalData(currentObj.publicActivityTypeId)"
+            >
+          </select>
+        </div>
+
+        <div class="col-xs-4">
+          <label ng-show = "isVisible.publicActivSelect">Нагорода</label>
+          <select ng-model="currentObj.awardName"
+                  ng-options="opt.id as opt.awardName for opt in newAddingData"
+                  class="form-control"
+                  ng-show = "isVisible.publicActivSelect">
+          </select><br/>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-2" id="subjPlus">
+          <button class="btn btn-xl btn-success"  ng-show = "isVisible.isAddToTable" ng-click="addToTable()"><i class="fa fa-plus"></i> Додати</button>
+          <button class="btn btn-xl btn-success" ng-show = "isVisible.isSaveToTable" ng-click="saveData()"><i class="fa fa-plus"></i> Зберегти</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

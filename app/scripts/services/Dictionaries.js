@@ -146,7 +146,7 @@ angular
           return getLargeDictionary('publicactivities/types');
         },
         getPublicActivitiesAwards: function (params) {
-          return getLargeDictionary('publicactivities/awards', params);
+          return getLargeDictionary('publicactivities/' + params + '/awards');
         },
         getEnrolmentsSubjects: function () {
           return getLargeDictionary('enrolments/subjects');
