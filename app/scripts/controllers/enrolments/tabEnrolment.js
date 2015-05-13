@@ -25,10 +25,10 @@ angular.module('admissionSystemApp')
           manageEnrolmentsTyps(promisesResult[1]);
         });
 
-      $scope.entireEnrolment.enrolment = {};
-      // $scope.entireEnrolment.enrolment.specOfferId = 141;
+      //$scope.entireEnrolment.enrolment = {};
+      //$scope.entireEnrolment.enrolment.personId = 11;
+      //$scope.entireEnrolment.enrolment.specOfferId = 43;
       // $scope.entireEnrolment.enrolment.enrolmentTypeId = 8;
-      // $scope.entireEnrolment.enrolment.personId = 33;
       // $scope.entireEnrolment.enrolment.personPaperId = 35; // 22
 
       $scope.fieldSearchBy = [];
@@ -40,7 +40,7 @@ angular.module('admissionSystemApp')
       $scope.specofferHeaders = baseSpecofferData.headers;
       $scope.enrolmentTypes = {};
 
-      function manageEnrolmentsTyps (enrolmentTypes) {
+      function manageEnrolmentsTyps(enrolmentTypes) {
         $scope.chiefEnrolTypes = _.filter(enrolmentTypes, function (n) {
           return !n.parentId;
         });

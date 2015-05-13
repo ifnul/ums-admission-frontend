@@ -245,7 +245,7 @@ angular
             .state('root.enrolment.new.enrolmentsubjects', {
               url: '/enrolmentsubjects',
               templateUrl: '../views/enrolment/tabsEnrolment/tab_enrolmentsubjects.html',
-              controller: ''
+              controller: 'enrolmentSubjects'
             })
             .state('root.enrolment.new.statuses', {
               url: '/statuses',
