@@ -70,8 +70,19 @@ angular
         .state('root.dictionaries', {
           url: '/dictionaries',
           views: {
-            templateUrl: 'views/dictionaries.html',
-            controller: 'dictionaryCtrl'
+            'container@': {
+              templateUrl: 'views/dictionaries.html',
+              controller: 'dictionaryCtrl'
+            }
+          }
+        })
+        .state('root.statistics', {
+          url: '/statistics',
+          views: {
+            'container@': {
+              templateUrl: 'views/statistics.html',
+              controller: 'StatisticsCtrl'
+            }
           }
         })
 
@@ -239,7 +250,7 @@ angular
             .state('root.enrolment.new.statuses', {
               url: '/statuses',
               templateUrl: '../views/enrolment/tabsEnrolment/tab_statuses.html',
-              controller: ''
+              controller: 'TabStatesCtrl'
             })
           /** ----- edit enrolment ----- **/
           .state('root.enrolment.edit', {
@@ -269,7 +280,7 @@ angular
             .state('root.enrolment.edit.statuses', {
               url: '/statuses',
               templateUrl: '../views/enrolment/tabsEnrolment/tab_statuses.html',
-              controller: ''
+              controller: 'TabStatesCtrl'
             });
     $urlRouterProvider
       .when('/person', '/person/list')

@@ -1,6 +1,6 @@
 <div ng-controller="TabSubjectCtrl">
-  <button class="btn btn-default top-buffer bottom-buffer" ng-click="open('lg')">
-    <i class="fa fa-plus text-success"></i> Додати предмет
+  <button class="btn btn-success top-buffer bottom-buffer" ng-click="open('lg')">
+    <i class="fa fa-plus text-default"></i> Додати предмет
   </button>
 
 
@@ -24,7 +24,7 @@
           <td> {{ subj.alternative ? 'Так' : 'Нi'}}</td>
           <td> {{subj.weightSubject}}</td>
           <td> {{subj.mark }}</td>
-          <td>
+          <td class="editing">
             <button class="btn btn-xs btn-danger" ng-click="removeRow($index)"><i class="fa fa-times"></i></button>
             <button class="btn btn-xs btn-warning" ng-click="open('lg', subj, $index )"><i class="fa fa-pencil"></i>
             </button>

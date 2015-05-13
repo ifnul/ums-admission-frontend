@@ -1,6 +1,6 @@
 <div ng-controller="TabWavesCtrl">
-  <button class="btn btn-default top-buffer bottom-buffer" ng-click="open()">
-    <i class="fa fa-plus text-success"></i> Додати хвилю
+  <button class="btn btn-success top-buffer bottom-buffer" ng-click="open()">
+    <i class="fa fa-plus text-default"></i> Додати хвилю
   </button>
 
 
@@ -26,7 +26,7 @@
           <td> {{wave.targetCount}}</td>
           <td>{{wave.beginDate}}</td>
           <td>{{wave.endDate }}</td>
-          <td>
+          <td class="editing">
             <button class="btn btn-xs btn-danger" ng-click="removeRow($index)"><i class="fa fa-times"></i></button>
             <button class="btn btn-xs btn-warning" ng-click="open(wave, $index )"><i class="fa fa-pencil"></i>
             </button>

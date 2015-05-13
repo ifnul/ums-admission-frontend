@@ -4,7 +4,8 @@ angular
   .module('admissionSystemApp')
   .controller('ListSpecofferCtrl', ['$scope', '$filter', 'ngTableParams', 'SpecoffersService',
     'decodeSpecofferSvc', '$modal', 'DictionariesSvc', 'Cookies', 'baseSpecofferData', 'copyTimeperiod',
-    function ($scope, $filter, NgTableParams, SpecoffersService, decodeSpecofferSvc, $modal, DictionariesSvc, Cookies, baseSpecofferData, copyTimeperiod) {
+    function ($scope, $filter, NgTableParams, SpecoffersService, decodeSpecofferSvc, $modal, DictionariesSvc, Cookies,
+              baseSpecofferData, copyTimeperiod) {
 
       $scope.isCollapsed = true;
       $scope.sweeper = function () {
@@ -138,7 +139,3 @@ angular
       };
 
     }]);
-
-
-
-

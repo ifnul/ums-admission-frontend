@@ -93,6 +93,8 @@
           <button type="button" class="btn btn-success "><i class="fa fa-plus"></i> {{::newitemlinktitle}}</button>
         </a>
         <button type="button"
+                data-toggle="modal"
+                data-target=".bs-example-modal-sm"
                 class="field-chooser-button pull-right btn btn-primary"
                 ng-click="isShowingFields = ! isShowingFields">
           <i class="fa fa-bars "></i></button>
@@ -175,11 +177,11 @@
   <!-- end content data -->
 
   <!-- MODAL FOR COLUMN CHOOSER -->
-  <div class="modal bs-example-modal-sm" id="modalHeaderChooser"
-       tabindex="-1" role="dialog"
+  <div class="modal fade bs-example-modal-sm" id="modalHeaderChooser"
+       tabindex="-1" role="dialog" aria-hidden="true"
        ng-show="isShowingFields"
     >
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-sm">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button"
@@ -194,7 +196,7 @@
             <li class="list-group-item" ng-repeat="header in headers track by $index"
                 ng-click="header.visible = !header.visible">
               <label for="showHideHeader">
-                <input name="showHideHeader"
+                <input id="showHideHeader"
                        type="checkbox"
                        ng-checked="header.visible">
                 <span>{{header.display}}</span>
@@ -204,9 +206,9 @@
         </div>
         <div class="modal-footer">
           <button type="button"
+                  data-dismiss="modal"
                   class="btn btn-danger"
-                  ng-click="isShowingFields = ! isShowingFields"
-            >Закрити
+                  ng-click="isShowingFields = ! isShowingFields">Закрити
           </button>
         </div>
       </div>

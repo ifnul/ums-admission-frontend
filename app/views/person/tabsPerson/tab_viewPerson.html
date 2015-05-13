@@ -5,7 +5,7 @@
   <div class="col-md-7">
     <h2 class="text-primary">{{entirePerson.person.name}}
       <small>
-        <a ui-sref="person.edit.main({id:entirePerson.person.id})">
+        <a ui-sref="root.person.edit.main({id:entirePerson.person.id})">
           <i class="fa fa-pencil-square-o text-primary"></i>
         </a>
       </small>
@@ -178,8 +178,6 @@
   </div>
 </div>
 
-<div class="row form-group">
-  <div class="col-md-12">
-    <person-contacts ng-model="entirePerson.contacts"></person-contacts>
-  </div>
+<div class="row">
+  <person-contacts ng-model="entirePerson.contacts"></person-contacts>
 </div>

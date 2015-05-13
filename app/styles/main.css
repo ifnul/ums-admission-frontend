@@ -86,21 +86,11 @@ table td a:hover {
 
  /* Modal layout for choosing table fields in /list-person/ */
 
-#modalHeaderChooser .modal-body {
-  height: 340px;
-  overflow-x: scroll;
-}
-
-#modalHeaderChooser {
-  display: block;
-}
-
 @media (max-width: 1250px) {
   .panel-title {
     font-size: 12px;
   }
 }
-
 
 /* General table direcive  */
 
@@ -113,6 +103,7 @@ table td a:hover {
 
 .content-data_manage-buttons {
   min-width: 93px;
+  text-align: center;
 }
 
 /* table header */
@@ -149,4 +140,9 @@ table td a:hover {
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
 }
-
+.btn-xs {
+  min-width: 24px;
+}
+.editing {
+  min-width: 70px;
+}
