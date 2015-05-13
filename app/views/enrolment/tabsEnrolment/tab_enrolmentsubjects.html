@@ -1,1 +1,36 @@
-<p>This is the tab_enrolmentsubjects view.</p>
+<div>
+  <form id="subjectsForm">
+
+    <div class="form-group">
+      <h3>Предмети обраної пропозиції</h3>
+
+      <table class="table table-hover">
+        <thead>
+        <tr>
+          <td>№</td>
+          <td>Предмет ЗНО</td>
+          <td>Мінімальний бал предмету ЗНО</td>
+          <td>Бал Персони</td>
+          <td>Вибір предметів Персони для зарахування</td>
+
+        </tr>
+        </thead>
+
+        <tr ng-repeat="subject in specofferIdSubjects" >
+          <td>{{ $index+1 }}</td>
+          <td>{{ getSubjectTitleById(subject.enrolmentSubjectId)}}</td>
+          <td>{{ subject.mark }}</td>
+          <td> {{ getPersonSubjectMark(subject.enrolmentSubjectId)}} </td>
+          <td><input type="checkbox" ng-disabled="!subject.alternative" ng-checked="!subject.alternative" id="obligatorySubject"/></td>
+
+
+        </tr>
+      </table>
+
+      <hr/>
+
+    </div>
+
+  </form>
+</div>
+
