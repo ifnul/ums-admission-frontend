@@ -151,7 +151,7 @@
       <pagination total-items="total"
                   ng-model="page.current"
                   items-per-page="itemsPerPage"
-                  ng-change="getdata({currentPage:currentPage, itemsPerPage:itemsPerPage, userFilterPick:userFilterPick})"
+                  ng-change="getdata({currentPage:page.current, itemsPerPage:itemsPerPage, userFilterPick:userFilterPick})"
                   num-pages="numPages"
                   max-size="maxSize"
                   previous-text="&lsaquo;"
