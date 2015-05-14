@@ -16,8 +16,7 @@ angular
 
         $scope.wholeAdress = [];
         $scope.adminUnitId = {};
-        if ($state.is('root.person.view.main') ||
-          $state.is('root.person.new.main') || $state.is('root.person.edit.main')) {
+        if ($state.is('root.person.new.main') || $state.is('root.person.edit.main')) {
           $scope.placeOfBirth = true;
         }
 
