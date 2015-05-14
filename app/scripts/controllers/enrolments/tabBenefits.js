@@ -3,11 +3,10 @@
 angular.module('admissionSystemApp')
   .controller('TabBenefitsCtrlEnrolment', ['$scope', '$location', 'SpecoffersService', 'BenefitsSvc',
     function ($scope, $location, SpecoffersService, BenefitsSvc) {
-      $scope.entireEnrolment.benefits = [];
       $scope.obj = {};
       $scope.obj.selectedBenefit = [];
 
-      SpecoffersService.getEntireSpecoffer(826).then(function (specoffer) {
+      SpecoffersService.getEntireSpecoffer($scope.entireEnrolment.enrolment.specOfferId).then(function (specoffer) {
 
         $scope.benefitsIDs = angular.copy (specoffer.benefits);
         console.log ($scope.benefitsIDs);

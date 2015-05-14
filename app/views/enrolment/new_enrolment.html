@@ -21,7 +21,7 @@
        	 		<tab 	ng-repeat="t in enrolTabs"
        	 				 	heading="{{t.heading}}"
        	 				 	ng-click="go(t.route)"
-       	 				 	active="t.active">
+       	 				 	active="t.active"
                   disabled="!entireEnrolment.enrolment.specOfferId && !$scope.entireEnrolment.enrolment.personId">
         		</tab>
     			</tabset>

@@ -34,14 +34,16 @@ angular
           var array1 = angular.copy(data.benefitsArray),
             array2 = angular.copy(data.benefitsMainArray),
             i = 0,
-            x = 0;
+            x;
 
           $scope.benefits = array1.concat(array2);
 
           //Render data from server to table
           $scope.$watch('entireSpecoffer.benefits.length', function () {
+            i = 0;
             $scope.everything.allInformationArray = [];
             for (i; i < $scope.entireSpecoffer.benefits.length; i++) {
+              x = 0;
               for (x; x < $scope.benefits.length; x++) {
                 if ($scope.entireSpecoffer.benefits[i].benefitId === $scope.benefits[x].id) {
                   $scope.everything.allInformationArray.push($scope.benefits[x]);
