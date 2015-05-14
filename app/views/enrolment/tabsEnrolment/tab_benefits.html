@@ -1,5 +1,5 @@
 <div ng-controller="TabBenefitsCtrlEnrolment">
-  <div>
+  <div id="select">
     <div class='container-fluid col-md-10'>
       <ui-select ng-model="obj.selectedBenefit"
                  required
@@ -14,9 +14,8 @@
       <button type="button" class="btn btn-primary" ng-click="insert()" ng-disabled="myForm.$invalid">Обрати</button>
     </div>
   </div>
-  {{obj.selectedBenefit}}
-  <!-- TABLE WITH quotas -->
 
+  <!-- TABLE WITH quotas -->
   <div class="row">
     <div class="col-md-12 text-center">
       <table class="table table-bordered">

@@ -146,3 +146,14 @@ table td a:hover {
 .editing {
   min-width: 70px;
 }
+
+#select {
+  margin: 10px 0 10px 0;
+  height: 34px;
+}
+
+#copyProgressbar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
