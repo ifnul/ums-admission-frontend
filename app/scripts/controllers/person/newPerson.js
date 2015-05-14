@@ -10,9 +10,19 @@ angular.module('admissionSystemApp')
       $scope.entirePerson.names = [];
       $scope.entirePerson.contacts = [];
       $scope.entirePerson.papers = [];
+      $scope.entirePerson.enrolmentsubjects = [];
       $scope.entirePerson.names[0] = {
         languageId: 2,
         fatherName: ''
+      };
+      $scope.entirePerson.addresses = {
+        regAddresses: {
+          addressTypeId: 1
+        },
+        postAddresses: {
+          addressTypeId: 2
+        },
+        isAdressesMatch: true
       };
 
       $scope.brosweOrEditPerson = function (personId) {

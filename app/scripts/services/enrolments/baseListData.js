@@ -187,7 +187,7 @@ angular
       {
         name: 'specOfferWaveId',
         display: 'Хвиля вступу (id)',
-        visible: true
+        visible: false
       },
       {
         name: 'enrolmentStatusTypeId',
