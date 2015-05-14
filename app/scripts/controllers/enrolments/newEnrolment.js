@@ -34,6 +34,10 @@ angular
         }
       };
 
+      $scope.isExtendedTabsAvailable = function() {
+        return $scope.entireEnrolment.enrolment.specOfferId && $scope.entireEnrolment.enrolment.personId;
+      };
+
       $scope.brosweOrEditEnrolment = function (enrolmentId) {
         EnrolmentService.getEntireEnrolment(enrolmentId).then(function (res) {
           _.merge($scope.entireEnrolment.enrolmentsubjects, res.enrolmentsubjects);
