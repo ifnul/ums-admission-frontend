@@ -49,7 +49,7 @@ angular
             promises = [],
             x, y, z, i = 0;
 
-          for (x = 0; x < 35; x++) {
+          for (x = 0; x < specofferArray.length; x++) {
             promises.push(SpecoffersService.getEntireSpecoffer(specofferArray[x].id).then(function (specoffer) {
               var obj = specoffer;
 
