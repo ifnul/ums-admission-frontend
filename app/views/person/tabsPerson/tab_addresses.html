@@ -1,7 +1,7 @@
 <div>
 	<h3>Адреса реєстрації</h3>
 
-	<form id="FromForRegAdress">
+	<form id="FromForRegAdress" name="adresses">
 
 		<adminunits-selector ng-model="entirePerson.addresses.regAddresses.adminUnitId">
 		</adminunits-selector>
@@ -48,6 +48,8 @@
 					<label for="inputApartmentReg">Квартира</label>
 					<input ng-model="entirePerson.addresses.regAddresses.apartment"
 					type="text"
+          required
+          name="flat"
 					class="form-control"
 					placeholder="номер квартири"
 					id="inputApartmentReg">

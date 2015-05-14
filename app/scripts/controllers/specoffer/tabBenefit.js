@@ -3,7 +3,7 @@
 angular.module('admissionSystemApp')
 
 
-  .controller('TabBenefitCtrl',  ['$scope', '$modal', '$location', 'BenefitsSvc', function ($scope, $modal, $location, BenefitsSvc) {
+  .controller('TabBenefitCtrl', ['$scope', '$modal', '$state', 'BenefitsSvc', function ($scope, $modal, $state, BenefitsSvc) {
 
     //Internal object for rendering data in table
     $scope.everything = {};
@@ -14,7 +14,7 @@ angular.module('admissionSystemApp')
     $scope.allBenefits.benefit = '';
 
     //Get data from server
-    if ($location.url() === '/new-specoffer') {
+    if ($state.is('root.specoffer.new.benefit')) {
 
       //Get data from server
       BenefitsSvc.getBenefits().then(function (data) {
