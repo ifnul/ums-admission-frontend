@@ -3,57 +3,85 @@
 angular
   .module('admissionSystemApp')
   .controller('ListSpecofferCtrl', ['$scope', '$filter', 'ngTableParams', 'SpecoffersService',
-    'decodeSpecofferSvc', '$modal', 'DictionariesSvc', 'Cookies', 'baseSpecofferData', 'copyTimeperiod',
+    'decodeSpecofferSvc', '$modal', 'DictionariesSvc', 'Cookies', 'baseSpecofferData', 'copyTimeperiod', '$rootScope',
     function ($scope, $filter, NgTableParams, SpecoffersService, decodeSpecofferSvc, $modal, DictionariesSvc, Cookies,
-              baseSpecofferData, copyTimeperiod) {
+              baseSpecofferData, copyTimeperiod, $rootScope) {
 
       $scope.isCollapsed = true;
       $scope.sweeper = function () {
         $scope.isCollapsed = !$scope.isCollapsed;
         if ($scope.isCollapsed) {
-          $scope.numValue = undefined;
-          $scope.begDate = undefined;
-          $scope.endDate = undefined;
+          $scope.timePeriod = {};
         }
       };
 
-      $scope.createNewTimeperiod = function (size) {
-        copyTimeperiod.createTimeperiod($scope.numValue, 'Вступна кампанія' + $scope.numValue, $scope.begDate,
-          $scope.endDate).then(function (data) {
-          $scope.createdTimeperiodId = data;
+      $scope.createNewTimeperiod = function (timePeriod) {
+        copyTimeperiod.createTimeperiod(
+          timePeriod.numValue,
+          'Вступна кампанія ' + timePeriod.numValue,
+          timePeriod.begDate,
+          timePeriod.endDate)
+          .then(function (data) {
+            timePeriod.id = data;
 
-          DictionariesSvc.clearStorageByRoute('timeperiods');
-          DictionariesSvc.getTimeperiods({
-            timePeriodTypeId: 1
-          }).then(function (timeperiods) {
-            $scope.timeperiods = timeperiods;
+            DictionariesSvc.clearStorageByRoute('timeperiods');
+            var timeperiodsPromise = DictionariesSvc.getTimeperiods({
+              timePeriodTypeId: 1
+            }).then(function (timeperiods) {
+              $scope.timeperiods = timeperiods;
+
+              return timeperiods;
+            });
+
+            return {
+              timeperiodId: timePeriod.id,
+              timeperiods: timeperiodsPromise
+            };
+          })
+          .then(function (params) {
+            return $modal.open({
+              templateUrl: '../views/modal/modalCopyTimeperiod.html',
+              //scope: $scope,
+              resolve: {
+                timePeriodId: function () {
+                  return params.timeperiodId;
+                },
+                timeperiods: function () {
+                  return params.timeperiods;
+                }
+              },
+              controller: function ($scope, $modalInstance, timePeriodId, timeperiods) {
+                $scope.timeperiods = _.filter(timeperiods, function (timeperiod) {
+                  return timeperiod.id !== timePeriodId;
+                });
+
+                $scope.switch = false;
+                $scope.switcher = function () {
+                  $scope.switch = !$scope.switch;
+                  $scope.selectedTimeperiod = undefined;
+                };
+
+                $scope.ok = function () {
+                  $modalInstance.close($scope.selectedTimeperiod);
+                };
+
+              },
+              size: 'lg'
+            }).result;
+          })
+          .then(function (sourceTimeperiodId) {
+            copyTimeperiod.copyToTimeperiod(sourceTimeperiodId, timePeriod.id, timePeriod.begDate, timePeriod.endDate).then(function (result) {
+              // success
+            }, function (error) {
+              // error
+            }, function (percentComplete) {
+              $rootScope.progress = Math.round (percentComplete);
+            });
+          })
+          .finally(function () {
+            $scope.sweeper();
+            $rootScope.progress = undefined;
           });
-        });
-
-        $modal.open({
-          templateUrl: '../views/modal/modalCopyTimeperiod.html',
-          scope: $scope,
-          controller: function ($scope, $modalInstance) {
-
-            $scope.switch = false;
-            $scope.switcher = function () {
-              $scope.switch = !$scope.switch;
-              $scope.selectedTimeperiod = undefined;
-            };
-
-            $scope.ok = function () {
-              copyTimeperiod.copyToTimeperiod($scope.selectedTimeperiod, $scope.createdTimeperiodId, $scope.begDate,
-                $scope.endDate);
-              $modalInstance.close();
-            };
-
-            $scope.cancel = function () {
-              $modalInstance.dismiss('cancel');
-            };
-
-          },
-          size: size
-        });
       };
 
       $scope.headers = baseSpecofferData.headers;

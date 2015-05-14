@@ -1,1 +1,40 @@
-<p>This is the tab_benefits view.</p>
+<div ng-controller="TabBenefitsCtrlEnrolment">
+  <div id="select">
+    <div class='container-fluid col-md-10'>
+      <ui-select ng-model="obj.selectedBenefit"
+                 required
+                 id="">
+        <ui-select-match placeholder="Оберiть пільгу">{{$select.selected.name}}</ui-select-match>
+        <ui-select-choices repeat="benefit in renderSelectArray | filter: $select.search">
+          <div ng-bind-html="benefit.name | highlight: $select.search"></div>
+        </ui-select-choices>
+      </ui-select>
+    </div>
+    <div class='container-fluid col-md-2'>
+      <button type="button" class="btn btn-primary" ng-click="insert()" ng-disabled="myForm.$invalid">Обрати</button>
+    </div>
+  </div>
+
+  <!-- TABLE WITH quotas -->
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <table class="table table-bordered">
+        <thead>
+        <tr>
+          <th class="text-center">ID</th>
+          <th class="text-center">Тип</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="x in renderTableArray track by $index">
+          <td> {{ x.id}} </td>
+          <td> {{ x.name }} </td>
+          <td><button class="btn btn-xs btn-danger" ng-click="removeRow(x.id)"><i class="fa fa-times"></i></button></td>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>
+

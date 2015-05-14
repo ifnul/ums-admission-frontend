@@ -7,14 +7,15 @@ angular.module('admissionSystemApp')
         data = [],
         subjectObject = {},
         benefits = $q.defer(),
-        getBenefits,
-        i;
+        getBenefits;
 
     subjectObject.benefitsArray = [];
     subjectObject.benefitsMainArray = [];
 
     //Get benefits function
     getBenefits = function () {
+      var i;
+
       if (flag === 0) {
         flag += 1;
         DictionariesSvc.getBenefits().then(function (res) {

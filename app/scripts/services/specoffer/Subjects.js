@@ -4,20 +4,22 @@ angular.module('admissionSystemApp')
 
   .factory('SubjectsSvc', ['$http', '$q', 'DictionariesSvc', function ($http, $q, DictionariesSvc) {
     var flagForFirstFunction = 0,
-      data = [],
-      chiefSubjectsArray = [],
-      subjectsForParentArray = [],
-      chiefSubjects = $q.defer(),
-      subjectsForParent = $q.defer(),
-      getChiefSubjects,
-      i,
-      y;
-    //Get chief subjects function
+        data = [],
+        chiefSubjectsArray = [],
+        subjectsForParentArray = [],
+        chiefSubjects = $q.defer(),
+        subjectsForParent = $q.defer(),
+        getChiefSubjects,
+        getSubjectsForParentFunction,
+        getSubjectsById;
 
+    //Get chief subjects function
     getChiefSubjects = function () {
+      var i, y, z;
 
       if (flagForFirstFunction === 0) {
         flagForFirstFunction += 1;
+
         DictionariesSvc.getAllSubjects().then(function (res) {
           angular.extend(data, res);
 
@@ -25,16 +27,21 @@ angular.module('admissionSystemApp')
             if (!data[i].hasOwnProperty('hasChildren')) {
               data[i].hasChildren = false;
               if (data[i].hasOwnProperty('parentId')) {
-                data[data[i].parentId - 1].hasChildren = true;
+                z = 0;
+                for (z; z < data.length; z++) {
+                  if (data[i].parentId === data[z].id) {
+                    data[z].hasChildren = true;
+                    break;
+                  }
+                }
               }
             }
           }
           for (y = 0; y < data.length; y++) {
             if (!data[y].hasOwnProperty('parentId')) {
               chiefSubjectsArray.push({
-                id: data[y].id,
-                name: data[y].name,
-                hasChildren: data[y].hasChildren});
+                id: data[y].id, name: data[y].name, hasChildren: data[y].hasChildren
+              });
             }
           }
 
@@ -45,13 +52,12 @@ angular.module('admissionSystemApp')
       return chiefSubjects.promise;
     };
 
-
     //Get subjects for chief subject function
-    var getSubjectsForParentFunction = function (id) {
+    getSubjectsForParentFunction = function (id) {
 
       getChiefSubjects().then(function () {
-        var i,
-          y;
+        var i, y;
+
         subjectsForParentArray.length = 0;
         for (i = 0; i < data.length; i++) {
           if (data[i].id === id) {
@@ -59,9 +65,7 @@ angular.module('admissionSystemApp')
               for (y = 0; y < data.length; y++) {
                 if (data[y].parentId === id) {
                   subjectsForParentArray.push({
-                    id: data[y].id,
-                    name: data[y].name,
-                    parentId: data[y].parentId
+                    id: data[y].id, name: data[y].name, parentId: data[y].parentId
                   });
                 }
               }
@@ -76,13 +80,13 @@ angular.module('admissionSystemApp')
       return subjectsForParent.promise;
     };
 
-
-    var getSubjectsById = function (id) {
-      var returnNameDefer = $q.defer();
-      var returnName = {};
+    getSubjectsById = function (id) {
+      var returnNameDefer = $q.defer(),
+          returnName = {};
 
       getChiefSubjects().then(function () {
         var i, y;
+
         for (i = 0; i < data.length; i++) {
           if (data[i].id === id) {
             if (data[i].hasOwnProperty('parentId')) {
@@ -105,7 +109,6 @@ angular.module('admissionSystemApp')
 
       return returnNameDefer.promise;
     };
-
 
     return {
       //function returns Promise with info about chief subjects (like [{hasChildren: true, id: 3, name: "Іноземна мова"}, etc.])

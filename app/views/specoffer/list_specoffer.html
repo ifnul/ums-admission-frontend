@@ -30,14 +30,14 @@
                 placeholder="Введіть рік"
                 name="campaign"
                 min="2015"
-                ng-model="numValue"
+                ng-model="timePeriod.numValue"
                 required>
             </div>
             <div>
               <label for="begDate">Дата початку</label>
               <input type="text"
                      id = "begDate"
-                     ng-model="begDate"
+                     ng-model="timePeriod.begDate"
                      datepicker-popup="yyyy-MM-dd"
                      is-open="isOpen3"
                      ng-click = "isOpen3 = true"
@@ -52,7 +52,7 @@
               <label for="endDate">Дата закінчення</label>
               <input type="text"
                      id = "endDate"
-                     ng-model="endDate"
+                     ng-model="timePeriod.endDate"
                      datepicker-popup="yyyy-MM-dd"
                      is-open="isOpen4"
                      ng-click = "isOpen4 = true"
@@ -68,7 +68,7 @@
           <br/>
 
           <div>
-            <button type="button" class="btn btn-primary" ng-click="createNewTimeperiod('lg')" ng-disabled="myForm.$invalid">Створити</button>
+            <button type="button" class="btn btn-primary" ng-click="createNewTimeperiod(timePeriod)" ng-disabled="myForm.$invalid">Створити</button>
           </div>
         </div>
       </div>

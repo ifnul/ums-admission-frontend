@@ -28,6 +28,7 @@
 
 <div id="spinnerDiv" loader>
   <img src="images/spinner.gif" class="spinner"/>
+  <progressbar ng-show="progress" animate="false" value="progress" type="success" id="copyProgressbar"><b>{{progress}}%</b></progressbar>
 </div>
 
 <toaster-container></toaster-container>
@@ -84,11 +85,15 @@
 <script src="scripts/directives/generalTable.js"></script>
 <script src="scripts/controllers/person/listPerson.js"></script>
 <script src="scripts/services/person/decodePerson.js"></script>
+<script src="scripts/controllers/person/newPerson.js"></script>
+<script src="scripts/controllers/person/tabPerson.js"></script>
+<script src="scripts/controllers/person/tabAdresses.js"></script>
 <script src="scripts/controllers/specoffer/tabWaves.js"></script>
 <script src="scripts/services/getFiltredList.js"></script>
 <script src="scripts/services/enrolments/decodeEnrolments.js"></script>
 <script src="scripts/controllers/enrolments/listEnrolments.js"></script>
 <script src="scripts/controllers/enrolments/newEnrolment.js"></script>
+<script src="scripts/controllers/enrolments/tabBenefits.js"></script>
 <script src="scripts/controllers/enrolments/tabStates.js"></script>
 <script src="scripts/directives/personContacts.js"></script>
 <script src="scripts/services/enrolments/baseListData.js"></script>

@@ -24,7 +24,7 @@
             <select required
                     class="form-control"
                     ng-model="selectedTimeperiod"
-                    ng-options="opt.id as opt.name for opt in timeperiodsForCopy">
+                    ng-options="opt.id as opt.name for opt in timeperiods">
               <option value="" disabled selected>Оберіть вступну кампанію</option>
             </select>
           </div>
@@ -36,6 +36,6 @@
 </div>
 
 <div class="modal-footer">
-  <button class="btn btn-primary" ng-click="ok(); sweeper();" ng-disabled="modalCopyTimeperiod.$invalid" ng-show="switch">Імпортувати</button>
-  <button class="btn btn-danger" ng-click="cancel(); sweeper();">Завершити</button>
+  <button class="btn btn-primary" ng-click="ok()" ng-disabled="modalCopyTimeperiod.$invalid" ng-show="switch">Імпортувати</button>
+  <button class="btn btn-danger" ng-click="$dismiss()">Завершити</button>
 </div>
