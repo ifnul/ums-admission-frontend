@@ -70,7 +70,7 @@ angular
       .state('root.specoffer.new.main', {
         url: '/',
         templateUrl: '../views/specoffer/tabsSpecoffer/tab_specoffer.html',
-        controller: 'NewSpecofferCtrl'
+        controller: 'tabProposalCtrl'
       })
       .state('root.specoffer.new.subjects', {
         url: '/subjects',
