@@ -1,5 +1,5 @@
-<div>
-  <form>
+<div class="row">
+  <div class="col-xs-12">
     <table class="table table-hover" ng-show="inputData.length">
       <thead>
       <tr>
@@ -28,11 +28,15 @@
         <td>{{item.docIssued}}</td>
         <td>{{item.isChecked ? '\u2713' : '\u2718'}}</td>
         <td>{{item.isForeign ? '\u2713' : '\u2718'}}</td>
-        <td ng-show="isVisible.publicActiveTable">{{item.award.publicActivityTypeId}}</td>
-        <td ng-show="isVisible.publicActiveTable">{{item.award.publicActivityAwardId}}</td>
-        <td ng-show="isVisible.studyTable">{{item.honorsTypeId}}</td>
-        <td ng-show="isVisible.studyTable || isVisible.markTable">{{item.mark}}</td>
-        <td ng-show="isVisible.docPinTable">{{item.docPin}}</td>
+        <td ng-show="isVisible.publicActiveTable || item.award.publicActivityTypeId">
+          {{item.award.publicActivityTypeId}}
+        </td>
+        <td ng-show="isVisible.publicActiveTable || item.award.publicActivityAwardId">
+          {{item.award.publicActivityAwardId}}
+        </td>
+        <td ng-show="isVisible.studyTable || item.honorsTypeId">{{item.honorsTypeId}}</td>
+        <td ng-show="isVisible.studyTable || isVisible.markTable || item.mark">{{item.mark}}</td>
+        <td ng-show="isVisible.docPinTable || item.docPin">{{item.docPin}}</td>
 
         <td class="editing">
           <button class="btn btn-xs btn-warning" ng-click="editData(item, $index)"><i class="fa fa-pencil-square-o"></i>
@@ -41,6 +45,29 @@
         </td>
       </tr>
     </table>
+  </div>
+</div>
+
+<div class="row" ng-show="personView">
+  <form class="col-xs-12">
+    <div class="row" ng-show="personView && !inputData.length">
+      <div class="col-xs-10">
+        <h4>У даної персони немає документів</h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-10">
+        <button class="btn btn-success top-buffer bottom-buffer" ng-click="newDocument()">
+          <i class="fa fa-plus"></i> Додати документ
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="row" ng-show="!personView">
+  <form class="col-xs-12">
+
     <hr/>
     <!--is editing-->
     <div class="row">

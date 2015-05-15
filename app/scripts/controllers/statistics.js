@@ -46,10 +46,8 @@ angular.module('admissionSystemApp')
 
       $scope.pickTimePeriod = function () {
         DictionariesSvc.getAllSpecoffers($scope.timeperiod).then(function (rawSpecoffers) {
-          console.log('rawSpecoffers', rawSpecoffers);
           decodeSpecofferSvc.specofferDecoded(rawSpecoffers).then(function (decodedSpecoffers) {
             data = decodedSpecoffers;
-            console.log('decodedSpecoffers', decodedSpecoffers);
             initData();
           });
         });

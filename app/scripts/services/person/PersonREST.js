@@ -6,7 +6,7 @@ angular.module('admissionSystemApp')
 
       var restAngular,
         objCopy,
-        promises,
+        promises = [],
         newPromise;
 
       restAngular =
@@ -54,10 +54,8 @@ angular.module('admissionSystemApp')
 
         entirePerson = {};
         entirePerson.person = restAngular.one('persons', id).get();
-        entirePerson.addresses = restAngular.one('persons', id).customGET('addresses', {
-          personId: id
-        }).then(function (arr) {
-          return separateAddresses(arr.resources);
+        entirePerson.addresses = restAngular.one('persons', id).one('addresses').getList().then(function (arr) {
+          return separateAddresses(arr);
         });
         entirePerson.contacts = restAngular.one('persons', id).one('contacts').getList();
         entirePerson.names = restAngular.one('persons', id).one('names').getList();
@@ -82,9 +80,9 @@ angular.module('admissionSystemApp')
       }
 
       function addArrayOfItems(itemsArr, personId, route) {
-        var promises, newPromise, i;
+        var promises = [],
+          newPromise, i;
 
-        promises = [];
         for (i = 0; i < itemsArr.length; i += 1) {
           itemsArr[i].personId = personId;
           newPromise = restAngular.one('persons', personId).one(route).post('', itemsArr[i]);
@@ -129,6 +127,7 @@ angular.module('admissionSystemApp')
         newPromise = restAngular.one('persons', personId).one('papers').post('', item).then(function (response) {
           subjPromises = [];
           for (i = 0; i < itemsArrSubj.length; i += 1) {
+            itemsArrSubj[i].personId = personId;
             itemsArrSubj[i].personPaperId = response.id;
             subjPromise = restAngular.one('persons', personId).one('enrolmentsubjects').post('', itemsArrSubj[i]);
             subjPromises.push(subjPromise);

@@ -233,6 +233,10 @@ angular
         route: 'root.person.view.main'
       },
       {
+        heading: 'Документи',
+        route: 'root.person.view.papers'
+      },
+      {
         heading: 'Заяви',
         route: 'root.person.view.enrolments'
       }

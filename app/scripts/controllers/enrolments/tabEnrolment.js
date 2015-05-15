@@ -6,10 +6,10 @@ angular.module('admissionSystemApp')
     function ($scope, DictionariesSvc, baseFormData, basePersonData, $q, baseSpecofferData, $stateParams) {
 
       if ($stateParams.personId) {
-        $scope.personId = $stateParams.personId;
+        $scope.entireEnrolment.enrolment.personId = $stateParams.personId;
       }
       if ($stateParams.id) {
-        $scope.enrolmentId = $stateParams.id;
+        $scope.entireEnrolment.enrolment.id = $stateParams.id;
       }
 
       $q.all([
