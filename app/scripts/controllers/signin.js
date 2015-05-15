@@ -4,7 +4,6 @@ angular
 	.module('admissionSystemApp')
   .controller('SigninCtrl', ['$scope', 'AuthorizationSvc',
     function ($scope, AuthorizationSvc) {
-      // atob()
       var signin = this;
 
       signin.auth = {};

@@ -1,24 +1,28 @@
 <div class="form-group">
-	<div class="row">
-	  <div class="col-md-5">
-	  	<div class="form-group">
-		    <label for="inputStructure">Документ</label>
-		      <ui-select ng-model="enrolment.personPaperId"
-		               	 id="inputStructure"
-		               	 on-select="paperSelected($model)">
-		      <ui-select-match placeholder="Оберіть документ" >{{$select.selected.name}} </ui-select-match>
-		      <ui-select-choices repeat="item.personPaperId as item in papertypeId track by $index | filter: $select.search">
-		        <div ng-bind-html="item.name | highlight: $select.search"></div>
-		      </ui-select-choices>
-		    </ui-select>
-	    </div>
-	  </div>
+  <div class="row">
+    <label class="col-xs-2 control-label" for="inputStructure">Документ</label>
 
-		<div class="col-md-2" id="subjPlus">
-	    <a ui-sref="new-person">
-        <button is-change="false" type="button" class="btn btn-success "><i class="fa fa-plus"></i> Додати новий документ</button>
+    <div class="col-xs-5">
+
+      <ui-select ng-model="enrolment.personPaperId"
+                 id="inputStructure"
+                 on-select="paperSelected($model)">
+        <ui-select-match placeholder="Оберіть документ">{{$select.selected.name}}</ui-select-match>
+        <ui-select-choices repeat="item.personPaperId as item in papertypeId track by $index | filter: $select.search">
+          <div ng-bind-html="item.name | highlight: $select.search"></div>
+        </ui-select-choices>
+      </ui-select>
+    </div>
+
+
+    <div class="col-xs-3" id="subjPlus">
+      <a ui-sref="new-person">
+        <button is-change="false" type="button" class="btn btn-success "><i class="fa fa-plus"></i> Додати новий
+          документ
+        </button>
       </a>
-		</div>
+    </div>
 
-	</div>
+  </div>
+
 </div>

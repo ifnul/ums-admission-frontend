@@ -12,7 +12,8 @@ angular
     'checklist-model',
     'toaster',
     'ngAnimate',
-    'ngStorage'
+    'ngStorage',
+    'brantwills.paging'
   ])
 
   .config(function ($stateProvider, $urlRouterProvider) {
@@ -70,7 +71,7 @@ angular
       .state('root.specoffer.new.main', {
         url: '/',
         templateUrl: '../views/specoffer/tabsSpecoffer/tab_specoffer.html',
-        controller: 'tabProposalCtrl'
+        controller: 'NewSpecofferCtrl'
       })
       .state('root.specoffer.new.subjects', {
         url: '/subjects',

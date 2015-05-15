@@ -28,7 +28,6 @@ angular
           if (res.login === 'admin') {
             $state.go('root.person.list');
           }
-          console.log('res', res);
         }, function (error) {
           if (error.status === 401) {
             toaster.pop('error', 'Введено невірний логін або пароль');

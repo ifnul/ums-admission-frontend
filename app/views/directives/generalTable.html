@@ -70,6 +70,7 @@
       <button type="button"
               class="btn btn-primary btn-sm"
               ng-click="querySearchBy = '';
+                        currentPage = 1;
                         getdata({
                             currentPage:currentPage,
                             itemsPerPage:itemsPerPage,
@@ -81,7 +82,9 @@
   </div>
   <!-- end filter -->
 
+  <!-- content data -->
   <div class="col-sm-12 col-md-10  content-data">
+    <!-- table header -->
     <div class="panel panel-default ">
       <div class="panel-heading">
         <button type="button"
@@ -99,12 +102,11 @@
                 ng-click="isShowingFields = ! isShowingFields">
           <i class="fa fa-bars "></i></button>
       </div>
-
+    <!-- end table header -->
       <div class="table-responsive">
         <table class="table table-bordered table-hover ">
           <thead>
           <tr>
-            <!-- <td><input type="checkbox"></td> -->
             <th ng-repeat="column in headers track by $index" ng-show="column.visible">
               <a ng-click="sort(column.name, $event)">
                 {{::column.display}} <i class="fa fa-sort"></i>
@@ -115,7 +117,6 @@
           </thead>
           <tbody class="pointer">
           <tr ng-repeat="itemObj in data track by $index">
-            <!-- <td> <input type="checkbox"> </td> -->
             <td ng-repeat="column in headers track by $index"
                 ng-show="column.visible"
                 ng-click="setSelected = itemObj"> {{itemObj[column.name]}}
@@ -147,33 +148,33 @@
         </table>
       </div>
     </div>
+    <!-- PAGINATION + ITEMperPAGE CHOOSER -->
     <div class="raw table-footer">
-      <pagination total-items="total"
-                  ng-model="page.current"
-                  items-per-page="itemsPerPage"
-                  ng-change="getdata({currentPage:page.current, itemsPerPage:itemsPerPage, userFilterPick:userFilterPick})"
-                  num-pages="numPages"
-                  max-size="maxSize"
-                  previous-text="&lsaquo;"
-                  next-text="&rsaquo;"
-                  first-text="&laquo;"
-                  last-text="&raquo;"
-                  class="pagination-sm"
-                  boundary-links="true"
-                  rotate="false"
-        ></pagination>
+        <paging
+          class="small"
+          page="currentPage"
+          page-size="itemsPerPage"
+          total="total"
+          adjacent="2"
+          dots="2"
+          scroll-top="true"
+          hide-if-empty="false"
+          show-prev-next="true"
+          paging-action="paginationClick('Paging Clicked', page, pageSize, total)">
+        </paging>
       <div class="btn-group pull-right">
         <button class="btn btn-default"
                 ng-repeat="opt in itemsPerPageOptions"
                 ng-model="$parent.itemsPerPage"
                 type="button"
-                ng-click="itemPerPageChanged(opt);"
+                ng-click="itemPerPageChanged(opt, currentPage);"
                 btn-radio="opt"
           >{{::opt}}
         </button>
       </div>
     </div>
   </div>
+  <!-- end PAGINATION + ITEMperPAGE CHOOSER -->
   <!-- end content data -->
 
   <!-- MODAL FOR COLUMN CHOOSER -->

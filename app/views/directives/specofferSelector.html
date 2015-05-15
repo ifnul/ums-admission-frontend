@@ -1,6 +1,6 @@
 	<div class="form-group">
 		<div class="row">
-			<div class="col-md-5 col-sm-6">
+			<div class="col-xs-4">
 				<div class="form-group">
 		      <ui-select ng-model="searchBy.departmentId"
 		               name="inputStructure">
@@ -12,7 +12,7 @@
 				</div>
 			</div>
 
-			<div class="col-md-5 col-sm-6">
+			<div class="col-xs-4">
 				<div class="form-group">
 		      <ui-select ng-model="searchBy.specOfferTypeId"
 		               name="inputStructure">
@@ -20,16 +20,16 @@
 		      <ui-select-choices repeat="item.id as item in specoffertypes | filter: $select.search">
 		        <div ng-bind-html="item.name | highlight: $select.search"></div>
 		      </ui-select-choices>
-		   	 </ui-select>				
+		   	 </ui-select>
 				</div>
 			</div>
 
-			<div class="col-md-2">
-		    <button ng-click="openModalSpecoffer('lg')" type="submit" class="btn btn-primary">Пошук</button>
+			<div class="col-xs-1">
+		    <button ng-click="openModalSpecoffer('lg')" type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
 			</div>
 
 		</div>
 
-		<simple-table data="selected" headers="headers"></simple-table> 
+		<simple-table data="selected" headers="headers"  class="col-xs-12"  ></simple-table>
 
 	</div>
