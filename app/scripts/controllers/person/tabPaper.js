@@ -1,8 +1,20 @@
 'use strict';
 
 angular.module('admissionSystemApp')
-  .controller('tabPersonPapers', ['$scope', '$http', '$modal', '$rootScope', 'DictionariesSvc', '$filter',
-    function ($scope, $http, $modal, $rootScope, DictionariesSvc, $filter) {
+  .controller('tabPersonPapers', ['$scope', '$http', '$modal', '$rootScope', 'DictionariesSvc', '$filter', '$q',
+    'paperDecodeSvc', '$state', '$stateParams',
+    function ($scope, $http, $modal, $rootScope, DictionariesSvc, $filter, $q, paperDecodeSvc, $state,
+              $stateParams) {
+
+      if ($state.includes('root.person.view.*')) {
+        $scope.personView = true;
+      }
+
+      $scope.newDocument = function () {
+        $state.go('root.person.edit.papers', {
+          id: $stateParams.id
+        });
+      };
 
       /* all ng-shows on a view*/
       $scope.isVisible = {
@@ -34,6 +46,38 @@ angular.module('admissionSystemApp')
         {name: 'docPin', display: 'пін-код'}
       ];
 
+      $scope.inputData = [];
+
+      $scope.$watchCollection('entirePerson.papers', function () {
+        for (var i = 0; i < $scope.entirePerson.papers.length; i++) {
+          $scope.inputData = [];
+          var tempObj = {};
+
+          (function (i) {
+
+            _.merge(tempObj, $scope.entirePerson.papers[i]);
+            paperDecodeSvc.paperDecoded(tempObj).then(function (res) {
+              $scope.inputData.push(res);
+
+              if (res.award) {
+                $scope.isVisible.publicActiveTable = true;
+              }
+              if (res.honorsTypeId) {
+                $scope.isVisible.studyTable = true;
+              }
+              if (res.mark) {
+                $scope.isVisible.markTable = true;
+              }
+              if (res.docPin) {
+                $scope.isVisible.docPinTable = true;
+              }
+
+            });
+
+          })(i);
+        }
+      });
+
       /* function that's making decoding in data */
       function pushData(data, array) {
         angular.forEach(data, function (item) {
@@ -48,39 +92,26 @@ angular.module('admissionSystemApp')
       }
 
       var paperTypeNames = [],
-        paperUsageNames = [],
         publicAwards = [],
         publicActivities = [],
         decodeHonorTypes = [];
 
-      /* getting from service the categories of papers */
-      DictionariesSvc.getPaperUsages().then(function (paperUsage) {
-        $scope.paperUsage = paperUsage;
-        pushData(paperUsage, paperUsageNames);
-      });
+      $q.all([
+        DictionariesSvc.getPaperUsages(),
+        DictionariesSvc.getPaperTypes(),
+        DictionariesSvc.getPublicActivities(),
+        DictionariesSvc.getHonorsTypes()
+      ])
+        .then(function (res) {
+          $scope.paperUsage = res[0];
+          pushData(res[1], paperTypeNames);
+          $scope.newData = res[1];
+          pushData(res[2], publicActivities);
+          $scope.publicActiv = res[2];
+          pushData(res[3], decodeHonorTypes);
+          $scope.honorTypes = res[3];
+        });
 
-      /* function that's setting the children in our category of papers(if category have chosen, return all children from this category) */
-      DictionariesSvc.getPaperTypes().then(function (paperType) {
-        pushData(paperType, paperTypeNames);
-        $scope.newData = paperType;
-      });
-
-      $scope.filterPaperTypes = function (paper) {
-        return paper.paperUsageId === $scope.currentObj.abbrName;
-      };
-
-      /* getting from service the categories of awards */
-      DictionariesSvc.getPublicActivities().then(function (publicActiv) {
-        $scope.publicActiv = publicActiv;
-        pushData(publicActiv, publicActivities);
-      });
-
-      DictionariesSvc.getHonorsTypes().then(function (honorTypes) {
-        $scope.honorTypes = honorTypes;
-        pushData(honorTypes, decodeHonorTypes);
-      });
-
-      /* function that's setting the children in our category of awards(if category have chosen, return all children from this category) */
       $scope.setAdditionalData = function (id) {
         DictionariesSvc.getPublicActivitiesAwards(id).then(function (awards) {
           $scope.newAddingData = awards;
@@ -88,8 +119,10 @@ angular.module('admissionSystemApp')
         });
       };
 
-      $scope.entirePerson.papers = [];
-      $scope.inputData = [];
+      $scope.filterPaperTypes = function (paper) {
+        return paper.paperUsageId === $scope.currentObj.abbrName;
+      };
+
       $scope.currentObj = {};
       $scope.currentObj.pickAward = {};
       $scope.currentObj.isChecked = 0;
@@ -103,10 +136,12 @@ angular.module('admissionSystemApp')
       $scope.addToTable = function () {
         $scope.currentObj.docDate = $filter('date')($scope.currentObj.docDate, 'yyyy-MM-dd');
         cloneMainNotDecode = _.clone($scope.currentObj);
-        cloneMainNotDecode.award = {};
-        //cloneMainNotDecode.award.publicActivityAwardId = cloneMainNotDecode.publicActivityAwardId;
-        cloneMainNotDecode.award.publicActivityAwardId = cloneMainNotDecode.pickAward.id;
-        cloneMainNotDecode.award.bonus = cloneMainNotDecode.pickAward.bonus;
+        if (cloneMainNotDecode.publicActivityTypeId) {
+          cloneMainNotDecode.award = {};
+          //cloneMainNotDecode.award.publicActivityTypeId = cloneMainNotDecode.publicActivityTypeId;
+          cloneMainNotDecode.award.publicActivityAwardId = cloneMainNotDecode.pickAward.id;
+          cloneMainNotDecode.award.bonus = cloneMainNotDecode.pickAward.bonus;
+        }
         delete cloneMainNotDecode.pickAward;
         delete cloneMainNotDecode.publicActivityTypeId;
         delete cloneMainNotDecode.abbrName;
@@ -114,10 +149,12 @@ angular.module('admissionSystemApp')
 
         cloneView = _.clone($scope.currentObj);
         cloneViewDecode = decodeData(cloneView);
-        cloneView.award = {};
-        cloneView.award.publicActivityTypeId = cloneViewDecode.publicActivityTypeId;
-        cloneView.award.publicActivityAwardId = cloneViewDecode.pickAward.awardName;
-        cloneView.award.bonus = cloneViewDecode.pickAward.bonus;
+        if (cloneViewDecode.publicActivityTypeId) {
+          cloneView.award = {};
+          cloneView.award.publicActivityTypeId = cloneViewDecode.publicActivityTypeId;
+          cloneView.award.publicActivityAwardId = cloneViewDecode.pickAward.awardName;
+          cloneView.award.bonus = cloneViewDecode.pickAward.bonus;
+        }
         delete cloneViewDecode.pickAward;
         delete cloneViewDecode.publicActivityTypeId;
         delete cloneViewDecode.abbrName;
@@ -137,7 +174,6 @@ angular.module('admissionSystemApp')
       };
 
       function decodeData(obj) {
-        obj.abbrName = paperUsageNames[obj.abbrName];
         obj.paperTypeId = paperTypeNames[obj.paperTypeId];
         obj.publicActivityTypeId = publicActivities[obj.publicActivityTypeId];
         obj.publicActivityAwardId = publicAwards[obj.publicActivityAwardId];
@@ -157,10 +193,15 @@ angular.module('admissionSystemApp')
 
       /* the function that's editing the object, and let's to change current data in this object  */
       $scope.editData = function (item, idx) {
+        $scope.isVisible.isCreating = false;
         $scope.isVisible.publicActiveSelect = false;
         $scope.isVisible.docPinSelect = false;
         $scope.isVisible.studySelect = false;
         $scope.isVisible.markSelect = false;
+
+        objToEdit = {};
+        objToEditDecoded = {};
+        $scope.currentObj = {};
 
         objToEdit = $scope.entirePerson.papers[idx];
         _.merge($scope.currentObj, objToEdit);
@@ -176,10 +217,10 @@ angular.module('admissionSystemApp')
           }
         });
 
-        if (objToEdit.award.publicActivityAwardId < 64) {
+        if (objToEdit.award && objToEdit.award.publicActivityAwardId < 64) {
           $scope.currentObj.publicActivityTypeId = 1;
           $scope.setAdditionalData($scope.currentObj.publicActivityTypeId);
-        } else if (objToEdit.award.publicActivityAwardId >= 64) {
+        } else if (objToEdit.award && objToEdit.award.publicActivityAwardId >= 64) {
           $scope.currentObj.publicActivityTypeId = 2;
           $scope.setAdditionalData($scope.currentObj.publicActivityTypeId);
         }
@@ -195,15 +236,19 @@ angular.module('admissionSystemApp')
         $scope.currentObj.isChecked = 0;
         $scope.currentObj.isForeign = 0;
 
-        objToEdit.award.publicActivityAwardId = objToEdit.pickAward.id;
-        objToEdit.award.bonus = objToEdit.pickAward.bonus;
+        if (objToEdit.publicActivityTypeId) {
+          objToEdit.award.publicActivityAwardId = objToEdit.pickAward.id;
+          objToEdit.award.bonus = objToEdit.pickAward.bonus;
+        }
         delete objToEdit.abbrName;
         delete objToEdit.pickAward;
         delete objToEdit.publicActivityTypeId;
 
-        objToEditDecoded.award.publicActivityTypeId = objToEditDecoded.publicActivityTypeId;
-        objToEditDecoded.award.publicActivityAwardId = objToEditDecoded.pickAward.awardName;
-        objToEditDecoded.award.bonus = objToEditDecoded.pickAward.bonus;
+        if (objToEditDecoded.publicActivityTypeId) {
+          objToEditDecoded.award.publicActivityTypeId = objToEditDecoded.publicActivityTypeId;
+          objToEditDecoded.award.publicActivityAwardId = objToEditDecoded.pickAward.awardName;
+          objToEditDecoded.award.bonus = objToEditDecoded.pickAward.bonus;
+        }
         delete objToEditDecoded.abbrName;
         delete objToEditDecoded.pickAward;
         delete objToEditDecoded.publicActivityTypeId;

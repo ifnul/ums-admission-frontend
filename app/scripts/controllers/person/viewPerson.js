@@ -7,6 +7,7 @@ angular.module('admissionSystemApp')
 
       $scope.entirePerson = {};
       $scope.entirePerson.contacts = [];
+      $scope.entirePerson.papers = [];
 
       $scope.brosweOrEditPerson = function (personId) {
         Person.getEntirePerson(personId).then(function (res) {

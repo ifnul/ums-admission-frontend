@@ -172,6 +172,11 @@ angular
         templateUrl: '../views/person/tabsPerson/tab_viewPerson.html',
         controller: 'ViewPersonCtrl'
       })
+      .state('root.person.view.papers', {
+        url: '/papers',
+        templateUrl: '../views/person/tabsPerson/tab_papers.html',
+        controller: 'tabPersonPapers'
+      })
       .state('root.person.view.enrolments', {
         url: '/enrolments',
         templateUrl: '../views/person/tabsPerson/tab_enrolments.html',
