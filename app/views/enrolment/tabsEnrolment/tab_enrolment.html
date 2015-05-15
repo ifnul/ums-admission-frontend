@@ -1,232 +1,296 @@
 <div>
-	<form  id="movieForm" method="post">
-		<h4 class="">Пошук персони</h4>
-		<person-selector 	search="personSearch"
-											headers="personHeaders"
-											ng-model="entireEnrolment.enrolment.personId">
-		</person-selector>
+  <form id="movieForm" method="post" class="form-horizontal top-buffer">
+    <label class="col-xs-2 control-label">Пошук персони</label>
 
-		<div class="form-group">
-			<div class="row">
-				<div class="col-xs-3">
-					<label for="inputDocSeries">Серія заяви</label>
-					<input ng-model="entireEnrolment.enrolment.docSeries"
-					type="text"
-					class="form-control"
-					placeholder="Серія заяви"
-					id="inputDocSeries">
-				</div>
+    <person-selector search="personSearch"
+                     headers="personHeaders"
+                     ng-model="entireEnrolment.enrolment.personId">
+    </person-selector>
 
-				<div class="col-xs-3">
-					<label for="inputdocNum">Номер заяви</label>
-					<input ng-model="entireEnrolment.enrolment.docNum"
-					type="text"
-					class="form-control"
-					placeholder="Номер заяви"
-					id="inputdocNum">
-				</div>
-			</div>
-		</div>
+    <div class="form-group">
+      <div class="row">
+        <label class="col-xs-2 control-label" for="inputDocSeries">Серія заяви</label>
 
-		<div class="form-group">
-			<div class="row">
-				<div class="col-xs-2">
-	        <div  class="checkbox">
-	          <label> <input type="checkbox"
-	           				ng-init="entireEnrolment.enrolment.isState = 0"
-	                  ng-model="entireEnrolment.enrolment.isState"
-	                  ng-true-value="1"
-	                  ng-false-value="0"
-	                  ng-checked="entireEnrolment.enrolment.isState"> Бюджет
-	          </label>
-	        </div>
-				</div>
-				<div class="col-xs-2">
-	        <div  class="checkbox">
-	          <label> <input type="checkbox"
-	           				ng-init="entireEnrolment.enrolment.isContract = 0"
-	                  ng-model="entireEnrolment.enrolment.isContract"
-	                  ng-true-value="1"
-	                  ng-false-value="0"
-	                  ng-checked="entireEnrolment.enrolment.isContract"> Контракт
-	          </label>
-	        </div>
-				</div>
-			</div>
-		</div>
+        <div class="col-xs-3">
+          <input ng-model="entireEnrolment.enrolment.docSeries"
+                 type="text"
+                 class="form-control"
+                 placeholder="Серія заяви"
+                 id="inputDocSeries">
+        </div>
 
-		<div class="form-group">
-			<div class="row">
-				<div class="col-xs-12">
-			    <label>Вища освіта</label>
-			    <div class="form-group">
-			        <div class="radio-inline" ng-repeat="opt in isedustateOpt">
-			          <label>
-			            <input type="radio"
-			            			 name="isedustate"
-			            			 ng-value="opt.value"
-			            			 ng-model="entireEnrolment.enrolment.isedustate">
-			              {{opt.title}}
-			            </label>
-			        </div>
-			    </div>
-			  </div>
-			</div>
-		</div>
+        <label class="col-xs-2 control-label" for="inputdocNum">Номер заяви</label>
 
-		<div class="form-group">
-			<div class="row">
-				<div class="col-xs-12">
-			    <label>Відмітка про співбесіду</label>
-			    <div class="form-group">
-			        <div class="radio-inline" ng-repeat="opt in isinterviewOpt">
-			          <label>
-			            <input type="radio"
-			            			 name="isinterview"
-			            			 ng-value="opt.value"
-			            			 ng-model="entireEnrolment.enrolment.isinterview">
-			              {{opt.title}}
-			            </label>
-			        </div>
-			    </div>
-			  </div>
-			</div>
-		</div>
+        <div class="col-xs-3">
+          <input ng-model="entireEnrolment.enrolment.docNum"
+                 type="text"
+                 class="form-control"
+                 placeholder="Номер заяви"
+                 id="inputdocNum">
+        </div>
+      </div>
+    </div>
 
-		<div class="form-group">
-			<div class="row">
-				<div class="col-xs-2">
-	        <div  class="checkbox">
-	          <label> <input type="checkbox"
-	           				ng-init="entireEnrolment.enrolment.isoriginal = 0"
-	                  ng-model="entireEnrolment.enrolment.isoriginal"
-	                  ng-true-value="1"
-	                  ng-false-value="0"
-	                  ng-checked="entireEnrolment.enrolment.isoriginal"> Оригінал
-	          </label>
-	        </div>
-				</div>
-				<div class="col-xs-3">
-	        <div  class="checkbox">
-	          <label> <input type="checkbox"
-	           				ng-init="entireEnrolment.enrolment.isHostel = 0"
-	                  ng-model="entireEnrolment.enrolment.isHostel"
-	                  ng-true-value="1"
-	                  ng-false-value="0"
-	                  ng-checked="entireEnrolment.enrolment.isHostel"> Потірбен гуртожиток
-	          </label>
-	        </div>
-				</div>
-			</div>
-		</div>
+    <div class="form-group">
+      <div class="row">
+          <div class="checkbox">
+            <label class="col-xs-3 col-xs-offset-2 "> <input type="checkbox"
+                                                             ng-init="entireEnrolment.enrolment.isState = 0"
+                                                             ng-model="entireEnrolment.enrolment.isState"
+                                                             ng-true-value="1"
+                                                             ng-false-value="0"
+                                                             ng-checked="entireEnrolment.enrolment.isState"> Бюджет
+            </label>
+          </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+      <div class="row">
+        <div class="checkbox">
+          <label class="col-xs-3 col-xs-offset-2 "> <input type="checkbox"
+                                                           ng-init="entireEnrolment.enrolment.isContract = 0"
+                                                           ng-model="entireEnrolment.enrolment.isContract"
+                                                           ng-true-value="1"
+                                                           ng-false-value="0"
+                                                           ng-checked="entireEnrolment.enrolment.isContract"> Контракт
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="row">
+        <div class="checkbox">
+          <label class="col-xs-3 col-xs-offset-2 "> <input type="checkbox"
+                                                           ng-init="entireEnrolment.enrolment.isPrivilege = 0"
+                                                           ng-model="entireEnrolment.enrolment.isPrivilege"
+                                                           ng-true-value="1"
+                                                           ng-false-value="0"
+                                                           ng-checked="entireEnrolment.enrolment.isPrivilege"> Чи є
+            пільги на вступ?
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="row">
+        <label class="col-xs-2 control-label">Вища освіта</label>
+
+        <div class="form-group col-xs-10">
+          <div class="radio-inline" ng-repeat="opt in isedustateOpt">
+            <label>
+              <input type="radio"
+                     name="isedustate"
+                     ng-value="opt.value"
+                     ng-model="entireEnrolment.enrolment.isEducationState">
+              {{opt.title}}
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="row">
+        <label class="col-xs-2 control-label">Відмітка про співбесіду</label>
+
+        <div class="form-group col-xs-10">
+          <div class="radio-inline" ng-repeat="opt in isinterviewOpt">
+            <label>
+              <input type="radio"
+                     name="isinterview"
+                     ng-value="opt.value"
+                     ng-model="entireEnrolment.enrolment.isInterview">
+              {{opt.title}}
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
 
 
-		<h4 class="">Пошук пропозиції</h4>
+    <div class="form-group">
+      <div class="row">
+          <div class="checkbox">
+            <label class="col-xs-3 col-xs-offset-2 "> <input type="checkbox"
+                                                             ng-init="entireEnrolment.enrolment.isHostel = 0"
+                                                             ng-model="entireEnrolment.enrolment.isHostel"
+                                                             ng-true-value="1"
+                                                             ng-false-value="0"
+                                                             ng-checked="entireEnrolment.enrolment.isHostel"> Потрібен
+              гуртожиток?
+            </label>
+          </div>
+      </div>
+    </div>
 
-		<specoffer-selector departments="departmentId"
-												specofferTypes="specofferTypes"
-												headers="specofferHeaders"
-												ng-model="entireEnrolment.enrolment.specOfferId">
-		</specoffer-selector>
+    <label class="col-xs-2 control-label">Пошук пропозиції</label>
 
-		<paper-selector personid="{{entireEnrolment.enrolment.personId}}"
-										ng-model="entireEnrolment.enrolment.personPaperId">
-		</paper-selector>
+    <specoffer-selector departments="departmentId"
+                        specofferTypes="specofferTypes"
+                        headers="specofferHeaders"
+                        ng-model="entireEnrolment.enrolment.specOfferId">
+    </specoffer-selector>
 
-		<div class="form-group">
-			<div class="row">
-		    <div class="col-md-3">
-		      <label for="inputPriority">Пріоритет</label>
-		      <input ng-model="entireEnrolment.enrolment.priority"
-		             type="number" class="form-control "
-		             id="inputPriority"
-		             placeholder="Введіть пріоритет"
-		             name="inputPriority">
-		    </div>
-			</div>
-		</div>
+    <paper-selector personid="{{entireEnrolment.enrolment.personId}}"
+                    ng-model="entireEnrolment.enrolment.personPaperId">
+    </paper-selector>
 
 
+    <div class="form-group">
+      <div class="row">
+        <label class="col-xs-2 control-label" for="inputDocSeries">Загальний бал</label>
+
+        <div class="col-xs-3">
+          <input ng-model="entireEnrolment.enrolment.mark"
+                 type="number"
+                 class="form-control"
+                 placeholder="Загальний бал"
+                 id="mark">
+        </div>
+
+        <label class="col-xs-2 control-label" for="inputdocNum">Шкала оцiнювання</label>
+
+        <div class="col-xs-3">
 
 
-		<div class="form-group">
-			<div class="row">
-			  <div class="col-md-5">
-			    <label for="inputStructure">Структурний підрозділ</label>
-			      <ui-select ng-model="entireEnrolment.enrolment.departmentId"
-			               id="inputStructure">
-			      <ui-select-match placeholder="Оберіть структурний підрозділ">{{$select.selected.name}}</ui-select-match>
-			      <ui-select-choices repeat="item.id as item in departmentId | filter: $select.search">
-			        <div ng-bind-html="item.name | highlight: $select.search"></div>
-			      </ui-select-choices>
-			    </ui-select>
-			  </div>
-			</div>
-		</div>
+          <ui-select ng-model="entireEnrolment.enrolment.markscaletype"
+                     id="markScale">
+            <ui-select-match placeholder="Шкала оцiнювання">{{$select.selected.value}}</ui-select-match>
+            <ui-select-choices repeat="value in markType | filter: $select.search">
+              <div ng-bind-html="item.value | highlight: $select.search"></div>
+            </ui-select-choices>
+          </ui-select>
 
-		<div class="form-group">
-			<div class="row">
-				<div class="col-xs-3">
-							<label for="inputChiefEnrolTypes">Тип поступлення 1</label>
-							<select class="form-control"
-							ng-model="enrolmentTypes.chiefs"
-							ng-options="opt.id as opt.name for opt in chiefEnrolTypes"
-							name="inputChiefEnrolTypes"
-							id="inputChiefEnrolTypes"
-							ng-change="updateChildsEnrolTypes(enrolmentTypes.chiefs)">
-						</select>
-				</div>
-				<div class="col-xs-4">
-							<label for="inputEnrolmentTypeId">Тип поступлення 2</label>
-							<select class="form-control"
-							ng-model="entireEnrolment.enrolment.enrolmentTypeId"
-							ng-options="opt.id as opt.name for opt in enrolmentTypeId"
-							name="inputeEnrolmentTypeId"
-							id="inputEnrolmentTypeId"
-							ng-change="sendValueOutside(enrolmentTypes.childs)">
-						</select>
-				</div>
-			</div>
-		</div>
+        </div>
+      </div>
+    </div>
 
-	  <div class="row">
-	    <div class="col-md-3">
-	      <label class="control-label" for="evDate">Дата створення заяви</label>
-	        <input type="text"
-	              ng-model="entireEnrolment.enrolment.evDate"
-	              datepicker-popup="yyyy-MM-dd"
-	              is-open="isOpen"
-	              ng-click = "isOpen = true"
-	              close-text="Close"
-	              class="form-control"
-	              id="evDate"
-	              placeholder="РРРР-MM-ДД" />
-	    </div>
-	    <div class="col-md-3">
-	      <label class="control-label" for="begDate">Дата вступу заяви в дію</label>
-	        <input type="text"
-	              ng-model="entireEnrolment.enrolment.begDate"
-	              datepicker-popup="yyyy-MM-dd"
-	              is-open="isOpen2"
-	              ng-click = "isOpen2 = true"
-	              close-text="Close"
-	              class="form-control"
-	              id="begDate"
-	              placeholder="РРРР-MM-ДД" />
-	    </div>
-	    <div class="col-md-3">
-	      <label class="control-label" for="endDate">Дата закриття заяви</label>
-	        <input type="text"
-	              ng-model="entireEnrolment.enrolment.endDate"
-	              datepicker-popup="yyyy-MM-dd"
-	              is-open="isOpen3"
-	              ng-click = "isOpen3 = true"
-	              close-text="Close"
-	              class="form-control"
-	              id="endDate"
-	              placeholder="РРРР-MM-ДД" />
-	    </div>
-	  </div>
 
-	</form>
+    <div class="form-group">
+      <div class="row">
+        <div class="checkbox">
+          <label class="col-xs-3 col-xs-offset-2 "> <input type="checkbox"
+                                                           ng-init="entireEnrolment.enrolment.isOriginal = 0"
+                                                           ng-model="entireEnrolment.enrolment.isOriginal"
+                                                           ng-true-value="1"
+                                                           ng-false-value="0"
+                                                           ng-checked="entireEnrolment.enrolment.isOriginal"> Поданi
+            оригiнали документiв?
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="row">
+        <label class="col-xs-2 control-label" for="inputPriority">Пріоритет</label>
+
+        <div class="col-xs-3">
+
+          <input ng-model="entireEnrolment.enrolment.priority"
+                 type="number" class="form-control "
+                 id="inputPriority"
+                 placeholder="Введіть пріоритет"
+                 name="inputPriority">
+        </div>
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <div class="row">
+        <label class="col-xs-2 control-label" for="inputStructure">Структурний підрозділ</label>
+
+        <div class="col-xs-3">
+
+          <ui-select ng-model="entireEnrolment.enrolment.departmentId"
+                     id="inputStructure">
+            <ui-select-match placeholder="Структурний підрозділ">{{$select.selected.name}}</ui-select-match>
+            <ui-select-choices repeat="item.id as item in departmentId | filter: $select.search">
+              <div ng-bind-html="item.name | highlight: $select.search"></div>
+            </ui-select-choices>
+          </ui-select>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="row">
+        <label class="col-xs-2 control-label" for="inputChiefEnrolTypes">Тип вступу</label>
+
+        <div class="col-xs-3">
+          <select class="form-control"
+                  ng-model="enrolmentTypes.chiefs"
+                  ng-options="opt.id as opt.name for opt in chiefEnrolTypes"
+                  name="inputChiefEnrolTypes"
+                  id="inputChiefEnrolTypes"
+                  ng-change="updateChildsEnrolTypes(enrolmentTypes.chiefs)">
+          </select>
+        </div>
+        <label class="col-xs-2 control-label" for="inputEnrolmentTypeId">Деталiзацiя вступу</label>
+
+        <div class="col-xs-4">
+          <select class="form-control"
+                  ng-model="entireEnrolment.enrolment.enrolmentTypeId"
+                  ng-options="opt.id as opt.name for opt in enrolmentTypeId"
+                  name="inputeEnrolmentTypeId"
+                  id="inputEnrolmentTypeId"
+                  ng-change="sendValueOutside(enrolmentTypes.childs)">
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <label class=" col-xs-2 control-label" for="evDate">Дата створення заяви</label>
+
+      <div class="col-xs-3">
+        <input type="text"
+               ng-model="entireEnrolment.enrolment.evDate"
+               datepicker-popup="yyyy-MM-dd"
+               is-open="isOpen"
+               ng-click="isOpen = true"
+               close-text="Close"
+               class="form-control"
+               id="evDate"
+               placeholder="РРРР-MM-ДД"/>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-xs-2 control-label" for="begDate">Дата вступу заяви в дію</label>
+
+      <div class="col-xs-3">
+
+        <input type="text"
+               ng-model="entireEnrolment.enrolment.begDate"
+               datepicker-popup="yyyy-MM-dd"
+               is-open="isOpen2"
+               ng-click="isOpen2 = true"
+               close-text="Close"
+               class="form-control"
+               id="begDate"
+               placeholder="РРРР-MM-ДД"/>
+      </div>
+    </div>
+    <div class="row">
+      <label class=" col-xs-2 control-label" for="endDate">Дата закриття заяви</label>
+
+      <div class="col-xs-3">
+
+        <input type="text"
+               ng-model="entireEnrolment.enrolment.endDate"
+               datepicker-popup="yyyy-MM-dd"
+               is-open="isOpen3"
+               ng-click="isOpen3 = true"
+               close-text="Close"
+               class="form-control"
+               id="endDate"
+               placeholder="РРРР-MM-ДД"/>
+      </div>
+    </div>
+
+  </form>
 </div>

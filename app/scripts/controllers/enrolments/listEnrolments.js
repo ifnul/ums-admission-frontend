@@ -3,8 +3,16 @@
 angular
   .module('admissionSystemApp')
 	.controller('ListEnrolmentsCtrl', ['$scope', 'getFiltredListSvc', 'DictionariesSvc',
-    'baseListData', '$q', '$state',
-    function ($scope, getFiltredListSvc, DictionariesSvc, baseListData, $q, $state) {
+    'baseListData', '$q', '$state', '$location',
+    function ($scope, getFiltredListSvc, DictionariesSvc, baseListData, $q, $state, $location) {
+
+      $location.search({
+        page: 1,
+        count: 10
+      });
+
+      var page = ($state.params.page) ? $state.params.page : '1',
+          itemsPerPage = ($state.params.count) ? $state.params.count : '10';
 
       $scope.getEnrolments = function (pageNumber, perPage, filters, sort) {
         getFiltredListSvc.getListEnrolments(pageNumber, perPage, filters, sort).then(function (res) {
@@ -12,7 +20,7 @@ angular
           $scope.totalEnrol = res.total;
         });
       };
-      $scope.demoClickedToasts = [];
+      $scope.getEnrolments(page, itemsPerPage);
 
       $scope.enrolSearch = baseListData.search;
       $scope.enrolHeaders = baseListData.headers;
