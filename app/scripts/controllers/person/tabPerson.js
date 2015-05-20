@@ -14,6 +14,7 @@ angular.module('admissionSystemApp')
     ])
       .then(function (promisesResult) {
         $scope.personsTypes = promisesResult[0];
+        $scope.entirePerson.person.personTypeId = promisesResult[0][0].id;
         $scope.genderTypes = promisesResult[1];
         $scope.marriedTypes = promisesResult[2];
         $scope.adminUnitsTypes = promisesResult[3];
