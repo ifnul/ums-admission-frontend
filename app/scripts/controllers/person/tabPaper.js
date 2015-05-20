@@ -270,8 +270,6 @@ angular.module('admissionSystemApp')
         } else if (paper.paperTypeId === 4) {
           $scope.isVisible.docPinTable = true;
           $scope.isVisible.docPinSelect = true;
-          $scope.isVisible.markTable = true;
-          $scope.isVisible.markSelect = true;
         } else if (_.contains([2, 7, 9, 10, 11, 12, 13, 22, 23], paper.paperTypeId)) {
           $scope.isVisible.studyTable = true;
           $scope.isVisible.studySelect = true;

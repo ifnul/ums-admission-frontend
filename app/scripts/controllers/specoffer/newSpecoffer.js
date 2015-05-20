@@ -1,11 +1,10 @@
 'use strict';
 
-
 angular
   .module('admissionSystemApp')
-  .controller('NewSpecofferCtrl', ['$scope', '$stateParams', '$location', 'SpecoffersService',
+  .controller('NewSpecofferCtrl', ['$scope', '$stateParams', 'SpecoffersService',
     'DictionariesSvc', 'progressBarService', '$state', 'baseSpecofferData',
-    function ($scope, $stateParams, $location, SpecoffersService, DictionariesSvc, progressBarService, $state, baseSpecofferData) {
+    function ($scope, $stateParams, SpecoffersService, DictionariesSvc, progressBarService, $state, baseSpecofferData) {
       $scope.entireSpecoffer = {};
       $scope.entireSpecoffer.subjects = [];
       $scope.entireSpecoffer.benefits = [];
@@ -32,14 +31,14 @@ angular
         $scope.entireSpecoffer.specoffer.note = 'some note';
         SpecoffersService.addOrEditSpecoffer(entireSpecoffer).then(function () {
           DictionariesSvc.clearStorageByRoute('specoffers');
-          $location.path('/#/specoffer.list');
+          $state.go('root.specoffer.list');
         });
       };
 
       $scope.deleteSpecoffer = function () {
         SpecoffersService.deleteEntireSpecoffer().then(function () {
           DictionariesSvc.clearStorageByRoute('specoffers');
-          $location.path('/#/list-specoffer');
+          $state.go('root.specoffer.list');
         });
       };
 
