@@ -7,12 +7,12 @@ angular.module('admissionSystemApp')
 
       $location.search({
         page: 1,
-        count: 10
+        count: 25
       });
 
       $scope.personDecoded = [];
-      var page = ($state.params.page) ? $state.params.page : '1',
-          itemsPerPage = ($state.params.count) ? $state.params.count : '10';
+      var page = ($location.search().page) ? $location.search().page : '1',
+          itemsPerPage = ($location.search().count) ? $location.search().count : '25';
 
       $scope.getPersons = function (pageNumber, perPage, filters, sort) {
         getFiltredListSvc.getListPersons(pageNumber, perPage, filters, sort).then(function (res) {

@@ -59,6 +59,7 @@ angular
        */
       $scope.$on('$locationChangeStart', function () {
         queryParams = $location.search();
+        console.log('queryParams', queryParams);
         $scope.currentPage = queryParams.page;
         $scope.itemsPerPage = queryParams.count;
         $scope.getdata({
@@ -75,6 +76,7 @@ angular
        * in result ($state.go) - change state adding new query params to it (page, count);
        */
       $scope.paginationClick = function (PagingClicked, page) {
+        console.log('$scope.itemsPerPage', $scope.itemsPerPage);
         $location.search({
           page: page,
           count: $scope.itemsPerPage
@@ -83,7 +85,7 @@ angular
 
       // item per page chooser
       $scope.itemsPerPageOptions = ['10', '25', '50', '100'];
-      $scope.itemsPerPage = ($location.search().page) ? $location.search().page : $scope.itemsPerPageOptions[0];
+      $scope.itemsPerPage = ($location.search().count) ? $location.search().count : $scope.itemsPerPageOptions[1];
 
       /**
        * [itemPerPageChanged - do the same as paginationClick but triggers by differ event]
