@@ -33,11 +33,11 @@ angular
       },
       {
         value: 1,
-        title: 'Не отримую освіти'
+        title: 'Отримую освіту'
       },
       {
         value: 11,
-        title: 'Не отримую освіти'
+        title: 'Є вища освіта'
       }],
     isinterviewOpt: [
       {
