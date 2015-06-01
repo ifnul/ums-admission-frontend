@@ -12,6 +12,7 @@ angular
       $scope.entireEnrolment.enrolment.isContract = 0;
       $scope.entireEnrolment.enrolment.isState = 0;
       $scope.entireEnrolment.enrolment.isInterview = 0;
+      $scope.entireEnrolment.enrolment.isEducationState = 0;
       $scope.entireEnrolment.enrolmentsubjects = [];
       $scope.entireEnrolment.benefits = [];
       $scope.entireEnrolment.enrolment.specOfferId;
