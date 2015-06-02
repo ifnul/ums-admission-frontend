@@ -29,8 +29,9 @@
           <tabset>
             <tab  ng-repeat="t in personTabs"
                   heading="{{t.heading}}"
-                  ng-click="go(t.route)"
-                  active="t.active">
+                  ng-click="!(t.heading === 'Предмети ЗНО' && tabSubjDisabled()) && go(t.route)"
+                  active="t.active"
+                  disabled="t.heading === 'Предмети ЗНО' && tabSubjDisabled()">
             </tab>
           </tabset>
           <div ui-view></div>
