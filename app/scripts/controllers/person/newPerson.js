@@ -66,8 +66,14 @@ angular.module('admissionSystemApp')
 
       $scope.personTabs = angular.copy(basePersonData.tabs);
 
+      $scope.tabSubjDisabled = function () {
+        return !$scope.entirePerson.papers.some(function (paper) {
+          return paper.paperTypeId === 4;
+        })
+      };
+
       _.each($scope.personTabs, function (item) {
-        item.active =  $state.current.name === item.route.new || $state.current.name === item.route.edit;
+        item.active = $state.current.name === item.route.new || $state.current.name === item.route.edit;
       });
 
       $scope.go = function (route) {
