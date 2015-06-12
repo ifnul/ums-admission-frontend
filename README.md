@@ -8,6 +8,7 @@ version 0.11.1.
 1.npm install  
 2.bower install  
 3.grunt serve  
+(temporary cred's are:login:admin password:nimda)
 
 ## Testing
 
