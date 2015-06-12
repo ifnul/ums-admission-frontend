@@ -1,4 +1,4 @@
-# Kv-007.LNU
+# Frontend part for admission system
 =======
 # admission-system
 
