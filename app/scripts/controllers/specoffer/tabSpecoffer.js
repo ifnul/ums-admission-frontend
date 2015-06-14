@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('admissionSystemApp')
-  .controller('tabProposalCtrl', ['$scope', 'DictionariesSvc', 'Cookies', '$q',
-    function ($scope, DictionariesSvc, Cookies, $q) {
+  .controller('tabProposalCtrl', ['$scope', 'DictionariesSvc', 'Cookies', '$q', 'progressBarService',
+    function ($scope, DictionariesSvc, Cookies, $q, progressBarService) {
 
       $scope.entireSpecoffer.specoffer.timePeriodId = Cookies.getCookie('timeperiod');
 
@@ -20,5 +20,11 @@ angular.module('admissionSystemApp')
           $scope.eduFormTypesOptions = promisesResult[2];
           $scope.timePeriodCourseId = promisesResult[3];
         });
+
+
+      progressBarService.reset();
+      $scope.$on('valBubble', function (evt, args) {
+        progressBarService.setValidity(args.name, args.isValid);
+      });
 
     }]);

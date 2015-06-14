@@ -87,19 +87,7 @@ angular.module('admissionSystemApp')
       };
 
       if ($state.is('root.person.new.main') || $state.is('root.person.edit.main')) {
-        progressBarService.inputQuantity = 0;
-        progressBarService.value = 0;
-        $scope.$on('valBubble', function (evt, args) {  // using directive, which is responsible for changes in each input
-          if (args.isValid) {                           // checking if input is valid
-            progressBarService.value++;                 // value increases if the field is valid
-          }
-          else if (progressBarService.value > 0) {      // value decreases if input content's was deleted
-            progressBarService.value--;
-          }
-          else {
-            progressBarService.inputQuantity++;
-          }
-        });
+
       }
 
     }]);
