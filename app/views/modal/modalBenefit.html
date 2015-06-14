@@ -11,9 +11,10 @@
         <div class="col-xs-8">
           <div class='container-fluid'>
             <ui-select ng-model="allBenefits.benefit"
+                       ng-disabled ="disable"
                        required
                        id="inputType">
-              <ui-select-match placeholder="Оберiть пільгу">{{$select.selected.name}}</ui-select-match>
+              <ui-select-match placeholder="{{benefitPlaceholder}}">{{$select.selected.name}}</ui-select-match>
               <ui-select-choices repeat="benefit in benefits | filter: $select.search">
                 <div ng-bind-html="benefit.name | highlight: $select.search"></div>
               </ui-select-choices>

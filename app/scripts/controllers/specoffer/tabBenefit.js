@@ -12,6 +12,7 @@ angular
       //Ng-model for modalBenefit.html
       $scope.allBenefits = {};
       $scope.allBenefits.benefit = '';
+      $scope.benefitPlaceholder = 'Оберіть пільгу';
 
       //Get data from server
       if ($state.is('root.specoffer.new.benefit')) {
@@ -20,6 +21,12 @@ angular
         //Get data from server
         BenefitsSvc.getBenefits().then(function (data) {
           $scope.benefits = data.benefitsArray;
+
+          if ($scope.benefits.length === 0) {
+            $scope.benefitPlaceholder = 'Пільги доступні для вибору відсутні';
+            $scope.disable = true;
+          }
+
           $scope.everything.allInformationArray = angular.copy(data.benefitsMainArray);
 
           for (y; y < $scope.everything.allInformationArray.length; y++) {
