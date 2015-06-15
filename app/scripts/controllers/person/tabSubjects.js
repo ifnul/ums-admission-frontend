@@ -31,6 +31,7 @@ angular
           enrolmentSubjectId: $scope.enrolmentsubject.id,
           mark: $scope.subjectMark
         });
+        $scope.subjectMark = '';
       };
 
       $scope.deleteSubject = function (subject) {

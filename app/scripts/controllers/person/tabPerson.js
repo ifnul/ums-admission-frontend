@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('admissionSystemApp')
-  .controller('TabPersonCtrl', ['$scope', 'DictionariesSvc', '$q', 'progressBarService', function ($scope, DictionariesSvc, $q, progressBarService) {
+  .controller('TabPersonCtrl', ['$scope', 'DictionariesSvc', '$q', '$filter', 'progressBarService', function ($scope, DictionariesSvc, $q, $filter, progressBarService) {
 
     $q.all([
       DictionariesSvc.getPersonsTypes(),
@@ -20,6 +20,9 @@ angular.module('admissionSystemApp')
         $scope.adminUnitsTypes = promisesResult[3];
         $scope.adminUnits = promisesResult[4];
       });
+
+
+    $scope.entirePerson.person.begDate = $filter('date')($scope.entirePerson.person.begDate, 'yyyy-MM-dd');
 
     progressBarService.reset();
     $scope.$on('valBubble', function (evt, args) {
