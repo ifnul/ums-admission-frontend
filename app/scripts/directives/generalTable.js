@@ -52,23 +52,6 @@ angular
         $scope.userFilterPick = {};
       };
 
-
-      /**
-       * [on ulr query change - get new data ($location.search() trigger this event)]
-       * var queryParams [query params from the url]
-       */
-      $scope.$on('$locationChangeStart', function () {
-        queryParams = $location.search();
-        console.log('queryParams', queryParams);
-        $scope.currentPage = queryParams.page;
-        $scope.itemsPerPage = queryParams.count;
-        $scope.getdata({
-          currentPage: queryParams.page,
-          itemsPerPage: queryParams.count,
-          userFilterPick: $scope.userFilterPick
-        });
-      });
-
       /**
        * [paginationClick - handal click on pagination buttons]
        * @param  {[string]} PagingClicked  []
