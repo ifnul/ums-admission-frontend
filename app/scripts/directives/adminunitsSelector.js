@@ -1,89 +1,29 @@
 'use strict';
 
-/*
-  1) clear out adminutins and set root adminuin - country
-  2) upload new adminunit on-select event
-  3) make directive receive adminUnit id from outside and parse to html
- */
-
 angular
-.module('admissionSystemApp')
-  .directive('adminunitsSelector', ['DictionariesSvc', 'Restangular', 'translHttpStatusSvc', '$state',
-    function (DictionariesSvc, Restangular, translHttpStatusSvc, $state) {
-
-      adminunitsSelectorCtrl.$inject = ['$scope', 'DictionariesSvc'];
-      function adminunitsSelectorCtrl ($scope, DictionariesSvc) {
-
-        $scope.wholeAdress = [];
-        $scope.adminUnitId = {};
-        if ($state.is('root.person.new.main') || $state.is('root.person.edit.main')) {
-          $scope.placeOfBirth = true;
-        }
-
-        if ($state.includes('root.person.view.*')) {
-          $scope.personView = true;
-        }
-
-        Restangular.one('adminunits', 1).get().then(function (country) {
-          $scope.adminunits = [country];
-        });
-
-        $scope.clearAdress = function () { // (1)
-          Restangular.one('adminunits', 1).get().then(function (country) {
-            $scope.adminunits = [country];
-          });
-          $scope.wholeAdress.length = 0;
-          $scope.adminUnitId.selected = undefined;
-          $scope.disabled = false;
-        };
-
-        $scope.adminUtinSelected = function (model, item) { // (2)
-          $scope.wholeAdress.push(item.name);
-          $scope.sendValueOutside(item.id);
-          DictionariesSvc.getAdminUnits({
-            parentId: model
-          }).then(function (adminunits) {
-            if (adminunits.length < 1) {
-              $scope.disabled = true;
-            } else {
-              $scope.adminunits = adminunits;
-            }
-          });
-        };
-
-        $scope.parseAdminUnit = function (id) { // (3)
-          $scope.disabled = true;
-          var i = 0;
-
-          Restangular.one('adminunits', id).get().then(function callBack (adminunits) {
-            i++;
-            if (adminunits.parentId) {
-              $scope.wholeAdress.unshift(adminunits.name);
-              Restangular.one('adminunits', adminunits.parentId)
-                .get()
-                .then(callBack, translHttpStatusSvc.notifyAboutError);
-            }
-            if (i === 1) {
-              $scope.adminUnitId.selected = adminunits;
-            }
-          }, translHttpStatusSvc.notifyAboutError);
-        };
-      }
+  .module('admissionSystemApp')
+  .directive('adminunitsSelector', ['DictionariesSvc', 'Restangular', 'translHttpStatusSvc',
+    function (DictionariesSvc, Restangular, translHttpStatusSvc) {
+      var rootId = 1;
 
       return {
         restrict: 'E',
         templateUrl: '../views/directives/adminunitsSelector.html',
         require: 'ngModel',
         replace: true,
-        scope: {},
+        scope: {
+          label: '@'
+        },
         controller: adminunitsSelectorCtrl,
-        link: function postLink (scope, element, attrs, ngModel) {
-          var adminUnitId;
+        link: function postLink(scope, element, attrs, ngModel) {
 
           ngModel.$render = function () {
-            adminUnitId = ngModel.$modelValue;
-            if (adminUnitId) {
-              scope.parseAdminUnit(adminUnitId);
+            var unitId = ngModel.$modelValue;
+
+            if (unitId) {
+              scope.parseAdminUnit(unitId);
+            } else {
+              scope.selectUnit(0, rootId);
             }
           };
 
@@ -93,4 +33,61 @@ angular
 
         }
       };
+
+      adminunitsSelectorCtrl.$inject = ['$scope', '$q', 'DictionariesSvc'];
+
+      function adminunitsSelectorCtrl($scope, $q, DictionariesSvc) {
+        $scope.adminUnits = [];
+        $scope.selected = [];
+
+        $scope.selectUnit = function (index, id) {
+          $scope.adminUnits.splice(index + 1, $scope.adminUnits.length - index);
+
+          DictionariesSvc.getAdminUnits({parentId: id})
+            .then(function (units) {
+              if (units.length) {
+                $scope.adminUnits.push(units);
+              } else {
+                $scope.sendValueOutside(id);
+              }
+            });
+        };
+
+        $scope.parseAdminUnit = function (id) {
+
+          function loadAdminUnit(id, list) {
+            list = list || [];
+
+            return Restangular
+              .one('adminunits', id)
+              .get()
+              .then(function (item) {
+                list.unshift(item.id);
+
+                if (item.parentId && item.parentId !== rootId) {
+                  return loadAdminUnit(item.parentId, list);
+                } else {
+                  return list;
+                }
+              }, translHttpStatusSvc.notifyAboutError);
+          }
+
+          return loadAdminUnit(id).then(function (items) {
+            var promises = [];
+
+            $scope.adminUnits = [];
+            $scope.selected = items;
+
+            angular.forEach(items, function (item, index) {
+              promises.push(DictionariesSvc
+                .getAdminUnits({parentId: index > 0 ? items[index - 1] : rootId})
+                .then(function (units) {
+                  $scope.adminUnits[index] = units
+                }));
+            });
+
+            return $q.all(promises);
+          })
+        }
+      }
     }]);
