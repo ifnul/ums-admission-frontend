@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('admissionSystemApp')
-  .controller('TabPersonCtrl', ['$scope', 'DictionariesSvc', '$q', function ($scope, DictionariesSvc, $q) {
+  .controller('TabPersonCtrl', ['$scope', 'DictionariesSvc', '$q', '$filter', function ($scope, DictionariesSvc, $q, $filter) {
 
     $q.all([
       DictionariesSvc.getPersonsTypes(),
@@ -20,5 +20,7 @@ angular.module('admissionSystemApp')
         $scope.adminUnitsTypes = promisesResult[3];
         $scope.adminUnits = promisesResult[4];
       });
+
+    $scope.entirePerson.person.begDate = $filter('date')($scope.entirePerson.person.begDate, 'yyyy-MM-dd');
 
   }]);
