@@ -7,7 +7,7 @@
  * # validator
  */
 angular.module('admissionSystemApp')
-  .directive('valBubble', function (formHelper) {
+  .directive('valBubble', function (formHelper, progressBarService) {
     return {
       require: 'ngModel',
       restrict: 'A',
@@ -28,6 +28,7 @@ angular.module('admissionSystemApp')
             //emit an event upwards
             scope.$emit('valBubble', {
               isValid: isValid,       // if the field is valid
+              name: ctrl.$name,
               element: element,       // the element that the validation applies to
               expression: this.exp,   // the expression that was watched to check validity
               scope: scope,           // the current scope
@@ -45,11 +46,11 @@ angular.module('admissionSystemApp')
         var form = null,
           p,
           props,
-         requiredFormProps = ['$error', '$name', '$dirty', '$pristine', '$valid', '$invalid', '$addControl',
-          '$removeControl', '$setValidity', '$setDirty'],
+          requiredFormProps = ['$error', '$name', '$dirty', '$pristine', '$valid', '$invalid', '$addControl',
+            '$removeControl', '$setValidity', '$setDirty'],
           ifContains = function (item) {
-          return _.contains(props, item);
-        };
+            return _.contains(props, item);
+          };
         for (p in scope) {
           if (_.isObject(scope[p]) && !_.isFunction(scope[p]) && !_.isArray(scope[p]) && p.substr(0, 1) !== '$') {
             props = _.keys(scope[p]);

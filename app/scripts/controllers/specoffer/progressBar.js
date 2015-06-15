@@ -3,14 +3,9 @@
 angular.module('admissionSystemApp')
   .controller('ProgressBarCtrl', ['$scope', 'progressBarService', '$state',
     function ($scope, progressBarService, $state) {
-      $scope.$watch(
-        function () {
-          return progressBarService.value;
-        },
+      $scope.$watch(progressBarService.getValidPercentage, function (value) {
 
-        function (value) {
-
-          $scope.progressBarPercent = Math.round((value * 100) / progressBarService.inputQuantity);
+          $scope.progressBarPercent = value;
 
           var type;
 
@@ -35,7 +30,7 @@ angular.module('admissionSystemApp')
           if ($scope.progressBarPercent === 100 && ($state.is('root.person.new.main') ||
             $state.is('root.person.edit.main'))) {
             $scope.propositionMessage = 'Будь ласка, додайте адресу!';
-          } 
+          }
           else {
             $scope.propositionMessage = ' ';
           }

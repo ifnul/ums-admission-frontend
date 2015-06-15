@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('admissionSystemApp')
-  .controller('TabPersonCtrl', ['$scope', 'DictionariesSvc', '$q', function ($scope, DictionariesSvc, $q) {
+  .controller('TabPersonCtrl', ['$scope', 'DictionariesSvc', '$q', 'progressBarService', function ($scope, DictionariesSvc, $q, progressBarService) {
 
     $q.all([
       DictionariesSvc.getPersonsTypes(),
@@ -20,5 +20,10 @@ angular.module('admissionSystemApp')
         $scope.adminUnitsTypes = promisesResult[3];
         $scope.adminUnits = promisesResult[4];
       });
+
+    progressBarService.reset();
+    $scope.$on('valBubble', function (evt, args) {
+      progressBarService.setValidity(args.name, args.isValid);
+    });
 
   }]);
