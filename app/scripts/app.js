@@ -345,7 +345,7 @@ angular
     $urlRouterProvider
       .when('/person', '/person/list')
       .when('/enrolment', '/enrolment/list')
-      .otherwise('/specoffer/list');
+      .otherwise('/signin');
   })
 
   .config(function (uiSelectConfig) {
