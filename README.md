@@ -41,3 +41,5 @@ Running `grunt test` will run the unit tests with karma.
 ## Back-end documentation
 
 http://194.44.198.222:8080/is-lnu-rest-api/documentation/
+
+https://drive.google.com/folderview?id=0BwHaBiqMSw16fkE2dnNQRG9WMnlXSkE1WDY3NUJfQ0h4VlFsXzB5MGpXRVhKcVp1MUkyOVU&usp=sharing
