@@ -10,11 +10,16 @@ This instruction assumes you have npm, node installed.
 Clone the project then run:
 
 1.```npm install```
+
 2.```npm install -g bower``` (once to install bower globally)
+
 3.```bower install``` (Before launching bower you may once need to enter: ```git config --global url."https://".insteadOf git://```)
+
 4.```npm install -g grunt-cli``` (once to install grunt globally)
+
 5.```grunt serve```  
 (credentials are ```login:admin password:nimda```)
+
 
 PS: Depending on your OS this instuction may vary 
 
