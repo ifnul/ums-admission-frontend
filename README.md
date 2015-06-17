@@ -24,3 +24,7 @@ Running `grunt test` will run the unit tests with karma.
 6. Notify tester where can he/she can find your updates to check.
 7. After testing and merging leave a comment containing id of pull request where it was fixed.
 8. Push "Close issue".
+
+## Back-end documentation
+
+http://194.44.198.222:8080/is-lnu-rest-api/documentation/
