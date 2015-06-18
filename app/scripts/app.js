@@ -13,7 +13,8 @@ angular
     'toaster',
     'ngAnimate',
     'ngStorage',
-    'brantwills.paging'
+    'brantwills.paging',
+    'ui.router.breadcrumbs'
   ])
 
   .config(function ($stateProvider, $urlRouterProvider) {
@@ -22,6 +23,10 @@ angular
       .state('root', {
         url: '',
         abstract: true,
+        breadcrumb: {
+          text: 'ЛНУ',
+          stateName: 'root.specoffer.list'
+        },
         views: {
           'header': {
             templateUrl: '../views/header.html',
@@ -47,6 +52,10 @@ angular
       .state('root.specoffer', {
         url: '/specoffer',
         abstract: true,
+        breadcrumb: {
+          text: 'Пропозиції',
+          stateName: 'root.specoffer.list'
+        },
         template: '<ui-view/>'
       })
       .state('root.specoffer.list', {
@@ -61,6 +70,10 @@ angular
     /** ----- adding new specoffer ----- **/
       .state('root.specoffer.new', {
         url: '/specoffer/new',
+        breadcrumb: {
+          text: 'Додавання пропозиції',
+          stateName: 'root.specoffer.new.main'
+        },
         views: {
           'container@': {
             templateUrl: '../views/specoffer/new_specoffer.html',
@@ -94,6 +107,10 @@ angular
 
       .state('root.specoffer.edit', {
         url: '/edit/:id',
+        breadcrumb: {
+          text: 'Редагування пропозиції',
+          stateName: 'root.specoffer.edit.main'
+        },
         views: {
           'container@': {
             templateUrl: '../views/specoffer/new_specoffer.html',
@@ -103,6 +120,7 @@ angular
       })
       .state('root.dictionaries', {
         url: '/dictionaries',
+        breadcrumb: 'Довідники',
         views: {
           'container@': {
             templateUrl: 'views/dictionaries.html',
@@ -112,6 +130,7 @@ angular
       })
       .state('root.statistics', {
         url: '/statistics',
+        breadcrumb: 'Статистика',
         views: {
           'container@': {
             templateUrl: 'views/statistics.html',
@@ -146,6 +165,10 @@ angular
       //////////////////////////////////////////////////////////
       .state('root.person', {
         url: '/person',
+        breadcrumb: {
+          text: 'Персони',
+          stateName: 'root.person.list'
+        },
         abstract: true
         // template: '<div ui-view="container"></div>'
       })
@@ -161,6 +184,10 @@ angular
     /** ----- person view----- **/
       .state('root.person.view', {
         url: '/view/:id',
+        breadcrumb: {
+          text: 'Перегляд персони',
+          stateName: 'root.person.view.main'
+        },
         views: {
           'container@': {
             templateUrl: '../views/person/view_person.html',
@@ -186,6 +213,10 @@ angular
     /** ----- new person ----- **/
       .state('root.person.new', {
         url: '/new',
+        breadcrumb: {
+          text: 'Додавання персони',
+          stateName: 'root.person.new.main'
+        },
         views: {
           'container@': {
             templateUrl: '../views/person/new_person.html',
@@ -225,6 +256,10 @@ angular
     /** ----- edit person ----- **/
       .state('root.person.edit', {
         url: '/edit/:id',
+        breadcrumb: {
+          text: 'Редагування персони',
+          stateName: 'root.person.edit.main'
+        },
         views: {
           'container@': {
             templateUrl: '../views/person/new_person.html',
@@ -268,7 +303,11 @@ angular
       //////////////////////////////////////////////////////////
       .state('root.enrolment', {
         url: '/enrolment',
-        abstract: true
+        abstract: true,
+        breadcrumb: {
+          text: 'Заяви',
+          stateName: 'root.enrolment.list'
+        }
       })
       .state('root.enrolment.list', {
         url: '/list',
@@ -282,6 +321,10 @@ angular
     /** ----- new enrolment ----- **/
       .state('root.enrolment.new', {
         url: '/new',
+        breadcrumb: {
+          text: 'Додавання заяви',
+          stateName: 'root.enrolment.list'
+        },
         views: {
           'container@': {
             templateUrl: '../views/enrolment/new_enrolment.html',
@@ -315,6 +358,10 @@ angular
     /** ----- edit enrolment ----- **/
       .state('root.enrolment.edit', {
         url: '/edit/:id',
+        breadcrumb: {
+          text: 'Редагування заяви',
+          stateName: 'root.enrolment.list'
+        },
         views: {
           'container@': {
             templateUrl: '../views/enrolment/new_enrolment.html',
