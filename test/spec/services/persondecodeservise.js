@@ -62,7 +62,7 @@ describe('Service: personDecodeSvc', function() {
         'isMilitary': 'ВЗ',
         'isHostel': 'потреб. гуртож.',
         'uri': '/persons/25'
-      }]; 
+      }];
 
       personDecodeSvc.personDecoded(rawData).then(function(data) {
         expect(data).toEqual(dataDecoded);
