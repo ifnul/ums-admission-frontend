@@ -56,7 +56,8 @@ angular
       }
 
       $scope.sendToServer = function (entireEnrolment) {
-        $scope.entireEnrolment.enrolment.note = 'some note';
+        //$scope.entireEnrolment.enrolment.note = 'some note';
+
         EnrolmentService.addOrEditEnrolment(entireEnrolment).then(function () {
           DictionariesSvc.clearStorageByRoute('enrolments');
           $state.go ('root.enrolment.list');
