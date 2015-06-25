@@ -2,15 +2,15 @@
 
 angular
   .module('admissionSystemApp')
-  .factory('copyTimeperiod', ['$http', '$q', 'DictionariesSvc', 'SpecoffersService',
-    function ($http, $q, DictionariesSvc, SpecoffersService) {
+  .factory('copyTimeperiod', ['$http', '$q', 'DictionariesSvc', 'SpecoffersService', 'Constants',
+    function ($http, $q, DictionariesSvc, SpecoffersService, Constants) {
 
       //This var modifies request
       var req = {
           method: 'POST',
-          url: 'http://104.236.29.16:8080/is-lnu-rest-api/api/timeperiods',
+          url: Constants.basicURL+'timeperiods',
           headers: {
-            'Authorization': 'Basic YWRtaW46bmltZGE=',
+            'Authorization': Constants.BasicAuth,
             'Content-Type': 'application/json'
           },
           data: {}
