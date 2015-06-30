@@ -1,3 +1,5 @@
+'use strict';
+
 angular
   .module('admissionSystemApp')
   .factory('progressBarService', function () {
