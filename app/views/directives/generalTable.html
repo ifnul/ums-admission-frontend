@@ -35,6 +35,20 @@
     <hr>
     <h4>Фільтрація</h4>
 
+    <p>
+      <button type="button"
+              class="btn btn-primary btn-sm personFilterUpdateButton"
+              ng-click="querySearchBy = '';
+                        currentPage = 1;
+                        getdata({
+                            currentPage:currentPage,
+                            itemsPerPage:itemsPerPage,
+                            userFilterPick:userFilterPick
+                          })"
+        >Оновити
+      </button>
+    </p>
+
     <ul class="list-group" ng-repeat="(key, value) in userFilterPick">
       <li class="list-group-item"
           ng-repeat="item in value">
@@ -68,7 +82,7 @@
 
     <p>
       <button type="button"
-              class="btn btn-primary btn-sm"
+              class="btn btn-primary btn-sm personFilterUpdateButton"
               ng-click="querySearchBy = '';
                         currentPage = 1;
                         getdata({
@@ -160,14 +174,20 @@
           scroll-top="true"
           hide-if-empty="false"
           show-prev-next="true"
-          paging-action="paginationClick('Paging Clicked', page, pageSize, total)">
+          paging-action="paginationClick('Paging Clicked', page, pageSize, total);
+          getdata({
+              currentPage:currentPage,
+              itemsPerPage:itemsPerPage,
+              userFilterPick:userFilterPick
+            })">
         </paging>
       <div class="btn-group pull-right">
         <button class="btn btn-default"
+                ng-class="{active: opt == itemsPerPageDefault}"
                 ng-repeat="opt in itemsPerPageOptions"
                 ng-model="$parent.itemsPerPage"
                 type="button"
-                ng-click="itemPerPageChanged(opt, currentPage);"
+                ng-click="itemPerPageChanged(opt)"
                 btn-radio="opt"
           >{{::opt}}
         </button>

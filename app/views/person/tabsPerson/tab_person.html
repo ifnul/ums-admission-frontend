@@ -29,7 +29,7 @@
               <input type="text"
                      id="firstName"
                      name="firstName"
-                     ng-pattern="/^[а-яА-ЯіІєЄ\']*$/"
+                     ng-pattern="/^[а-яА-ЯіІєЄ\'\s\-]*$/"
                      ng-model="entirePerson.person.firstName"
                      required
                      val-bubble
@@ -42,7 +42,7 @@
             <div class="col-md-4">
               <input type="text"
                      id="firstNameEng"
-                     ng-pattern="/^[a-zA-Z\']*$/"
+                     ng-pattern="/^[a-zA-Z\'\s\-]*$/"
                      ng-model="entirePerson.names[0].firstName"
                      required
                      val-bubble
@@ -62,7 +62,7 @@
               <input type="text"
                      ng-model="entirePerson.person.surname"
                      id="surname"
-                     ng-pattern="/^[а-яА-ЯіІєЄ\']*$/"
+                     ng-pattern="/^[а-яА-ЯіІєЄ\'\s\-]*$/"
                      required
                      val-bubble
                      class="form-control"
@@ -77,7 +77,7 @@
               <input type="text"
                      ng-model="entirePerson.names[0].surname"
                      id="surnameEng"
-                     ng-pattern="/^[a-zA-Z\']*$/"
+                     ng-pattern="/^[a-zA-Z\'\s\-]*$/"
                      required
                      val-bubble
                      class="form-control"
@@ -98,7 +98,7 @@
                      val-bubble
                      class="form-control"
                      id="fatherName"
-                     ng-pattern="/^[а-яА-ЯіІєЄ\']*$/"
+                     ng-pattern="/^[а-яА-ЯіІєЄ\'\s\-]*$/"
                      name="fatherName"
                      placeholder="По-батьковi"/>
             </div>

@@ -4,8 +4,8 @@ angular
 	.module('admissionSystemApp')
   .directive('generalTable', function () {
 
-    personTableController.$inject = ['$scope', '$state', '$location'];
-    function personTableController($scope, $state, $location) {
+    personTableController.$inject = ['$scope', '$state', '$location', '$timeout'];
+    function personTableController($scope, $state, $location, $timeout) {
       console.log();
 
       var index,
@@ -67,7 +67,8 @@ angular
       };
 
       // item per page chooser
-      $scope.itemsPerPageOptions = ['10', '25', '50', '100'];
+      $scope.itemsPerPageDefault = 10;
+      $scope.itemsPerPageOptions = ['10', '20', '50', '100'];
       $scope.itemsPerPage = ($location.search().count) ? $location.search().count : $scope.itemsPerPageOptions[1];
 
       /**
@@ -78,6 +79,10 @@ angular
           page: 1,
           count: itemsPerPage
         });
+
+        $timeout(function() {
+          angular.element('.personFilterUpdateButton').trigger('click');
+        }, 0);
       };
     }
 
