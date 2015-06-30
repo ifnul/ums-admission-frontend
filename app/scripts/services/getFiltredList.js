@@ -6,16 +6,19 @@ angular.module('admissionSystemApp')
   function ($http, $q, decodeEnrolSvc, Constants, personDecodeSvc, translHttpStatusSvc, toaster) {
 
     function makeFiltersPretty (rawFilters) {
+      console.log("->getFiltredList.js:9 rawFilters:", rawFilters);
 
       var readyToUseFiltres = {};
 
       _.forEach(rawFilters, function (value, key) {
         if ((value.length > 0) && value.length !== value[0].length) {
+          readyToUseFiltres[key] = [];
           _.forEach(value, function (item) {
-            readyToUseFiltres[key] = item.id;
+            readyToUseFiltres[key].push(item.id);
           });
         }
       });
+      console.log("->getFiltredList.js:20 readyToUseFiltres:", readyToUseFiltres);
       return readyToUseFiltres;
     }
 
