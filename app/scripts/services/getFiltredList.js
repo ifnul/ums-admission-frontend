@@ -6,10 +6,11 @@ angular.module('admissionSystemApp')
   function ($http, $q, decodeEnrolSvc, Constants, personDecodeSvc, translHttpStatusSvc, toaster) {
 
     function makeFiltersPretty (rawFilters) {
+
       var readyToUseFiltres = {};
 
       _.forEach(rawFilters, function (value, key) {
-        if (!(value.length < 1) && value.length !== value[0].length) {
+        if ((value.length > 0) && value.length !== value[0].length) {
           _.forEach(value, function (item) {
             readyToUseFiltres[key] = item.id;
           });

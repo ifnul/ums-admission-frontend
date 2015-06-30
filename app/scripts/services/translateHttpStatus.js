@@ -3,7 +3,7 @@
 angular.module('admissionSystemApp')
   .factory('translHttpStatusSvc', ['toaster', function (toaster) {
 
-    function translator (obj) {
+    function translator(obj) {
       if (obj.message === 'Entity doesn\'t exist') {
         return {
           type: 'error',

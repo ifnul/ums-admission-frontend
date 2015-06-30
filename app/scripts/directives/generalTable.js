@@ -9,8 +9,8 @@ angular
       console.log();
 
       var index,
-        searchObj,
-        queryParams;
+        searchObj;
+        //queryParams;
 
       // filter (checkboxes) options
       $scope.userFilterPick = {};
@@ -141,7 +141,7 @@ angular
      * headers - table headers (could be found in servise which keeps satic data)
      * filters -  filter data (titles, values). Statis data
      * search - model for search (mainly for dropdown). Statis data
-     * getdata - main function. Fro retrieving data from the serve
+     * getdata - main function. For retrieving data from the server
      * total - total number of items which comes form the server (actually it is data.length)
      * onDelete, onChange - handle deleting/changing of single item.
      * onView - handle redirect to person view. Only for person item.
