@@ -7,7 +7,7 @@
  * # validator
  */
 angular.module('admissionSystemApp')
-  .directive('valBubble', function (formHelper, progressBarService) {
+  .directive('valBubble', function (formHelper) {
     return {
       require: 'ngModel',
       restrict: 'A',
