@@ -6,6 +6,10 @@ angular
 
     var restAngular, objCopy;
 
+      /**
+       * restAngular configuration
+       * applying only to rest action of this servise
+       */
     restAngular =
       Restangular.withConfig(function (Configurer) {
         Configurer.setRequestInterceptor(function (element, operation) {
@@ -20,6 +24,11 @@ angular
 
     objCopy = {};
 
+      /**
+       * get entire enrolment entireEnrolment = {enrolment: [], benefits: [], enrolmentssubject: [], statuses : {}}
+       * @param id - id of enrolment which need to be retreived
+       * @returns {Promise} - return entireEnrolment obj
+       */
     function getEntireEnrolment(id) {
       var entireEnrolment = {};
 
@@ -35,6 +44,13 @@ angular
       return $q.all(entireEnrolment);
     }
 
+      /**
+       * send array of items (enrolment | benefits | enrolmentssubject | statuses) to server
+       * @param itemsArr {array} -
+       * @param enrolmentId {number} - id
+       * @param route {stirng} route to put data
+       * @returns {Promise} with result
+       */
     function addArrayOfItems(itemsArr, enrolmentId, route) {
       var promises, benefitPromise, i;
 
@@ -47,18 +63,29 @@ angular
       return $q.all(promises);
     }
 
-    function addEntireEnrolment(obj) {
+      /**
+       * adding only enrolment object (it's single objedct)
+       * @param enrolment {object}
+       * @returns {promise} with id (server give ID to new enrolment)
+       */
+    function addEntireEnrolment(enrolment) {
       var id = $q.defer();
 
-      restAngular.all('enrolments').post(obj.enrolment).then(function (response) {
+      restAngular.all('enrolments').post(enrolment).then(function (response) {
         id.resolve(response.id);
       });
       return id.promise;
     }
 
+      /**
+       * !! STARTING FUNCTION !!
+       * decide if entire specoffer need to be edit (put) or add (post)
+       * @param currentObj - entire specoffer obj;
+       * like this: {enrolment: [], benefits: [], enrolmentssubject: [], statuses : {}}
+       */
     function addOrEditEnrolment(currentObj) {
       if (!objCopy.enrolment) {
-        return addEntireEnrolment(currentObj).then(function (enrolmentId) {
+        return addEntireEnrolment(currentObj.enrolment).then(function (enrolmentId) {
           currentObj.enrolment.id = enrolmentId;
           return $q.all([
             addArrayOfItems(currentObj.enrolmentsubjects, enrolmentId, 'enrolmentsubjects'),
@@ -71,6 +98,12 @@ angular
       }
     }
 
+      /**
+       * MAIN function for editing entire enrolment
+       * manipulate with objCopy to compare if property change or not (and than do aciton or not)
+       * objCopy {object} - is a copy that was made than data comes from server (see getEntireEnrolment func)
+       * @param newOnj
+       */
     function editEntireEnrolment(newOnj) {
       var enrolmentId, promiseSpecoffer;
 
@@ -90,10 +123,18 @@ angular
         });
     }
 
+      /**
+       * - if item doesn't have id property - POST NEW item.
+       * - else check if item correspond the items with same ID in oldAdd. If false - PUT it.
+       * - check if there are there are deleted items
+       * @param newArr {array} e.g. [{id: '2', note: 'some note'}, {...}]
+       * @param oldArr {array}
+       * @param enrolmentId {number}
+       * @param route {string}
+       * @returns {Promise}
+       */
     function compareArrays(newArr, oldArr, enrolmentId, route) {
-      /* - if item doesn't have id property - POST NEW item.
-       - else check if item correspond the items with same ID in oldAdd. If false - PUT it.
-       - check if there are there are deleted items  */
+
       var promises = [];
 
       _.forEach(newArr, function (item) {
@@ -128,6 +169,11 @@ angular
       return $q.all(promises);
     }
 
+      /**
+       * produce deleting
+       * @param objToDelete
+       * @returns {*}
+       */
     function deleteEnrolment(objToDelete) {
       var promises = [],
         enrolmentId = objToDelete.enrolment.id;
@@ -151,6 +197,13 @@ angular
       });
     }
 
+
+      /**
+       * delete entire enrolment form the server
+       * @param objToDelete  - obj which need to be deleted
+       * @param id
+       * @returns {*}
+       */
     function deleteEntireEnrolment(objToDelete, id) {
       if (!objToDelete.enrolment) {
         return getEntireEnrolment(id).then(deleteEnrolment);
@@ -159,6 +212,9 @@ angular
       }
     }
 
+      /**
+       * PUBLIC METHODS!
+       */
     return {
       getEntireEnrolment: getEntireEnrolment,
 

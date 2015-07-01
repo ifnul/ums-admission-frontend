@@ -3,12 +3,17 @@
 angular
   .module('admissionSystemApp')
   .controller('NewEnrolmentCtrl', ['$scope', '$stateParams', 'baseFormData', '$state', 'EnrolmentService',
-    'DictionariesSvc',
-    function ($scope, $stateParams, baseFormData, $state, EnrolmentService, DictionariesSvc) {
+    'DictionariesSvc', '$filter',
+    function ($scope, $stateParams, baseFormData, $state, EnrolmentService, DictionariesSvc, $filter) {
+
+      var today = $filter('date')(new Date(),'yyyy-MM-dd');
+
       $scope.enrolmentId = $stateParams.id;
 
       $scope.entireEnrolment = {};
       $scope.entireEnrolment.enrolment = {};
+      $scope.entireEnrolment.enrolment.evDate = today;
+      $scope.entireEnrolment.enrolment.begDate = today;
       $scope.entireEnrolment.enrolment.isContract = 0;
       $scope.entireEnrolment.enrolment.isState = 0;
       $scope.entireEnrolment.enrolment.isInterview = 0;
