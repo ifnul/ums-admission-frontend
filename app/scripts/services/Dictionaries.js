@@ -163,6 +163,9 @@ angular
         },
         getEnrolments: function (params) {
           return getLargeDictionary('enrolments', params, false);
+        },
+        getMarksScales: function () {
+          return getLargeDictionary('marks/scales');
         }
       };
     }]);
