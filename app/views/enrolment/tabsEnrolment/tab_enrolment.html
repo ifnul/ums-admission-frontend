@@ -142,7 +142,6 @@
     <div class="form-group">
       <div class="row">
         <label class="col-xs-2 control-label" for="inputDocSeries">Загальний бал</label>
-
         <div class="col-xs-3">
           <input ng-model="entireEnrolment.enrolment.mark"
                  type="number"
@@ -151,16 +150,14 @@
                  id="mark">
         </div>
 
+
         <label class="col-xs-2 control-label" for="inputdocNum">Шкала оцiнювання</label>
-
         <div class="col-xs-3">
-
-
           <ui-select ng-model="entireEnrolment.enrolment.markscaletype"
                      id="markScale">
-            <ui-select-match placeholder="Шкала оцiнювання">{{$select.selected.value}}</ui-select-match>
-            <ui-select-choices repeat="value in markType | filter: $select.search">
-              <div ng-bind-html="item.value | highlight: $select.search"></div>
+            <ui-select-match placeholder="Шкала оцiнювання">{{$select.selected.name}}</ui-select-match>
+            <ui-select-choices repeat="element.id as element in markType | filter: $select.search">
+              <div ng-bind-html="element.name | highlight: $select.search"></div>
             </ui-select-choices>
           </ui-select>
 

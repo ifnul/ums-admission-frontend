@@ -17,13 +17,17 @@ angular.module('admissionSystemApp')
           departmentTypeId: 1
         }),
         DictionariesSvc.getEnrolmentsTypes(),
-        DictionariesSvc.getSpecoffersTypes()
+        DictionariesSvc.getSpecoffersTypes(),
+        DictionariesSvc.getMarksScales()
       ])
         .then(function (promisesResult) {
           $scope.departmentId = promisesResult[0];
           $scope.specofferTypes = promisesResult[2];
           manageEnrolmentsTyps(promisesResult[1]);
+          $scope.markType = promisesResult[3];
         });
+
+
 
       //$scope.entireEnrolment.enrolment = {};
       //$scope.entireEnrolment.enrolment.personId = 11;
