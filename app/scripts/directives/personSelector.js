@@ -21,8 +21,10 @@ angular
           size: size,
           scope: $scope
         });
+        $scope.modalTitle = 'Оберіть персону';
         searchPersonSvc.searchPersons($scope.querySearchBy, $scope.fieldSearchBy.property, $scope.fieldSearchBy.route);
       };
+
 
       $scope.ok = function (obj) {
         modalInstance.close();
