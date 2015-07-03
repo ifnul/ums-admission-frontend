@@ -16,6 +16,7 @@ angular
           size: size,
           scope: $scope
         });
+        $scope.modalTitle = 'Оберіть пропозицію';
         startSearchSpecoffers();
       };
 

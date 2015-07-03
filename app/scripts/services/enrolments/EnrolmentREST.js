@@ -85,6 +85,7 @@ angular
        */
     function addOrEditEnrolment(currentObj) {
       if (!objCopy.enrolment) {
+        console.log('currentObj', currentObj);
         return addEntireEnrolment(currentObj.enrolment).then(function (enrolmentId) {
           currentObj.enrolment.id = enrolmentId;
           return $q.all([

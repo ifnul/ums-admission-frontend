@@ -23,7 +23,6 @@ angular
       $scope.entireEnrolment.enrolment.specOfferId;
       $scope.entireEnrolment.enrolment.personId;
 
-
       $scope.enrolTabs = angular.copy(baseFormData.tabs);
 
       _.each($scope.enrolTabs, function (item) {
@@ -61,18 +60,17 @@ angular
       }
 
       $scope.sendToServer = function (entireEnrolment) {
-        //$scope.entireEnrolment.enrolment.note = 'some note';
-
         EnrolmentService.addOrEditEnrolment(entireEnrolment).then(function () {
           DictionariesSvc.clearStorageByRoute('enrolments');
           $state.go ('root.enrolment.list');
         });
-
-        $scope.delete = function () {
-          EnrolmentService.deleteEntireEnrolment().then(function () {
-            DictionariesSvc.clearStorageByRoute('enrolments');
-            $state.go ('root.enrolment.list');
-          });
-        };
       };
+
+      $scope.delete = function () {
+        EnrolmentService.deleteEntireEnrolment().then(function () {
+          DictionariesSvc.clearStorageByRoute('enrolments');
+          $state.go ('root.enrolment.list');
+        });
+      };
+
     }]);
