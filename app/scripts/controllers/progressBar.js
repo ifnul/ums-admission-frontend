@@ -20,20 +20,19 @@ angular.module('admissionSystemApp')
           }
           $scope.type = type;
 
-          if ($scope.progressBarPercent === 100 && ($state.is('root.specoffer.new.main') ||
-            $state.is('root.specoffer.edit.main'))) {
-            $scope.propositionMessage = 'Будь ласка, додайте предмети та пiльги!';
-          } else {
-            $scope.propositionMessage = ' ';
-          }
-
-          if ($scope.progressBarPercent === 100 && ($state.is('root.person.new.main') ||
-            $state.is('root.person.edit.main'))) {
-            $scope.propositionMessage = 'Будь ласка, додайте адресу!';
-          }
-          else {
-            $scope.propositionMessage = ' ';
-          }
+          //if ($scope.progressBarPercent === 100 && ($state.is('root.specoffer.new.main') ||
+          //  $state.is('root.specoffer.edit.main'))) {
+          //  $scope.propositionMessage = 'Будь ласка, додайте предмети та пiльги!';
+          //} else {
+          //  $scope.propositionMessage = ' ';
+          //}
+          //
+          //if ($scope.progressBarPercent === 100 && ($state.is('root.person.new.main') ||
+          //  $state.is('root.person.edit.main'))) {
+          //  $scope.propositionMessage = 'Будь ласка, додайте адресу!';
+          //} else {
+          //  $scope.propositionMessage = ' ';
+          //}
 
         });
 

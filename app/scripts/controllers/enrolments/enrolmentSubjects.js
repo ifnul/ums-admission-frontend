@@ -3,7 +3,10 @@
 angular
   .module('admissionSystemApp')
   .controller('enrolmentSubjects',
-  ['$scope', 'Restangular', 'DictionariesSvc', function ($scope, Restangular, DictionariesSvc) {
+  ['$scope', 'Restangular', 'DictionariesSvc', 'EnrolmentModel', function ($scope, Restangular, DictionariesSvc, EnrolmentModel) {
+
+    $scope.enrolmentsubjects = EnrolmentModel.enrolmentSubjectsArr();
+    $scope.enrolment = EnrolmentModel.enrolmentObj();
 
     $scope.enrolSubjIds = DictionariesSvc.getEnrolmentsSubjects().then(function (subjs) {
       $scope.subjectNames = [];
@@ -12,12 +15,12 @@ angular
       });
     });
 
-    Restangular.one('persons', $scope.entireEnrolment.enrolment.personId).one('enrolmentsubjects').get()
+    Restangular.one('persons', $scope.enrolment.personId).one('enrolmentsubjects').get()
       .then(function (personEnrolmentSubjects) {
       $scope.personIdSubjects = personEnrolmentSubjects.resources;
     });
 
-    Restangular.one('specoffers', $scope.entireEnrolment.enrolment.specOfferId).one('subjects').get()
+    Restangular.one('specoffers', $scope.enrolment.specOfferId).one('subjects').get()
       .then(function (specofferIdSubjects) {
       $scope.specofferIdSubjects = specofferIdSubjects.resources;
     });

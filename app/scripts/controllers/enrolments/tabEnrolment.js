@@ -2,16 +2,28 @@
 
 angular.module('admissionSystemApp')
   .controller('TabEnrolmentCtrl', ['$scope', 'DictionariesSvc',
-    'baseFormData', 'basePersonData', '$q', 'baseSpecofferData', '$stateParams',
-    function ($scope, DictionariesSvc, baseFormData, basePersonData, $q, baseSpecofferData, $stateParams) {
+    'baseFormData', 'basePersonData', '$q', 'baseSpecofferData', '$stateParams', 'EnrolmentModel', 'progressBarService',
+    function ($scope, DictionariesSvc, baseFormData, basePersonData, $q, baseSpecofferData, $stateParams, EnrolmentModel, progressBarService) {
+
+      /**
+       * bind model (entire.entolment) to controller (view)
+       */
+      $scope.enrolment = EnrolmentModel.enrolmentObj();
+
+      //$scope.$watch('enrolment', function (newVal) {
+      //  console.log("enrolment:", newVal);
+      //});
 
       if ($stateParams.personId) {
-        $scope.entireEnrolment.enrolment.personId = $stateParams.personId;
+        $scope.enrolment.personId = $stateParams.personId;
       }
       if ($stateParams.id) {
-        $scope.entireEnrolment.enrolment.id = $stateParams.id;
+        $scope.enrolment.id = $stateParams.id;
       }
 
+      /**
+       * get data and pass to dropdowns
+       */
       $q.all([
         DictionariesSvc.getAllDepartments({
           departmentTypeId: 1
@@ -27,14 +39,10 @@ angular.module('admissionSystemApp')
           $scope.markType = promisesResult[3];
         });
 
-
-
-      //$scope.entireEnrolment.enrolment = {};
-      //$scope.entireEnrolment.enrolment.personId = 11;
-      //$scope.entireEnrolment.enrolment.specOfferId = 43;
-      // $scope.entireEnrolment.enrolment.enrolmentTypeId = 8;
-      // $scope.entireEnrolment.enrolment.personPaperId = 35; // 22
-
+      /**
+       * for person selector
+       * @type {Array}
+       */
       $scope.fieldSearchBy = [];
 
       $scope.personSearch = baseFormData.searchPerson;
@@ -42,23 +50,28 @@ angular.module('admissionSystemApp')
       $scope.isinterviewOpt = baseFormData.isinterviewOpt;
       $scope.personHeaders = basePersonData.headers;
       $scope.specofferHeaders = baseSpecofferData.headers;
-      $scope.enrolmentTypes = {};
 
+      /**
+       *
+       * @param enrolmentTypes
+       * 'Тип вступу' and 'Деталiзацiя вступу'
+       */
+      $scope.enrolmentTypes = {};
       function manageEnrolmentsTyps(enrolmentTypes) {
         $scope.chiefEnrolTypes = _.filter(enrolmentTypes, function (n) {
           return !n.parentId;
         });
 
         $scope.updateChildsEnrolTypes = function (chiefID) {
-          $scope.entireEnrolment.enrolment.enrolmentTypeId = undefined;
+          $scope.enrolment.enrolmentTypeId = undefined;
           $scope.enrolmentTypeId = _.filter(enrolmentTypes, function (n) {
             return n.parentId === chiefID;
           });
         };
 
-        if ($scope.entireEnrolment.enrolment.enrolmentTypeId) {
+        if ($scope.enrolment.enrolmentTypeId) {
           var currentChild = _.filter(enrolmentTypes, {
-            id: $scope.entireEnrolment.enrolment.enrolmentTypeId
+            id: $scope.enrolment.enrolmentTypeId
           });
 
           $scope.enrolmentTypes.chiefs = currentChild[0].parentId;
@@ -67,4 +80,15 @@ angular.module('admissionSystemApp')
           });
         }
       }
+
+      /**
+       * progress bar managment
+       * TODO: enhance it
+       */
+      progressBarService.reset();
+      $scope.$on('valBubble', function (evt, args) {
+        progressBarService.setValidity(args.name, args.isValid);
+      });
+
+
     }]);

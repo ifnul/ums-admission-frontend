@@ -1,13 +1,16 @@
 'use strict';
 
 angular.module('admissionSystemApp')
-  .controller('TabBenefitsCtrlEnrolment', ['$scope', '$location', 'SpecoffersService', 'BenefitsSvc',
-    function ($scope, $location, SpecoffersService, BenefitsSvc) {
+  .controller('TabBenefitsCtrlEnrolment', ['$scope', '$location', 'SpecoffersService', 'BenefitsSvc', 'EnrolmentModel',
+    function ($scope, $location, SpecoffersService, BenefitsSvc, EnrolmentModel) {
       $scope.obj = {};
       $scope.obj.selectedBenefit = [];
+      $scope.benefits = EnrolmentModel.benefitsArr();
+      $scope.enrolment = EnrolmentModel.enrolmentObj();
 
-      SpecoffersService.getEntireSpecoffer($scope.entireEnrolment.enrolment.specOfferId).then(function (specoffer) {
-
+      console.log('$scope.enrolment.specOfferId', $scope.enrolment.specOfferId);
+      SpecoffersService.getEntireSpecoffer($scope.enrolment.specOfferId).then(function (specoffer) {
+        console.log(specoffer);
         $scope.benefitsIDs = angular.copy (specoffer.benefits);
         console.log ($scope.benefitsIDs);
 
@@ -30,16 +33,16 @@ angular.module('admissionSystemApp')
             }
           }
 
-          $scope.$watch ('entireEnrolment.benefits.length', function () {
+          $scope.$watch ('benefits.length', function () {
             var xx = 0,
                 yy;
 
             $scope.renderTableArray = [];
 
-            for (xx; xx < $scope.entireEnrolment.benefits.length; xx++) {
+            for (xx; xx < $scope.benefits.length; xx++) {
               yy = 0;
               for (yy; yy < $scope.benefitsName.length; yy++) {
-                if ($scope.entireEnrolment.benefits[xx].benefitId === $scope.benefitsName[yy].id) {
+                if ($scope.benefits[xx].benefitId === $scope.benefitsName[yy].id) {
                   $scope.renderTableArray.push($scope.benefitsName[yy]);
                   break;
                 }
@@ -50,7 +53,7 @@ angular.module('admissionSystemApp')
       });
 
       $scope.insert = function () {
-        $scope.entireEnrolment.benefits.push ({
+        $scope.benefits.push ({
           benefitId : $scope.obj.selectedBenefit.id, note: ''
         });
         $scope.obj.selectedBenefit = undefined;
@@ -69,9 +72,9 @@ angular.module('admissionSystemApp')
           }
         }
 
-        for (x; x < $scope.entireEnrolment.benefits.length; x++) {
-          if ($scope.entireEnrolment.benefits[x].benefitId === id) {
-            $scope.entireEnrolment.benefits.splice(x, 1);
+        for (x; x < $scope.benefits.length; x++) {
+          if ($scope.benefits[x].benefitId === id) {
+            $scope.benefits.splice(x, 1);
             break;
           }
         }

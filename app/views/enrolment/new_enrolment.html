@@ -4,15 +4,24 @@
       <li><a ui-sref="root.enrolment.list">Заяви</a></li>
       <li class="active">Нова заява</li>
     </ol>
-    <h2 ng-show="!entireEnrolment.enrolment.id" class="content-header-title top-buffer bottom-buffer"><i class="fa fa-user-plus text-danger"></i>
+    <h2 ng-show="!enrolment.id" class="content-header-title top-buffer bottom-buffer"><i class="fa fa-user-plus text-danger"></i>
       Додавання заяви</h2>
-    <h2 ng-show="entireEnrolment.enrolment.id" class="content-header-title top-buffer bottom-buffer"><i class="fa fa-user-plus text-danger"></i>
+    <h2 ng-show="enrolment.id" class="content-header-title top-buffer bottom-buffer"><i class="fa fa-user-plus text-danger"></i>
       Редагування заяви</h2>
   </div>
 </div>
 
 	<!-- main content -->
-	<div class="col-sm-12 col-md-12 new-proposal-wrapper">
+	<div class="col-sm-12 col-md-12 new-proposal-wrapper" ng-controller="ProgressBarCtrl">
+
+    <div class="row">
+      <p class="text-center col-md-6">
+        <progressbar value="progressBarPercent" type="{{type}}">Основна інформаці заповнена на: {{progressBarPercent}}%</progressbar>
+      </p>
+      <p class="text-center col-md-3 text-danger">
+        {{propositionMessage}}
+      </p>
+    </div>
 
 	  <div>
 	    <div class="row">
@@ -20,7 +29,7 @@
     			<tabset>
        	 		<tab 	ng-repeat="t in enrolTabs"
        	 				 	heading="{{t.heading}}"
-       	 				 	ng-click="isExtendedTabsAvailable() && go(t.route)"
+       	 				 	ng-click="isExtendedTabsAvailable() && goToTab(t.route)"
        	 				 	active="t.active"
         					disabled="!isExtendedTabsAvailable()">
         		</tab>
@@ -30,7 +39,10 @@
 	    </div>
 
 	    <div class="top-buffer bottom-buffer row">
-	      <button ng-click="sendToServer(entireEnrolment)" type="submit" class="btn btn-primary">Зберегти</button>
+	      <button ng-click="sendToServer()"
+                type="submit"
+                class="btn btn-primary"
+                ng-disabled="(progressBarPercent !== 100)">Зберегти</button>
 	      <button ng-click="delete()" type="submit" class="btn btn-danger">Видалити</button>
 	    </div>
 

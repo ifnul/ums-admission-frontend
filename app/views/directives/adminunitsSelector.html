@@ -1,5 +1,5 @@
 <div>
-  <div class="form-group" ng-repeat="unit in adminUnits">
+  <div class="form-group" ng-repeat="unit in adminUnits track by $index">
     <div class="row">
       <label class="col-md-2 control-label" ng-show="$index === 0">{{ label }}</label>
 

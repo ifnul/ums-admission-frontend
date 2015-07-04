@@ -12,17 +12,21 @@
 </div>
 
 <!-- main content -->
-<div class="col-sm-12 col-md-12 new-proposal-wrapper" ng-controller="ProgressBarCtrl">
+<div class="col-sm-12 col-md-12 new-proposal-wrapper">
 
   <div class="row">
+    <div ng-controller="ProgressBarCtrl">
       <p class="text-center col-md-6">
-        <progressbar value="progressBarPercent" type="{{type}}">Заповнено на: {{progressBarPercent}}%</progressbar>
+        <progressbar value="progressBarPercent" type="{{type}}">Основна інформаці заповнена на: {{progressBarPercent}}%</progressbar>
       </p>
       <p class="text-center col-md-3 text-danger">
         {{propositionMessage}}
       </p>
 
     </div>
+  </div>
+
+
   <div>
     <div class="row">
       <div class="tabset col-md-9">
