@@ -3,8 +3,8 @@
 angular
   .module('admissionSystemApp')
   .controller('NewSpecofferCtrl', ['$scope', '$stateParams', 'SpecoffersService',
-    'DictionariesSvc', 'progressBarService', '$state', 'baseSpecofferData',
-    function ($scope, $stateParams, SpecoffersService, DictionariesSvc, progressBarService, $state, baseSpecofferData) {
+    'DictionariesSvc', '$state', 'baseSpecofferData',
+    function ($scope, $stateParams, SpecoffersService, DictionariesSvc, $state, baseSpecofferData) {
       $scope.entireSpecoffer = {};
       $scope.entireSpecoffer.subjects = [];
       $scope.entireSpecoffer.benefits = [];

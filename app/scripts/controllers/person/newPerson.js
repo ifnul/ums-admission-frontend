@@ -2,8 +2,8 @@
 
 angular.module('admissionSystemApp')
   .controller('NewPersonCtrl', ['$scope', '$stateParams', 'Person', '$location',
-    'DictionariesSvc', '$state', 'basePersonData', 'progressBarService',
-    function ($scope, $stateParams, Person, $location, DictionariesSvc, $state, basePersonData, progressBarService) {
+    'DictionariesSvc', '$state', 'basePersonData',
+    function ($scope, $stateParams, Person, $location, DictionariesSvc, $state, basePersonData) {
 
       $scope.entirePerson = {};
       $scope.entirePerson.person = {};

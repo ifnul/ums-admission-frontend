@@ -2,34 +2,32 @@
 
 angular
   .module('admissionSystemApp')
-  .controller('NewEnrolmentCtrl', ['$scope', '$stateParams', 'baseFormData', '$state', 'EnrolmentService',
-    'DictionariesSvc', '$filter',
-    function ($scope, $stateParams, baseFormData, $state, EnrolmentService, DictionariesSvc, $filter) {
+  .controller('NewEnrolmentCtrl', ['$scope', '$stateParams', 'baseFormData', '$state', 'EnrolmentModel',
+    'DictionariesSvc', 'toaster',
+    function ($scope, $stateParams, baseFormData, $state, EnrolmentModel, DictionariesSvc, toaster) {
 
-      var today = $filter('date')(new Date(),'yyyy-MM-dd');
+      if (!$stateParams.id) {
+        EnrolmentModel.clearEntireEnrolment();
+      }
+      /**
+       * 1) check if enrolment id is passed. If so - current state is *editing* state
+       * 2) bind model to contoller (view)
+       */
+      $scope.enrolmentId = $stateParams.id; // 1)
+      $scope.enrolment = EnrolmentModel.enrolmentObj(); // 2)
 
-      $scope.enrolmentId = $stateParams.id;
-
-      $scope.entireEnrolment = {};
-      $scope.entireEnrolment.enrolment = {};
-      $scope.entireEnrolment.enrolment.evDate = today;
-      $scope.entireEnrolment.enrolment.begDate = today;
-      $scope.entireEnrolment.enrolment.isContract = 0;
-      $scope.entireEnrolment.enrolment.isState = 0;
-      $scope.entireEnrolment.enrolment.isInterview = 0;
-      $scope.entireEnrolment.enrolment.isEducationState = 0;
-      $scope.entireEnrolment.enrolmentsubjects = [];
-      $scope.entireEnrolment.benefits = [];
-      $scope.entireEnrolment.enrolment.specOfferId;
-      $scope.entireEnrolment.enrolment.personId;
+      console.log('$scope.enrolment', $scope.enrolment);
 
       $scope.enrolTabs = angular.copy(baseFormData.tabs);
-
       _.each($scope.enrolTabs, function (item) {
         item.active =  $state.current.name === item.route.new || $state.current.name === item.route.edit;
       });
 
-      $scope.go = function (route) {
+      /**
+       * @param route, e.g. root.enrolment.new or root.enrolment.edit/4
+       * perfom navigation between tabs
+       */
+      $scope.goToTab = function (route) {
         if ($scope.enrolmentId) {
           $state.go(route.edit, {
             id: $scope.enrolmentId
@@ -39,35 +37,57 @@ angular
         }
       };
 
+      /**
+       * disable benefit tab if specOfferId && personId is undefined;
+       * @returns {boolean}
+       */
       $scope.isExtendedTabsAvailable = function() {
-        return $scope.entireEnrolment.enrolment.specOfferId && $scope.entireEnrolment.enrolment.personId;
+        return $scope.enrolment.specOfferId && $scope.enrolment.personId;
       };
 
-      $scope.brosweOrEditEnrolment = function (enrolmentId) {
-        EnrolmentService.getEntireEnrolment(enrolmentId).then(function (res) {
-          _.merge($scope.entireEnrolment.enrolmentsubjects, res.enrolmentsubjects);
-          _.merge($scope.entireEnrolment.benefits, res.benefits);
-          _.merge($scope.entireEnrolment.enrolment, res.enrolment);
-          _.merge($scope.entireEnrolment.statuses, res.statuses);
-
-        });
-      };
-
+      /**
+       * 1) if id was passed as a parameter to state - act as anrolment is browsing or editing
+       * 2) else - act as new enrolment needed to be created
+       */
       if ($stateParams.id) {
-        $scope.brosweOrEditEnrolment($stateParams.id);
+        EnrolmentModel.getEntireEnrolment($stateParams.id).then(function(res) {
+          $scope.enrolment = EnrolmentModel.enrolmentObj();
+          //$scope.enrolment = res;
+          console.log('res', res);
+          //console.log('EnrolmentModel.enrolmentObj', EnrolmentModel.enrolmentObj);
+          console.log('$scope.enrolment',$scope.enrolment);
+        });
       } else {
-        EnrolmentService.clearCopy();
+        EnrolmentModel.clearCopy();
+        //EnrolmentModel.clearEntireEnrolment();
       }
 
-      $scope.sendToServer = function (entireEnrolment) {
-        EnrolmentService.addOrEditEnrolment(entireEnrolment).then(function () {
-          DictionariesSvc.clearStorageByRoute('enrolments');
-          $state.go ('root.enrolment.list');
+      /**
+       * perfom sending (saving) entire enrolment to server
+       * 1) clear cache in dictionary after saving
+       * 2) clear entireEnrolment obj after saving
+       * 3) if prefious route was root.person.edit - redirect to it, else - to root.enrolment.list
+       */
+      $scope.sendToServer = function () {
+        EnrolmentModel.addOrEditEnrolment().then(function () {
+          DictionariesSvc.clearStorageByRoute('enrolments'); // 1)
+          EnrolmentModel.clearEntireEnrolment(); // 2)
+
+          if ($stateParams.personId) { // 3)
+            $state.go($stateParams.previousState, {
+              id: $stateParams.personId
+            });
+          } else {
+            $state.go ('root.enrolment.list');
+          }
+        }, function (resp) {
+          toaster.pop('error', resp.messageType, resp.message);
+          //toaster.pop(translHttpStatusSvc.translate(msg));
         });
       };
 
       $scope.delete = function () {
-        EnrolmentService.deleteEntireEnrolment().then(function () {
+        EnrolmentModel.deleteEntireEnrolment().then(function () {
           DictionariesSvc.clearStorageByRoute('enrolments');
           $state.go ('root.enrolment.list');
         });

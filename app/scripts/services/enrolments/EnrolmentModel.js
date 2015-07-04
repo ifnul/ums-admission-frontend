@@ -2,9 +2,45 @@
 
 angular
   .module('admissionSystemApp')
-  .factory('EnrolmentService', ['Restangular', '$q', '$filter', function (Restangular, $q, $filter) {
+  .factory('EnrolmentModel', ['Restangular', '$q', '$filter', function (Restangular, $q, $filter) {
 
     var restAngular, objCopy;
+
+    /**
+     * @type {{object}} entire enrolment model
+     */
+    var today = $filter('date')(new Date(),'yyyy-MM-dd');
+    var entireEnrolment = {};
+    entireEnrolment.enrolment = {};
+    entireEnrolment.enrolment.evDate = today;
+    entireEnrolment.enrolment.begDate = today;
+    entireEnrolment.enrolment.endDate = "";
+    entireEnrolment.enrolment.isContract = 0;
+    entireEnrolment.enrolment.isState = 0;
+    entireEnrolment.enrolment.isInterview = 0;
+    entireEnrolment.enrolment.isEducationState = 0;
+
+    entireEnrolment.enrolmentsubjects = [];
+    entireEnrolment.benefits = [];
+    entireEnrolment.statuses = [];
+
+    /**
+     * clear EntireEnrolment object (set it to default values)
+     */
+    function clearEntireEnrolment () {
+      entireEnrolment = {};
+      entireEnrolment.enrolment = {};
+      entireEnrolment.enrolment.evDate = today;
+      entireEnrolment.enrolment.begDate = today;
+      entireEnrolment.enrolment.endDate = "";
+      entireEnrolment.enrolment.isContract = 0;
+      entireEnrolment.enrolment.isState = 0;
+      entireEnrolment.enrolment.isInterview = 0;
+      entireEnrolment.enrolment.isEducationState = 0;
+      entireEnrolment.enrolmentsubjects = [];
+      entireEnrolment.benefits = [];
+      entireEnrolment.statuses = [];
+    }
 
       /**
        * restAngular configuration
@@ -30,18 +66,23 @@ angular
        * @returns {Promise} - return entireEnrolment obj
        */
     function getEntireEnrolment(id) {
-      var entireEnrolment = {};
+      //var entireEnrolment = {};
+      //  entireEnrolment.enrolment = restAngular.one('enrolments', id).get();
+      //entireEnrolment.benefits = restAngular.one('enrolments', id).one('benefits').getList();
+      //entireEnrolment.enrolmentsubjects = restAngular.one('enrolments', id).one('enrolmentsubjects').getList();
+      //entireEnrolment.statuses = restAngular.one('enrolments', id).one('statuses').getList();
+        var entire = {};
+        entire.enrolment = restAngular.one('enrolments', id).get();
+        entire.benefits = restAngular.one('enrolments', id).one('benefits').getList();
+        entire.enrolmentsubjects = restAngular.one('enrolments', id).one('enrolmentsubjects').getList();
+        entire.statuses = restAngular.one('enrolments', id).one('statuses').getList();
 
-      entireEnrolment.enrolment = restAngular.one('enrolments', id).get();
-      entireEnrolment.benefits = restAngular.one('enrolments', id).one('benefits').getList();
-      entireEnrolment.enrolmentsubjects = restAngular.one('enrolments', id).one('enrolmentsubjects').getList();
-      entireEnrolment.statuses = restAngular.one('enrolments', id).one('statuses').getList();
-
-      $q.all(entireEnrolment).then(function (res) {
+      $q.all(entire).then(function (res) {
         objCopy = {};
         _.merge(objCopy, res);
+        _.merge(entireEnrolment, res);
       });
-      return $q.all(entireEnrolment);
+      return $q.all(entire);
     }
 
       /**
@@ -73,6 +114,8 @@ angular
 
       restAngular.all('enrolments').post(enrolment).then(function (response) {
         id.resolve(response.id);
+      }, function(err) {
+        id.reject(err);
       });
       return id.promise;
     }
@@ -83,19 +126,23 @@ angular
        * @param currentObj - entire specoffer obj;
        * like this: {enrolment: [], benefits: [], enrolmentssubject: [], statuses : {}}
        */
-    function addOrEditEnrolment(currentObj) {
+    function addOrEditEnrolment() {
       if (!objCopy.enrolment) {
-        console.log('currentObj', currentObj);
-        return addEntireEnrolment(currentObj.enrolment).then(function (enrolmentId) {
-          currentObj.enrolment.id = enrolmentId;
+        console.log('entireEnrolment', entireEnrolment);
+        return addEntireEnrolment(entireEnrolment.enrolment).then(function (enrolmentId) {
+          console.log('enrolmentId', enrolmentId);
+          entireEnrolment.enrolment.id = enrolmentId;
           return $q.all([
-            addArrayOfItems(currentObj.enrolmentsubjects, enrolmentId, 'enrolmentsubjects'),
-            addArrayOfItems(currentObj.benefits, enrolmentId, 'benefits'),
-            addArrayOfItems(currentObj.statuses, enrolmentId, 'statuses')
+            addArrayOfItems(entireEnrolment.enrolmentsubjects, enrolmentId, 'enrolmentsubjects'),
+            addArrayOfItems(entireEnrolment.benefits, enrolmentId, 'benefits'),
+            addArrayOfItems(entireEnrolment.statuses, enrolmentId, 'statuses')
           ]);
+        }, function(err) {
+          console.log(err);
+          return err;
         });
       } else {
-        return editEntireEnrolment(currentObj);
+        return editEntireEnrolment(entireEnrolment);
       }
     }
 
@@ -226,6 +273,21 @@ angular
       },
       clearCopy: function () {
         objCopy = {};
+      },
+      clearEntireEnrolment: function () {
+        clearEntireEnrolment();
+      },
+      enrolmentObj: function() {
+        return entireEnrolment.enrolment;
+      },
+      enrolmentSubjectsArr: function() {
+        return entireEnrolment.enrolmentsubjects;
+      },
+      benefitsArr: function() {
+        return entireEnrolment.benefits;
+      },
+      statusesArr: function() {
+        return entireEnrolment.statuses;
       }
-    };
+    }
   }]);

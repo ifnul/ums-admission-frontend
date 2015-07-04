@@ -3,10 +3,11 @@
 angular
   .module('admissionSystemApp')
   .controller('TabStatesCtrl', ['$scope', '$stateParams', 'baseListData', 'decodeEnrolmentsSvc', 'enrolmentStates',
-    'Restangular',
-    function ($scope, $stateParams, baseListData, decodeEnrolmentsSvc, enrolmentStates, Restangular) {
+    'Restangular', 'EnrolmentModel',
+    function ($scope, $stateParams, baseListData, decodeEnrolmentsSvc, enrolmentStates, Restangular, EnrolmentModel) {
 
-      $scope.entireEnrolment.statuses = [];
+      $scope.statuses = EnrolmentModel.statusesArr();
+      $scope.enrolment = EnrolmentModel.enrolmentObj();
 
       $scope.localStatuses = [];
       $scope.headers = baseListData.stateHeaders;
@@ -14,13 +15,13 @@ angular
       $scope.enrolmentId = $stateParams.id;
 
       if ($scope.enrolmentId) {
-        Restangular.one('specoffers', $scope.entireEnrolment.enrolment.specOfferId).getList('waves')
+        Restangular.one('specoffers', $scope.enrolment.specOfferId).getList('waves')
           .then(function (waves) {
           $scope.wave = waves[waves.length - 1];
         });
 
-        _.merge($scope.localStatuses, $scope.entireEnrolment.statuses);
-        $scope.state = $scope.entireEnrolment.statuses[0];
+        _.merge($scope.localStatuses, $scope.statuses);
+        $scope.state = $scope.statuses[0];
         $scope.filteredStates = enrolmentStates.checkState($scope.state.enrolmentStatusTypeId);
         decodeEnrolmentsSvc.enrolmentsDecoded($scope.localStatuses).then(function (states) {
           $scope.states = states;
@@ -30,17 +31,17 @@ angular
           });
         });
       } else {
-        Restangular.one('specoffers', $scope.entireEnrolment.enrolment.specOfferId).getList('waves')
+        Restangular.one('specoffers', $scope.enrolment.specOfferId).getList('waves')
           .then(function (waves) {
           $scope.wave = waves[waves.length - 1];
           $scope.viewState = {};
           $scope.newState = {
-            isContract: $scope.entireEnrolment.enrolment.isContract,
-            isState: $scope.entireEnrolment.enrolment.isState,
+            isContract: $scope.enrolment.isContract,
+            isState: $scope.enrolment.isState,
             specOfferWaveId: $scope.wave.id,
             enrolmentStatusTypeId: 1
           };
-          $scope.entireEnrolment.statuses.push($scope.newState);
+          $scope.statuses.push($scope.newState);
           _.merge($scope.viewState, $scope.newState);
           decodeEnrolmentsSvc.enrolmentsDecoded([$scope.viewState]).then(function (state) {
             $scope.states = state;
@@ -56,7 +57,7 @@ angular
           specOfferWaveId: $scope.wave.id,
           enrolmentStatusTypeId: $scope.newStatus.enrolmentStatusTypeId
         };
-        $scope.entireEnrolment.statuses.push($scope.newState);
+        $scope.statuses.push($scope.newState);
         _.merge($scope.viewState, $scope.newState);
         decodeEnrolmentsSvc.enrolmentsDecoded([$scope.viewState]).then(function (state) {
           $scope.localStatuses.push(state[0]);

@@ -1,10 +1,12 @@
-<div>
-  <form id="movieForm" method="post" class="form-horizontal top-buffer">
+<div val-bubble-counter>
+  <form id="movieForm" method="post" name="form_prop" class="form-horizontal top-buffer">
     <label class="col-xs-2 control-label">Пошук персони</label>
 
     <person-selector search="personSearch"
                      headers="personHeaders"
-                     ng-model="entireEnrolment.enrolment.personId">
+                     name="inputPersonId"
+                     ng-model="enrolment.personId"
+                     required val-bubble>
     </person-selector>
 
     <div class="form-group">
@@ -12,21 +14,25 @@
         <label class="col-xs-2 control-label" for="inputDocSeries">Серія заяви</label>
 
         <div class="col-xs-3">
-          <input ng-model="entireEnrolment.enrolment.docSeries"
+          <input ng-model="enrolment.docSeries"
+                 name="inputDocSeries"
                  type="text"
+                 id="inputDocSeries"
                  class="form-control"
                  placeholder="Серія заяви"
-                 id="inputDocSeries">
+                 required val-bubble>
         </div>
 
         <label class="col-xs-2 control-label" for="inputdocNum">Номер заяви</label>
 
         <div class="col-xs-3">
-          <input ng-model="entireEnrolment.enrolment.docNum"
+          <input ng-model="enrolment.docNum"
                  type="text"
+                 name="inputdocNum"
                  class="form-control"
                  placeholder="Номер заяви"
-                 id="inputdocNum">
+                 id="inputdocNum"
+                 required val-bubble>
         </div>
       </div>
     </div>
@@ -35,11 +41,11 @@
       <div class="row">
           <div class="checkbox">
             <label class="col-xs-3 col-xs-offset-2 "> <input type="checkbox"
-                                                             ng-init="entireEnrolment.enrolment.isState = 0"
-                                                             ng-model="entireEnrolment.enrolment.isState"
+                                                             ng-init="enrolment.isState = 0"
+                                                             ng-model="enrolment.isState"
                                                              ng-true-value="1"
                                                              ng-false-value="0"
-                                                             ng-checked="entireEnrolment.enrolment.isState"> Бюджет
+                                                             ng-checked="enrolment.isState"> Бюджет
             </label>
           </div>
         </div>
@@ -49,11 +55,11 @@
       <div class="row">
         <div class="checkbox">
           <label class="col-xs-3 col-xs-offset-2 "> <input type="checkbox"
-                                                           ng-init="entireEnrolment.enrolment.isContract = 0"
-                                                           ng-model="entireEnrolment.enrolment.isContract"
+                                                           ng-init="enrolment.isContract = 0"
+                                                           ng-model="enrolment.isContract"
                                                            ng-true-value="1"
                                                            ng-false-value="0"
-                                                           ng-checked="entireEnrolment.enrolment.isContract"> Контракт
+                                                           ng-checked="enrolment.isContract"> Контракт
           </label>
         </div>
       </div>
@@ -63,11 +69,11 @@
       <div class="row">
         <div class="checkbox">
           <label class="col-xs-3 col-xs-offset-2 "> <input type="checkbox"
-                                                           ng-init="entireEnrolment.enrolment.isPrivilege = 0"
-                                                           ng-model="entireEnrolment.enrolment.isPrivilege"
+                                                           ng-init="enrolment.isPrivilege = 0"
+                                                           ng-model="enrolment.isPrivilege"
                                                            ng-true-value="1"
                                                            ng-false-value="0"
-                                                           ng-checked="entireEnrolment.enrolment.isPrivilege"> Чи є
+                                                           ng-checked="enrolment.isPrivilege"> Чи є
             пільги на вступ?
           </label>
         </div>
@@ -84,7 +90,7 @@
               <input type="radio"
                      name="isedustate"
                      ng-value="opt.value"
-                     ng-model="entireEnrolment.enrolment.isEducationState">
+                     ng-model="enrolment.isEducationState">
               {{opt.title}}
             </label>
           </div>
@@ -102,7 +108,7 @@
               <input type="radio"
                      name="isinterview"
                      ng-value="opt.value"
-                     ng-model="entireEnrolment.enrolment.isInterview">
+                     ng-model="enrolment.isInterview">
               {{opt.title}}
             </label>
           </div>
@@ -115,11 +121,11 @@
       <div class="row">
           <div class="checkbox">
             <label class="col-xs-3 col-xs-offset-2 "> <input type="checkbox"
-                                                             ng-init="entireEnrolment.enrolment.isHostel = 0"
-                                                             ng-model="entireEnrolment.enrolment.isHostel"
+                                                             ng-init="enrolment.isHostel = 0"
+                                                             ng-model="enrolment.isHostel"
                                                              ng-true-value="1"
                                                              ng-false-value="0"
-                                                             ng-checked="entireEnrolment.enrolment.isHostel"> Потрібен
+                                                             ng-checked="enrolment.isHostel"> Потрібен
               гуртожиток?
             </label>
           </div>
@@ -131,37 +137,44 @@
     <specoffer-selector departments="departmentId"
                         specofferTypes="specofferTypes"
                         headers="specofferHeaders"
-                        ng-model="entireEnrolment.enrolment.specOfferId">
+                        name="inputSpecOfferId"
+                        ng-model="enrolment.specOfferId"
+                        required val-bubble>
     </specoffer-selector>
 
-    <paper-selector personid="{{entireEnrolment.enrolment.personId}}"
-                    ng-model="entireEnrolment.enrolment.personPaperId">
+    <paper-selector personid="{{enrolment.personId}}"
+                    name="inputPersonPaperId"
+                    ng-model="enrolment.personPaperId"
+                    required val-bubble>
     </paper-selector>
 
 
     <div class="form-group">
       <div class="row">
-        <label class="col-xs-2 control-label" for="inputDocSeries">Загальний бал</label>
+        <label class="col-xs-2 control-label" for="inputMark">Загальний бал</label>
         <div class="col-xs-3">
-          <input ng-model="entireEnrolment.enrolment.mark"
+          <input ng-model="enrolment.mark"
                  type="number"
+                 name="inputMark"
                  class="form-control"
                  placeholder="Загальний бал"
-                 id="mark">
+                 id="inputMark"
+                 required val-bubble >
         </div>
 
+       <!-- -->
+        <!--<label class="col-xs-2 control-label" for="inputMaksScale">Шкала оцiнювання</label>-->
+        <!--<div class="col-xs-3">-->
+          <!--<ui-select ng-model="enrolment.markscaletype"-->
+                     <!--id="markScale">-->
+                          <!--required val-bubble-->
+            <!--<ui-select-match placeholder="Шкала оцiнювання">{{$select.selected.name}}</ui-select-match>-->
+            <!--<ui-select-choices repeat="element.id as element in markType | filter: $select.search">-->
+              <!--<div ng-bind-html="element.name | highlight: $select.search"></div>-->
+            <!--</ui-select-choices>-->
+          <!--</ui-select>-->
 
-        <label class="col-xs-2 control-label" for="inputdocNum">Шкала оцiнювання</label>
-        <div class="col-xs-3">
-          <ui-select ng-model="entireEnrolment.enrolment.markscaletype"
-                     id="markScale">
-            <ui-select-match placeholder="Шкала оцiнювання">{{$select.selected.name}}</ui-select-match>
-            <ui-select-choices repeat="element.id as element in markType | filter: $select.search">
-              <div ng-bind-html="element.name | highlight: $select.search"></div>
-            </ui-select-choices>
-          </ui-select>
-
-        </div>
+        <!--</div>-->
       </div>
     </div>
 
@@ -170,11 +183,11 @@
       <div class="row">
         <div class="checkbox">
           <label class="col-xs-3 col-xs-offset-2 "> <input type="checkbox"
-                                                           ng-init="entireEnrolment.enrolment.isOriginal = 0"
-                                                           ng-model="entireEnrolment.enrolment.isOriginal"
+                                                           ng-init="enrolment.isOriginal = 0"
+                                                           ng-model="enrolment.isOriginal"
                                                            ng-true-value="1"
                                                            ng-false-value="0"
-                                                           ng-checked="entireEnrolment.enrolment.isOriginal"> Поданi
+                                                           ng-checked="enrolment.isOriginal"> Поданi
             оригiнали документiв?
           </label>
         </div>
@@ -187,11 +200,14 @@
 
         <div class="col-xs-3">
 
-          <input ng-model="entireEnrolment.enrolment.priority"
+          <input ng-model="enrolment.priority"
                  type="number" class="form-control "
                  id="inputPriority"
                  placeholder="Введіть пріоритет"
-                 name="inputPriority">
+                 name="inputPriority"
+                 min="1"
+                 max="15"
+                 required val-bubble>
         </div>
       </div>
     </div>
@@ -200,11 +216,13 @@
     <div class="form-group">
       <div class="row">
         <label class="col-xs-2 control-label" for="inputStructure">Структурний підрозділ</label>
-
+-
         <div class="col-xs-3">
 
-          <ui-select ng-model="entireEnrolment.enrolment.departmentId"
-                     id="inputStructure">
+          <ui-select ng-model="enrolment.departmentId"
+                     id="inputStructure"
+                     name="departmentId"
+                     required val-bubble>
             <ui-select-match placeholder="Структурний підрозділ">{{$select.selected.name}}</ui-select-match>
             <ui-select-choices repeat="item.id as item in departmentId | filter: $select.search">
               <div ng-bind-html="item.name | highlight: $select.search"></div>
@@ -224,18 +242,20 @@
                   ng-options="opt.id as opt.name for opt in chiefEnrolTypes"
                   name="inputChiefEnrolTypes"
                   id="inputChiefEnrolTypes"
-                  ng-change="updateChildsEnrolTypes(enrolmentTypes.chiefs)">
+                  ng-change="updateChildsEnrolTypes(enrolmentTypes.chiefs)"
+                  required val-bubble>
           </select>
         </div>
         <label class="col-xs-2 control-label" for="inputEnrolmentTypeId">Деталiзацiя вступу</label>
 
         <div class="col-xs-4">
           <select class="form-control"
-                  ng-model="entireEnrolment.enrolment.enrolmentTypeId"
+                  ng-model="enrolment.enrolmentTypeId"
                   ng-options="opt.id as opt.name for opt in enrolmentTypeId"
                   name="inputeEnrolmentTypeId"
                   id="inputEnrolmentTypeId"
-                  ng-change="sendValueOutside(enrolmentTypes.childs)">
+                  ng-change="sendValueOutside(enrolmentTypes.childs)"
+                  required val-bubble>
           </select>
         </div>
       </div>
@@ -246,14 +266,12 @@
 
       <div class="col-xs-3">
         <input type="text"
-               ng-model="entireEnrolment.enrolment.evDate"
+               ng-model="enrolment.evDate"
                datepicker-popup="yyyy-MM-dd"
-               is-open="isOpen"
-               ng-click="isOpen = true"
-               close-text="Close"
                class="form-control"
                id="evDate"
-               placeholder="РРРР-MM-ДД"/>
+               placeholder="РРРР-MM-ДД"
+               readonly/>
       </div>
     </div>
     <div class="row">
@@ -262,7 +280,7 @@
       <div class="col-xs-3">
 
         <input type="text"
-               ng-model="entireEnrolment.enrolment.begDate"
+               ng-model="enrolment.begDate"
                datepicker-popup="yyyy-MM-dd"
                is-open="isOpen2"
                ng-click="isOpen2 = true"
@@ -278,7 +296,7 @@
       <div class="col-xs-3">
 
         <input type="text"
-               ng-model="entireEnrolment.enrolment.endDate"
+               ng-model="enrolment.endDate"
                datepicker-popup="yyyy-MM-dd"
                is-open="isOpen3"
                ng-click="isOpen3 = true"

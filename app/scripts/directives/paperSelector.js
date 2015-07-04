@@ -42,6 +42,10 @@ angular
           }
         };
 
+        if (attrs.personid) {
+          scope.parsePersonPaperId(attrs.personid);
+        }
+
         scope.paperSelected = function (personPaperId) {
           ngModel.$setViewValue(personPaperId);
         };

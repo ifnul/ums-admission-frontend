@@ -217,7 +217,7 @@ angular
         templateUrl: '../views/person/tabsPerson/tab_personsubjects.html',
         controller: 'tabSubjects'
       })
-      .state('root.person.new.enrolments', {
+      .state('root.person.new.enro  lments', {
         url: '/enrolments',
         templateUrl: '../views/person/tabsPerson/tab_enrolments.html',
         controller: 'TabPersonEnrolmentsCtrl'
@@ -287,6 +287,11 @@ angular
             templateUrl: '../views/enrolment/new_enrolment.html',
             controller: 'NewEnrolmentCtrl'
           }
+        },
+        //abstract: true,
+        params: {
+          personId: null,
+          previousState: null
         }
       })
       .state('root.enrolment.new.main', {
@@ -345,6 +350,7 @@ angular
     $urlRouterProvider
       .when('/person', '/person/list')
       .when('/enrolment', '/enrolment/list')
+      //.when('/enrolment/new', '/enrolment/new/main')
       .otherwise('/signin');
   })
 
