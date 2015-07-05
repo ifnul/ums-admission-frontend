@@ -350,7 +350,6 @@ angular
     $urlRouterProvider
       .when('/person', '/person/list')
       .when('/enrolment', '/enrolment/list')
-      //.when('/enrolment/new', '/enrolment/new/main')
       .otherwise('/signin');
   })
 

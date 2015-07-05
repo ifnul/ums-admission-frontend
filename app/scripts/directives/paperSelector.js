@@ -13,8 +13,10 @@ angular
     function paperSelectorDirectiveCtrl($scope, getPersonPapersSvc) {
       $scope.papertypeId = getPersonPapersSvc.getRightPapersTypes;
 
-      $scope.parsePersonPaperId = function (personId) {
-        getPersonPapersSvc.setRightPersonPapers(personId);
+      $scope.parsePersonPaperId = function (personId, personPaperId) {
+        getPersonPapersSvc.setRightPersonPapers(personId).then(function() {
+          $scope.enrolment.personPaperId = personPaperId;
+        });
       };
 
       $scope.$on('person-id-changed', function (event, args) { // (1)

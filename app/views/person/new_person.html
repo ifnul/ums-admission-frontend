@@ -12,18 +12,15 @@
 </div>
 
 <!-- main content -->
-<div class="col-sm-12 col-md-12 new-proposal-wrapper">
+<div class="col-sm-12 col-md-12 new-proposal-wrapper" ng-controller="ProgressBarCtrl">
 
   <div class="row">
-    <div ng-controller="ProgressBarCtrl">
       <p class="text-center col-md-6">
         <progressbar value="progressBarPercent" type="{{type}}">Основна інформаці заповнена на: {{progressBarPercent}}%</progressbar>
       </p>
       <p class="text-center col-md-3 text-danger">
         {{propositionMessage}}
       </p>
-
-    </div>
   </div>
 
 
@@ -42,9 +39,13 @@
       </div>
     </div>
 
+    <!--TODO: link 'зберегти' button to inputs in other tabs -->
+    <!--|| (!entirePerson.addresses.regAddresses.house)-->
     <div class="top-buffer bottom-buffer row">
-      <button ng-click="sendToServerPerson(entirePerson)" ng-disabled="(progressBarPercent !== 100) ||
-      (!entirePerson.addresses.regAddresses.house)" type="submit" class="btn btn-primary">Зберегти</button>
+      <button ng-click="sendToServerPerson(entirePerson)"
+              ng-disabled="(progressBarPercent !== 100) "
+              type="submit"
+              class="btn btn-primary">Зберегти</button>
       <button ng-click="deletePerson()" type="submit" class="btn btn-danger">Видалити</button>
     </div>
 

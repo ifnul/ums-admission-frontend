@@ -9,10 +9,10 @@ angular.module('admissionSystemApp')
        * bind model (entire.entolment) to controller (view)
        */
       $scope.enrolment = EnrolmentModel.enrolmentObj();
-
-      //$scope.$watch('enrolment', function (newVal) {
-      //  console.log("enrolment:", newVal);
-      //});
+      console.log('$scope.enrolment', $scope.enrolment);
+      $scope.$watch('enrolment', function (newVal) {
+        console.log("enrolment:", newVal);
+      });
 
       if ($stateParams.personId) {
         $scope.enrolment.personId = $stateParams.personId;
@@ -24,6 +24,7 @@ angular.module('admissionSystemApp')
       /**
        * get data and pass to dropdowns
        */
+      DictionariesSvc.clearStorageByRoute('enrolments/types');
       $q.all([
         DictionariesSvc.getAllDepartments({
           departmentTypeId: 1
@@ -35,7 +36,7 @@ angular.module('admissionSystemApp')
         .then(function (promisesResult) {
           $scope.departmentId = promisesResult[0];
           $scope.specofferTypes = promisesResult[2];
-          manageEnrolmentsTyps(promisesResult[1]);
+          //manageEnrolmentsTyps(promisesResult[1]);
           $scope.markType = promisesResult[3];
         });
 
@@ -51,35 +52,7 @@ angular.module('admissionSystemApp')
       $scope.personHeaders = basePersonData.headers;
       $scope.specofferHeaders = baseSpecofferData.headers;
 
-      /**
-       *
-       * @param enrolmentTypes
-       * 'Тип вступу' and 'Деталiзацiя вступу'
-       */
-      $scope.enrolmentTypes = {};
-      function manageEnrolmentsTyps(enrolmentTypes) {
-        $scope.chiefEnrolTypes = _.filter(enrolmentTypes, function (n) {
-          return !n.parentId;
-        });
 
-        $scope.updateChildsEnrolTypes = function (chiefID) {
-          $scope.enrolment.enrolmentTypeId = undefined;
-          $scope.enrolmentTypeId = _.filter(enrolmentTypes, function (n) {
-            return n.parentId === chiefID;
-          });
-        };
-
-        if ($scope.enrolment.enrolmentTypeId) {
-          var currentChild = _.filter(enrolmentTypes, {
-            id: $scope.enrolment.enrolmentTypeId
-          });
-
-          $scope.enrolmentTypes.chiefs = currentChild[0].parentId;
-          $scope.enrolmentTypeId = _.filter(enrolmentTypes, function (n) {
-            return n.parentId === $scope.enrolmentTypes.chiefs;
-          });
-        }
-      }
 
       /**
        * progress bar managment

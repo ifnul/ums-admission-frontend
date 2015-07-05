@@ -5,6 +5,11 @@ angular.module('admissionSystemApp')
     'DictionariesSvc', '$state', 'basePersonData',
     function ($scope, $stateParams, Person, $location, DictionariesSvc, $state, basePersonData) {
 
+
+      $scope.$watch('entirePerson', function (newVal) {
+        console.log("enrolment:", newVal);
+      });
+
       $scope.entirePerson = {};
       $scope.entirePerson.person = {};
       $scope.entirePerson.names = [];

@@ -16,8 +16,6 @@ angular
       $scope.enrolmentId = $stateParams.id; // 1)
       $scope.enrolment = EnrolmentModel.enrolmentObj(); // 2)
 
-      console.log('$scope.enrolment', $scope.enrolment);
-
       $scope.enrolTabs = angular.copy(baseFormData.tabs);
       _.each($scope.enrolTabs, function (item) {
         item.active =  $state.current.name === item.route.new || $state.current.name === item.route.edit;
@@ -52,10 +50,7 @@ angular
       if ($stateParams.id) {
         EnrolmentModel.getEntireEnrolment($stateParams.id).then(function(res) {
           $scope.enrolment = EnrolmentModel.enrolmentObj();
-          //$scope.enrolment = res;
-          console.log('res', res);
-          //console.log('EnrolmentModel.enrolmentObj', EnrolmentModel.enrolmentObj);
-          console.log('$scope.enrolment',$scope.enrolment);
+          console.log('$scope.enrolment', $scope.enrolment);
         });
       } else {
         EnrolmentModel.clearCopy();
