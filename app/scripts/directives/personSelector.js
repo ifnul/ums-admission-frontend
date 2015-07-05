@@ -10,6 +10,11 @@ angular
 
     personSelectorDirectiveCtrl.$inject = ['$scope', '$modal', '$rootScope', 'searchPersonSvc'];
     function personSelectorDirectiveCtrl ($scope, $modal, $rootScope, searchPersonSvc) {
+
+      $scope.clearSelected = function() {
+        searchPersonSvc.selectedPerson.length = 0;
+      };
+
       $scope.data = searchPersonSvc.searchResult;
       $scope.selected = searchPersonSvc.selectedPerson;
 
@@ -63,6 +68,8 @@ angular
           personId = ngModel.$modelValue;
           if (personId) {
             scope.parsePerson(personId);
+          } else {
+            scope.clearSelected();
           }
         };
 

@@ -14,6 +14,7 @@ angular.module('admissionSystemApp')
         console.log("enrolment:", newVal);
       });
 
+      console.log('$stateParams.personId', $stateParams.personId);
       if ($stateParams.personId) {
         $scope.enrolment.personId = $stateParams.personId;
       }

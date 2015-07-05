@@ -16,6 +16,8 @@ angular
       $scope.enrolmentId = $stateParams.id; // 1)
       $scope.enrolment = EnrolmentModel.enrolmentObj(); // 2)
 
+      console.log('$scope.enrolment', $scope.enrolment);
+
       $scope.enrolTabs = angular.copy(baseFormData.tabs);
       _.each($scope.enrolTabs, function (item) {
         item.active =  $state.current.name === item.route.new || $state.current.name === item.route.edit;

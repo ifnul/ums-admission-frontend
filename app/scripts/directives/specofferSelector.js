@@ -21,6 +21,7 @@ angular
       };
 
       function startSearchSpecoffers () {
+        console.log('$scope.search', $scope.searchBy);
         DictionariesSvc.getAllSpecoffers($scope.searchBy).then(function (rawSpecoffer) {
           decodeSpecofferSvc.specofferDecoded(rawSpecoffer).then(function (decodedSpecoffer) {
             $scope.data = decodedSpecoffer;
