@@ -1,0 +1,26 @@
+<div class="form-group">
+  <div class="row">
+    <label class="col-xs-2 control-label" for="inputChiefEnrolTypes">Тип вступу</label>
+
+    <div class="col-xs-3">
+      <select class="form-control"
+              ng-model="enrolmentTypes.chiefs"
+              ng-options="opt.id as opt.name for opt in chiefEnrolTypes"
+              name="inputChiefEnrolTypes"
+              id="inputChiefEnrolTypes"
+              ng-change="updateChildsEnrolTypes(enrolmentTypes.chiefs)">
+      </select>
+    </div>
+    <label class="col-xs-2 control-label" for="inputEnrolmentTypeId">Деталiзацiя вступу</label>
+
+    <div class="col-xs-4">
+      <select class="form-control"
+              ng-model="enrolmentTypeId"
+              ng-options="opt.id as opt.name for opt in childEnrolTypes"
+              name="inputeEnrolmentTypeId"
+              id="inputEnrolmentTypeId"
+              ng-change="enrolmentTypeIdSelected(enrolmentTypeId)">
+      </select>
+    </div>
+  </div>
+</div>

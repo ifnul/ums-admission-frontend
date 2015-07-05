@@ -19,12 +19,12 @@ angular.module('admissionSystemApp')
 
       function setRightPersonPapers (personId) {
         papersTypes.rightPapersTypes.length = 0;
-        DictionariesSvc.getPaperTypes({
+        return DictionariesSvc.getPaperTypes({
           paperUsageId : 2
         }).then(function (paperTypes) { // (1)
           papersTypes.wholePapersTypes = paperTypes;
 
-          Restangular.one('persons', personId).one('papers').getList().then(function (papers) { // (2)
+          return Restangular.one('persons', personId).one('papers').getList().then(function (papers) { // (2)
             personPapers = papers;
             _.forEach(papersTypes.wholePapersTypes, function (paperTypeObj) {
               _.forEach(personPapers, function (personPaperObj) {

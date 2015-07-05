@@ -2,6 +2,7 @@
   <form id="movieForm" method="post" name="form_prop" class="form-horizontal top-buffer">
     <label class="col-xs-2 control-label">Пошук персони</label>
 
+    <!-- label: "Пошук персони:"-->
     <person-selector search="personSearch"
                      headers="personHeaders"
                      name="inputPersonId"
@@ -31,6 +32,7 @@
                  name="inputdocNum"
                  class="form-control"
                  placeholder="Номер заяви"
+                 ng-pattern="/^[0-9\'\s\-]*$/"
                  id="inputdocNum"
                  required val-bubble>
         </div>
@@ -40,12 +42,13 @@
     <div class="form-group">
       <div class="row">
           <div class="checkbox">
-            <label class="col-xs-3 col-xs-offset-2 "> <input type="checkbox"
-                                                             ng-init="enrolment.isState = 0"
-                                                             ng-model="enrolment.isState"
-                                                             ng-true-value="1"
-                                                             ng-false-value="0"
-                                                             ng-checked="enrolment.isState"> Бюджет
+            <label class="col-xs-3 col-xs-offset-2 ">
+              <input type="checkbox"
+                     ng-init="enrolment.isState = 0"
+                     ng-model="enrolment.isState"
+                     ng-true-value="1"
+                     ng-false-value="0"
+                     ng-checked="enrolment.isState"> Бюджет
             </label>
           </div>
         </div>
@@ -54,12 +57,13 @@
     <div class="form-group">
       <div class="row">
         <div class="checkbox">
-          <label class="col-xs-3 col-xs-offset-2 "> <input type="checkbox"
-                                                           ng-init="enrolment.isContract = 0"
-                                                           ng-model="enrolment.isContract"
-                                                           ng-true-value="1"
-                                                           ng-false-value="0"
-                                                           ng-checked="enrolment.isContract"> Контракт
+          <label class="col-xs-3 col-xs-offset-2 ">
+            <input type="checkbox"
+                   ng-init="enrolment.isContract = 0"
+                   ng-model="enrolment.isContract"
+                   ng-true-value="1"
+                   ng-false-value="0"
+                   ng-checked="enrolment.isContract"> Контракт
           </label>
         </div>
       </div>
@@ -68,13 +72,13 @@
     <div class="form-group">
       <div class="row">
         <div class="checkbox">
-          <label class="col-xs-3 col-xs-offset-2 "> <input type="checkbox"
-                                                           ng-init="enrolment.isPrivilege = 0"
-                                                           ng-model="enrolment.isPrivilege"
-                                                           ng-true-value="1"
-                                                           ng-false-value="0"
-                                                           ng-checked="enrolment.isPrivilege"> Чи є
-            пільги на вступ?
+          <label class="col-xs-3 col-xs-offset-2 ">
+            <input type="checkbox"
+                   ng-init="enrolment.isPrivilege = 0"
+                   ng-model="enrolment.isPrivilege"
+                   ng-true-value="1"
+                   ng-false-value="0"
+                   ng-checked="enrolment.isPrivilege"> Чи є пільги на вступ?
           </label>
         </div>
       </div>
@@ -90,8 +94,7 @@
               <input type="radio"
                      name="isedustate"
                      ng-value="opt.value"
-                     ng-model="enrolment.isEducationState">
-              {{opt.title}}
+                     ng-model="enrolment.isEducationState"> {{opt.title}}
             </label>
           </div>
         </div>
@@ -120,13 +123,13 @@
     <div class="form-group">
       <div class="row">
           <div class="checkbox">
-            <label class="col-xs-3 col-xs-offset-2 "> <input type="checkbox"
-                                                             ng-init="enrolment.isHostel = 0"
-                                                             ng-model="enrolment.isHostel"
-                                                             ng-true-value="1"
-                                                             ng-false-value="0"
-                                                             ng-checked="enrolment.isHostel"> Потрібен
-              гуртожиток?
+            <label class="col-xs-3 col-xs-offset-2 ">
+              <input type="checkbox"
+                     ng-init="enrolment.isHostel = 0"
+                     ng-model="enrolment.isHostel"
+                     ng-true-value="1"
+                     ng-false-value="0"
+                     ng-checked="enrolment.isHostel"> Потрібен гуртожиток?
             </label>
           </div>
       </div>
@@ -134,6 +137,7 @@
 
     <label class="col-xs-2 control-label">Пошук пропозиції</label>
 
+    <!--Label: "Пошук пропозиції "-->
     <specoffer-selector departments="departmentId"
                         specofferTypes="specofferTypes"
                         headers="specofferHeaders"
@@ -142,6 +146,7 @@
                         required val-bubble>
     </specoffer-selector>
 
+    <!--Label: "Документ "-->
     <paper-selector personid="{{enrolment.personId}}"
                     name="inputPersonPaperId"
                     ng-model="enrolment.personPaperId"
@@ -162,19 +167,21 @@
                  required val-bubble >
         </div>
 
-       <!-- -->
-        <!--<label class="col-xs-2 control-label" for="inputMaksScale">Шкала оцiнювання</label>-->
-        <!--<div class="col-xs-3">-->
-          <!--<ui-select ng-model="enrolment.markscaletype"-->
-                     <!--id="markScale">-->
-                          <!--required val-bubble-->
-            <!--<ui-select-match placeholder="Шкала оцiнювання">{{$select.selected.name}}</ui-select-match>-->
-            <!--<ui-select-choices repeat="element.id as element in markType | filter: $select.search">-->
-              <!--<div ng-bind-html="element.name | highlight: $select.search"></div>-->
-            <!--</ui-select-choices>-->
-          <!--</ui-select>-->
 
-        <!--</div>-->
+        <label class="col-xs-2 control-label" for="inputMarkScaleId">Шкала оцiнювання</label>
+        <div class="col-xs-3">
+          <ui-select ng-model="enrolment.markScaleId"
+                     id="markScale"
+                     name="inputMarkScaleId"
+                     id="inputMarkScaleId"
+                     required val-bubble>
+            <ui-select-match placeholder="Шкала оцiнювання">{{$select.selected.name}}</ui-select-match>
+            <ui-select-choices repeat="element.id as element in markType | filter: $select.search">
+              <div ng-bind-html="element.name | highlight: $select.search"></div>
+            </ui-select-choices>
+          </ui-select>
+
+        </div>
       </div>
     </div>
 
@@ -182,13 +189,13 @@
     <div class="form-group">
       <div class="row">
         <div class="checkbox">
-          <label class="col-xs-3 col-xs-offset-2 "> <input type="checkbox"
-                                                           ng-init="enrolment.isOriginal = 0"
-                                                           ng-model="enrolment.isOriginal"
-                                                           ng-true-value="1"
-                                                           ng-false-value="0"
-                                                           ng-checked="enrolment.isOriginal"> Поданi
-            оригiнали документiв?
+          <label class="col-xs-3 col-xs-offset-2 ">
+            <input type="checkbox"
+                   ng-init="enrolment.isOriginal = 0"
+                   ng-model="enrolment.isOriginal"
+                   ng-true-value="1"
+                   ng-false-value="0"
+                   ng-checked="enrolment.isOriginal"> Поданi оригiнали документiв?
           </label>
         </div>
       </div>
@@ -232,34 +239,12 @@
       </div>
     </div>
 
-    <div class="form-group">
-      <div class="row">
-        <label class="col-xs-2 control-label" for="inputChiefEnrolTypes">Тип вступу</label>
-
-        <div class="col-xs-3">
-          <select class="form-control"
-                  ng-model="enrolmentTypes.chiefs"
-                  ng-options="opt.id as opt.name for opt in chiefEnrolTypes"
-                  name="inputChiefEnrolTypes"
-                  id="inputChiefEnrolTypes"
-                  ng-change="updateChildsEnrolTypes(enrolmentTypes.chiefs)"
-                  required val-bubble>
-          </select>
-        </div>
-        <label class="col-xs-2 control-label" for="inputEnrolmentTypeId">Деталiзацiя вступу</label>
-
-        <div class="col-xs-4">
-          <select class="form-control"
-                  ng-model="enrolment.enrolmentTypeId"
-                  ng-options="opt.id as opt.name for opt in enrolmentTypeId"
-                  name="inputeEnrolmentTypeId"
-                  id="inputEnrolmentTypeId"
-                  ng-change="sendValueOutside(enrolmentTypes.childs)"
-                  required val-bubble>
-          </select>
-        </div>
-      </div>
-    </div>
+    <!--Label: "Документ "-->
+    <enrolment-types-selector
+                    name="enrolmentTypesInput"
+                    ng-model="enrolment.enrolmentTypeId"
+                    required val-bubble>
+    </enrolment-types-selector>
 
     <div class="row">
       <label class=" col-xs-2 control-label" for="evDate">Дата створення заяви</label>
