@@ -59,10 +59,15 @@ angular
        * in result ($state.go) - change state adding new query params to it (page, count);
        */
       $scope.paginationClick = function (PagingClicked, page) {
-        console.log('$scope.itemsPerPage', $scope.itemsPerPage);
         $location.search({
           page: page,
           count: $scope.itemsPerPage
+        });
+
+        $scope.getdata({
+          currentPage: page,
+          itemsPerPage: $scope.itemsPerPage,
+          userFilterPick: $scope.userFilterPick
         });
       };
 
@@ -75,14 +80,17 @@ angular
        * [itemPerPageChanged - do the same as paginationClick but triggers by differ event]
        */
       $scope.itemPerPageChanged = function (itemsPerPage) {
+        $scope.currentPage = 1;
         $location.search({
-          page: 1,
+          page: $scope.currentPage,
           count: itemsPerPage
         });
 
-        $timeout(function() {
-          angular.element('.personFilterUpdateButton').trigger('click');
-        }, 0);
+        $scope.getdata({
+          currentPage: $scope.currentPage,
+          itemsPerPage: $scope.itemsPerPage,
+          userFilterPick: $scope.userFilterPick
+        });
       };
     }
 
