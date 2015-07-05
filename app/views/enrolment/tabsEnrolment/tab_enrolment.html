@@ -12,6 +12,7 @@
 
     <div class="form-group">
       <div class="row">
+
         <label class="col-xs-2 control-label" for="inputDocSeries">Серія заяви</label>
 
         <div class="col-xs-3">
@@ -147,7 +148,7 @@
     </specoffer-selector>
 
     <!--Label: "Документ "-->
-    <paper-selector personid="{{enrolment.personId}}"
+    <paper-selector personid="enrolment.personId"
                     name="inputPersonPaperId"
                     ng-model="enrolment.personPaperId"
                     on-new-person-paper="newPersonPaper()"

@@ -32,7 +32,8 @@ angular
       require: 'ngModel',
       replace: true,
       scope: {
-        onNewPersonPaper: '&?'
+        onNewPersonPaper: '&?',
+        personid: '=?'
       },
       controller: paperSelectorDirectiveCtrl,
       link: function postLink (scope, element, attrs, ngModel) {
@@ -41,9 +42,9 @@ angular
         scope.enrolment = {};
         ngModel.$render = function () { // (2)
           personPaperId = ngModel.$modelValue;
-          scope.personid = attrs.personid;
-          if (personPaperId) {
-            scope.personid = attrs.personid;
+          console.log('scope.personid', scope.personid);
+          console.log('scope.personid', !!scope.personid);
+          if (scope.personid) {
             scope.parsePersonPaperId(scope.personid, personPaperId);
           }
         };
@@ -51,7 +52,7 @@ angular
 
 
         if (attrs.personid) {
-          scope.parsePersonPaperId(attrs.personid);
+          scope.parsePersonPaperId(scope.personid);
         }
 
         scope.paperSelected = function (personPaperId) {

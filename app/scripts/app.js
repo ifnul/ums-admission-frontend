@@ -217,7 +217,7 @@ angular
         templateUrl: '../views/person/tabsPerson/tab_personsubjects.html',
         controller: 'tabSubjects'
       })
-      .state('root.person.new.enro  lments', {
+      .state('root.person.new.enrolments', {
         url: '/enrolments',
         templateUrl: '../views/person/tabsPerson/tab_enrolments.html',
         controller: 'TabPersonEnrolmentsCtrl'
