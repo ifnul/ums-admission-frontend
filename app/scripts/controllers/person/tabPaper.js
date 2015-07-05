@@ -10,6 +10,8 @@ angular.module('admissionSystemApp')
         $scope.personView = true;
       }
 
+      console.log('$stateParams', $stateParams);
+
       $scope.newDocument = function () {
         $state.go('root.person.edit.papers', {
           id: $stateParams.id

@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('admissionSystemApp')
-  .controller('TabEnrolmentCtrl', ['$scope', 'DictionariesSvc',
-    'baseFormData', 'basePersonData', '$q', 'baseSpecofferData', '$stateParams', 'EnrolmentModel', 'progressBarService',
-    function ($scope, DictionariesSvc, baseFormData, basePersonData, $q, baseSpecofferData, $stateParams, EnrolmentModel, progressBarService) {
+  .controller('TabEnrolmentCtrl', ['$scope', 'DictionariesSvc',  'baseFormData', 'basePersonData',
+    '$q', 'baseSpecofferData', '$stateParams', 'EnrolmentModel', 'progressBarService', '$state',
+    function ($scope, DictionariesSvc, baseFormData, basePersonData, $q, baseSpecofferData, $stateParams, EnrolmentModel, progressBarService, $state) {
 
       /**
        * bind model (entire.entolment) to controller (view)
@@ -52,7 +52,17 @@ angular.module('admissionSystemApp')
       $scope.personHeaders = basePersonData.headers;
       $scope.specofferHeaders = baseSpecofferData.headers;
 
-
+      /**
+       * redirect to person view for creatent new parson paper (on button click)
+       */
+      $scope.newPersonPaper = function () {
+        console.log('click handler');
+        console.log('$stateParams', $stateParams);
+        $state.go('root.person.edit.papers', {
+          id: $scope.enrolment.personId,
+          previousState: $state.current.name
+        });
+      };
 
       /**
        * progress bar managment

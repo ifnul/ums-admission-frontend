@@ -150,6 +150,7 @@
     <paper-selector personid="{{enrolment.personId}}"
                     name="inputPersonPaperId"
                     ng-model="enrolment.personPaperId"
+                    on-new-person-paper="newPersonPaper()"
                     required val-bubble>
     </paper-selector>
 
@@ -239,7 +240,7 @@
       </div>
     </div>
 
-    <!--Label: "Документ "-->
+    <!--Label: "Тип вступу", "Деталiзацiя вступу"-->
     <enrolment-types-selector
                     name="enrolmentTypesInput"
                     ng-model="enrolment.enrolmentTypeId"

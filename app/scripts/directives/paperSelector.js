@@ -9,8 +9,8 @@ angular
   .module('admissionSystemApp')
   .directive('paperSelector', function () {
 
-    paperSelectorDirectiveCtrl.$inject = ['$scope', 'getPersonPapersSvc'];
-    function paperSelectorDirectiveCtrl($scope, getPersonPapersSvc) {
+    paperSelectorDirectiveCtrl.$inject = ['$scope', 'getPersonPapersSvc', '$stateParams'];
+    function paperSelectorDirectiveCtrl($scope, getPersonPapersSvc, $stateParams) {
       $scope.papertypeId = getPersonPapersSvc.getRightPapersTypes;
 
       $scope.parsePersonPaperId = function (personId, personPaperId) {
@@ -21,6 +21,7 @@ angular
 
       $scope.$on('person-id-changed', function (event, args) { // (1)
         $scope.enrolment.personPaperId = undefined;
+        $scope.personid = args.personId;
         getPersonPapersSvc.setRightPersonPapers(args.personId);
       });
     }
@@ -30,7 +31,9 @@ angular
       restrict: 'E',
       require: 'ngModel',
       replace: true,
-      scope: {},
+      scope: {
+        onNewPersonPaper: '&?'
+      },
       controller: paperSelectorDirectiveCtrl,
       link: function postLink (scope, element, attrs, ngModel) {
         var personPaperId;
@@ -38,11 +41,14 @@ angular
         scope.enrolment = {};
         ngModel.$render = function () { // (2)
           personPaperId = ngModel.$modelValue;
+          scope.personid = attrs.personid;
           if (personPaperId) {
             scope.personid = attrs.personid;
             scope.parsePersonPaperId(scope.personid, personPaperId);
           }
         };
+
+
 
         if (attrs.personid) {
           scope.parsePersonPaperId(attrs.personid);
@@ -51,7 +57,6 @@ angular
         scope.paperSelected = function (personPaperId) {
           ngModel.$setViewValue(personPaperId);
         };
-
       }
     };
   });

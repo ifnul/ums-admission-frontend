@@ -16,8 +16,12 @@
 
 
     <div class="col-xs-3" id="subjPlus">
-      <a ui-sref="new-person">
-        <button is-change="false" type="button" class="btn btn-success "><i class="fa fa-plus"></i> Додати новий
+      <a>
+        <button is-change="false"
+                type="button"
+                class="btn btn-success"
+                ng-click="onNewPersonPaper()"
+                ng-disabled="!personid"><i class="fa fa-plus"></i> Додати новий
           документ
         </button>
       </a>

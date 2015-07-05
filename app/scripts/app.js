@@ -230,6 +230,9 @@ angular
             templateUrl: '../views/person/new_person.html',
             controller: 'NewPersonCtrl'
           }
+        },
+        params: {
+          previousState: null
         }
       })
       .state('root.person.edit.main', {
@@ -250,7 +253,10 @@ angular
       .state('root.person.edit.papers', {
         url: '/papers',
         templateUrl: '../views/person/tabsPerson/tab_papers.html',
-        controller: 'tabPersonPapers'
+        controller: 'tabPersonPapers',
+        params: {
+          previousState: null
+        }
       })
       .state('root.person.edit.personsubjects', {
         url: '/personsubjects',
