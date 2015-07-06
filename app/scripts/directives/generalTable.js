@@ -124,14 +124,19 @@ angular
             userFilterPick: scope.userFilterPick,
             sort: {}
           },
-          arrow = angular.element(event.target.getElementsByClassName('fa'));
+          arrow = angular.element(event.target.getElementsByClassName('fa')),
+          sortArrows = angular.element('.fa.fa-caret-up, .fa.fa-caret-down');
+
+        sortArrows.removeClass('fa-caret-up');
+        sortArrows.removeClass('fa-caret-down');
+        sortArrows.addClass('fa-sort');
 
         scope.params = params;
 
         arrow.removeClass('fa-sort');
 
         if (scope.descending) {
-          arrow.removeClass('fa-caret-up ').addClass('fa-caret-down');
+          arrow.removeClass('fa-caret-up').addClass('fa-caret-down');
           params.sort.orderBy = columnName + '-desc';
           scope.getdata(params);
         } else {
