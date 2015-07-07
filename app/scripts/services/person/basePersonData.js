@@ -81,7 +81,7 @@ angular
     ],
     search: [
       {
-        title: 'призвіщу',
+        title: 'прізвищу',
         property: 'surname'
       },
       {
