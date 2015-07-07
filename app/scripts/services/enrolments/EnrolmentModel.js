@@ -15,11 +15,11 @@ angular
     entireEnrolment.enrolment.evDate = today;
     entireEnrolment.enrolment.begDate = today;
     entireEnrolment.enrolment.endDate = "";
-    entireEnrolment.enrolment.isContract = 0;
-    entireEnrolment.enrolment.isState = 0;
+    entireEnrolment.enrolment.isContract = 1;
+    entireEnrolment.enrolment.isState = 1;
     entireEnrolment.enrolment.isInterview = 0;
     entireEnrolment.enrolment.isEducationState = 0;
-
+    entireEnrolment.enrolment.enrolmentTypeId = 32;
     entireEnrolment.enrolmentsubjects = [];
     entireEnrolment.benefits = [];
     entireEnrolment.statuses = [];
@@ -33,10 +33,11 @@ angular
       entireEnrolment.enrolment.evDate = today;
       entireEnrolment.enrolment.begDate = today;
       entireEnrolment.enrolment.endDate = "";
-      entireEnrolment.enrolment.isContract = 0;
-      entireEnrolment.enrolment.isState = 0;
+      entireEnrolment.enrolment.isContract = 1;
+      entireEnrolment.enrolment.isState = 1;
       entireEnrolment.enrolment.isInterview = 0;
       entireEnrolment.enrolment.isEducationState = 0;
+      entireEnrolment.enrolment.enrolmentTypeId = 32;
       entireEnrolment.enrolmentsubjects = [];
       entireEnrolment.benefits = [];
       entireEnrolment.statuses = [];
