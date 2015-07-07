@@ -4,8 +4,8 @@ angular
 	.module('admissionSystemApp')
   .directive('generalTable', function () {
 
-    personTableController.$inject = ['$scope', '$state', '$location', '$timeout'];
-    function personTableController($scope, $state, $location, $timeout) {
+    personTableController.$inject = ['$scope', '$state', '$location'];
+    function personTableController($scope, $state, $location) {
       console.log();
 
       var index,
