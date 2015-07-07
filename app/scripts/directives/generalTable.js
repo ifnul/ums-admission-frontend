@@ -88,7 +88,7 @@ angular
 
         $scope.getdata({
           currentPage: $scope.currentPage,
-          itemsPerPage: $scope.itemsPerPage,
+          itemsPerPage: itemsPerPage,
           userFilterPick: $scope.userFilterPick
         });
       };
