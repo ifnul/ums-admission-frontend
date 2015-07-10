@@ -4,8 +4,8 @@ angular
 	.module('admissionSystemApp')
   .directive('generalTable', function () {
 
-    personTableController.$inject = ['$scope', '$state', '$location', '$timeout'];
-    function personTableController($scope, $state, $location, $timeout) {
+    personTableController.$inject = ['$scope', '$state', '$location'];
+    function personTableController($scope, $state, $location) {
       console.log();
 
       var index,
@@ -59,10 +59,15 @@ angular
        * in result ($state.go) - change state adding new query params to it (page, count);
        */
       $scope.paginationClick = function (PagingClicked, page) {
-        console.log('$scope.itemsPerPage', $scope.itemsPerPage);
         $location.search({
           page: page,
           count: $scope.itemsPerPage
+        });
+
+        $scope.getdata({
+          currentPage: page,
+          itemsPerPage: $scope.itemsPerPage,
+          userFilterPick: $scope.userFilterPick
         });
       };
 
@@ -75,14 +80,17 @@ angular
        * [itemPerPageChanged - do the same as paginationClick but triggers by differ event]
        */
       $scope.itemPerPageChanged = function (itemsPerPage) {
+        $scope.currentPage = 1;
         $location.search({
-          page: 1,
+          page: $scope.currentPage,
           count: itemsPerPage
         });
 
-        $timeout(function() {
-          angular.element('.personFilterUpdateButton').trigger('click');
-        }, 0);
+        $scope.getdata({
+          currentPage: $scope.currentPage,
+          itemsPerPage: itemsPerPage,
+          userFilterPick: $scope.userFilterPick
+        });
       };
     }
 
@@ -116,14 +124,19 @@ angular
             userFilterPick: scope.userFilterPick,
             sort: {}
           },
-          arrow = angular.element(event.target.getElementsByClassName('fa'));
+          arrow = angular.element(event.target.getElementsByClassName('fa')),
+          sortArrows = angular.element('.fa.fa-caret-up, .fa.fa-caret-down');
+
+        sortArrows.removeClass('fa-caret-up');
+        sortArrows.removeClass('fa-caret-down');
+        sortArrows.addClass('fa-sort');
 
         scope.params = params;
 
         arrow.removeClass('fa-sort');
 
         if (scope.descending) {
-          arrow.removeClass('fa-caret-up ').addClass('fa-caret-down');
+          arrow.removeClass('fa-caret-up').addClass('fa-caret-down');
           params.sort.orderBy = columnName + '-desc';
           scope.getdata(params);
         } else {
