@@ -48,6 +48,7 @@ angular
               if (units.length) {
                 $scope.adminUnits.push(units);
               } else {
+                console.log(id);
                 $scope.sendValueOutside(id);
               }
             });

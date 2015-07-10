@@ -2,8 +2,10 @@
 
 angular
   .module('admissionSystemApp')
-  .controller('tabSubjects', ['$scope', '$modal', '$rootScope', 'DictionariesSvc',
-    function ($scope, $modal, $rootScope, DictionariesSvc) {
+  .controller('tabSubjects', ['$scope', '$modal', '$rootScope', 'DictionariesSvc', 'PersonModel',
+    function ($scope, $modal, $rootScope, DictionariesSvc, PersonModel) {
+
+      $scope.enrolmentsubjects = PersonModel.enrolmentsubjectsArr;
 
       $scope.getSubjectTitleById = function (id) {
         var subjectTitle = '';
@@ -17,7 +19,7 @@ angular
       };
 
       $scope.filterExistsSubjects = function (subject) {
-        return !_.find($scope.entirePerson.enrolmentsubjects, function (item) {
+        return !_.find($scope.enrolmentsubjects, function (item) {
           return item.enrolmentSubjectId == subject.id;
         });
       };
@@ -27,7 +29,7 @@ angular
       });
 
       $scope.addPersonSubject = function () {
-        $scope.entirePerson.enrolmentsubjects.push({
+        $scope.enrolmentsubjects.push({
           enrolmentSubjectId: $scope.enrolmentsubject.id,
           mark: $scope.subjectMark
         });
@@ -35,9 +37,9 @@ angular
       };
 
       $scope.deleteSubject = function (subject) {
-        var index = $scope.entirePerson.enrolmentsubjects.indexOf(subject);
+        var index = $scope.enrolmentsubjects.indexOf(subject);
 
-        $scope.entirePerson.enrolmentsubjects.splice(index, 1);
+        $scope.enrolmentsubjects.splice(index, 1);
       };
 
       $scope.editSubject = function (subject) {

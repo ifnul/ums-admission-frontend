@@ -198,12 +198,33 @@ angular
         templateUrl: '../views/person/tabsPerson/tab_person.html',
         controller: 'TabPersonCtrl'
       })
+      .state('root.person.new.extra1', {
+        url: '/extra1',
+        templateUrl: '../views/person/tabsPerson/tab_extra1.html',
+        controller: ''
+      })
+      .state('root.person.new.passport', {
+        url: '/passport',
+        templateUrl: '../views/person/tabsPerson/tab_passport.html',
+        controller: ''
+      })
       .state('root.person.new.addresses', {
         url: '/addresses',
         templateUrl: '../views/person/tabsPerson/tab_addresses.html',
         controller: 'TabAdressesCtrl'
       })
+      .state('root.person.new.certificate', {
+        url: '/certificate',
+        templateUrl: '../views/person/tabsPerson/tab_certificate.html',
+        controller: ''
+      })
+      .state('root.person.new.photo', {
+        url: '/photo',
+        templateUrl: '../views/person/tabsPerson/tab_photo.html',
+        controller: ''
+      })
       .state('root.person.new.contacts', {
+        url: '/contacts',
         templateUrl: '../views/person/tabsPerson/tab_contacts.html',
         controller: ''
       })
@@ -240,10 +261,30 @@ angular
         templateUrl: '../views/person/tabsPerson/tab_person.html',
         controller: 'TabPersonCtrl'
       })
+      .state('root.person.edit.extra1', {
+        url: '/extra1',
+        templateUrl: '../views/person/tabsPerson/tab_extra1.html',
+        controller: ''
+      })
+      .state('root.person.edit.passport', {
+        url: '/passport',
+        templateUrl: '../views/person/tabsPerson/tab_passport.html',
+        controller: ''
+      })
       .state('root.person.edit.addresses', {
         url: '/addresses',
         templateUrl: '../views/person/tabsPerson/tab_addresses.html',
         controller: 'TabAdressesCtrl'
+      })
+      .state('root.person.edit.certificate', {
+        url: '/certificate',
+        templateUrl: '../views/person/tabsPerson/tab_certificate.html',
+        controller: ''
+      })
+      .state('root.person.edit.photo', {
+        url: '/photo',
+        templateUrl: '../views/person/tabsPerson/tab_photo.html',
+        controller: ''
       })
       .state('root.person.edit.contacts', {
         url: '/contacts',

@@ -18,16 +18,17 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
 
-            <li ui-sref-active="active">
-              <a ui-sref="root.specoffer.list">Пропозиції
+            <li ui-sref-active="active" class="disabled">
+              <a >Пропозиції <!--ui-sref="root.specoffer.list"-->
                 <span class="sr-only">(current)</span>
               </a>
             </li>
 
-            <li ui-sref-active="active"><a ui-sref="root.person.list">Персони</a></li>
+            <li ui-sref-active="active" ><a ui-sref="root.person.list">Персони</a></li>
             <li ui-sref-active="active"><a ui-sref="root.enrolment.list">Заяви</a></li>
             <li ui-sref-active="active"><a ui-sref="root.dictionaries">Довідники</a></li>
-            <li ui-sref-active="active"><a ui-sref="root.statistics">Статистика</a></li>
+
+            <li ui-sref-active="active" class="disabled" ><a>Статистика</a></li> <!--ui-sref="root.statistics"-->
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
