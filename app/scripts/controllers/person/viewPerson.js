@@ -1,16 +1,18 @@
 'use strict';
 
 angular.module('admissionSystemApp')
-  .controller('ViewPersonCtrl', ['$scope', 'DictionariesSvc', '$q', '$stateParams', 'Person', '$state',
+  .controller('ViewPersonCtrl', ['$scope', 'DictionariesSvc', '$q', '$stateParams', 'PersonModel', '$state',
     'basePersonData',
-    function ($scope, DictionariesSvc, $q, $stateParams, Person, $state, basePersonData) {
+    function ($scope, DictionariesSvc, $q, $stateParams, PersonModel, $state, basePersonData) {
 
+
+      // TODO: move model to PersonModel (don't forget template )
       $scope.entirePerson = {};
       $scope.entirePerson.contacts = [];
       $scope.entirePerson.papers = [];
 
       $scope.brosweOrEditPerson = function (personId) {
-        Person.getEntirePerson(personId).then(function (res) {
+        PersonModel.getEntirePerson(personId).then(function (res) {
           _.merge($scope.entirePerson, res);
         });
       };

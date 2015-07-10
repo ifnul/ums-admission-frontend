@@ -2,8 +2,8 @@
 
 angular.module('admissionSystemApp')
   .controller('ListPersonCtrl', ['$scope', 'personDecodeSvc', 'DictionariesSvc',
-    'basePersonData', 'Person', '$state', 'getFiltredListSvc', 'toaster', '$location',
-    function ($scope, personDecodeSvc, DictionariesSvc, basePersonData, Person, $state, getFiltredListSvc, toaster, $location) {
+    'basePersonData', 'PersonModel', '$state', 'getFiltredListSvc', 'toaster', '$location',
+    function ($scope, personDecodeSvc, DictionariesSvc, basePersonData, PersonModel, $state, getFiltredListSvc, toaster, $location) {
 
       $location.search({
         page: 1,
@@ -29,7 +29,7 @@ angular.module('admissionSystemApp')
       $scope.headers = basePersonData.headers;
 
       $scope.deletePerson = function (id) {
-        Person.deleteEntirePerson(id).then(function () {
+        PersonModel.deleteEntirePerson(id).then(function () {
           DictionariesSvc.clearStorageByRoute('persons');
           DictionariesSvc.getPersons().then(function (rawPersons) {
             personDecodeSvc.personDecoded(rawPersons).then(function (decodedPersons) {

@@ -1,9 +1,76 @@
 'use strict';
 
 angular.module('admissionSystemApp')
-  .factory('Person', ['Restangular', '$q', '$filter',
+  .factory('PersonModel', ['Restangular', '$q', '$filter',
     function (Restangular, $q, $filter) {
 
+      /**
+       * @type {{object}} - entire person model
+       */
+      var entirePerson = {};
+      entirePerson.person = {};
+      entirePerson.person.photo = '/';
+      entirePerson.person.isHostel = 1;
+      entirePerson.person.isMilitary = 0;
+      entirePerson.person.resident = 0;
+      entirePerson.person.identifier = 0;
+      entirePerson.person.citizenCountryId = 1;
+      entirePerson.person.identifier = 1;
+      entirePerson.contacts = [];
+      entirePerson.papers = [];
+      entirePerson.enrolmentsubjects = [];
+      entirePerson.names = [];
+      entirePerson.names[0] = {
+        languageId: 2,
+        fatherName: ''
+      };
+      entirePerson.addresses = {
+        regAddresses: {
+          addressTypeId: 1
+        },
+        postAddresses: {
+          addressTypeId: 2
+        },
+        isAdressesMatch: true
+      };
+
+      /**
+       * clear entirePerson object (set it to default values)
+       */
+      function clearEntirePerson () {
+        var entirePerson = {};
+        entirePerson.person = {};
+        entirePerson.person.photo = '/';
+        entirePerson.person.isHostel = 1;
+        entirePerson.person.isMilitary = 0;
+        entirePerson.person.resident = 0;
+        entirePerson.person.identifier = 0;
+        entirePerson.person.citizenCountryId = 1;
+        entirePerson.person.identifier = 1;
+        entirePerson.contacts = [];
+        entirePerson.papers = [];
+        entirePerson.enrolmentsubjects = [];
+        entirePerson.names = [];
+        entirePerson.names[0] = {
+          languageId: 2,
+          fatherName: ''
+        };
+        entirePerson.addresses = {
+          regAddresses: {
+            addressTypeId: 1
+          },
+          postAddresses: {
+            addressTypeId: 2
+          },
+          isAdressesMatch: true
+        };
+
+      }
+
+      /**
+       * restAngular configuration
+       * applying only to rest action of this servise
+       */
       var restAngular,
         objCopy,
         promises = [],
@@ -23,6 +90,19 @@ angular.module('admissionSystemApp')
 
       objCopy = {};
 
+      function fillNames(english, ukrainian) {
+        english.name = english.surname +
+        ' ' + english.firstName +
+        ' ' + english.fatherName;
+        ukrainian.name = ukrainian.surname +
+        ' ' + ukrainian.firstName +
+        ' ' + ukrainian.fatherName;
+      }
+      /**
+       * internal function for making front-end readable obj
+       * @param arr - array of addresses
+       * @returns {{obj}} - separated addresses
+       */
       function separateAddresses(arr) {
         var addresses = {};
 
@@ -34,6 +114,11 @@ angular.module('admissionSystemApp')
         return addresses;
       }
 
+      /**
+       * internal function for making server readable address obj
+       * @param obj - address obj
+       * @returns {Array} - array of addresses
+       */
       function assembleAddresses(obj) {
         var arr = [];
 
@@ -49,21 +134,26 @@ angular.module('admissionSystemApp')
         return arr;
       }
 
+      /**
+       * get entire enrolment and merge it with entirePerson (!) & objCopy (!);
+       * @param id - id of enroment which need to be extracted
+       * @returns {Promise} - promise with obj result (don't usable)
+       */
       function getEntirePerson(id) {
-        var entirePerson, i;
+        var entire, entirePerson, i;
 
-        entirePerson = {};
-        entirePerson.person = restAngular.one('persons', id).get();
-        entirePerson.addresses = restAngular.one('persons', id).one('addresses').getList().then(function (arr) {
+        entire = {};
+        entire.person = restAngular.one('persons', id).get();
+        entire.addresses = restAngular.one('persons', id).one('addresses').getList().then(function (arr) {
           return separateAddresses(arr);
         });
-        entirePerson.contacts = restAngular.one('persons', id).one('contacts').getList();
-        entirePerson.names = restAngular.one('persons', id).one('names').getList();
-        entirePerson.papers = restAngular.one('persons', id).one('papers').getList();
-        entirePerson.awards = restAngular.one('persons', id).one('awards').getList();
-        entirePerson.enrolmentsubjects = restAngular.one('persons', id).one('enrolmentsubjects').getList();
+        entire.contacts = restAngular.one('persons', id).one('contacts').getList();
+        entire.names = restAngular.one('persons', id).one('names').getList();
+        entire.papers = restAngular.one('persons', id).one('papers').getList();
+        entire.awards = restAngular.one('persons', id).one('awards').getList();
+        entire.enrolmentsubjects = restAngular.one('persons', id).one('enrolmentsubjects').getList();
 
-        $q.all(entirePerson).then(function (res) {
+        $q.all(entire).then(function (res) {
           for (i = 0; i < res.papers.length; i++) {
             angular.forEach(res.awards, function (award) {
               if (res.papers[i].id === award.personPaperId) {
@@ -76,9 +166,16 @@ angular.module('admissionSystemApp')
           _.merge(objCopy, res);
           _.merge(entirePerson, res);
         });
-        return $q.all(entirePerson);
+        return $q.all(entire); // note: this promise is never used!
       }
 
+      /**
+       * !! It's general function for adding differen types of items
+       * @param itemsArr - array of objects
+       * @param personId - person is which server returnes (when cereating)
+       * @param route - route tu put data. decide which data needed to be post/put
+       * @returns {Promise} - array of pomises
+       */
       function addArrayOfItems(itemsArr, personId, route) {
         var promises = [],
           newPromise, i;
@@ -91,6 +188,13 @@ angular.module('admissionSystemApp')
         return $q.all(promises);
       }
 
+      /**
+       * some private function. TODO: discover and make documentation
+       * @param itemsArr
+       * @param itemsArrSubj
+       * @param personId
+       * @returns {Promise}
+       */
       function addPapersAwardsSubjects(itemsArr, itemsArrSubj, personId) {
         var i;
 
@@ -108,6 +212,11 @@ angular.module('admissionSystemApp')
         return $q.all(promises);
       }
 
+      /**
+       * some private function. TODO: discover and make documentation
+       * @param item
+       * @param personId
+       */
       function addAward(item, personId) {
         var awardToPut = {};
 
@@ -121,6 +230,12 @@ angular.module('admissionSystemApp')
         promises.push(newPromise);
       }
 
+      /**
+       * private function. TODO: discover and make documentation
+       * @param item
+       * @param itemsArrSubj
+       * @param personId
+       */
       function addSubjects(item, itemsArrSubj, personId) {
         var subjPromises, subjPromise, i;
 
@@ -137,31 +252,52 @@ angular.module('admissionSystemApp')
         promises.push(newPromise);
       }
 
-      function addEntirePerson(obj) {
+
+      /**
+       * adding only person object (it's single object)
+       * @param obj - person obj
+       * @returns {promise} with id (server give ID to new person)
+       */
+      function addEntirePerson(person) {
         var id = $q.defer();
 
-        restAngular.all('persons').post(obj.person).then(function (response) {
+        restAngular.all('persons').post(person).then(function (response) {
           id.resolve(response.id);
         });
         return id.promise;
       }
 
-      function addOrEditPerson(currentObj) {
+      /**
+       * !! STARTING FUNCTION !!
+       * decide if entire person need to be edit (put) or add (post)
+       * like this: {names: [], addresses: [], awards: [], person : {}}
+       */
+      function addOrEditPerson() {
         if (!objCopy.person) {
-          return addEntirePerson(currentObj).then(function (personId) {
-            currentObj.person.id = personId;
+          console.log('entirePerson: ', entirePerson);
+          console.log('entirePerson.person: ', entirePerson.person);
+          fillNames(entirePerson.names[0], entirePerson.person);
+          return addEntirePerson(entirePerson.person).then(function (personId) {
+            entirePerson.person.id = personId;
             return $q.all([
-              addArrayOfItems(assembleAddresses(currentObj.addresses), personId, 'addresses'),
-              addArrayOfItems(currentObj.contacts, personId, 'contacts'),
-              addArrayOfItems(currentObj.names, personId, 'names'),
-              addPapersAwardsSubjects(currentObj.papers, currentObj.enrolmentsubjects, personId)
+              addArrayOfItems(assembleAddresses(entirePerson.addresses), personId, 'addresses'),
+              addArrayOfItems(entirePerson.contacts, personId, 'contacts'),
+              addArrayOfItems(entirePerson.names, personId, 'names'),
+              addPapersAwardsSubjects(entirePerson.papers, entirePerson.enrolmentsubjects, personId)
             ]);
           });
         } else {
-          return editEntirePerson(currentObj);
+          return editEntirePerson(entirePerson);
         }
       }
 
+      /**
+       * MAIN function for editing entire person
+       * it manipulates with objCopy to compare if property change or not (and than do some actions or not)
+       * @param newObj - it's an object which will be added or updated
+       * @returns {promise}
+       * objCopy - is a copy that was made than data comes from server (see getEntirePerson func)
+       */
       function editEntirePerson(newObj) {
         var promisePerson, personId;
 
@@ -377,6 +513,27 @@ angular.module('admissionSystemApp')
 
         clearCopy: function () {
           objCopy = {};
+        },
+        clearEntirePerson: function () {
+          clearEntirePerson();
+        },
+        personObj: function() {
+          return entirePerson.person;
+        },
+        contactsArr: function() {
+          return entirePerson.contacts;
+        },
+        papersArr: function() {
+          return entirePerson.papers;
+        },
+        enrolmentsubjectsArr: function() {
+          return entirePerson.enrolmentsubjects;
+        },
+        namesArr: function() {
+          return entirePerson.names[0];
+        },
+        addressesObj: function() {
+          return entirePerson.addresses;
         }
-      };
+    };
     }]);

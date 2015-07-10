@@ -15,11 +15,11 @@ angular
     entireEnrolment.enrolment.evDate = today;
     entireEnrolment.enrolment.begDate = today;
     entireEnrolment.enrolment.endDate = "";
-    entireEnrolment.enrolment.isContract = 0;
-    entireEnrolment.enrolment.isState = 0;
+    entireEnrolment.enrolment.isContract = 1;
+    entireEnrolment.enrolment.isState = 1;
     entireEnrolment.enrolment.isInterview = 0;
     entireEnrolment.enrolment.isEducationState = 0;
-
+    entireEnrolment.enrolment.enrolmentTypeId = 32;
     entireEnrolment.enrolmentsubjects = [];
     entireEnrolment.benefits = [];
     entireEnrolment.statuses = [];
@@ -33,10 +33,11 @@ angular
       entireEnrolment.enrolment.evDate = today;
       entireEnrolment.enrolment.begDate = today;
       entireEnrolment.enrolment.endDate = "";
-      entireEnrolment.enrolment.isContract = 0;
-      entireEnrolment.enrolment.isState = 0;
+      entireEnrolment.enrolment.isContract = 1;
+      entireEnrolment.enrolment.isState = 1;
       entireEnrolment.enrolment.isInterview = 0;
       entireEnrolment.enrolment.isEducationState = 0;
+      entireEnrolment.enrolment.enrolmentTypeId = 32;
       entireEnrolment.enrolmentsubjects = [];
       entireEnrolment.benefits = [];
       entireEnrolment.statuses = [];
@@ -66,11 +67,6 @@ angular
        * @returns {Promise} - return entireEnrolment obj
        */
     function getEntireEnrolment(id) {
-      //var entireEnrolment = {};
-      //  entireEnrolment.enrolment = restAngular.one('enrolments', id).get();
-      //entireEnrolment.benefits = restAngular.one('enrolments', id).one('benefits').getList();
-      //entireEnrolment.enrolmentsubjects = restAngular.one('enrolments', id).one('enrolmentsubjects').getList();
-      //entireEnrolment.statuses = restAngular.one('enrolments', id).one('statuses').getList();
         var entire = {};
         entire.enrolment = restAngular.one('enrolments', id).get();
         entire.benefits = restAngular.one('enrolments', id).one('benefits').getList();
@@ -82,7 +78,7 @@ angular
         _.merge(objCopy, res);
         _.merge(entireEnrolment, res);
       });
-      return $q.all(entire);
+      return $q.all(entire);  // note: this promise is never used!
     }
 
       /**

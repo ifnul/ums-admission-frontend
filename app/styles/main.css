@@ -1,21 +1,42 @@
+body {
+  /*background: url(../images/absurdity.png);*/
+}
+
+.admissionSystemApp-container {
+  max-width: 1400px;
+}
+
 .top-buffer {
   margin-top: 25px;
 }
-
 .bottom-buffer {
   margin-bottom: 20px;
 }
 
+.left-buffer {
+  margin-left: 5px !important;
+}
+
 input.ng-invalid.ng-dirty {
-  border-color: red;
+  border-color: #d3d7d0;
   background-color: #ffcccc;
 }
 
+/* ******** TABS ********* */
 .tabset {
-  border: 1px solid grey;
+  /*border: 1px solid grey;*/
   padding: 10px;
 }
-
+.tabs-and-button {
+  border: 1px solid #D3D7D0;
+  border-radius: 5px;
+  background-color: #FCFCFC;
+}
+.nav-tabs {
+  background-color: rgb(245, 245, 245);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
 .photo {
   margin-top: 20px;
 }

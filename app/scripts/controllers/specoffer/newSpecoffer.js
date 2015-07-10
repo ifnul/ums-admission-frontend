@@ -49,6 +49,7 @@ angular
       });
 
       $scope.go = function (route) {
+        console.log(route.new);
         if ($stateParams.id) {
           $state.go(route.edit, {
             id: $stateParams.id
