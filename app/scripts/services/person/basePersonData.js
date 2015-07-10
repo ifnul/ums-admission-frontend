@@ -185,17 +185,45 @@ angular
     ],
     tabs: [
       {
-        heading: 'Основна інформація',
+        heading: 'ПІБ',
         route: {
           new: 'root.person.new.main',
           edit: 'root.person.edit.main'
         }
       },
       {
-        heading: 'Адреса',
+        heading: 'Додаткова інформація',
+        route: {
+          new: 'root.person.new.extra1',
+          edit: 'root.person.edit.extra1'
+        }
+      },
+      {
+        heading: 'Посвідчення',
+        route: {
+          new: 'root.person.new.passport',
+          edit: 'root.person.edit.passport'
+        }
+      },
+      {
+        heading: 'Адреси',
         route: {
           new: 'root.person.new.addresses',
           edit: 'root.person.edit.addresses'
+        }
+      },
+      {
+        heading: 'Атестати',
+        route: {
+          new: 'root.person.new.certificate',
+          edit: 'root.person.edit.certificate'
+        }
+      },
+      {
+        heading: 'Фото',
+        route: {
+          new: 'root.person.new.photo',
+          edit: 'root.person.edit.photo'
         }
       },
       {

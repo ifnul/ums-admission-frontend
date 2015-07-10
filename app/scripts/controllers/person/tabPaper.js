@@ -2,13 +2,15 @@
 
 angular.module('admissionSystemApp')
   .controller('tabPersonPapers', ['$scope', '$http', '$modal', '$rootScope', 'DictionariesSvc', '$filter', '$q',
-    'paperDecodeSvc', '$state', '$stateParams',
+    'paperDecodeSvc', '$state', '$stateParams', 'PersonModel',
     function ($scope, $http, $modal, $rootScope, DictionariesSvc, $filter, $q, paperDecodeSvc, $state,
-              $stateParams) {
+              $stateParams, PersonModel) {
 
       if ($state.includes('root.person.view.*')) {
         $scope.personView = true;
       }
+
+      $scope.papers = PersonModel.papersArr();
 
       console.log('$stateParams', $stateParams);
 
@@ -50,14 +52,14 @@ angular.module('admissionSystemApp')
 
       $scope.inputData = [];
 
-      $scope.$watchCollection('entirePerson.papers', function () {
-        for (var i = 0; i < $scope.entirePerson.papers.length; i++) {
+      $scope.$watchCollection('papers', function () {
+        for (var i = 0; i < $scope.papers.length; i++) {
           $scope.inputData = [];
           var tempObj = {};
 
           (function (i) {
 
-            _.merge(tempObj, $scope.entirePerson.papers[i]);
+            _.merge(tempObj, $scope.papers[i]);
             paperDecodeSvc.paperDecoded(tempObj).then(function (res) {
               $scope.inputData.push(res);
 
@@ -147,7 +149,7 @@ angular.module('admissionSystemApp')
         delete cloneMainNotDecode.pickAward;
         delete cloneMainNotDecode.publicActivityTypeId;
         delete cloneMainNotDecode.abbrName;
-        $scope.entirePerson.papers.push(cloneMainNotDecode);
+        $scope.papers.push(cloneMainNotDecode);
 
         cloneView = _.clone($scope.currentObj);
         cloneViewDecode = decodeData(cloneView);
@@ -187,7 +189,7 @@ angular.module('admissionSystemApp')
       $scope.deleteData = function (idx) {
 
         $scope.inputData.splice(idx, 1);
-        $scope.entirePerson.papers.splice(idx, 1);
+        $scope.papers.splice(idx, 1);
       };
 
       var objToEdit,
@@ -205,7 +207,7 @@ angular.module('admissionSystemApp')
         objToEditDecoded = {};
         $scope.currentObj = {};
 
-        objToEdit = $scope.entirePerson.papers[idx];
+        objToEdit = $scope.papers[idx];
         _.merge($scope.currentObj, objToEdit);
         objToEditDecoded = $scope.inputData[idx];
         $scope.addSelect(objToEdit);
