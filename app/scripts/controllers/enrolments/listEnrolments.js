@@ -8,11 +8,11 @@ angular
 
       $location.search({
         page: 1,
-        count: 25
+        count: 10
       });
 
       var page = ($location.search().page) ? $location.search().page : '1',
-          itemsPerPage = ($location.search().count) ? $location.search().count : '25';
+          itemsPerPage = ($location.search().count) ? $location.search().count : '10';
 
       $scope.getEnrolments = function (pageNumber, perPage, filters, sort) {
         getFiltredListSvc.getListEnrolments(pageNumber, perPage, filters, sort).then(function (res) {
