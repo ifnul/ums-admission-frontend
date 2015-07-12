@@ -50,17 +50,22 @@
     <hr>
 
     <div class="bottom-buffer row">
-      <div class="col-md-1 col-md-offset-9">
+      <div class="col-lg-1 col-md-2 col-lg-offset-8 col-md-offset-4">
+        <button ng-click="deletePerson()"
+                ng-hide="!isEditing"
+                class="btn btn-block btn-danger">Видалити</button>
+      </div>
+      <div class="col-lg-1 col-md-2">
         <button ng-click="sendToServerPerson()"
                 ng-disabled="(progressBarPercent !== 100)"
                 type="submit"
-                class="btn btn-success">Зберегти</button>
+                class="btn btn-block btn-success">Зберегти</button>
       </div>
-      <div class="col-md-1 ">
+      <div class="col-lg-1 col-md-2">
         <button ng-click="goToNextTab(-1)"
                 class="btn btn-md btn-block btn-primary">Назад</button>
       </div>
-      <div class="col-md-1 ">
+      <div class="col-lg-1 col-md-2">
         <button ng-click="goToNextTab(1)"
                 type=""
                 class="btn btn-md btn-block btn-primary">Далі</button>
@@ -71,7 +76,9 @@
               <!--type="submit"-->
               <!--class="btn btn-primary">Зберегти</button>-->
       <!--<button ng-click="deletePerson()" type="submit" class="btn btn-danger">Видалити</button>-->
-    </div>
 
-  </div>
+
+</div>
+
+</div>
 </div>

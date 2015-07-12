@@ -13,9 +13,7 @@ angular.module('admissionSystemApp')
       entirePerson.person.isHostel = 1;
       entirePerson.person.isMilitary = 0;
       entirePerson.person.resident = 0;
-      entirePerson.person.identifier = 0;
       entirePerson.person.citizenCountryId = 1;
-      entirePerson.person.identifier = 1;
       entirePerson.contacts = [];
       entirePerson.papers = [];
       entirePerson.enrolmentsubjects = [];
@@ -44,9 +42,7 @@ angular.module('admissionSystemApp')
         entirePerson.person.isHostel = 1;
         entirePerson.person.isMilitary = 0;
         entirePerson.person.resident = 0;
-        entirePerson.person.identifier = 0;
         entirePerson.person.citizenCountryId = 1;
-        entirePerson.person.identifier = 1;
         entirePerson.contacts = [];
         entirePerson.papers = [];
         entirePerson.enrolmentsubjects = [];
@@ -105,13 +101,16 @@ angular.module('admissionSystemApp')
        */
       function separateAddresses(arr) {
         var addresses = {};
-
-        addresses.regAddresses = arr[0].addressTypeId === 1 ? arr[0] : arr[1];
-        addresses.postAddresses = arr[1].addressTypeId === 2 ? arr[1] : arr[0];
-        addresses.isAdressesMatch = _.isEqual(
-          [arr[0].street, arr[0].zipCode, arr[0].apartment],
-          [arr[1].street, arr[1].zipCode, arr[1].apartment]);
-        return addresses;
+        try {
+          addresses.regAddresses = arr[0].addressTypeId === 1 ? arr[0] : arr[1];
+          addresses.postAddresses = arr[1].addressTypeId === 2 ? arr[1] : arr[0];
+          addresses.isAdressesMatch = _.isEqual(
+            [arr[0].street, arr[0].zipCode, arr[0].apartment],
+            [arr[1].street, arr[1].zipCode, arr[1].apartment]);
+          return addresses;
+        } catch (e) {
+          console.warn(e);
+        }
       }
 
       /**
@@ -140,7 +139,7 @@ angular.module('admissionSystemApp')
        * @returns {Promise} - promise with obj result (don't usable)
        */
       function getEntirePerson(id) {
-        var entire, entirePerson, i;
+        var entire, i;
 
         entire = {};
         entire.person = restAngular.one('persons', id).get();
@@ -165,6 +164,7 @@ angular.module('admissionSystemApp')
           objCopy = {};
           _.merge(objCopy, res);
           _.merge(entirePerson, res);
+          console.log('entirePerson.person', entirePerson.person);
         });
         return $q.all(entire); // note: this promise is never used!
       }
@@ -518,6 +518,7 @@ angular.module('admissionSystemApp')
           clearEntirePerson();
         },
         personObj: function() {
+          console.log('entirePerson.person', entirePerson.person);
           return entirePerson.person;
         },
         contactsArr: function() {
