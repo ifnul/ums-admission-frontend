@@ -5,11 +5,16 @@ angular.module('admissionSystemApp')
     'DictionariesSvc', '$state', 'basePersonData', '$q', 'progressBarPersonSvc',
     function ($scope, $stateParams, PersonModel, $location, DictionariesSvc, $state, basePersonData, $q, progressBarPersonSvc) {
 
+      if (!$stateParams.id) {
+        PersonModel.clearEntirePerson();
+      }
 
       $scope.person = PersonModel.personObj();
       $scope.contacts = PersonModel.contactsArr();
       $scope.addresses = PersonModel.addressesObj();
       $scope.names = PersonModel.namesArr();
+
+      console.log('$scope.person', $scope.person);
 
       $q.all([
         DictionariesSvc.getPersonsTypes(),
@@ -40,6 +45,7 @@ angular.module('admissionSystemApp')
           $scope.person = PersonModel.personObj();
           $scope.contacts = PersonModel.contactsArr();
         });
+        $scope.isEditing = true;
       } else {
         PersonModel.clearCopy();
       }
@@ -56,20 +62,6 @@ angular.module('admissionSystemApp')
         console.log('$scope.names', $scope.names);
         console.log('$scope.addresses', $scope.addresses);
         console.log('$scope.contacts', $scope.contacts);
-        //$scope.entirePerson.names[0].name = $scope.entirePerson.names[0].surname +
-        //' ' + $scope.entirePerson.names[0].firstName +
-        //' ' + $scope.entirePerson.names[0].fatherName;
-        //$scope.entirePerson.person.name = $scope.entirePerson.person.surname +
-        //' ' + $scope.entirePerson.person.firstName +
-        //' ' + $scope.entirePerson.person.fatherName;
-
-        //if (!$scope.entirePerson.person.photo) {
-        //  $scope.entirePerson.person.photo = '/';
-        //}
-        //$scope.entirePerson.person.isMilitary = ($scope.entirePerson.person.isMilitary) ? 1 : 0;
-        //$scope.entirePerson.person.isHostel = ($scope.entirePerson.person.isHostel) ? 1 : 0;
-        //$scope.entirePerson.person.resident = ($scope.entirePerson.person.resident) ? 1 : 0;
-
         PersonModel.addOrEditPerson().then(function () {
           DictionariesSvc.clearStorageByRoute('persons');
           PersonModel.clearEntirePerson();
@@ -154,7 +146,6 @@ angular.module('admissionSystemApp')
 
       progressBarPersonSvc.reset();
       $scope.$on('valBubble', function (evt, args) {
-        console.log('buble!',args.name , args.isValid);
         progressBarPersonSvc.setValidity(args.name, args.isValid);
       });
     }]);
