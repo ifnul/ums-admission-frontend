@@ -11,7 +11,7 @@ angular
           content: [{
             id: 1, name: 'Бюджетна ф.н.'
           } , {
-            id: 2, name: 'Не бюджетна'
+            id: 0, name: 'Не бюджетна'
           }],
           open: true
         },
@@ -22,7 +22,7 @@ angular
           content: [{
             id: 1, name: 'Контактна ф.н.'
           } , {
-            id: 2, name: 'Не контрактна'
+            id: 0, name: 'Не контрактна'
           }],
           open: true
         },
@@ -33,7 +33,7 @@ angular
           content: [{
             id: 1, name: 'Пільга наявна'
           } , {
-            id: 2, name: 'немає пільг'
+            id: 0, name: 'Не має пільг'
           }],
           open: true
         },
@@ -44,7 +44,7 @@ angular
           content: [{
             id: 1, name: 'Потребує гуртож.'
           } , {
-            id: 2, name: 'Не потребує гуртож.'
+            id: 0, name: 'Не потребує гуртож.'
           }],
           open: true
         },
